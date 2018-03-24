@@ -1,0 +1,55 @@
+body,html {
+	height: 100%
+}
+
+/* Remove the navbar's default margin-bottom and rounded borders */ 
+.navbar {
+	margin-bottom: 0;
+	border-radius: 0;
+}
+
+/* Set height of the grid so .sidenav can be 100% (adjust as needed) */
+.height-full {
+	min-height: calc(100vh - 112px);
+}
+
+/* Set gray background color and 100% height */
+.sidenav {
+	padding-top: 20px;
+	padding-bottom: 20px;
+	background-color: #f1f1f1;
+	height: 100%;
+}
+
+/* Overwrite the border and bg color of .active for list-group */
+.list-group-item.active {
+	background-color: #343a40;
+	border-color: #343a40;
+}
+
+/* Overwrite the font color of inactive list-group items */
+.list-group-item:not(.active) {
+	color: #15072f;
+}
+
+/* Overwrite the overflow of div tag of browse area */
+#cover-pic {
+	overflow: hidden;
+}
+
+/* Set black background color, white text and some padding */
+footer {
+	color: white;
+	padding: 16px;
+}
+
+/* On small screens, set height to 'auto' for sidenav and grid */
+@media screen and (max-width: 767px) {
+	.sidenav {
+		height: auto;
+		padding: 15px;
+	}
+	.row.content { 
+		height:auto;
+	}
+}
