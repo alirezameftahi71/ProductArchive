@@ -14,14 +14,7 @@ $(function() {
     "id=1",
     "json",
     function(result){
-      $("table #title").text(result[1]['title']);
-      $("table #releaseDate").text(result[1]['released_date']);
-      $("table #rate").text(result[1]['rate']);
-      $("table #genre").text(result[1]['genres']);
-      $("table #platform").text(result[1]['platforms']);
-      $("table #publisher").text(result[1]['publishers']);
-      $("#description").text(result[1]['description']);
-      $("#cover-pic").attr('src', result[1]['cover_pic']);
+      fillMainTable(result, 1);
     }
   );
 
@@ -47,14 +40,7 @@ $(function() {
           "id=" + id,
           "json",
           function(result){
-            $("table #title").text(result[id]['title']);
-            $("table #releaseDate").text(result[id]['released_date']);
-            $("table #rate").text(result[id]['rate']);
-            $("table #genre").text(result[id]['genres']);
-            $("table #platform").text(result[id]['platforms']);
-            $("table #publisher").text(result[id]['publishers']);
-            $("#description").text(result[id]['description']);
-            $("#cover-pic").attr('src', result[id]['cover_pic']);
+            fillMainTable(result, id);
           }
         );
       });
