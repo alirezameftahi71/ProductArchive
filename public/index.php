@@ -42,7 +42,12 @@
         </div>
         <div class="col-md-4">
           <div class="container-fluid">
-            <img id="cover-pic" class="img-fluid" src="http://via.placeholder.com/270x330" alt="Product Cover" width="270" height="330">
+            <img id="cover-pic" class="img-fluid" src="http://via.placeholder.com/265x320" alt="Product Cover" width="265" height="320">
+          </div>
+          <div class="container-fluid toolbar">
+              <i class="icon fas fa-trash-alt"></i>
+              <i class="icon fas fa-thumbs-up"></i>
+              <a href="update_product.php?"><i class="icon fas fa-edit"></i></a>
           </div>
           <hr>
           <div class="container-fluid text-center">

@@ -43,6 +43,21 @@ footer {
 	padding: 16px;
 }
 
+.toolbar {
+	width: 265px;
+	height: auto;
+}
+
+.icon {
+	cursor: pointer;
+	color: black;
+	text-decoration-style: none;
+}
+
+.icon:hover {
+	color: blue;
+}
+
 /* On small screens, set height to 'auto' for sidenav and grid */
 @media screen and (max-width: 767px) {
 	.sidenav {
