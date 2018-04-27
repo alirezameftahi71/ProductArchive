@@ -73,16 +73,3 @@ function createAlertMessage(id, type, message) {
   $(alertBox).append($(alertMessage));
   $("#" + id).append($(alertBox));
 }
-
-// Fills in the main table 
-function fillMainTable(result, id) {
-  if(id == undefined) id = 1;
-  $("table #title").text(result[id]['title']);
-  $("table #releaseDate").text(result[id]['released_date']);
-  $("table #rate").text(result[id]['rate'] + "/5");
-  $("table #genre").text(result[id]['genres']);
-  $("table #platform").text(result[id]['platforms']);
-  $("table #publisher").text(result[id]['publishers']);
-  $("#description").text(result[id]['description']);
-  $("#cover-pic").attr('src', result[id]['cover_pic']);
-}

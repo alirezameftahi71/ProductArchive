@@ -1,4 +1,4 @@
-<?php include("../include/_layout/header.html"); ?>
+<?php include "../include/_layout/header.html";?>
 
 <div class="container-fluid text-center">
 	<div class="row content height-full">
@@ -10,4 +10,4 @@
 	</div>
 </div>
 
-<?php include("../include/_layout/footer.html"); ?>
+<?php include "../include/_layout/footer.html";?>

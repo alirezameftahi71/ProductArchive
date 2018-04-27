@@ -1,14 +1,14 @@
-<?php include("../include/_layout/header.html"); ?>
+<?php include "../include/_layout/header.html";?>
 <script src="../include/_js/index.js"></script>
-<div class="container-fluid text-center">    
+<div class="container-fluid text-center">
   <div class="row content height-full">
     <div class="col-md-2 sidenav">
       <input class="form-control" id="searchBox" type="text" placeholder="Search...">
       <br>
       <div class="list-group" id="listItems">
-      </div> 
+      </div>
     </div>
-    <div class="col-md-10"> 
+    <div class="col-md-10">
       <h3 class="text-center mt-4 mb-4">The Game Archive</h3>
       <hr />
       <div class="row">
@@ -16,7 +16,7 @@
           <table style="table-layout:fixed;" class="table table-bordered table-striped mt-5">
             <tr>
               <th>Title</th>
-              <td id="title">Example Product</td>
+              <td id="title">Example Product Name</td>
             </tr>
             <tr>
               <th>Release Date</th>
@@ -36,7 +36,7 @@
             </tr>
             <tr>
               <th>Rate</th>
-              <td id="rate">4/5</td>
+              <td id="rate">#/5</td>
             </tr>
           </table>
         </div>
@@ -45,9 +45,10 @@
             <img id="cover-pic" class="img-fluid" src="http://via.placeholder.com/265x320" alt="Product Cover" width="265" height="320">
           </div>
           <div class="container-fluid toolbar">
-              <i class="icon fas fa-trash-alt"></i>
+              <a data-toggle="confirmation" data-title="Delete Product?" data-placement="left" data-btn-cancel-class="btn-danger"
+                data-popout="true" href="javascript:deleteProduct();"><i class="icon fas fa-trash-alt"></i></a>
               <i class="icon fas fa-thumbs-up"></i>
-              <a href="update_product.php?"><i class="icon fas fa-edit"></i></a>
+              <a href="update_product.php?id=" + $('#listItems .active').attr('id')><i class="icon fas fa-edit"></i></a>
           </div>
           <hr>
           <div class="container-fluid text-center">
@@ -56,8 +57,8 @@
             </p>
           </div>
         </div>
-      </div> 
+      </div>
     </div>
   </div>
 </div>
-<?php include("../include/_layout/footer.html"); ?>
+<?php include "../include/_layout/footer.html";?>

@@ -1,4 +1,4 @@
-$(function() {
+$(function () {
 	// Footer print
 	$('footer').text(getFooter("Alireza Meftahi"));
 
