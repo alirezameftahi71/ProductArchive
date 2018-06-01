@@ -48,7 +48,7 @@
               <a data-toggle="confirmation" data-title="Delete Product?" data-placement="left" data-btn-cancel-class="btn-danger"
                 data-popout="true" href="javascript:deleteProduct();"><i class="icon fas fa-trash-alt"></i></a>
               <i class="icon fas fa-thumbs-up"></i>
-              <a href="update_product.php?id=" + $('#listItems .active').attr('id')><i class="icon fas fa-edit"></i></a>
+              <a href="javascript:updateProduct();"><i class="icon fas fa-edit"></i></a>
           </div>
           <hr>
           <div class="container-fluid text-center">

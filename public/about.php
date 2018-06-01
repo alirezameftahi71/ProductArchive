@@ -4,7 +4,12 @@
 	<div class="row content height-full">
 	    <div class="col-sm-12 h-100 d-table">
 	        <div class="d-table-cell align-middle">
-	            <h1>Developed by <br /> Alireza Meftahi</h1>
+				<h5>To-do List</h5>
+				<hr />
+				<ul style="list-style:none;">
+					<li>messages</li>
+					<li>mark as favorite</li>
+				</ul>
 	        </div>
 	    </div>
 	</div>

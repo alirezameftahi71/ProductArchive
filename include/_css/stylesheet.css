@@ -65,6 +65,20 @@ footer {
 	color: blue;
 }
 
+#file-browse-wrapper {
+	display: inline-flex;
+}
+
+#file-browse-wrapper a {
+	font-size: 26px;
+	margin-left: 12px;
+	cursor: pointer;
+	color: black;
+}
+
+#file-browse-wrapper a:hover {
+	color: red;
+}
 /* On small screens, set height to 'auto' for sidenav and grid */
 
 @media screen and (max-width: 767px) {

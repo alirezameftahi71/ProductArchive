@@ -26,7 +26,7 @@ function getAllProducts() {
     "json",
     function (result) {
       // Fill the table with first data
-      getProductById(Object.keys(result)[0]);
+      getProductById(Object.keys(result)[0], fillMainTable);
       $.each(result, function (i) {
         $('#listItems').append('<a href="#" id="' + i + '" class="list-group-item list-group-item-action">' + result[i]['title'] + '</a>');
       });
@@ -35,21 +35,8 @@ function getAllProducts() {
         $($('#listItems').children()).removeClass('active');
         $(this).addClass('active');
         // Fill the tables and place the photo if exists
-        getProductById($(this)[0].id);
+        getProductById($(this)[0].id, fillMainTable);
       });
-    }
-  );
-}
-
-// Read the data by passed id
-function getProductById(id) {
-  _apiRequest(
-    "../include/_php/services/read.php",
-    "GET",
-    "id=" + id,
-    "json",
-    function (result) {
-      fillMainTable(result, id);
     }
   );
 }
@@ -86,7 +73,7 @@ function deleteProduct() {
       preElement.addClass('active');
       delElement.remove();
       if (preId != undefined)
-        getProductById();
+        getProductById(preId, fillMainTable);
       else
         fillMainTable();
     },
@@ -94,4 +81,9 @@ function deleteProduct() {
       createAlertMessage("messageBox", "Fail", result);
     },
   );
+}
+
+// Update the product
+function updateProduct() {
+  window.location.replace("update_product.php?id=" + getCurrentProductID());
 }
