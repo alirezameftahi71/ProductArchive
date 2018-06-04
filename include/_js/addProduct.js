@@ -1,11 +1,13 @@
 // Global variables
-var last_insert_id = 0;
+var last_insert_id;
 
 $(function () {
   // Tag inputs functionalities
   tagsManagerHandler("genre", '../include/_php/services/get_genres.php');
   tagsManagerHandler("platform", '../include/_php/services/get_platforms.php');
   tagsManagerHandler("publisher", '../include/_php/services/get_publishers.php');
+  $('#btn-submit').click(sendAddInfo);
+  $('#file-browse-wrapper a').hide();
 });
 
 // Send data to php services

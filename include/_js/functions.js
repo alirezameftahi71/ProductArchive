@@ -64,6 +64,11 @@ function tagsManagerHandler(id, url) {
   });
 }
 
+// Push value into tagmanager manually 
+function pushIntoTagmanager(id, value) {
+  $("#" + id).tagsManager("pushTag", value);
+}
+
 // Creates a bootstrap 4 alert message
 function createAlertMessage(id, type, message) {
   var alertBox = $("<div class='alert alert-" + type + " alert-dismissible'></div>");
@@ -74,15 +79,15 @@ function createAlertMessage(id, type, message) {
   $("#" + id).append($(alertBox));
 }
 
-// Fills in the main table 
-function fillMainTable(result, id) {
-  if(id == undefined) id = 1;
-  $("table #title").text(result[id]['title']);
-  $("table #releaseDate").text(result[id]['released_date']);
-  $("table #rate").text(result[id]['rate'] + "/5");
-  $("table #genre").text(result[id]['genres']);
-  $("table #platform").text(result[id]['platforms']);
-  $("table #publisher").text(result[id]['publishers']);
-  $("#description").text(result[id]['description']);
-  $("#cover-pic").attr('src', result[id]['cover_pic']);
+// Read the data by passed id
+function getProductById(id, successFunc) {
+  _apiRequest(
+    "../include/_php/services/read.php",
+    "GET",
+    "id=" + id,
+    "json",
+    function (result) {
+      successFunc(result, id);
+    }
+  );
 }
