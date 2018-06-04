@@ -1,20 +1,23 @@
 <?php include_once "../connect_db.php";?>
 <?php include_once "../functions.php";?>
 <?php
-$select_query = "SELECT DISTINCT game.*, GROUP_CONCAT(DISTINCT genre.name SEPARATOR ', ') AS genres, GROUP_CONCAT(DISTINCT platform.name) AS platforms, GROUP_CONCAT(DISTINCT publisher.name) AS publishers
-	FROM game
-		INNER JOIN game_genre
-		ON game.id = game_genre.game_id
-			INNER JOIN genre
-			ON game_genre.genre_id = genre.id
-				INNER JOIN game_platform
-				ON game.id = game_platform.game_id
-					INNER JOIN platform
-					ON game_platform.platform_id = platform.id
-						INNER JOIN game_publisher
-						ON game.id = game_publisher.game_id
-							INNER JOIN publisher
-							ON game_publisher.publisher_id = publisher.id ";
+$select_query = "SELECT DISTINCT game.*,
+                GROUP_CONCAT(DISTINCT genre.name SEPARATOR ', ') AS genres,
+                GROUP_CONCAT(DISTINCT platform.name SEPARATOR ', ') AS platforms,
+                GROUP_CONCAT(DISTINCT publisher.name SEPARATOR ', ') AS publishers
+                    FROM game
+                        INNER JOIN game_genre
+                        ON game.id = game_genre.game_id
+                            INNER JOIN genre
+                            ON game_genre.genre_id = genre.id
+                                INNER JOIN game_platform
+                                ON game.id = game_platform.game_id
+                                    INNER JOIN platform
+                                    ON game_platform.platform_id = platform.id
+                                        INNER JOIN game_publisher
+                                        ON game.id = game_publisher.game_id
+                                            INNER JOIN publisher
+                                            ON game_publisher.publisher_id = publisher.id ";
 if (isset($_GET['id'])) {
     $select_query .= "WHERE game.id = $_GET[id] ";
 }
