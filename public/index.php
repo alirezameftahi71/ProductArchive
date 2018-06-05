@@ -8,7 +8,7 @@
       <div class="list-group" id="listItems">
       </div>
     </div>
-    <div class="col-md-10">
+    <div class="col-md-10" id="main-area">
       <h3 class="text-center mt-4 mb-4">The Game Archive</h3>
       <hr />
       <div class="row">
@@ -45,18 +45,23 @@
             <img id="cover-pic" class="img-fluid" src="http://via.placeholder.com/265x320" alt="Product Cover" width="265" height="320">
           </div>
           <div class="container-fluid toolbar">
-              <a data-toggle="confirmation" data-title="Delete Product?" data-placement="left" data-btn-cancel-class="btn-danger"
-                data-popout="true" href="javascript:deleteProduct();"><i class="icon fas fa-trash-alt"></i></a>
-              <i class="icon fas fa-thumbs-up"></i>
-              <a href="javascript:updateProduct();"><i class="icon fas fa-edit"></i></a>
-          </div>
-          <hr>
-          <div class="container-fluid text-center">
-            <p id="description">
-              Full Description goes here in multiple lines providing more and detailed information about the product, like story line or history.
-            </p>
+            <a data-toggle="confirmation" data-title="Delete Product?" data-placement="left" data-btn-cancel-class="btn-danger" data-popout="true"
+              href="javascript:deleteProduct();">
+              <i class="icon fas fa-trash-alt"></i>
+            </a>
+            <i class="icon fas fa-thumbs-up"></i>
+            <a href="javascript:updateProduct();">
+              <i class="icon fas fa-edit"></i>
+            </a>
           </div>
         </div>
+      </div>
+      <hr>
+      <div class="container-fluid text-center">
+        <p id="description">
+          Full Description goes here in multiple lines providing more and detailed information about the product, like story line or
+          history.
+        </p>
       </div>
     </div>
   </div>

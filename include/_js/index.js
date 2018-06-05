@@ -1,4 +1,6 @@
 $(function () {
+  // Call the resizer for list-group
+  resizeListGroup();
   // Searchbox filter
   $("#searchBox").on("keyup", function () {
     var value = $(this).val().toLowerCase();
@@ -16,6 +18,14 @@ $(function () {
     // other options
   });
 });
+
+// Calculate the height of main area and asign it to list-group
+function resizeListGroup() {
+  $('.list-group').height($('#main-area').height() - $('footer').outerHeight() - $('.navbar').outerHeight() + 10);
+}
+
+// Bind the resize event to resizeListGroup()
+$(window).bind('resize', resizeListGroup);
 
 // Read all the data 
 function getAllProducts() {

@@ -25,6 +25,11 @@ html {
 	height: 100%;
 }
 
+/* Overwrite the scrol of .list-group */
+.list-group {
+	overflow-y: scroll;
+}
+
 /* Overwrite the border and bg color of .active for list-group */
 
 .list-group-item.active {
@@ -79,8 +84,8 @@ footer {
 #file-browse-wrapper a:hover {
 	color: red;
 }
-/* On small screens, set height to 'auto' for sidenav and grid */
 
+/* On small screens*/
 @media screen and (max-width: 767px) {
 	.sidenav {
 		height: auto;
@@ -88,5 +93,9 @@ footer {
 	}
 	.row.content {
 		height: auto;
+	}
+	/* Overwrite the scrol of .list-group */
+	.list-group {
+		height: 250px !important;
 	}
 }
