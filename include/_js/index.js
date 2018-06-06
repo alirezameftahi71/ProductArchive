@@ -29,7 +29,6 @@ $(window).bind('resize', resizeListGroup);
 
 // Make passed id in items selected and scroll to it
 function makeItemSelected(id) {
-  var id = window.location.search.split("?id=")[1];
   $('.list-group #' + id).trigger('click');
   window.location.href += "#" + id;
 }
@@ -57,6 +56,7 @@ function getAllProducts() {
 
       // Check if there's a return queryString 
       if (window.location.search) {
+        var id = window.location.search.split("?id=")[1];
         makeItemSelected(id);
       }
     }
