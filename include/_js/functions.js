@@ -6,7 +6,7 @@ function getFooter(ownerName) {
 // Mark the current page as active in navbar 
 function activeCurrPage(url) {
   $('ul.navbar-nav a').filter(function () {
-    return this.href == url.href.replace('#', '');
+    return url.href.includes(this.href);
   }).parent().addClass('active');
 }
 
