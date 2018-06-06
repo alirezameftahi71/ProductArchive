@@ -27,6 +27,13 @@ function resizeListGroup() {
 // Bind the resize event to resizeListGroup()
 $(window).bind('resize', resizeListGroup);
 
+// Make passed id in items selected and scroll to it
+function makeItemSelected(id) {
+  var id = window.location.search.split("?id=")[1];
+  $('.list-group #' + id).trigger('click');
+  window.location.href += "#" + id;
+}
+
 // Read all the data 
 function getAllProducts() {
   _apiRequest(
@@ -47,6 +54,11 @@ function getAllProducts() {
         // Fill the tables and place the photo if exists
         getProductById($(this)[0].id, fillMainTable);
       });
+
+      // Check if there's a return queryString 
+      if (window.location.search) {
+        makeItemSelected(id);
+      }
     }
   );
 }

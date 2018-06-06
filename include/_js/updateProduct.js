@@ -48,7 +48,8 @@ function sendUpdateInfo() {
         file_data,
         "TEXT",
         function (result) {
-          createAlertMessage("messageBox", "success", result);
+          // createAlertMessage("messageBox", "success", result);
+          window.location.replace("./index.php?id=" + last_update_id);
         },
         function () {
           createAlertMessage("messageBox", "fail", result)
