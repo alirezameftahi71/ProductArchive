@@ -47,8 +47,9 @@
               <label for="cover-pic">Cover Picture:</label>
               <div id="file-browse-wrapper">
                 <input type="file" class="form-control" name="cover-pic" id="cover-pic">
-                <a href="javascript:deletePicture();" title="Delete Cover Picture">
-                  <i class="fas fa-times"></i>
+                <a data-toggle="confirmation" title="Delete Cover Picture" data-title="Delete Picture?" data-placement="top" data-btn-cancel-class="btn-danger" data-popout="true"
+                  href="javascript:deletePicture();">
+                  <i class="icon fas fa-times"></i>
                 </a>
               </div>
 

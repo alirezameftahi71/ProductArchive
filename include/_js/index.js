@@ -11,12 +11,6 @@ $(function () {
 
   // Fill the side menu
   getAllProducts();
-
-  // Enabling confirmation
-  $('[data-toggle=confirmation]').confirmation({
-    rootSelector: '[data-toggle=confirmation]',
-    // other options
-  });
 });
 
 // Calculate the height of main area and asign it to list-group
@@ -63,6 +57,13 @@ function getAllProducts() {
   );
 }
 
+function getCoverPic(data) {
+  var res = "http://via.placeholder.com/270x330";
+  if(data != null && data != undefined && data != "")
+    res = "data:image/jpeg;base64," + data;
+  return res;
+}
+
 // Fills in the main table 
 function fillMainTable(result, id) {
   $("table #title").text(id != undefined ? result[id]['title'] : "Example Product Name");
@@ -72,7 +73,7 @@ function fillMainTable(result, id) {
   $("table #platform").text(id != undefined ? result[id]['platforms'] : "Example platform");
   $("table #publisher").text(id != undefined ? result[id]['publishers'] : "Example Company");
   $("#description").text(id != undefined ? result[id]['description'] : "Full Description goes here in multiple lines providing more and detailed information about the product, like story line or history.");
-  $("#cover-pic").attr('src', id != undefined ? result[id]['cover_pic'] : "http://via.placeholder.com/270x330");
+  $("#cover-pic").attr('src', id != undefined ? getCoverPic(result[id]['cover_pic']) : "http://via.placeholder.com/270x330");
 }
 
 // Find the selected product's id

@@ -43,7 +43,7 @@ function sendUpdateInfo() {
       file_data.append('file', file);
       // Send photo
       _apiRequest(
-        "../include/_php/services/upload_file.php?id=" + last_update_id,
+        "../include/_php/services/add_picture.php?id=" + last_update_id,
         "POST",
         file_data,
         "TEXT",
@@ -62,7 +62,7 @@ function sendUpdateInfo() {
 
 function deletePicture() {
   _apiRequest(
-    "../include/_php/services/delete_file.php?id=" + id,
+    "../include/_php/services/delete_picture.php?id=" + id,
     "GET",
     null,
     "TEXT",

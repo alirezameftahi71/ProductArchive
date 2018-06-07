@@ -28,11 +28,6 @@ $result = mysqli_query($conn, $select_query);
 if (confirm_query_select($result)) {
     $json = array();
     while ($row = mysqli_fetch_assoc($result)) {
-        $cover_pic = "http://via.placeholder.com/270x330";
-        if (isset($_GET['id']) && file_exists("../../../resource/_img/" . $_GET['id'])) {
-            $cover_pic = "../resource/_img/" . $_GET['id'];
-        }
-
         $json[$row['id']] = array(
             'title' => $row['title'],
             'released_date' => $row['released_date'],
@@ -41,7 +36,7 @@ if (confirm_query_select($result)) {
             'platforms' => $row['platforms'],
             'publishers' => $row['publishers'],
             'description' => $row['description'],
-            'cover_pic' => $cover_pic,
+            'cover_pic' => $row['cover_pic'] == null ? null : base64_encode($row['cover_pic']),
         );
     }
     echo json_encode($json);

@@ -25,7 +25,7 @@ function sendAddInfo() {
       file_data.append('file', file);
       // Send photo
       _apiRequest(
-        "../include/_php/services/upload_file.php?id=" + last_insert_id,
+        "../include/_php/services/add_picture.php?id=" + last_insert_id,
         "POST",
         file_data,
         "TEXT",
