@@ -18,7 +18,7 @@ $publishers = explode(',', $publisher);
 $ids = $genre_ids = $publisher_ids = $platform_ids = [];
 
 // Update of product
-$update_game = "UPDATE `game` SET 
+$update_game = "UPDATE `game` SET
                     title = '$title',
                     released_date = STR_TO_DATE('$released_date', '%m-%d-%Y'),
                     rate = $rate,

@@ -66,13 +66,12 @@ function deletePicture() {
     "GET",
     null,
     "TEXT",
-    function(result){
+    function (result) {
       createAlertMessage("messageBox", "success", result);
     },
-    function(result){
+    function (result) {
       createAlertMessage("messageBox", "fail", result);
     },
     false
   );
 }
-

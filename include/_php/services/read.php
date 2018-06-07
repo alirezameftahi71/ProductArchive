@@ -1,8 +1,12 @@
 <?php include_once "../connect_db.php";?>
 <?php include_once "../functions.php";?>
 <?php
-$select_query = "SELECT DISTINCT game.*,
-                GROUP_CONCAT(DISTINCT genre.name SEPARATOR ', ') AS genres,
+$select_query = "SELECT DISTINCT game.id, game.title, game.released_date, game.rate, game.description, ";
+if (isset($_GET['id'])) {
+    $select_query .= "game.cover_pic, ";
+}
+
+$select_query .= "GROUP_CONCAT(DISTINCT genre.name SEPARATOR ', ') AS genres,
                 GROUP_CONCAT(DISTINCT platform.name SEPARATOR ', ') AS platforms,
                 GROUP_CONCAT(DISTINCT publisher.name SEPARATOR ', ') AS publishers
                     FROM game
@@ -28,6 +32,11 @@ $result = mysqli_query($conn, $select_query);
 if (confirm_query_select($result)) {
     $json = array();
     while ($row = mysqli_fetch_assoc($result)) {
+        $cover_pic = null;
+        if (isset($_GET['id']) && $row['cover_pic'] != null) {
+            $cover_pic = base64_encode($row['cover_pic']);
+        }
+
         $json[$row['id']] = array(
             'title' => $row['title'],
             'released_date' => $row['released_date'],
@@ -36,7 +45,7 @@ if (confirm_query_select($result)) {
             'platforms' => $row['platforms'],
             'publishers' => $row['publishers'],
             'description' => $row['description'],
-            'cover_pic' => $row['cover_pic'] == null ? null : base64_encode($row['cover_pic']),
+            'cover_pic' => $cover_pic,
         );
     }
     echo json_encode($json);

@@ -26,6 +26,7 @@ html {
 }
 
 /* Overwrite the scrol of .list-group */
+
 .list-group {
 	overflow-y: scroll;
 }
@@ -86,6 +87,7 @@ footer {
 }
 
 /* On small screens*/
+
 @media screen and (max-width: 767px) {
 	.sidenav {
 		height: auto;

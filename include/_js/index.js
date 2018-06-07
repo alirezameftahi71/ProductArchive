@@ -35,23 +35,23 @@ function getAllProducts() {
     null,
     "json",
     function (result) {
-      // Fill the table with first data
-      getProductById(Object.keys(result)[0], fillMainTable);
       $.each(result, function (i) {
         $('#listItems').append('<a href="#" id="' + i + '" class="list-group-item list-group-item-action">' + result[i]['title'] + '</a>');
       });
-      $($('#listItems').children()[0]).addClass('active');
       $($('#listItems').children()).click(function () {
         $($('#listItems').children()).removeClass('active');
         $(this).addClass('active');
         // Fill the tables and place the photo if exists
         getProductById($(this)[0].id, fillMainTable);
       });
-
       // Check if there's a return queryString 
       if (window.location.search) {
         var id = window.location.search.split("?id=")[1];
         makeItemSelected(id);
+      } else {
+        // Fill the table with first data
+        getProductById(Object.keys(result)[0], fillMainTable);
+        $($('#listItems').children()[0]).addClass('active');
       }
     }
   );
@@ -59,7 +59,7 @@ function getAllProducts() {
 
 function getCoverPic(data) {
   var res = "http://via.placeholder.com/270x330";
-  if(data != null && data != undefined && data != "")
+  if (data != null && data != undefined && data != "")
     res = "data:image/jpeg;base64," + data;
   return res;
 }
