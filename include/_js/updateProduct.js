@@ -12,20 +12,20 @@ $(function () {
 });
 
 // Fill Form with existing data
-function fillUpdateForm(result, id) {
-  $('#title').val(result[id].title);
-  $('#released-date').val(result[id].released_date);
-  $('#rate').val(result[id].rate);
-  result[id].genres.split(', ').forEach(genre => {
+function fillUpdateForm(result) {
+  $('#title').val(result[0].title);
+  $('#released-date').val(result[0].released_date);
+  $('#rate').val(result[0].rate);
+  result[0].genres.split(', ').forEach(genre => {
     pushIntoTagmanager("genre", genre);
   });
-  result[id].platforms.split(', ').forEach(genre => {
+  result[0].platforms.split(', ').forEach(genre => {
     pushIntoTagmanager("platform", genre);
   });
-  result[id].publishers.split(', ').forEach(genre => {
+  result[0].publishers.split(', ').forEach(genre => {
     pushIntoTagmanager("publisher", genre);
   });
-  $('#desc-box').val(result[id].description);
+  $('#desc-box').val(result[0].description);
 }
 
 // Send data to php services

@@ -87,7 +87,7 @@ function getProductById(id, successFunc) {
     "id=" + id,
     "json",
     function (result) {
-      successFunc(result, id);
+      successFunc(result);
     }
   );
 }

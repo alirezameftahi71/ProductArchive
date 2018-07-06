@@ -26,7 +26,7 @@ if (isset($_GET['id'])) {
     $select_query .= "WHERE game.id = $_GET[id] ";
 }
 
-$select_query .= "GROUP BY game.id;";
+$select_query .= "GROUP BY game.id ORDER BY game.title;";
 
 $result = mysqli_query($conn, $select_query);
 if (confirm_query_select($result)) {
@@ -37,7 +37,8 @@ if (confirm_query_select($result)) {
             $cover_pic = base64_encode($row['cover_pic']);
         }
 
-        $json[$row['id']] = array(
+        $json[] = array(
+            'id' => $row['id'],
             'title' => $row['title'],
             'released_date' => $row['released_date'],
             'rate' => $row['rate'],

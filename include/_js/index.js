@@ -36,7 +36,7 @@ function getAllProducts() {
     "json",
     function (result) {
       $.each(result, function (i) {
-        $('#listItems').append('<a href="#" id="' + i + '" class="list-group-item list-group-item-action">' + result[i]['title'] + '</a>');
+        $('#listItems').append('<a href="#" id="' + result[i]['id'] + '" class="list-group-item list-group-item-action">' + result[i]['title'] + '</a>');
       });
       $($('#listItems').children()).click(function () {
         $($('#listItems').children()).removeClass('active');
@@ -46,11 +46,11 @@ function getAllProducts() {
       });
       // Check if there's a return queryString 
       if (window.location.search) {
-        var id = window.location.search.split("?id=")[1];
+        var id = window.location.search.split("?id=").pop();
         makeItemSelected(id);
       } else {
         // Fill the table with first data
-        getProductById(Object.keys(result)[0], fillMainTable);
+        getProductById(result[0]['id'], fillMainTable);
         $($('#listItems').children()[0]).addClass('active');
       }
     }
@@ -65,15 +65,15 @@ function getCoverPic(data) {
 }
 
 // Fills in the main table 
-function fillMainTable(result, id) {
-  $("table #title").text(id != undefined ? result[id]['title'] : "Example Product Name");
-  $("table #releaseDate").text(id != undefined ? result[id]['released_date'] : "20xx");
-  $("table #rate").text(id != undefined ? result[id]['rate'] + "/5" : "#/5");
-  $("table #genre").text(id != undefined ? result[id]['genres'] : "Example Genre");
-  $("table #platform").text(id != undefined ? result[id]['platforms'] : "Example platform");
-  $("table #publisher").text(id != undefined ? result[id]['publishers'] : "Example Company");
-  $("#description").text(id != undefined ? result[id]['description'] : "Full Description goes here in multiple lines providing more and detailed information about the product, like story line or history.");
-  $("#cover-pic").attr('src', id != undefined ? getCoverPic(result[id]['cover_pic']) : "http://via.placeholder.com/270x330");
+function fillMainTable(result) {
+  $("table #title").text(result != undefined ? result[0]['title'] : "Example Product Name");
+  $("table #releaseDate").text(result != undefined  ? result[0]['released_date'] : "20xx");
+  $("table #rate").text(result != undefined  ? result[0]['rate'] + "/5" : "#/5");
+  $("table #genre").text(result != undefined  ? result[0]['genres'] : "Example Genre");
+  $("table #platform").text(result != undefined  ? result[0]['platforms'] : "Example platform");
+  $("table #publisher").text(result != undefined  ? result[0]['publishers'] : "Example Company");
+  $("#description").text(result != undefined  ? result[0]['description'] : "Full Description goes here in multiple lines providing more and detailed information about the product, like story line or history.");
+  $("#cover-pic").attr('src', result != undefined  ? getCoverPic(result[0]['cover_pic']) : "http://via.placeholder.com/270x330");
 }
 
 // Find the selected product's id
