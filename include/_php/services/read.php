@@ -1,6 +1,7 @@
 <?php include_once "../connect_db.php";?>
 <?php include_once "../functions.php";?>
 <?php
+$getSorted = true;
 $select_query = "SELECT DISTINCT game.id, game.title, game.released_date, game.rate, game.description, ";
 if (isset($_GET['id'])) {
     $select_query .= "game.cover_pic, ";
@@ -26,7 +27,10 @@ if (isset($_GET['id'])) {
     $select_query .= "WHERE game.id = $_GET[id] ";
 }
 
-$select_query .= "GROUP BY game.id ORDER BY game.title;";
+$select_query .= "GROUP BY game.id ";
+if ($getSorted) {
+    $select_query .= "ORDER BY game.title ";
+}
 
 $result = mysqli_query($conn, $select_query);
 if (confirm_query_select($result)) {

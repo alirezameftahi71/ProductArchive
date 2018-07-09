@@ -1,6 +1,15 @@
 body,
 html {
-	height: 100%
+	height: 100%;
+}
+
+::-webkit-scrollbar {
+	width: 7px;
+}
+
+::-webkit-scrollbar-thumb {
+	border-radius: 5px;
+	background-color: lightgray;
 }
 
 /* Remove the navbar's default margin-bottom and rounded borders */
@@ -84,6 +93,18 @@ footer {
 
 #file-browse-wrapper a:hover {
 	color: red;
+}
+
+a:hover {
+	text-decoration: none;
+}
+
+.fa.fa-search {
+	cursor: pointer;
+}
+
+#searchBox {
+	border: 1px solid #ced4da !important;
 }
 
 /* On small screens*/

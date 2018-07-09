@@ -66,14 +66,14 @@ function getCoverPic(data) {
 
 // Fills in the main table 
 function fillMainTable(result) {
-  $("table #title").text(result != undefined ? result[0]['title'] : "Example Product Name");
-  $("table #releaseDate").text(result != undefined  ? result[0]['released_date'] : "20xx");
-  $("table #rate").text(result != undefined  ? result[0]['rate'] + "/5" : "#/5");
-  $("table #genre").text(result != undefined  ? result[0]['genres'] : "Example Genre");
-  $("table #platform").text(result != undefined  ? result[0]['platforms'] : "Example platform");
-  $("table #publisher").text(result != undefined  ? result[0]['publishers'] : "Example Company");
-  $("#description").text(result != undefined  ? result[0]['description'] : "Full Description goes here in multiple lines providing more and detailed information about the product, like story line or history.");
-  $("#cover-pic").attr('src', result != undefined  ? getCoverPic(result[0]['cover_pic']) : "http://via.placeholder.com/270x330");
+  $("table #title").html(result != undefined ? result[0]['title'] : "Example Product Name");
+  $("table #releaseDate").html(result != undefined ? result[0]['released_date'] : "20xx");
+  $("table #rate").html(result != undefined ? result[0]['rate'] + "/5" : "#/5");
+  $("table #genre").html(result != undefined ? result[0]['genres'] : "Example Genre");
+  $("table #platform").html(result != undefined ? result[0]['platforms'] : "Example platform");
+  $("table #publisher").html(result != undefined ? result[0]['publishers'] : "Example Company");
+  $("#description").html(result != undefined ? result[0]['description'] : "Full Description goes here in multiple lines providing more and detailed information about the product, like story line or history.");
+  $("#cover-pic").attr('src', result != undefined ? getCoverPic(result[0]['cover_pic']) : "http://via.placeholder.com/270x330");
 }
 
 // Find the selected product's id

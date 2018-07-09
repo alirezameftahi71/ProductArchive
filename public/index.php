@@ -3,7 +3,14 @@
 <div class="container-fluid text-center">
   <div class="row content height-full">
     <div class="col-md-2 sidenav">
-      <input class="form-control" id="searchBox" type="text" placeholder="Search...">
+      <div class="input-group">
+        <input class="form-control py-2 border-right-0 border" type="search" id="searchBox" placeholder="Search...">
+        <span class="input-group-append">
+          <div class="input-group-text bg-white">
+            <i class="fa fa-search"></i>
+          </div>
+        </span>
+      </div>
       <br>
       <div class="list-group" id="listItems">
       </div>
