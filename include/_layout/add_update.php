@@ -52,7 +52,6 @@
                   <i class="icon fas fa-times"></i>
                 </a>
               </div>
-
             </div>
           </div>
         </div>

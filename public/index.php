@@ -4,7 +4,7 @@
   <div class="row content height-full">
     <div class="col-md-2 sidenav">
       <div class="input-group">
-        <input class="form-control py-2 border-right-0 border" type="search" id="searchBox" placeholder="Search...">
+        <input class="form-control border-right-0 border" type="search" id="searchBox" placeholder="Search...">
         <span class="input-group-append">
           <div class="input-group-text bg-white">
             <i class="fa fa-search"></i>

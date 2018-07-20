@@ -66,14 +66,26 @@ function getCoverPic(data) {
 
 // Fills in the main table 
 function fillMainTable(result) {
-  $("table #title").html(result != undefined ? result[0]['title'] : "Example Product Name");
-  $("table #releaseDate").html(result != undefined ? result[0]['released_date'] : "20xx");
-  $("table #rate").html(result != undefined ? result[0]['rate'] + "/5" : "#/5");
-  $("table #genre").html(result != undefined ? result[0]['genres'] : "Example Genre");
-  $("table #platform").html(result != undefined ? result[0]['platforms'] : "Example platform");
-  $("table #publisher").html(result != undefined ? result[0]['publishers'] : "Example Company");
-  $("#description").html(result != undefined ? result[0]['description'] : "Full Description goes here in multiple lines providing more and detailed information about the product, like story line or history.");
-  $("#cover-pic").attr('src', result != undefined ? getCoverPic(result[0]['cover_pic']) : "http://via.placeholder.com/270x330");
+  if (!result) {
+    $("table #title").html("Example Product Name");
+    $("table #releaseDate").html("20xx");
+    $("table #rate").html("#/5");
+    $("table #genre").html("Example Genre");
+    $("table #platform").html("Example platform");
+    $("table #publisher").html("Example Company");
+    $("#description").html("Full Description goes here in multiple lines providing more and detailed information about the product, like story line or history.");
+    $("#cover-pic").attr('src', "http://via.placeholder.com/270x330");
+  } else {
+    $("table #title").html( result[0]['title'] ? result[0]['title'] : "---");
+    $("table #releaseDate").html(result[0]['released_date'] ? result[0]['released_date'] : "---");
+    $("table #rate").html(result[0]['rate'] ? result[0]['rate'] + "/5" : "---");
+    $("table #genre").html(result[0]['genres'] ? result[0]['genres'] : "---");
+    $("table #platform").html(result[0]['platforms'] ? result[0]['platforms'] : "---");
+    $("table #publisher").html(result[0]['publishers'] ? result[0]['publishers'] : "---");
+    $("#description").html(result[0]['description'] ? result[0]['description'] : "");
+    $("#cover-pic").attr('src', getCoverPic(result[0]['cover_pic']) ? getCoverPic(result[0]['cover_pic']) : "http://via.placeholder.com/270x330");
+  }
+
 }
 
 // Find the selected product's id

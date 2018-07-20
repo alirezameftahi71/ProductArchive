@@ -3,11 +3,11 @@ html {
 	height: 100%;
 }
 
-::-webkit-scrollbar {
+.sidenav ::-webkit-scrollbar {
 	width: 7px;
 }
 
-::-webkit-scrollbar-thumb {
+.sidenav ::-webkit-scrollbar-thumb {
 	border-radius: 5px;
 	background-color: lightgray;
 }
