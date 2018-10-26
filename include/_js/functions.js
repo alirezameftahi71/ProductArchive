@@ -1,6 +1,9 @@
 // Print the footer
 function getFooter(ownerName) {
-  return "\u00A9 2018 - " + (new Date()).getFullYear() + " " + ownerName + " | All Rights Reserved"
+  var startYear = "2018";
+  var currentYear = (new Date()).getFullYear().toString();
+  var startYearText = startYear == currentYear ? "" : "2018 - "
+  return "\u00A9 " + startYearText + currentYear + " " + ownerName + " | All Rights Reserved"
 }
 
 // Mark the current page as active in navbar 
