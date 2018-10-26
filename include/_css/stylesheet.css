@@ -107,6 +107,12 @@ a:hover {
 	border: 1px solid #ced4da !important;
 }
 
+/* Making the chart container full width */
+
+#chartContainer {
+	width: 100%;
+}
+
 /* On small screens*/
 
 @media screen and (max-width: 767px) {
