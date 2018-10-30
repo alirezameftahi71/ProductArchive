@@ -1,15 +1,14 @@
-body,
-html {
+body {
+	height: 100%;
+	font-size: 16px;
+}
+
+#arm-body>.row {
 	height: 100%;
 }
 
-.sidenav ::-webkit-scrollbar {
-	width: 7px;
-}
-
-.sidenav ::-webkit-scrollbar-thumb {
-	border-radius: 5px;
-	background-color: lightgray;
+#listItems {
+	height: calc(100% - 63px);
 }
 
 /* Remove the navbar's default margin-bottom and rounded borders */
@@ -19,25 +18,20 @@ html {
 	border-radius: 0;
 }
 
-/* Set height of the grid so .sidenav can be 100% (adjust as needed) */
-
-.height-full {
-	min-height: calc(100vh - 112px);
-}
-
 /* Set gray background color and 100% height */
 
 .sidenav {
 	padding-top: 20px;
 	padding-bottom: 20px;
 	background-color: #f1f1f1;
-	height: 100%;
+	height: calc(95ch - 95px);
 }
 
 /* Overwrite the scrol of .list-group */
 
 .list-group {
 	overflow-y: scroll;
+	overflow-x: hidden;
 }
 
 /* Overwrite the border and bg color of .active for list-group */
@@ -64,6 +58,8 @@ html {
 footer {
 	color: white;
 	padding: 16px;
+	position: static;
+	bottom: 0;
 }
 
 .toolbar {
@@ -120,9 +116,15 @@ a:hover {
 		height: auto;
 		padding: 15px;
 	}
+
+	body {
+		height: initial;
+	}
+
 	.row.content {
 		height: auto;
 	}
+
 	/* Overwrite the scrol of .list-group */
 	.list-group {
 		height: 250px !important;

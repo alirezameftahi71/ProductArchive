@@ -1,6 +1,6 @@
-<div class="container-fluid">
-  <div class="row content height-full justify-content-center">
-    <div class="col-md-9">
+<div class="row">
+  <div class="container-fluid">
+    <div class="col-md-9 justify-content-center">
       <h3 class="text-center mt-4 mb-4">
         <?php echo $page_title ?>
       </h3>
@@ -19,23 +19,24 @@
               </div>
               <div class="col-6">
                 <label for="rate">Rate:</label>
-                <input type="number" min=1 max=5 step="0.5" class="form-control" id="rate" placeholder="Enter Metascore" name="rate">
+                <input type="number" min=1 max=5 step="0.5" class="form-control" id="rate" placeholder="Enter Metascore"
+                  name="rate">
               </div>
             </div>
             <div class="form-group">
               <label for="genre">Genre(s):</label>
-              <input type="text" class="form-control typeahead tm-input tm-input-info" id="genre" placeholder="Enter Genres" name="genre"
-                autocomplete="off" />
+              <input type="text" class="form-control typeahead tm-input tm-input-info" id="genre" placeholder="Enter Genres"
+                name="genre" autocomplete="off" />
             </div>
             <div class="form-group">
               <label for="platform">Platform(s):</label>
-              <input type="text" class="form-control typeahead tm-input tm-input-info" id="platform" placeholder="Enter Platforms" name="platform"
-                autocomplete="off" />
+              <input type="text" class="form-control typeahead tm-input tm-input-info" id="platform" placeholder="Enter Platforms"
+                name="platform" autocomplete="off" />
             </div>
             <div class="form-group">
               <label for="publisher">Publisher(s):</label>
-              <input type="text" class="form-control typeahead tm-input tm-input-info" id="publisher" placeholder="Enter Publishers" name="publisher"
-                autocomplete="off" />
+              <input type="text" class="form-control typeahead tm-input tm-input-info" id="publisher" placeholder="Enter Publishers"
+                name="publisher" autocomplete="off" />
             </div>
           </div>
           <div class="col-md-3">
@@ -47,8 +48,8 @@
               <label for="cover-pic">Cover Picture:</label>
               <div id="file-browse-wrapper">
                 <input type="file" class="form-control" name="cover-pic" id="cover-pic">
-                <a data-toggle="confirmation" title="Delete Cover Picture" data-title="Delete Picture?" data-placement="top" data-btn-cancel-class="btn-danger" data-popout="true"
-                  href="javascript:deletePicture();">
+                <a data-toggle="confirmation" title="Delete Cover Picture" data-title="Delete Picture?" data-placement="top"
+                  data-btn-cancel-class="btn-danger" data-popout="true" href="javascript:deletePicture();">
                   <i class="icon fas fa-times"></i>
                 </a>
               </div>

@@ -5,34 +5,43 @@ $(function () {
         null,
         "json",
         function (data) {
-            Highcharts.chart('chartContainer', {
-                chart: {
-                    renderTo: 'container',
-                    type: 'column',
-                    margin: [100, 100, 100, 100]
-                },
-                title: {
-                    text: ''
-                },
-                yAxis: {
-                    title: {
-                        text: null
-                    }
-                },
-                credits: {
-                    enabled: false
-                },
-                legend: {
-                    enabled: false
-                },
-                xAxis: {
-                    type: "category"
-                },
-                series: [{
-                    name: 'Count of Games',
-                    data: data
-                }]
-            });
+            var seriesArray = [{
+                name: 'Count of Games',
+                data: data
+            }];
+            var config = hcConfigBuilder(seriesArray, 'column');
+            drawChart('chartContainer', config);
         }
     );
 });
+
+function drawChart(chartContainerId, config) {
+    Highcharts.chart(chartContainerId, config);
+}
+
+function hcConfigBuilder(seriesArray, hcType){
+    return {
+        chart: {
+            type: hcType,
+            margin: [100, 100, 100, 100]
+        },
+        title: {
+            text: ''
+        },
+        yAxis: {
+            title: {
+                text: null
+            }
+        },
+        credits: {
+            enabled: false
+        },
+        legend: {
+            enabled: false
+        },
+        xAxis: {
+            type: "category"
+        },
+        series: seriesArray
+    };
+}
