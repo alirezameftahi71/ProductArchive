@@ -7,6 +7,9 @@ body {
 	height: 100%;
 }
 
+#arm-body .row#full-height {
+	min-height: calc(100vh - 112px);
+}
 #listItems {
 	height: calc(100% - 63px);
 }
