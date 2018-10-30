@@ -1,7 +1,7 @@
 <?php include "../include/_layout/header.html";?>
 <script src="../include/_js/index.js"></script>
-<div class="container-fluid text-center">
-  <div class="row content height-full">
+<div id="main-content" class="container-fluid text-center">
+  <div class="row height-full">
     <div class="col-md-2 sidenav">
       <div class="input-group">
         <input class="form-control border-right-0 border" type="search" id="searchBox" placeholder="Search...">
@@ -49,11 +49,12 @@
         </div>
         <div class="col-md-4">
           <div class="container-fluid">
-            <img id="cover-pic" class="img-fluid" src="http://via.placeholder.com/265x320" alt="Product Cover" width="265" height="320">
+            <img id="cover-pic" class="img-fluid" src="http://via.placeholder.com/265x320" alt="Product Cover" width="265"
+              height="320">
           </div>
           <div class="container-fluid toolbar">
-            <a data-toggle="confirmation" data-title="Delete Product?" data-placement="left" data-btn-cancel-class="btn-danger" data-popout="true"
-              href="javascript:deleteProduct();">
+            <a data-toggle="confirmation" data-title="Delete Product?" data-placement="left" data-btn-cancel-class="btn-danger"
+              data-popout="true" href="javascript:deleteProduct();">
               <i class="icon fas fa-trash-alt"></i>
             </a>
             <i class="icon fas fa-thumbs-up"></i>
@@ -66,7 +67,8 @@
       <hr>
       <div class="container-fluid text-center">
         <p id="description">
-          Full Description goes here in multiple lines providing more and detailed information about the product, like story line or
+          Full Description goes here in multiple lines providing more and detailed information about the product, like
+          story line or
           history.
         </p>
       </div>

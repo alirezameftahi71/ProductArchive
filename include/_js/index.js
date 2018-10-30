@@ -11,15 +11,15 @@ $(function () {
 
   // Fill the side menu
   getAllProducts();
+
+  // Bind the resize event to resizeListGroup()
+  $(window).bind('resize', resizeListGroup);
 });
 
 // Calculate the height of main area and asign it to list-group
 function resizeListGroup() {
   $('.list-group').height($('#main-area').height() - $('footer').outerHeight() - $('.navbar').outerHeight() + 10);
 }
-
-// Bind the resize event to resizeListGroup()
-$(window).bind('resize', resizeListGroup);
 
 // Make passed id in items selected and scroll to it
 function makeItemSelected(id) {
@@ -76,7 +76,7 @@ function fillMainTable(result) {
     $("#description").html("Full Description goes here in multiple lines providing more and detailed information about the product, like story line or history.");
     $("#cover-pic").attr('src', "http://via.placeholder.com/270x330");
   } else {
-    $("table #title").html( result[0]['title'] ? result[0]['title'] : "---");
+    $("table #title").html(result[0]['title'] ? result[0]['title'] : "---");
     $("table #releaseDate").html(result[0]['released_date'] ? result[0]['released_date'] : "---");
     $("table #rate").html(result[0]['rate'] ? result[0]['rate'] + "/5" : "---");
     $("table #genre").html(result[0]['genres'] ? result[0]['genres'] : "---");

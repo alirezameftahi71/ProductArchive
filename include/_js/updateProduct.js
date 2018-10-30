@@ -60,6 +60,7 @@ function sendUpdateInfo() {
   );
 }
 
+// Remove the picture for product from database functionality
 function deletePicture() {
   _apiRequest(
     "../include/_php/services/delete_picture.php?id=" + id,
