@@ -1,5 +1,5 @@
 <div class="container-fluid">
-  <div class="row content full-height justify-content-center">
+  <div id="full-height" class="row content justify-content-center">
     <div class="col-md-9">
       <h3 class="text-center mt-4 mb-4">
         <?php echo $page_title ?>
