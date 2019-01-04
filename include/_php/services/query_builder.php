@@ -3,13 +3,10 @@
 <?php
 header("Content-Type: application/json; charset=UTF-8");
 
-// getting the post body
-// $json_string = preg_replace('/\s+/', '',file_get_contents('php://input'));
-$recievedJson = json_decode(file_get_contents('php://input'));
-
 // prep query of temp table
+$temp_table_name = "all_fields";
 $make_temp_table = <<<SQL
-CREATE TEMPORARY TABLE all_fields
+CREATE TEMPORARY TABLE $temp_table_name
 SELECT game.id AS id, game.title AS title, game.rate AS rate,
 game.released_date AS released_date, game.description AS description,
 GROUP_CONCAT(DISTINCT genre.name SEPARATOR ', ') AS genres,
@@ -28,41 +25,60 @@ SQL;
 // making the temp table
 mysqli_query($conn, $make_temp_table);
 
+// getting the post body
+$recievedJsonStr = file_get_contents('php://input');
+
+if (!$recievedJsonStr) {
+// check if there's any post body if not return temp_table column names
+    $getAllFieldsQuery = "SHOW COLUMNS FROM $temp_table_name";
+    $result = mysqli_query($conn, $getAllFieldsQuery);
+    if (confirm_query_select($result)) {
+        $json = array();
+        while ($row = mysqli_fetch_assoc($result)) {
+            $json[] = $row['Field'];
+        }
+        echo json_encode($json);
+    }
+} else { 
+// else get the body as object and make the search query
+    $recievedJsonObj = json_decode($recievedJsonStr);
+
 // making the search query
-$query = "SELECT * FROM all_fields WHERE";
-$processIsRunning = true;
-$postObj = $recievedJson;
-while ($processIsRunning) {
-    if (is_numeric($postObj->value)) {
-        $query .= " $postObj->field $postObj->mop $postObj->value";
-    } else {
-        $query .= " $postObj->field $postObj->mop \"$postObj->value\"";
+    $query = "SELECT * FROM $temp_table_name WHERE";
+    $processIsRunning = true;
+    $postObj = $recievedJsonObj;
+    while ($processIsRunning) {
+        if (is_numeric($postObj->value)) {
+            $query .= " $postObj->field $postObj->mop $postObj->value";
+        } else {
+            $query .= " $postObj->field $postObj->mop \"%$postObj->value%\"";
+        }
+        if ($postObj->child) {
+            $query .= " $postObj->cop";
+            $postObj = $postObj->child;
+        } else {
+            $processIsRunning = false;
+        }
     }
-    if ($postObj->child) {
-        $query .= " $postObj->cop ";
-        $postObj = $postObj->child;
-    } else {
-        $processIsRunning = false;
-    }
-}
 
 // execution of the search query
-$result = mysqli_query($conn, $query);
-if (confirm_query_select($result)) {
-    $json = array();
-    while ($row = mysqli_fetch_assoc($result)) {
-        $json[] = array(
-            'id' => $row['id'],
-            'title' => $row['title'],
-            'rate' => $row['rate'],
-            'released_date' => $row['released_date'],
-            'platform' => $row['platforms'],
-            'genre' => $row['genres'],
-            'publishers' => $row['publishers'],
-            'description' => $row['description'],
-        );
+    $result = mysqli_query($conn, $query);
+    if (confirm_query_select($result)) {
+        $json = array();
+        while ($row = mysqli_fetch_assoc($result)) {
+            $json[] = array(
+                'id' => $row['id'],
+                'title' => $row['title'],
+                'rate' => $row['rate'],
+                'released_date' => $row['released_date'],
+                'platform' => $row['platforms'],
+                'genre' => $row['genres'],
+                'publishers' => $row['publishers'],
+                'description' => $row['description'],
+            );
+        }
+        echo json_encode($json);
     }
-    echo json_encode($json);
 }
 ?>
 <?php include_once "../disconnect_db.php";
