@@ -1,6 +1,6 @@
 <?php include "../include/_layout/header.html";?>
 <script src="../include/_js/index.js"></script>
-<div class="row text-center">
+<div class="row text-center full-height">
   <div class="col-md-2 sidenav">
     <div class="input-group" id="searchItems">
       <input class="form-control border-right-0 border" type="search" id="searchBox" placeholder="Search...">
