@@ -6,7 +6,7 @@ $(function () {
         "json",
         function (data) {
             var seriesArray = [{
-                name: 'Count of Games',
+                name: 'YValue',
                 data: data
             }];
             var config = hcConfigBuilder(seriesArray, 'column');
@@ -23,6 +23,7 @@ function hcConfigBuilder(seriesArray, hcType){
     return {
         chart: {
             type: hcType,
+            zoomType: 'x',
             margin: [100, 100, 100, 100]
         },
         title: {

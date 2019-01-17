@@ -51,9 +51,9 @@ if (!$recievedJsonStr) {
         if (is_numeric($postObj->value)) {
             $query .= " $postObj->field $postObj->mop $postObj->value";
         } else {
-            $query .= " $postObj->field $postObj->mop \"%$postObj->value%\"";
+            $query .= " $postObj->field $postObj->mop '%$postObj->value%'";
         }
-        if ($postObj->child) {
+        if (isset($postObj->child) && $postObj->child) {
             $query .= " $postObj->cop";
             $postObj = $postObj->child;
         } else {

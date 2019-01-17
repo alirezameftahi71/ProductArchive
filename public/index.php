@@ -19,7 +19,7 @@
     <hr />
     <div class="row">
       <div class="col-md-8">
-        <table style="table-layout:fixed;" class="table table-bordered table-striped mt-5">
+        <table class="table table-bordered table-striped fixed-width-table mt-5">
           <tr>
             <th>Title</th>
             <td id="title">Example Product Name</td>
