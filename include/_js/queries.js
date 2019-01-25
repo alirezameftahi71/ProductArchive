@@ -15,30 +15,29 @@ $(function () {
 });
 
 function addRow() {
-    var radioBtnId = uuidv4();
     let dropDownFields = $('<tr><td>' +
-        '<input class="form-control btn btn-outline-dark" id="remove-row-btn" onclick="removeRow(this, event)" type="button" value="Delete">' +
+        '<input class="form-control btn btn-outline-dark" id="remove-row-btn" onclick="removeRow(this, event)" type="button" value="&#10005;">' +
         '</td><td>' +
         '<select id="all-fields" name="field" class="form-control">' +
         '</select>' +
         '</td><td>' +
         '<select name="mop" class="form-control">' +
+        '<option value="=">Equal to</option>' +
+        '<option value="<">Less than</option>' +
+        '<option value=">">More than</option>' +
+        '<option value="<=">Less or equal</option>' +
+        '<option value=">=">More or equal</option>' +
+        '<option value="<>">Not Equal</option>' +
         '<option value="like">Contains</option>' +
-        '<option value="=">=</option>' +
-        '<option value="<">&lt;</option>' +
-        '<option value=">">&gt;</option>' +
-        '<option value="<=">&lt;=</option>' +
-        '<option value=">=">&gt;=</option>' +
-        '<option value="<>">&lt;&gt;</option>' +
+        '<option value="not like">Not contains</option>' +
         '</select>' +
         '</td><td>' +
         '<input name="value" class="form-control" type="text">' +
         '</td><td>' +
-        '<div class="form-check-inline">' +
-        '<input name="cop-' + radioBtnId + '" class="form-check-input" id="radio-and" type="radio" checked="" value="AND">AND' +
-        '</div><div class="form-check-inline">' +
-        '<input name="cop-' + radioBtnId + '" class="form-check-input" id="radio-or" type="radio" value="OR">OR' +
-        '</div>' +
+        '<select name="cop" class="form-control">' +
+        '<option value="AND">AND</option>' +
+        '<option value="OR">OR</option>' +
+        '</select>' +
         '</td></tr>');
     for (let i = 0; i < allFields.length; i++) {
         let element = $('<option></option>', {
@@ -77,12 +76,10 @@ function prepareRequestData(data) {
     var temp = {};
     var array = [];
     for (var item of data) {
-        if (item.name.includes('cop')) {
-            temp['cop'] = item.value;
+        temp[item.name] = item.value;
+        if (item.name === 'cop') {
             array.push(temp);
             temp = {};
-        } else {
-            temp[item.name] = item.value;
         }
     }
     for (let index = array.length; index >= 0; index--) {
