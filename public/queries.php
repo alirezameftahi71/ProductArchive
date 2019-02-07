@@ -10,7 +10,7 @@
                         <table id="query-builder" class="table table-bordered table-striped mt-5">
                             <thead>
                                 <tr>
-                                    <th>
+                                    <th style="width: 38px;">
                                         <input class="form-control btn btn-outline-dark" id="add-row-btn" type="button"
                                             value="&#10011;">
                                     </th>
@@ -28,7 +28,7 @@
                 <div class="row content justify-content-center">
                     <input id="btn-submit" type="button" class="btn btn-primary" value="Submit">
                     &nbsp;&nbsp;&nbsp;
-                    <input id="btn-submit" type="reset" class="btn btn-danger" value="Reset">
+                    <input id="btn-reset" type="reset" class="btn btn-danger" value="Reset">
                     <div class="col-md-12 p-0">
                         <br />
                         <table id="result-table" style="display:none;">

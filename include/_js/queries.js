@@ -1,4 +1,30 @@
 var allFields;
+const allOperators = [{
+    title: 'Equal to',
+    value: '='
+}, {
+    title: 'Less than',
+    value: '<'
+}, {
+    title: 'More than',
+    value: '>'
+}, {
+    title: 'Less or equal',
+    value: '<='
+}, {
+    title: 'More or equal',
+    value: '>='
+}, {
+    title: 'Not Equal',
+    value: '<>'
+}, {
+    title: 'Contains',
+    value: 'like'
+}, {
+    title: 'Not contains',
+    value: 'not like'
+}];
+
 $(function () {
     $('#add-row-btn').click(addRow);
     _apiRequest(
@@ -12,24 +38,17 @@ $(function () {
         }
     );
     $('#btn-submit').click(sendQuery);
+    $('#btn-reset').click(resetForm);
 });
 
 function addRow() {
-    let dropDownFields = $('<tr><td>' +
+    let element = $('<tr><td>' +
         '<input class="form-control btn btn-outline-dark" id="remove-row-btn" onclick="removeRow(this, event)" type="button" value="&#10005;">' +
         '</td><td>' +
         '<select id="all-fields" name="field" class="form-control">' +
         '</select>' +
         '</td><td>' +
-        '<select name="mop" class="form-control">' +
-        '<option value="=">Equal to</option>' +
-        '<option value="<">Less than</option>' +
-        '<option value=">">More than</option>' +
-        '<option value="<=">Less or equal</option>' +
-        '<option value=">=">More or equal</option>' +
-        '<option value="<>">Not Equal</option>' +
-        '<option value="like">Contains</option>' +
-        '<option value="not like">Not contains</option>' +
+        '<select id="all-operators" name="mop" class="form-control">' +
         '</select>' +
         '</td><td>' +
         '<input name="value" class="form-control" type="text">' +
@@ -39,14 +58,25 @@ function addRow() {
         '<option value="OR">OR</option>' +
         '</select>' +
         '</td></tr>');
+
     for (let i = 0; i < allFields.length; i++) {
-        let element = $('<option></option>', {
-            value: allFields[i]
+        let fieldOption = $('<option></option>', {
+            value: allFields[i].field,
+            dataType: allFields[i].type,
         });
-        element.text(allFields[i]);
-        $(dropDownFields).find('#all-fields').append($(element));
+        fieldOption.text(allFields[i].field.toUpperCase());
+        $(element).find('#all-fields').append($(fieldOption));
+
     }
-    $('table#query-builder tbody').append($(dropDownFields));
+    for (let i = 0; i < allOperators.length; i++) {
+        let operatorOption = $('<option></option>', {
+            value: allOperators[i].value
+        });
+        operatorOption.text(allOperators[i].title);
+        $(element).find('#all-operators').append($(operatorOption));
+    }
+
+    $('table#query-builder tbody').append($(element));
 }
 
 function removeRow(e, event) {
@@ -89,4 +119,11 @@ function prepareRequestData(data) {
     }
     res = array.length > 0 ? array[0] : {};
     return res;
+}
+
+function resetForm(){
+    $('#result-table').bootstrapTable('destroy');
+    $('#result-table').hide();
+    $('#query-builder tbody').empty();
+    addRow();
 }

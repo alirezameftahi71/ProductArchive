@@ -35,11 +35,13 @@ if (!$recievedJsonStr) {
     if (confirm_query_select($result)) {
         $json = array();
         while ($row = mysqli_fetch_assoc($result)) {
-            $json[] = $row['Field'];
+            $json[] = array(
+                'field' => $row['Field'],
+                'type' => $row['Type']);
         }
         echo json_encode($json);
     }
-} else { 
+} else {
 // else get the body as object and make the search query
     $recievedJsonObj = json_decode($recievedJsonStr);
 
