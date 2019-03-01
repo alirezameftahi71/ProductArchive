@@ -53,7 +53,11 @@ if (!$recievedJsonStr) {
         if (is_numeric($postObj->value)) {
             $query .= " $postObj->field $postObj->mop $postObj->value";
         } else {
-            $query .= " $postObj->field $postObj->mop '%$postObj->value%'";
+            if (strContains($postObj->mop, 'like')) {
+                $query .= " $postObj->field $postObj->mop '%$postObj->value%'";
+            } else {
+                $query .= " $postObj->field $postObj->mop '$postObj->value'";
+            }
         }
         if (isset($postObj->child) && $postObj->child) {
             $query .= " $postObj->cop";

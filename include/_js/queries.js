@@ -110,6 +110,8 @@ function removeRow(e) {
 }
 
 function sendQuery() {
+  $("#result-table").bootstrapTable("destroy");
+  $("#result-table").hide();
   var data = $("form").serializeArray();
   var processedData = prepareRequestData(data);
   var processedDataStr = JSON.stringify(processedData);
