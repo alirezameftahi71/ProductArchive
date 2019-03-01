@@ -42,7 +42,7 @@ const allOperators = [
   },
   {
     title: "Between",
-    value: "Between",
+    value: "between",
     types: ["int", "float", "date"]
   }
 ];
@@ -57,7 +57,7 @@ $(() => {
     data => {
       data.unshift({ field: "", type: "" });
       allFields = data;
-      //addRow();
+      addRow();
     }
   );
   $("#btn-submit").click(sendQuery);
@@ -69,9 +69,12 @@ $(() => {
       return e.types.indexOf(type.split("(")[0]) > -1;
     });
     fillOperatorsDropdown(ops, row);
+    fixValueInputUi(row, false);
   });
   $("table#query-builder").on("change", "#operators", e => {
-    // on operator change
+    let value = $(e.target.selectedOptions).attr("value");
+    let row = $(e.target).parents("tr");
+    fixValueInputUi(row, value === "between")
   });
 });
 
@@ -90,7 +93,20 @@ function addRow() {
             </td>
             <td><select id="all-fields" name="field" class="form-control"></select></td>
             <td><select id="operators" name="mop" class="form-control"></select></td>
-            <td><input id="input-value" name="value" class="form-control" type="text" /></td>
+            <td>
+            <input id="simple-value" name="value" class="form-control" type="text" />
+            <div id="between-value-row" class="row" style="display:none;">
+              <div class="col-md-5">
+                <input id="value-from" name="valueFrom" class="form-control" type="date">
+              </div>
+              <div class="col-md-2 text-center">
+                <label style="vertical-align:sub;">And</label>
+              </div>
+              <div class="col-md-5">
+                <input id="value-to" name="valueTo" class="form-control" type="date">
+              </div>
+            </div>
+            </td>
             <td>
             <select name="cop" class="form-control">
                 <option value="AND">AND</option>
@@ -99,7 +115,7 @@ function addRow() {
             </td>
         </tr>
     `);
-    fillFieldsDropdown(allFields, $(row));
+  fillFieldsDropdown(allFields, $(row));
   $("table#query-builder tbody").append(row);
 }
 
@@ -171,12 +187,22 @@ function fillOperatorsDropdown(ops, row) {
 
 function fillFieldsDropdown(fields, row) {
   let fieldSelector = row.find("#all-fields");
-    for (let i = 0; i < fields.length; i++) {
+  for (let i = 0; i < fields.length; i++) {
     let fieldOption = $("<option></option>", {
       value: fields[i].field,
       datatype: fields[i].type
     });
     fieldOption.text(fields[i].field.toUpperCase());
     fieldSelector.append($(fieldOption));
+  }
+}
+
+function fixValueInputUi(row, opIsBetween){
+  if (opIsBetween) {
+    row.find("#between-value-row").show();
+    row.find("#simple-value").val("").hide();
+  } else {
+    row.find("#between-value-row").hide();
+    row.find("#simple-value").val("").show();
   }
 }
