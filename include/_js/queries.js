@@ -74,7 +74,9 @@ $(() => {
   $("table#query-builder").on("change", "#operators", e => {
     let value = $(e.target.selectedOptions).attr("value");
     let row = $(e.target).parents("tr");
-    fixValueInputUi(row, value === "between")
+    fixValueInputUi(row, value === "between");
+    let fieldType = $(row.find("#all-fields")[0].selectedOptions).attr("datatype");
+    toggleDateBetweenInput(row, fieldType === 'date');
   });
 });
 
@@ -97,13 +99,13 @@ function addRow() {
             <input id="simple-value" name="value" class="form-control" type="text" />
             <div id="between-value-row" class="row" style="display:none;">
               <div class="col-md-5">
-                <input id="value-from" name="valueFrom" class="form-control" type="date">
+                <input id="value-from" name="valueFrom" class="form-control" type="text">
               </div>
               <div class="col-md-2 text-center">
                 <label style="vertical-align:sub;">And</label>
               </div>
               <div class="col-md-5">
-                <input id="value-to" name="valueTo" class="form-control" type="date">
+                <input id="value-to" name="valueTo" class="form-control" type="text">
               </div>
             </div>
             </td>
@@ -204,5 +206,13 @@ function fixValueInputUi(row, opIsBetween){
   } else {
     row.find("#between-value-row").hide();
     row.find("#simple-value").val("").show();
+  }
+}
+
+function toggleDateBetweenInput(row, typeIsDate) {
+  if (typeIsDate) {
+    row.find('#between-value-row input').val("").attr('type', 'date');
+  } else {
+    row.find('#between-value-row input').val("").attr('type', 'text');
   }
 }
