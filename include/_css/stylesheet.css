@@ -118,6 +118,10 @@ a:hover {
 	table-layout: fixed;
 }
 
+.height-small {
+	height: 7rem;
+}
+
 /* On small screens*/
 
 @media screen and (max-width: 767px) {
