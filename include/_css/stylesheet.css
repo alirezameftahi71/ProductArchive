@@ -113,6 +113,11 @@ a:hover {
 	width: 100%;
 }
 
+/* Makes the table column widths all equal */
+.fixed-width-table {
+	table-layout: fixed;
+}
+
 /* On small screens*/
 
 @media screen and (max-width: 767px) {

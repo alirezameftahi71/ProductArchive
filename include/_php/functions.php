@@ -39,3 +39,9 @@ function deleteFile($fileName, $path)
         return unlink($file);
     }
 }
+
+// Search a string for a substring
+function strContains($string, $substring)
+{
+    return strpos($string, $substring) !== false;
+}
