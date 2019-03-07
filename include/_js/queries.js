@@ -69,6 +69,7 @@ $(() => {
       return e.types.indexOf(type.split("(")[0]) > -1;
     });
     fillOperatorsDropdown(ops, row);
+    toggleBetweenOperator(row, false);
     toggleDateInput(row, type === 'date');
   });
   $("table#query-builder").on("change", "#operators", e => {
