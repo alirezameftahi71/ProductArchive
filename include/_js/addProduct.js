@@ -37,6 +37,8 @@ function sendAddInfo() {
         },
         true
       );
+    }, function(result) {
+      
     }
   );
 }

@@ -63,20 +63,20 @@ $(() => {
   $("#btn-submit").click(sendQuery);
   $("#btn-reset").click(resetForm);
   $("table#query-builder").on("change", "#all-fields", e => {
-    let type = $(e.target.selectedOptions).attr("datatype");
     let row = $(e.target).parents("tr");
+    let type = $(e.target.selectedOptions).attr("datatype");
     let ops = allOperators.filter(e => {
       return e.types.indexOf(type.split("(")[0]) > -1;
     });
     fillOperatorsDropdown(ops, row);
-    fixValueInputUi(row, false);
+    toggleDateInput(row, type === 'date');
   });
   $("table#query-builder").on("change", "#operators", e => {
-    let value = $(e.target.selectedOptions).attr("value");
     let row = $(e.target).parents("tr");
-    fixValueInputUi(row, value === "between");
+    let op = $(e.target.selectedOptions).attr("value");
     let fieldType = $(row.find("#all-fields")[0].selectedOptions).attr("datatype");
-    toggleDateBetweenInput(row, fieldType === 'date');
+    toggleBetweenOperator(row, op === "between");
+    toggleDateInput(row, type === 'date');
   });
 });
 
@@ -199,7 +199,7 @@ function fillFieldsDropdown(fields, row) {
   }
 }
 
-function fixValueInputUi(row, opIsBetween){
+function toggleBetweenOperator(row, opIsBetween){
   if (opIsBetween) {
     row.find("#between-value-row").show();
     row.find("#simple-value").val("").hide();
@@ -209,10 +209,12 @@ function fixValueInputUi(row, opIsBetween){
   }
 }
 
-function toggleDateBetweenInput(row, typeIsDate) {
+function toggleDateInput(row, typeIsDate) {
   if (typeIsDate) {
     row.find('#between-value-row input').val("").attr('type', 'date');
+    row.find('input#simple-value').val("").attr('type', 'date');
   } else {
     row.find('#between-value-row input').val("").attr('type', 'text');
+    row.find('input#simple-value').val("").attr('type', 'text');
   }
 }
