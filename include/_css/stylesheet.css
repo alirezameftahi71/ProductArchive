@@ -8,11 +8,11 @@ body {
 }
 
 .full-height {
-	min-height: calc(100vh - 112px);
+	min-height: calc(100vh - 7em);
 }
 
 #listItems {
-	height: calc(100% - 63px);
+	height: calc(100% - 3.9375em);
 }
 
 /* Remove the navbar's default margin-bottom and rounded borders */
@@ -25,10 +25,10 @@ body {
 /* Set gray background color and 100% height */
 
 .sidenav {
-	padding-top: 20px;
-	padding-bottom: 20px;
+	padding-top: 1.25em;
+	padding-bottom: 1.25em;
 	background-color: #f1f1f1;
-	height: calc(95ch - 95px);
+	height: calc(95ch - 5.9375em);
 }
 
 /* Overwrite the scrol of .list-group */
@@ -61,7 +61,7 @@ body {
 
 footer {
 	color: white;
-	padding: 16px;
+	padding: 1em;
 	position: static;
 	bottom: 0;
 }
@@ -85,14 +85,8 @@ footer {
 }
 
 #file-browse-wrapper a {
-	font-size: 26px;
-	margin-left: 12px;
-	cursor: pointer;
-	color: black;
-}
-
-#file-browse-wrapper a:hover {
-	color: red;
+	font-size: 1.625em;
+	margin-left: 0.75em;
 }
 
 a:hover {
@@ -104,7 +98,7 @@ a:hover {
 }
 
 #searchBox {
-	border: 1px solid #ced4da !important;
+	border: 0.0625em solid #ced4da !important;
 }
 
 /* Making the chart container full width */
@@ -119,15 +113,15 @@ a:hover {
 }
 
 .height-small {
-	height: 7rem;
+	height: 7em;
 }
 
 /* On small screens*/
 
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 47.9375em) {
 	.sidenav {
 		height: auto;
-		padding: 15px;
+		padding: 0.9375em;
 	}
 
 	body {
@@ -140,6 +134,6 @@ a:hover {
 
 	/* Overwrite the scrol of .list-group */
 	.list-group {
-		height: 250px !important;
+		height: 15.625em !important;
 	}
 }

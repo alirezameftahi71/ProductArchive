@@ -75,9 +75,7 @@ $(() => {
   $("table#query-builder").on("change", "#operators", e => {
     let row = $(e.target).parents("tr");
     let op = $(e.target.selectedOptions).attr("value");
-    let fieldType = $(row.find("#all-fields")[0].selectedOptions).attr("datatype");
     toggleBetweenOperator(row, op === "between");
-    toggleDateInput(row, type === 'date');
   });
 });
 
