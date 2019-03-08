@@ -56,7 +56,6 @@
             data-popout="true" href="javascript:deleteProduct();">
             <i class="icon fas fa-trash-alt"></i>
           </a>
-          <i class="icon fas fa-thumbs-up"></i>
           <a href="javascript:updateProduct();">
             <i class="icon fas fa-edit"></i>
           </a>
