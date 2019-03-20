@@ -1,13 +1,13 @@
 <div class="container-fluid">
   <div class="row content justify-content-center full-height">
-    <div class="col-md-9">
+    <div class="col-md-10">
       <h3 class="text-center mt-4 mb-4">
         <?php echo $page_title ?>
       </h3>
       <hr />
       <form>
         <div class="row content justify-content-center">
-          <div class="col-md-7">
+          <div class="col-md-8">
             <div class="form-group">
               <label for="title">Title:</label>
               <input type="text" class="form-control" id="title" placeholder="Enter title" name="title" required="required">
@@ -39,7 +39,7 @@
                 name="publisher" autocomplete="off" />
             </div>
           </div>
-          <div class="col-md-3">
+          <div class="col-md-4">
             <div class="form-group">
               <label for="desc-box">Description:</label>
               <textarea class="form-control" rows="11" id="desc-box" placeholder="Enter brief description here" name="desc-box"></textarea>
@@ -57,10 +57,10 @@
           </div>
         </div>
         <div class="row content justify-content-center">
-          <div class="col-md-7">
+          <div class="col-md-8">
             <button id="btn-submit" type="button" class="btn btn-primary">Submit</button>
           </div>
-          <div class="col-md-3">
+          <div class="col-md-4">
             <div id="messageBox"></div>
           </div>
         </div>
