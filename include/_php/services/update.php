@@ -8,6 +8,7 @@ $title = empty($_POST["title"]) ? null : test_input($conn, $_POST["title"]);
 $released_date = empty($_POST["released-date"]) ? null : test_input($conn, $_POST["released-date"]);
 $released_date = ($released_date != null) ? date("m-d-Y", strtotime($released_date)) : 'null';
 $rate = empty($_POST["rate"]) ? 'null' : $_POST["rate"];
+$isDone = empty($_POST["isDone"]) ? 0 : number_format($_POST["isDone"]);
 $genre = empty($_POST["hidden-genre"]) ? null : test_input($conn, $_POST["hidden-genre"]);
 $platform = empty($_POST["hidden-platform"]) ? null : test_input($conn, $_POST["hidden-platform"]);
 $publisher = empty($_POST["hidden-publisher"]) ? null : test_input($conn, $_POST["hidden-publisher"]);
@@ -19,10 +20,11 @@ $ids = $genre_ids = $publisher_ids = $platform_ids = [];
 
 // Update of product
 $update_game = "UPDATE `game` SET
-                    title = '$title',
-                    released_date = STR_TO_DATE('$released_date', '%m-%d-%Y'),
-                    rate = $rate,
-                    description = '$desc_box'
+                    `title` = '$title',
+                    `released_date` = STR_TO_DATE('$released_date', '%m-%d-%Y'),
+                    `rate` = $rate,
+                    `description` = '$desc_box',
+                    `completed` = $isDone 
                 WHERE game.id = $product_id";
 mysqli_query($conn, $update_game);
 
@@ -33,7 +35,7 @@ foreach ($genres as $genre) {
     $match_genre = mysqli_query($conn, $search_genre);
     // Insert if not exist
     if (mysqli_num_rows($match_genre) == 0) {
-        $insert_genre = "INSERT INTO `genre`(name) VALUES('$genre');";
+        $insert_genre = "INSERT INTO `genre`(`name`) VALUES('$genre');";
         if (mysqli_query($conn, $insert_genre)) {
             array_push($genre_ids, mysqli_insert_id($conn));
         }
@@ -51,7 +53,7 @@ foreach ($platforms as $platform) {
     $match_platform = mysqli_query($conn, $search_platform);
     // Insert if not exist
     if (mysqli_num_rows($match_platform) == 0) {
-        $insert_platform = "INSERT INTO `platform`(name) VALUES('$platform');";
+        $insert_platform = "INSERT INTO `platform`(`name`) VALUES('$platform');";
         if (mysqli_query($conn, $insert_platform)) {
             array_push($platform_ids, mysqli_insert_id($conn));
         }
@@ -70,7 +72,7 @@ foreach ($publishers as $publisher) {
     $match_publisher = mysqli_query($conn, $search_publisher);
     // Insert if not exist
     if (mysqli_num_rows($match_publisher) == 0) {
-        $insert_publisher = "INSERT INTO `publisher`(name) VALUES('$publisher');";
+        $insert_publisher = "INSERT INTO `publisher`(`name`) VALUES('$publisher');";
         if (mysqli_query($conn, $insert_publisher)) {
             array_push($publisher_ids, mysqli_insert_id($conn));
         }
@@ -87,7 +89,7 @@ $delete_all_genre_relations = "DELETE FROM `game_genre` WHERE `game_id`=$product
 mysqli_query($conn, $delete_all_genre_relations);
 // Insert game_genre table
 foreach ($ids['genres'] as $id) {
-    $update_game_genre = "INSERT INTO `game_genre`(game_id, genre_id) VALUES($product_id, $id);";
+    $update_game_genre = "INSERT INTO `game_genre`(`game_id`, `genre_id`) VALUES($product_id, $id);";
     mysqli_query($conn, $update_game_genre);
 }
 
@@ -96,7 +98,7 @@ $delete_all_platform_relations = "DELETE FROM `game_platform` WHERE `game_id`=$p
 mysqli_query($conn, $delete_all_platform_relations);
 // Insert game_platform table
 foreach ($ids['platforms'] as $id) {
-    $update_game_platform = "INSERT INTO `game_platform`(game_id, platform_id) VALUES($product_id, $id);";
+    $update_game_platform = "INSERT INTO `game_platform`(`game_id`, `platform_id`) VALUES($product_id, $id);";
     mysqli_query($conn, $update_game_platform);
 }
 
@@ -105,7 +107,7 @@ $delete_all_publisher_relations = "DELETE FROM `game_publisher` WHERE `game_id`=
 mysqli_query($conn, $delete_all_publisher_relations);
 // Insert game_publisher table
 foreach ($ids['publishers'] as $id) {
-    $update_game_publisher = "INSERT INTO `game_publisher`(game_id, publisher_id) VALUES($product_id, $id);";
+    $update_game_publisher = "INSERT INTO `game_publisher`(`game_id`, `publisher_id`) VALUES($product_id, $id);";
     mysqli_query($conn, $update_game_publisher);
 }
 

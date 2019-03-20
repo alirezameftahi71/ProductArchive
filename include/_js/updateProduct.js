@@ -16,6 +16,7 @@ function fillUpdateForm(result) {
   $('#title').val(result[0].title);
   $('#released-date').val(result[0].released_date);
   $('#rate').val(result[0].rate);
+  $('#isDone').val(result[0].completed || 0);
   result[0].genres.split(', ').forEach(genre => {
     pushIntoTagmanager("genre", genre);
   });

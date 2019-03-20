@@ -12,15 +12,22 @@
               <label for="title">Title:</label>
               <input type="text" class="form-control" id="title" placeholder="Enter title" name="title" required="required">
             </div>
-            <div class="row form-group">
-              <div class="col-6">
+            <div class="row">
+              <div class="col-md-4  form-group">
                 <label for="released-date">Released Date:</label>
                 <input type="date" class="form-control" id="released-date" name="released-date">
               </div>
-              <div class="col-6">
+              <div class="col-md-4  form-group">
                 <label for="rate">Rate:</label>
                 <input type="number" min=1 max=5 step="0.5" class="form-control" id="rate" placeholder="Enter Metascore"
                   name="rate">
+              </div>
+              <div class="col-md-4  form-group">
+                <label for="isDone">Mark as Done:</label>
+                <select id="isDone" class="form-control" name="isDone">
+                  <option value="0">False</option>
+                  <option value="1">True</option>
+                </select>
               </div>
             </div>
             <div class="form-group">

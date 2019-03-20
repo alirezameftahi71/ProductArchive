@@ -1,7 +1,7 @@
 <?php include_once "../connect_db.php";?>
 <?php include_once "../functions.php";?>
 <?php
-$getSorted = true;
+$getSorted = false;
 $select_query = "SELECT DISTINCT game.id, game.title, game.released_date, game.rate, game.description, game.completed, ";
 if (isset($_GET['id'])) {
     $select_query .= "game.cover_pic, ";
