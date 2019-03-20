@@ -11,7 +11,8 @@ SELECT game.id AS id, game.title AS title, game.rate AS rate,
 game.released_date AS released_date, game.description AS description,
 GROUP_CONCAT(DISTINCT genre.name SEPARATOR ', ') AS genres,
 GROUP_CONCAT(DISTINCT platform.name SEPARATOR ', ') AS platforms,
-GROUP_CONCAT(DISTINCT publisher.name SEPARATOR ', ') AS publishers
+GROUP_CONCAT(DISTINCT publisher.name SEPARATOR ', ') AS publishers,
+game.completed AS completed
 FROM game
 INNER JOIN game_genre ON game.id = game_genre.game_id
 INNER JOIN genre ON genre.id = game_genre.genre_id
@@ -59,7 +60,7 @@ if (!$recievedJsonStr) {
         } else {
             if (strContains($postObj->mop, 'like')) {
                 $query .= " $postObj->field $postObj->mop '%$postObj->value%'";
-            } else if(strContains($postObj->mop, 'between')) {
+            } else if (strContains($postObj->mop, 'between')) {
                 $query .= " $postObj->field $postObj->mop '$postObj->valueFrom' AND '$postObj->valueTo'";
             } else {
                 $query .= " $postObj->field $postObj->mop '$postObj->value'";
@@ -87,6 +88,7 @@ if (!$recievedJsonStr) {
                 'genre' => $row['genres'],
                 'publishers' => $row['publishers'],
                 'description' => $row['description'],
+                'completed' => $row['completed'],
             );
         }
         echo json_encode($json);

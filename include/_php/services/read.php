@@ -2,7 +2,7 @@
 <?php include_once "../functions.php";?>
 <?php
 $getSorted = true;
-$select_query = "SELECT DISTINCT game.id, game.title, game.released_date, game.rate, game.description, ";
+$select_query = "SELECT DISTINCT game.id, game.title, game.released_date, game.rate, game.description, game.completed, ";
 if (isset($_GET['id'])) {
     $select_query .= "game.cover_pic, ";
 }
@@ -50,6 +50,7 @@ if (confirm_query_select($result)) {
             'platforms' => $row['platforms'],
             'publishers' => $row['publishers'],
             'description' => $row['description'],
+            'completed' => $row['completed'],
             'cover_pic' => $cover_pic,
         );
     }

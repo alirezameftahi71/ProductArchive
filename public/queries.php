@@ -41,6 +41,7 @@
                                     <th data-field="platform">Platform(s)</th>
                                     <th data-field="publishers">Publishers(s)</th>
                                     <th data-field="rate">Rate/5</th>
+                                    <!-- <th data-field="completed">Completed</th> -->
                                     <!-- <th data-field="description">Description</th> -->
                                 </tr>
                             </thead>

@@ -3,7 +3,7 @@ const allOperators = [
   {
     title: "Equal to",
     value: "=",
-    types: ["int", "float", "varchar", "text", "nvarchar", "date"]
+    types: ["int", "tinyint", "float", "varchar", "text", "nvarchar", "date"]
   },
   {
     title: "Less than",
@@ -28,7 +28,7 @@ const allOperators = [
   {
     title: "Not Equal",
     value: "<>",
-    types: ["int", "float", "varchar", "text", "nvarchar", "date"]
+    types: ["int", "tinyint", "float", "varchar", "text", "nvarchar", "date"]
   },
   {
     title: "Contains",

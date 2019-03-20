@@ -60,6 +60,9 @@
           <a href="javascript:updateProduct();">
             <i class="icon fas fa-edit"></i>
           </a>
+          <a id="btn-action-checked" href="javascript:toggleCompletedTag();">
+            <i class="icon fas fa-check-circle"></i>
+          </a>
         </div>
       </div>
     </div>

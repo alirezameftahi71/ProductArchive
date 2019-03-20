@@ -29,6 +29,7 @@ CREATE TABLE game(
 	title varchar(200) NOT NULL,
 	released_date date,
 	rate float,
+	completed tinyint(1),
 	cover_pic longblob,
 	description text
 );

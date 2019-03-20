@@ -48,6 +48,7 @@ function getAllProducts() {
   );
 }
 
+// Sets picture passed in on the cover pic box
 function getCoverPic(data) {
   var res = "http://via.placeholder.com/270x330";
   if (data != null && data != undefined && data != "")
@@ -66,6 +67,7 @@ function fillMainTable(result) {
     $("table #publisher").html("Example Company");
     $("#description").html("Full Description goes here in multiple lines providing more and detailed information about the product, like story line or history.");
     $("#cover-pic").attr('src', "http://via.placeholder.com/270x330");
+    setCompletedBtn(0);
   } else {
     $("table #title").html(result[0]['title'] ? result[0]['title'] : "---");
     $("table #releaseDate").html(result[0]['released_date'] ? result[0]['released_date'] : "---");
@@ -75,8 +77,8 @@ function fillMainTable(result) {
     $("table #publisher").html(result[0]['publishers'] ? result[0]['publishers'] : "---");
     $("#description").html(result[0]['description'] ? result[0]['description'] : "");
     $("#cover-pic").attr('src', getCoverPic(result[0]['cover_pic']) ? getCoverPic(result[0]['cover_pic']) : "http://via.placeholder.com/270x330");
+    setCompletedBtn(+result[0]['completed']);
   }
-
 }
 
 // Find the selected product's id
@@ -112,4 +114,35 @@ function deleteProduct() {
 // Update the product
 function updateProduct() {
   window.location.replace("update_product.php?id=" + getCurrentProductID());
+}
+
+// Toggle Completed tag
+function toggleCompletedTag() {
+  let id = getCurrentProductID();
+  _apiRequest(
+    "../include/_php/services/get_completed.php",
+    "GET",
+    "id=" + id,
+    "json",
+    (isDone) => {
+      setCompletedTag(id, !isDone);
+      setCompletedBtn(!isDone);
+    }
+  );
+}
+
+// Adds or removed active class to completed btn
+function setCompletedBtn(isDone) {
+  isDone ? $("#btn-action-checked i").addClass('green') : $("#btn-action-checked i").removeClass('green');
+}
+
+// Set Completed tag
+function setCompletedTag(id, isDone) {
+  _apiRequest(
+    "../include/_php/services/set_completed.php",
+    "GET",
+    "id=" + id + "&done=" + isDone,
+    "json",
+    () => { }
+  );
 }
