@@ -102,4 +102,4 @@ foreach ($ids['publishers'] as $id) {
 // Send the id of inserted game
 echo $ids['game'];
 ?>
-<?php include_once "../disconnect_db.php";
+<?php include_once "../disconnect_db.php"; ?>

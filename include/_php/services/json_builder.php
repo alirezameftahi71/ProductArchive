@@ -15,4 +15,4 @@ if (confirm_query_select($result)) {
     echo json_encode($json);
 }
 ?>
-<?php include_once "../disconnect_db.php";
+<?php include_once "../disconnect_db.php"; ?>

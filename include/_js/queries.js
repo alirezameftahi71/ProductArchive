@@ -1,6 +1,5 @@
 var allFields;
-const allOperators = [
-  {
+const allOperators = [{
     title: "Equal to",
     value: "=",
     types: ["int", "tinyint", "float", "varchar", "text", "nvarchar", "date"]
@@ -55,13 +54,17 @@ $(() => {
     null,
     "json",
     data => {
-      data.unshift({ field: "", type: "" });
+      data.unshift({
+        field: "",
+        type: ""
+      });
       allFields = data;
       addRow();
     }
   );
   $("#btn-submit").click(sendQuery);
   $("#btn-reset").click(resetForm);
+  $("#btn-save").click(saveQueryClick);
   $("table#query-builder").on("change", "#all-fields", e => {
     let row = $(e.target).parents("tr");
     let type = $(e.target.selectedOptions).attr("datatype");
@@ -198,7 +201,7 @@ function fillFieldsDropdown(fields, row) {
   }
 }
 
-function toggleBetweenOperator(row, opIsBetween){
+function toggleBetweenOperator(row, opIsBetween) {
   if (opIsBetween) {
     row.find("#between-value-row").show();
     row.find("#simple-value").val("").hide();
@@ -216,4 +219,36 @@ function toggleDateInput(row, typeIsDate) {
     row.find('#between-value-row input').val("").attr('type', 'text');
     row.find('input#simple-value').val("").attr('type', 'text');
   }
+}
+
+function saveQuery(jsonQuery) {
+  bootbox.prompt("This is the default prompt!", (nameQuery) => {
+    if (!nameQuery) {
+      bootbox.alert({
+        message: "No Name Entered, Nothing Saved!",
+        size: 'small',
+        backdrop: true,
+      });
+    } else {
+      let data = {
+        name: nameQuery,
+        query: jsonQuery
+      };
+      _apiRequest(
+        "../include/_php/services/save_query.php",
+        "POST",
+        JSON.stringify(data),
+        "json",
+        result => {
+          createAlertMessage("messageBox", "success", result);
+        }
+      );
+    }
+  });
+}
+
+function saveQueryClick() {
+  let data = $("form").serializeArray();
+  let processedData = prepareRequestData(data);
+  saveQuery(processedData);
 }

@@ -29,6 +29,8 @@
                     <input id="btn-submit" type="button" class="btn btn-primary" value="Submit">
                     &nbsp;&nbsp;&nbsp;
                     <input id="btn-reset" type="reset" class="btn btn-danger" value="Reset">
+                    &nbsp;&nbsp;&nbsp;
+                    <input id="btn-save" type="button" class="btn btn-info" value="Save">
                     <div class="col-md-12 p-0">
                         <br />
                         <table id="result-table" style="display:none;">

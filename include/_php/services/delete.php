@@ -26,4 +26,4 @@ if (isset($_GET['id'])) {
 
 }
 ?>
-<?php include_once "../disconnect_db.php";
+<?php include_once "../disconnect_db.php"; ?>

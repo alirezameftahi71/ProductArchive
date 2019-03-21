@@ -17,4 +17,4 @@ if ($result) {
     echo json_encode((object) $json);
 }
 ?>
-<?php include_once "../disconnect_db.php";
+<?php include_once "../disconnect_db.php"; ?>

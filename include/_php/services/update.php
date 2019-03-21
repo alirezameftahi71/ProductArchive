@@ -114,4 +114,4 @@ foreach ($ids['publishers'] as $id) {
 // Send the id of inserted game
 echo $product_id;
 ?>
-<?php include_once "../disconnect_db.php";
+<?php include_once "../disconnect_db.php"; ?>

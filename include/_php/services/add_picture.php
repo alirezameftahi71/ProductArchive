@@ -15,4 +15,4 @@ if (!empty($file)) {
 }
 
 ?>
-<?php include_once "../disconnect_db.php";
+<?php include_once "../disconnect_db.php"; ?>
