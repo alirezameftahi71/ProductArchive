@@ -14,7 +14,7 @@ $(function () {
 function sendAddInfo() {
   var data = $('form').serialize();
   _apiRequest(
-    "../include/_php/services/create.php",
+    "../include/_php/services/product/create.php",
     "POST",
     data,
     "TEXT",

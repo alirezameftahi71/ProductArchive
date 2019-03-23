@@ -7,7 +7,6 @@ if (isset($_GET['id'])) {
     } else {
         echo "Failed to Remove the Picture.";
     }
-
 }
 ?>
 <?php include_once "../disconnect_db.php"; ?>

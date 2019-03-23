@@ -33,7 +33,7 @@ function fillUpdateForm(result) {
 function sendUpdateInfo() {
   var data = $('form').serialize();
   _apiRequest(
-    "../include/_php/services/update.php?id=" + id,
+    "../include/_php/services/product/update.php?id=" + id,
     "POST",
     data,
     "TEXT",

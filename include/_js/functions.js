@@ -129,7 +129,7 @@ function createAlertMessage(id, type, message) {
 // Read the data by passed id
 function getProductById(id, successFunc) {
   _apiRequest(
-    "../include/_php/services/read.php",
+    "../include/_php/services/product/read.php",
     "GET",
     "id=" + id,
     "json",
@@ -144,4 +144,9 @@ function uuidv4() {
   return ([1e7] + -1e3 + -4e3 + -8e3 + -1e11).replace(/[018]/g, c =>
     (c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> c / 4).toString(16)
   )
+}
+
+// Returns selected option of a select element
+function getSelectedOption(element) {
+  return $($(element)[0].selectedOptions[0]);
 }

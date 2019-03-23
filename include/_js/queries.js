@@ -67,7 +67,7 @@ $(() => {
   $("#btn-save").click(saveQueryClick);
   $("table#query-builder").on("change", "#all-fields", e => {
     let row = $(e.target).parents("tr");
-    let type = $(e.target.selectedOptions).attr("datatype");
+    let type = getSelectedOption(e.target).attr("datatype");
     let ops = allOperators.filter(e => {
       return e.types.indexOf(type.split("(")[0]) > -1;
     });
@@ -77,7 +77,7 @@ $(() => {
   });
   $("table#query-builder").on("change", "#operators", e => {
     let row = $(e.target).parents("tr");
-    let op = $(e.target.selectedOptions).attr("value");
+    let op = getSelectedOption(e.target).attr("value");
     toggleBetweenOperator(row, op === "between");
   });
 });
@@ -235,7 +235,7 @@ function saveQuery(jsonQuery) {
         query: jsonQuery
       };
       _apiRequest(
-        "../include/_php/services/save_query.php",
+        "../include/_php/services/query/create.php",
         "POST",
         JSON.stringify(data),
         "json",

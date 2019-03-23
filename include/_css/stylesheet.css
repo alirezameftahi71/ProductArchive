@@ -24,7 +24,7 @@ body {
 
 /* Set gray background color and 100% height */
 
-.sidenav {
+.items-sidenav {
 	padding-top: 1.25em;
 	padding-bottom: 1.25em;
 	background-color: #f1f1f1;
@@ -143,7 +143,7 @@ a:hover {
 /* On small screens*/
 
 @media screen and (max-width: 47.9375em) {
-	.sidenav {
+	.items-sidenav {
 		height: auto;
 		padding: 0.9375em;
 	}

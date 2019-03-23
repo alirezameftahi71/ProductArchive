@@ -21,7 +21,7 @@ function makeItemSelected(id) {
 // Read all the data 
 function getAllProducts() {
   _apiRequest(
-    "../include/_php/services/read.php",
+    "../include/_php/services/product/read.php",
     "GET",
     null,
     "json",

@@ -1,5 +1,5 @@
-<?php include_once "../connect_db.php";?>
-<?php include_once "../functions.php";?>
+<?php include_once "../../connect_db.php";?>
+<?php include_once "../../functions.php";?>
 <?php
 $getSorted = false;
 $select_query = "SELECT DISTINCT game.id, game.title, game.released_date, game.rate, game.description, game.completed, ";
@@ -57,4 +57,4 @@ if (confirm_query_select($result)) {
     echo json_encode($json);
 }
 ?>
-<?php include_once "../disconnect_db.php"; ?>
+<?php include_once "../../disconnect_db.php"; ?>

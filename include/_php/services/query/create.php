@@ -1,5 +1,5 @@
-<?php include_once "../connect_db.php";?>
-<?php include_once "../functions.php";?>
+<?php include_once "../../connect_db.php";?>
+<?php include_once "../../functions.php";?>
 <?php
 header("Content-Type: application/json; charset=UTF-8");
 // getting the post body
@@ -18,4 +18,4 @@ if ($recievedJsonStr) {
 }
 
 ?>
-<?php include_once "../disconnect_db.php";
+<?php include_once "../../disconnect_db.php";
