@@ -1,13 +1,18 @@
-<?php include "../include/_layout/header.html";?>
+<!-- load the header  -->
+<?php include "../include/_layout/header.php";?>
+
+<!-- load css for this page -->
+<link rel="stylesheet" href="../include/_css/chart.css">
+
+<!-- load js for this page -->
 <script src="../include/_js/charts.js"></script>
+
+<!-- load main area -->
 <div class="row text-center full-height">
 	<div class="col-md-12">
-		<div class="row">
-			<div class="col-md-12 p-0">
-				<div id="chartContainer"></div>
-			</div>
-		</div>
-		<div class="row mt-3">
+
+		<!-- controls are here  -->
+		<div class="row mt-3 chart-control-row">
 			<div class="col-md-3 form-group">
 				<label for="data-select">Data:</label>
 				<select id="data-select" class="form-control" name="data-select">
@@ -33,10 +38,17 @@
 				<select id="value-select" class="form-control" name="value-select">
 				</select>
 			</div>
-
 		</div>
+		
+		<!-- render chart here  -->
+		<div class="row chart-container-row">
+			<div class="col-md-12 p-0">
+				<div id="chart-container"></div>
+			</div>
+		</div>
+
 	</div>
 </div>
-</div>
-</div>
-<?php include "../include/_layout/footer.html";?>
+
+<!-- load footer -->
+<?php include "../include/_layout/footer.php";?>

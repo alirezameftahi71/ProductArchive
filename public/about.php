@@ -1,4 +1,4 @@
-<?php include "../include/_layout/header.html";?>
+<?php include "../include/_layout/header.php";?>
 <div class="row text-center full-height">
   <div class="col-sm-12 h-100 d-table">
     <div class="container mb-5">
@@ -16,4 +16,4 @@
     <?php include "../include/_layout/logoSlide.html";?>
   </div>
 </div>
-<?php include "../include/_layout/footer.html";?>
+<?php include "../include/_layout/footer.php";?>

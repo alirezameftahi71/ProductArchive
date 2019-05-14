@@ -2,7 +2,7 @@ $(function () {
   // Searchbox filter
   $("#searchBox").on("keyup", function () {
     var value = $(this).val().toLowerCase();
-    $("#listItems a").filter(function () {
+    $("#list-items a").filter(function () {
       $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
     });
   });
@@ -27,10 +27,10 @@ function getAllProducts() {
     "json",
     function (result) {
       $.each(result, function (i) {
-        $('#listItems').append('<a href="#" id="' + result[i]['id'] + '" class="list-group-item list-group-item-action">' + result[i]['title'] + '</a>');
+        $('#list-items').append('<a href="#" id="' + result[i]['id'] + '" class="list-group-item list-group-item-action">' + result[i]['title'] + '</a>');
       });
-      $($('#listItems').children()).click(function () {
-        $($('#listItems').children()).removeClass('active');
+      $($('#list-items').children()).click(function () {
+        $($('#list-items').children()).removeClass('active');
         $(this).addClass('active');
         // Fill the tables and place the photo if exists
         getProductById($(this)[0].id, fillMainTable);
@@ -42,7 +42,7 @@ function getAllProducts() {
       } else {
         // Fill the table with first data
         getProductById(result[0]['id'], fillMainTable);
-        $($('#listItems').children()[0]).addClass('active');
+        $($('#list-items').children()[0]).addClass('active');
       }
     }
   );
@@ -83,7 +83,7 @@ function fillMainTable(result) {
 
 // Find the selected product's id
 function getCurrentProductID() {
-  return $('#listItems .active').attr('id');
+  return $('#list-items .active').attr('id');
 }
 
 // Delete the product
@@ -95,7 +95,7 @@ function deleteProduct() {
     "text",
     function (result) {
       createAlertMessage("messageBox", "Success", result);
-      var delElement = $('#listItems .active');
+      var delElement = $('#list-items .active');
       var preElement = delElement.prev();
       var preId = preElement.attr('id');
       preElement.addClass('active');
@@ -133,7 +133,7 @@ function toggleCompletedTag() {
 
 // Adds or removed active class to completed btn
 function setCompletedBtn(isDone) {
-  isDone ? $("#btn-action-checked i").addClass('green') : $("#btn-action-checked i").removeClass('green');
+  isDone ? $("#checked-btn i").addClass('green') : $("#checked-btn i").removeClass('green');
 }
 
 // Set Completed tag

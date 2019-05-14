@@ -77,7 +77,7 @@ function changeChart() {
 }
 
 function drawChart(seriesArray, hcType) {
-    Highcharts.chart('chartContainer', {
+    Highcharts.chart('chart-container', {
         chart: {
             type: hcType,
             zoomType: 'x',

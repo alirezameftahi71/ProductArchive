@@ -1,6 +1,15 @@
-<?php include "../include/_layout/header.html";?>
+<!-- include the header  -->
+<?php include "../include/_layout/header.php";?>
+
+<!-- load css for this page  -->
+<link rel="stylesheet" href="../include/_css/index.css">
+
+<!-- load js for this page  -->
 <script src="../include/_js/index.js"></script>
+
+<!-- parent area -->
 <div class="row text-center full-height">
+  <!-- the side menu -->
   <div class="col-md-2 items-sidenav">
     <div class="input-group" id="searchItems">
       <input class="form-control border-right-0 border" type="search" id="searchBox" placeholder="Search...">
@@ -11,9 +20,11 @@
       </span>
     </div>
     <br>
-    <div class="list-group" id="listItems">
+    <div class="list-group" id="list-items">
     </div>
   </div>
+
+  <!-- the main area -->
   <div class="col-md-10">
     <h3 class="mt-4 mb-4">The Game Archive</h3>
     <hr />
@@ -48,19 +59,21 @@
       </div>
       <div class="col-md-4">
         <div class="container-fluid">
-          <img id="cover-pic" class="img-fluid" src="http://via.placeholder.com/265x320" alt="Product Cover" width="265"
-            height="320">
+          <img id="cover-pic" class="img-fluid" src="../resource/_img/cover-placeholder-265x320.png" alt="Product Cover"
+            width="265" height="320">
         </div>
         <div class="container-fluid toolbar">
-          <a data-toggle="confirmation" data-title="Delete Product?" data-placement="left" data-btn-cancel-class="btn-danger"
-            data-popout="true" href="javascript:deleteProduct();">
-            <i class="icon fas fa-trash-alt"></i>
+          <a data-toggle="confirmation" data-title="Delete Product?" data-placement="left"
+            data-btn-cancel-class="btn-danger" data-popout="true" class="m-btn" href="javascript:deleteProduct();">
+            <i class="icon red-hover fas fa-trash-alt"></i>
           </a>
-          <i class="icon fas fa-thumbs-up"></i>
-          <a href="javascript:updateProduct();">
+          <a class="m-btn" href="#">
+            <i class="icon fas fa-thumbs-up"></i>
+          </a>
+          <a class="m-btn" href="javascript:updateProduct();">
             <i class="icon fas fa-edit"></i>
           </a>
-          <a id="btn-action-checked" href="javascript:toggleCompletedTag();">
+          <a class="m-btn" id="checked-btn" href="javascript:toggleCompletedTag();">
             <i class="icon fas fa-check-circle"></i>
           </a>
         </div>
@@ -75,4 +88,5 @@
         history.
       </p>
     </div>
-    <?php include "../include/_layout/footer.html";?>
+    <?php include "../include/_layout/footer.php";?>
+  </div>

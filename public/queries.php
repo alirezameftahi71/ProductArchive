@@ -1,4 +1,4 @@
-<?php include "../include/_layout/header.html";?>
+<?php include "../include/_layout/header.php";?>
 <script src="../include/_js/queries.js"></script>
 <div class="container-fluid">
     <div class="row content justify-content-center full-height">
@@ -55,4 +55,4 @@
         </div>
     </div>
 </div>
-<?php include "../include/_layout/footer.html";?>
+<?php include "../include/_layout/footer.php";?>

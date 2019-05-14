@@ -1,3 +1,6 @@
+<!-- load php functions  -->
+<?php require_once "../include/_php/functions.php";?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -13,11 +16,11 @@
   <link rel="stylesheet" href="../include/_css/library/tagmanager.min.css" />
   <link rel="stylesheet" href="../include/_css/library/bootstrap-table.min.css" />
   <link rel="stylesheet" href="../include/_css/library/bootstrap4-toggle.min.css" />
-  <link rel="stylesheet" href="../include/_css/stylesheet.css">
+  <link rel="stylesheet" href="../include/_css/site.css">
 
   <script src="../include/_js/library/jquery-3.3.1.min.js"></script>
-  <script src="../include/_js/library/popper.min.js"></script>
   <script src="../include/_js/library/bootstrap.min.js"></script>
+  <script src="../include/_js/library/popper.min.js"></script>
   <script src="../include/_js/library/bootstrap-confirmation.min.js"></script>
   <script src="../include/_js/library/tagmanager.min.js"></script>
   <script src="../include/_js/library/bootstrap3-typeahead.min.js"></script>
@@ -50,7 +53,7 @@
           <a class="nav-link" href="queries.php">Queries</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="charts.php">Charts</a>
+          <a class="nav-link" href="chart.php">Charts</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="about.php">About</a>

@@ -1,5 +1,14 @@
-<?php include "../include/_layout/header.html";?>
-<?php include "../include/_php/functions.php";?>
-<script src="../include/_js/updateProduct.js"></script>
+<!-- set the page title variable -->
 <?php $page_title = "Update Product";?>
+
+<!-- load header  -->
+<?php include "../include/_layout/header.php";?>
+
+<!-- load js for this page -->
+<script src="../include/_js/updateProduct.js"></script>
+
+<!-- load the template -->
 <?php include "add_update.php";?>
+
+<!-- laod the footer -->
+<?php include "../include/_layout/footer.php";?>

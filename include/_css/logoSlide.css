@@ -56,7 +56,9 @@
   -ms-flex-align: start;
   align-items: start;
 }
-
+.height-small {
+  height: 7em;
+}
 @media (min-width: 992px) {
   .cid-section .col-lg-15 {
     -ms-flex: 0 0 20%;
