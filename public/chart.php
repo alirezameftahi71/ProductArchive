@@ -1,4 +1,4 @@
-<!-- load the header  -->
+<!-- load header  -->
 <?php include "../include/_layout/header.php";?>
 
 <!-- load css for this page -->

@@ -26,22 +26,24 @@ function makeItemSelected(id) {
 
 // Read all the data
 function getAllProducts() {
-  _apiRequest(
-    "../include/_php/services/product/read.php",
-    "GET",
-    null,
-    "json",
-    result => {
+  _apiRequest({
+    url: "../include/_php/services/product/read.php",
+    type: "GET",
+    data: null,
+    dataType: "json",
+    success: result => {
       // fill the sidebar
       $.each(result, i => {
         $("#list-items").append(
-          `<a href="#" id="${result[i]["id"]}" class="list-group-item list-group-item-action">
+          `<a href="#" id="${
+            result[i]["id"]
+          }" class="list-group-item list-group-item-action">
           ${result[i]["title"]}
           </a>`
         );
       });
       // bind click event on each item in sidebar
-      $($("#list-items").children()).click((e) => {
+      $($("#list-items").children()).click(e => {
         $($("#list-items").children()).removeClass("active");
         $(e.currentTarget).addClass("active");
         // Fill the tables and place the photo if exists
@@ -56,13 +58,16 @@ function getAllProducts() {
         getProductById(result[0]["id"], fillMainTable);
         $($("#list-items").children()[0]).addClass("active");
       }
-    }
-  );
+    },
+    fail: result => {}
+  });
 }
 
 // Sets picture passed in on the cover pic box
 function getCoverPic(data) {
-  return data ? `data:image/jpeg;base64,${data}` : "../resource/_img/cover-placeholder-265x320.png";
+  return data
+    ? `data:image/jpeg;base64,${data}`
+    : "../resource/_img/cover-placeholder-265x320.png";
 }
 
 // Fills in the main table
@@ -99,7 +104,10 @@ function fillMainTable(result) {
     $("#description").html(
       "Full Description goes here in multiple lines providing more and detailed information about the product, like story line or history."
     );
-    $("#cover-pic").attr("src", "../resource/_img/cover-placeholder-265x320.png");
+    $("#cover-pic").attr(
+      "src",
+      "../resource/_img/cover-placeholder-265x320.png"
+    );
   }
 }
 
@@ -110,12 +118,12 @@ function getCurrentProductID() {
 
 // Delete the product
 function deleteProduct() {
-  _apiRequest(
-    "../include/_php/services/delete.php",
-    "GET",
-    `id=${getCurrentProductID()}`,
-    "text",
-    (result) => {
+  _apiRequest({
+    url: "../include/_php/services/product/delete.php",
+    type: "GET",
+    data: `id=${getCurrentProductID()}`,
+    dataType: "text",
+    success: result => {
       const delElement = $("#list-items .active");
       const preElement = delElement.prev();
       const preId = preElement.attr("id");
@@ -123,9 +131,8 @@ function deleteProduct() {
       delElement.remove();
       preId ? getProductById(preId, fillMainTable) : fillMainTable();
     },
-    (result) => {
-    }
-  );
+    fail: result => {}
+  });
 }
 
 // Update the product

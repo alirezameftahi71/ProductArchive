@@ -1,6 +1,11 @@
+<!-- load header -->
 <?php include "../include/_layout/header.php";?>
+
+<!-- parent container -->
 <div class="row text-center full-height">
   <div class="col-sm-12 h-100 d-table">
+
+  <!-- table of content -->
     <div class="container mb-5">
       <div class="media-container-row">
         <div class="col-12 align-center">
@@ -13,7 +18,12 @@
         </div>
       </div>
     </div>
+
+    <!-- load logo slider here  -->
     <?php include "../include/_layout/logoSlide.html";?>
+
   </div>
 </div>
+
+<!-- load footer -->
 <?php include "../include/_layout/footer.php";?>

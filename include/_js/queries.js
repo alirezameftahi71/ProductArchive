@@ -1,5 +1,6 @@
-var allFields;
-const allOperators = [{
+let allFields;
+const allOperators = [
+  {
     title: "Equal to",
     value: "=",
     types: ["int", "tinyint", "float", "varchar", "text", "nvarchar", "date"]
@@ -48,20 +49,21 @@ const allOperators = [{
 
 $(() => {
   $("#add-row-btn").click(addRow);
-  _apiRequest(
-    "../include/_php/services/query_builder.php",
-    "POST",
-    null,
-    "json",
-    data => {
+  _apiRequest({
+    url: "../include/_php/services/query_builder.php",
+    type: "POST",
+    data: null,
+    dataType: "json",
+    success: data => {
       data.unshift({
         field: "",
         type: ""
       });
       allFields = data;
       addRow();
-    }
-  );
+    },
+    fail: () => {}
+  });
   $("#btn-submit").click(sendQuery);
   $("#btn-reset").click(resetForm);
   $("#btn-save").click(saveQueryClick);
@@ -73,7 +75,7 @@ $(() => {
     });
     fillOperatorsDropdown(ops, row);
     toggleBetweenOperator(row, false);
-    toggleDateInput(row, type === 'date');
+    toggleDateInput(row, type === "date");
   });
   $("table#query-builder").on("change", "#operators", e => {
     let row = $(e.target).parents("tr");
@@ -132,30 +134,31 @@ function removeRow(e) {
 function sendQuery() {
   $("#result-table").bootstrapTable("destroy");
   $("#result-table").hide();
-  var data = $("form").serializeArray();
-  var processedData = prepareRequestData(data);
-  var processedDataStr = JSON.stringify(processedData);
-  _apiRequest(
-    "../include/_php/services/query_builder.php",
-    "POST",
-    processedDataStr,
-    "json",
-    result => {
+  const data = $("form").serializeArray();
+  const processedData = prepareRequestData(data);
+  const processedDataStr = JSON.stringify(processedData);
+  _apiRequest({
+    url: "../include/_php/services/query_builder.php",
+    type: "POST",
+    data: processedDataStr,
+    dataType: "json",
+    success: result => {
       $("#result-table").bootstrapTable("destroy");
       $("#result-table")
         .bootstrapTable({
           data: result
         })
         .show();
-    }
-  );
+    },
+    fail: () => {}
+  });
 }
 
 function prepareRequestData(data) {
-  var res = {};
-  var temp = {};
-  var array = [];
-  for (var item of data) {
+  let res = {};
+  let temp = {};
+  let array = [];
+  for (let item of data) {
     temp[item.name] = item.value;
     if (item.name === "cop") {
       array.push(temp);
@@ -204,45 +207,64 @@ function fillFieldsDropdown(fields, row) {
 function toggleBetweenOperator(row, opIsBetween) {
   if (opIsBetween) {
     row.find("#between-value-row").show();
-    row.find("#simple-value").val("").hide();
+    row
+      .find("#simple-value")
+      .val("")
+      .hide();
   } else {
     row.find("#between-value-row").hide();
-    row.find("#simple-value").val("").show();
+    row
+      .find("#simple-value")
+      .val("")
+      .show();
   }
 }
 
 function toggleDateInput(row, typeIsDate) {
   if (typeIsDate) {
-    row.find('#between-value-row input').val("").attr('type', 'date');
-    row.find('input#simple-value').val("").attr('type', 'date');
+    row
+      .find("#between-value-row input")
+      .val("")
+      .attr("type", "date");
+    row
+      .find("input#simple-value")
+      .val("")
+      .attr("type", "date");
   } else {
-    row.find('#between-value-row input').val("").attr('type', 'text');
-    row.find('input#simple-value').val("").attr('type', 'text');
+    row
+      .find("#between-value-row input")
+      .val("")
+      .attr("type", "text");
+    row
+      .find("input#simple-value")
+      .val("")
+      .attr("type", "text");
   }
 }
 
 function saveQuery(jsonQuery) {
-  bootbox.prompt("This is the default prompt!", (nameQuery) => {
+  bootbox.prompt("This is the default prompt!", nameQuery => {
     if (!nameQuery) {
       bootbox.alert({
         message: "No Name Entered, Nothing Saved!",
-        size: 'small',
-        backdrop: true,
+        size: "small",
+        backdrop: true
       });
     } else {
-      let data = {
+      const data = {
         name: nameQuery,
         query: jsonQuery
       };
-      _apiRequest(
-        "../include/_php/services/query/create.php",
-        "POST",
-        JSON.stringify(data),
-        "json",
-        result => {
+      _apiRequest({
+        url: "../include/_php/services/query/create.php",
+        type: "POST",
+        data: JSON.stringify(data),
+        dataType: "json",
+        success: result => {
           createAlertMessage("messageBox", "success", result);
-        }
-      );
+        },
+        fail: () => {}
+      });
     }
   });
 }

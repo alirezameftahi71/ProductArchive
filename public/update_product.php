@@ -7,8 +7,8 @@
 <!-- load js for this page -->
 <script src="../include/_js/updateProduct.js"></script>
 
-<!-- load the template -->
+<!-- load template -->
 <?php include "add_update.php";?>
 
-<!-- laod the footer -->
+<!-- laod footer -->
 <?php include "../include/_layout/footer.php";?>
