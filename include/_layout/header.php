@@ -19,8 +19,8 @@
   <link rel="stylesheet" href="../include/_css/site.css">
 
   <script src="../include/_js/library/jquery-3.3.1.min.js"></script>
-  <script src="../include/_js/library/bootstrap.min.js"></script>
   <script src="../include/_js/library/popper.min.js"></script>
+  <script src="../include/_js/library/bootstrap.min.js"></script>
   <script src="../include/_js/library/bootstrap-confirmation.min.js"></script>
   <script src="../include/_js/library/tagmanager.min.js"></script>
   <script src="../include/_js/library/bootstrap3-typeahead.min.js"></script>

@@ -21,7 +21,7 @@
       .map(function (i, elem) {
         var val = jQuery(this).val();
         var dataType = jQuery(this.selectedOptions).attr('dataType')
-        if (val == null) {
+        if (val === null) {
           return null;
         }
         if (Array.isArray(val)) {
@@ -45,7 +45,7 @@
 function getFooter(ownerName) {
   var startYear = "2018";
   var currentYear = (new Date()).getFullYear().toString();
-  var startYearText = startYear == currentYear ? "" : "2018 - "
+  var startYearText = startYear === currentYear ? "" : "2018 - "
   return "\u00A9 " + startYearText + currentYear + " " + ownerName + " | All Rights Reserved"
 }
 
