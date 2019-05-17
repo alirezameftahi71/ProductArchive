@@ -1,5 +1,5 @@
 <!-- load php functions  -->
-<?php require_once "../include/_php/functions.php";?>
+<?php require_once "../include/_php/functions.php"; ?>
 
 <!DOCTYPE html>
 <html lang="en">
