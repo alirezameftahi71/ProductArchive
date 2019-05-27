@@ -52,8 +52,8 @@
             height="320">
         </div>
         <div class="container-fluid toolbar">
-          <a data-toggle="confirmation" data-title="Delete Product?" data-placement="left" data-btn-cancel-class="btn-danger"
-            data-popout="true" href="javascript:deleteProduct();">
+          <a data-toggle="confirmation" data-title="Delete Product?" data-placement="left"
+            data-btn-cancel-class="btn-danger" data-popout="true" href="javascript:deleteProduct();">
             <i class="icon fas fa-trash-alt"></i>
           </a>
           <i class="icon fas fa-thumbs-up"></i>
@@ -75,4 +75,6 @@
         history.
       </p>
     </div>
-    <?php include "../include/_layout/footer.html";?>
+  </div>
+</div>
+<?php include "../include/_layout/footer.html";?>
