@@ -4,11 +4,11 @@
   <div class="col-md-2 items-sidenav">
     <div class="input-group" id="searchItems">
       <input class="form-control border-right-0 border" type="search" id="searchBox" placeholder="Search...">
-      <span class="input-group-append">
+      <div class="input-group-append">
         <div class="input-group-text bg-white">
           <i class="fa fa-search"></i>
         </div>
-      </span>
+      </div>
     </div>
     <br>
     <div class="list-group" id="listItems">

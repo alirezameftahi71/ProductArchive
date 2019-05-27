@@ -37,6 +37,4 @@
 		</div>
 	</div>
 </div>
-</div>
-</div>
 <?php include "../include/_layout/footer.html";?>
