@@ -1,1 +1,0 @@
-mysql -u root < ../../include/_sql/tga_db.bak.sql

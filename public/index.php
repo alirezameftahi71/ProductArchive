@@ -1,89 +1,60 @@
-<!-- include the header  -->
-<?php include "../include/_layout/header.php";?>
+<?php
 
-<!-- load css for this page  -->
-<link rel="stylesheet" href="../include/_css/index.css">
+/**
+ * Laravel - A PHP Framework For Web Artisans
+ *
+ * @package  Laravel
+ * @author   Taylor Otwell <taylor@laravel.com>
+ */
 
-<!-- load js for this page  -->
-<script src="../include/_js/index.js"></script>
+define('LARAVEL_START', microtime(true));
 
-<!-- parent area -->
-<div class="row text-center full-height">
-  <!-- the side menu -->
-  <div class="col-md-2 items-sidenav">
-    <div class="input-group" id="searchItems">
-      <input class="form-control border-right-0 border" type="search" id="searchBox" placeholder="Search...">
-      <span class="input-group-append">
-        <div class="input-group-text bg-white">
-          <i class="fa fa-search"></i>
-        </div>
-      </span>
-    </div>
-    <br>
-    <div class="list-group" id="list-items">
-    </div>
-  </div>
+/*
+|--------------------------------------------------------------------------
+| Register The Auto Loader
+|--------------------------------------------------------------------------
+|
+| Composer provides a convenient, automatically generated class loader for
+| our application. We just need to utilize it! We'll simply require it
+| into the script here so that we don't have to worry about manual
+| loading any of our classes later on. It feels great to relax.
+|
+*/
 
-  <!-- the main area -->
-  <div class="col-md-10">
-    <h3 class="mt-4 mb-4">The Game Archive</h3>
-    <hr />
-    <div class="row">
-      <div class="col-md-8">
-        <table class="table table-bordered table-striped fixed-width-table mt-5">
-          <tr>
-            <th>Title</th>
-            <td id="title">Example Product Name</td>
-          </tr>
-          <tr>
-            <th>Release Date</th>
-            <td id="releaseDate">20xx</td>
-          </tr>
-          <tr>
-            <th>Genre(s)</th>
-            <td id="genre">Example Genre</td>
-          </tr>
-          <tr>
-            <th>Platform(s)</th>
-            <td id="platform">Example platform</td>
-          </tr>
-          <tr>
-            <th>Publisher(s)</th>
-            <td id="publisher">Example Company</td>
-          </tr>
-          <tr>
-            <th>Rate</th>
-            <td id="rate">#/5</td>
-          </tr>
-        </table>
-      </div>
-      <div class="col-md-4">
-        <div class="container-fluid">
-          <img id="cover-pic" class="img-fluid" src="../resource/_img/cover-placeholder-265x320.png" alt="Product Cover"
-            width="265" height="320">
-        </div>
-        <div class="container-fluid toolbar">
-          <a data-toggle="confirmation" data-title="Delete Product?" data-placement="left"
-            data-btn-cancel-class="btn-danger" data-popout="true" class="m-btn" href="javascript:deleteProduct();">
-            <i class="icon red-hover fas fa-trash-alt"></i>
-          </a>
-          <a class="m-btn" href="#">
-            <i class="icon fas fa-thumbs-up"></i>
-          </a>
-          <a class="m-btn" href="javascript:updateProduct();">
-            <i class="icon fas fa-edit"></i>
-          </a>
-        </div>
-      </div>
-    </div>
-    <hr>
-    <div class="container-fluid">
-      <p id="description">
-        Full Description goes here in multiple lines providing more and detailed information about the product,
-        like
-        story line or
-        history.
-      </p>
-    </div>
-    <?php include "../include/_layout/footer.php";?>
-  </div>
+require __DIR__.'/../vendor/autoload.php';
+
+/*
+|--------------------------------------------------------------------------
+| Turn On The Lights
+|--------------------------------------------------------------------------
+|
+| We need to illuminate PHP development, so let us turn on the lights.
+| This bootstraps the framework and gets it ready for use, then it
+| will load up this application so that we can run it and send
+| the responses back to the browser and delight our users.
+|
+*/
+
+$app = require_once __DIR__.'/../bootstrap/app.php';
+
+/*
+|--------------------------------------------------------------------------
+| Run The Application
+|--------------------------------------------------------------------------
+|
+| Once we have the application, we can handle the incoming request
+| through the kernel, and send the associated response back to
+| the client's browser allowing them to enjoy the creative
+| and wonderful application we have prepared for them.
+|
+*/
+
+$kernel = $app->make(Illuminate\Contracts\Http\Kernel::class);
+
+$response = $kernel->handle(
+    $request = Illuminate\Http\Request::capture()
+);
+
+$response->send();
+
+$kernel->terminate($request, $response);

@@ -1,9 +1,0 @@
-/* pic upload browse btn */
-#file-browse-wrapper {
-  display: inline-flex;
-}
-
-#file-browse-wrapper a {
-  font-size: 1.625em;
-  margin-left: 0.75em;
-}

@@ -1,1 +1,0 @@
-mysqldump -u root --routines --add-drop-database --databases tga_db > ../../include/_sql/tga_db.bak.sql
