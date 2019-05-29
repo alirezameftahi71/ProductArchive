@@ -49265,11 +49265,14 @@ module.exports = function(module) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _bootstrap__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 /* harmony import */ var _bootstrap__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_bootstrap__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _site__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./site */ "./resources/js/site.js");
+/* harmony import */ var _site__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_site__WEBPACK_IMPORTED_MODULE_1__);
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
  * building robust, powerful web applications using Vue and Laravel.
  */
+
 
 window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
 /**
@@ -49419,6 +49422,40 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ExampleComponent_vue_vue_type_template_id_299e239e___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
+
+/***/ }),
+
+/***/ "./resources/js/site.js":
+/*!******************************!*\
+  !*** ./resources/js/site.js ***!
+  \******************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+$(function () {
+  // Print the footer
+  $('#footer').text(function () {
+    var startYear = '2018';
+    var currentYear = new Date().getFullYear().toString();
+    var startYearText = startYear === currentYear ? '' : '2018';
+    return "\xA9 ".concat(startYearText, " - ").concat(currentYear, " Alireza Meftahi | All Rights Reserved");
+  }); // Searchbox filter
+
+  $('#searchBox').on('keyup change search', function (e) {
+    var value = $(e.currentTarget).val().toLowerCase();
+    $('#listItems a').filter(function (ei, item) {
+      $(item).toggle($(item).text().toLowerCase().indexOf(value) > -1);
+    });
+  }); // Mark the current page as active in navbar
+
+  $('ul.navbar-nav a').filter(function (i, item) {
+    return window.location.href.includes(item.href);
+  }).parent().addClass('active'); // // Enabling confirmation
+  // $('[data-toggle=confirmation]').confirmation({
+  // 	rootSelector: '[data-toggle=confirmation]',
+  // 	// other options
+  // });
+});
 
 /***/ }),
 

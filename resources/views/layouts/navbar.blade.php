@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+<nav class="navbar navbar-expand-md bg-dark navbar-dark">
     <a class="navbar-brand fas fa-archive" href="{{ url('/index') }}"></a>
     <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#nav-bar">
         <span class="navbar-toggler-icon"></span>
@@ -7,18 +7,6 @@
         <ul class="navbar-nav mr-auto">
             <li class="nav-item">
                 <a class="nav-link" href="{{ url('/index') }}">Home</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{{ url('/add') }}">Add/Update</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{{ url('/queries') }}">Queries</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{{ url('/charts') }}">Charts</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{{ url('/about') }}">About</a>
             </li>
         </ul>
         <ul class="navbar-nav">

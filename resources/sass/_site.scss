@@ -1,0 +1,79 @@
+#footer {
+    padding: 1rem;
+    position: static;
+    bottom: 0;
+}
+
+.full-height {
+    height: calc(100vh - 6.9rem);
+}
+
+#listItems {
+    height: calc(100% - 4.25rem);
+    overflow: auto;
+}
+
+.items-sidenav {
+    padding: 1.25rem;
+    background-color: $milk;
+    height: 100%;
+}
+
+.icon {
+    cursor: pointer;
+    color: $darkindigo;
+    text-decoration-style: none;
+}
+
+.icon:hover {
+    color: $blue;
+}
+
+#searchItems i.fa.fa-search {
+    cursor: pointer;
+}
+
+#info-table {
+	margin: 1rem;
+}
+
+/* Overwrite the border and bg color of .active for list-group */
+.list-group-item.active {
+    background-color: $darkindigo;
+    border-color: $darkindigo;
+}
+
+/* Overwrite the font color of inactive list-group items */
+.list-group-item:not(.active) {
+    color: #15072f;
+}
+
+/* On small screens*/
+
+@media screen and (max-width: 47.99em) {
+	.items-sidenav {
+		height: auto;
+		padding: 0.9375em;
+	}
+
+	#info-table{
+		margin: 0 0 1rem 0;
+	}
+
+	.full-height{
+		overflow-x: hidden;
+	}
+
+	body {
+		height: initial;
+	}
+
+	.row.content {
+		height: auto;
+	}
+
+	/* Overwrite the scrol of .list-group */
+	.list-group {
+		height: 15.625em !important;
+	}
+}
