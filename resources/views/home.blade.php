@@ -12,27 +12,9 @@
         </div>
         <br />
         <div class="list-group" id="listItems">
-                <a href="#" class="list-group-item list-group-item-action">Item 10</a>
-                <a href="#" class="list-group-item list-group-item-action">Item 11</a>
-                <a href="#" class="list-group-item list-group-item-action">Item 12</a>
-                <a href="#" class="list-group-item list-group-item-action">Item 13</a>
-                <a href="#" class="list-group-item list-group-item-action">Item 14</a>
-                <a href="#" class="list-group-item list-group-item-action">Item 15</a>
-                <a href="#" class="list-group-item list-group-item-action">Item 16</a>
-                <a href="#" class="list-group-item list-group-item-action">Item 17</a>
-                <a href="#" class="list-group-item list-group-item-action">Item 18</a>
-                <a href="#" class="list-group-item list-group-item-action">Item 19</a>
-                <a href="#" class="list-group-item list-group-item-action">Item 20</a>
-                <a href="#" class="list-group-item list-group-item-action">Item 21</a>
-                <a href="#" class="list-group-item list-group-item-action">Item 22</a>
-                <a href="#" class="list-group-item list-group-item-action">Item 23</a>
-                <a href="#" class="list-group-item list-group-item-action">Item 24</a>
-                <a href="#" class="list-group-item list-group-item-action">Item 25</a>
-                <a href="#" class="list-group-item list-group-item-action">Item 26</a>
-                <a href="#" class="list-group-item list-group-item-action">Item 27</a>
-                <a href="#" class="list-group-item list-group-item-action">Item 28</a>
-                <a href="#" class="list-group-item list-group-item-action">Item 29</a>
-                <a href="#" class="list-group-item list-group-item-action">Item 30</a>
+            @foreach ($list_items as $item)
+                <a id={{$item->id}} href="#{{$item->id}}" class="list-group-item list-group-item-action">{{ $item->name }}</a>
+            @endforeach
         </div>
     </div>
     <div class="col-lg-9 col-md-9">
