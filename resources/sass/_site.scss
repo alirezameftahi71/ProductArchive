@@ -1,4 +1,4 @@
-#footer {
+footer#footer {
     padding: 1rem;
     position: static;
     bottom: 0;
@@ -8,7 +8,7 @@
     height: calc(100vh - 6.6rem);
 }
 
-#listItems {
+#list-items {
     height: calc(100% - 4.25rem);
     overflow: auto;
 }
@@ -27,10 +27,6 @@
 
 .icon:hover {
     color: $blue;
-}
-
-#searchItems i.fa.fa-search {
-    cursor: pointer;
 }
 
 #info-table {

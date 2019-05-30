@@ -6,14 +6,14 @@
             <input class="form-control border-right-0 border" type="search" id="searchBox" placeholder="Search...">
             <div class="input-group-append">
                 <div class="input-group-text bg-white">
-                    <i class="fa fa-search"></i>
+                    <i class="icon fa fa-search"></i>
                 </div>
             </div>
         </div>
         <br />
-        <div class="list-group" id="listItems">
+        <div class="list-group" id="list-items">
             @foreach ($list_items as $item)
-                <a id={{$item->id}} href="#{{$item->id}}" class="list-group-item list-group-item-action">{{ $item->name }}</a>
+                <a id={{$item->id}} href="#" class="list-group-item list-group-item-action">{{$item->name}}</a>
             @endforeach
         </div>
     </div>

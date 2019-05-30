@@ -16520,7 +16520,7 @@ a.text-dark:focus {
   background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100' fill='rgb(145, 145, 145)'><polygon points='0,0 0,100 50,50'/></svg>");
 }
 
-#footer {
+footer#footer {
   padding: 1rem;
   position: static;
   bottom: 0;
@@ -16530,7 +16530,7 @@ a.text-dark:focus {
   height: calc(100vh - 6.6rem);
 }
 
-#listItems {
+#list-items {
   height: calc(100% - 4.25rem);
   overflow: auto;
 }
@@ -16550,10 +16550,6 @@ a.text-dark:focus {
 
 .icon:hover {
   color: #3490dc;
-}
-
-#searchItems i.fa.fa-search {
-  cursor: pointer;
 }
 
 #info-table {

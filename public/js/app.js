@@ -49430,31 +49430,34 @@ __webpack_require__.r(__webpack_exports__);
   !*** ./resources/js/site.js ***!
   \******************************/
 /*! no static exports found */
-/***/ (function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
 
+"use strict";
+ // TODO: make use of vanilla js and vue.js instead of jQuery
+// Print the footer
+
+$('#footer').text(function () {
+  var startYear = '2018';
+  var currentYear = new Date().getFullYear();
+  return "\xA9 ".concat(startYear, " - ").concat(currentYear, " Alireza Meftahi | All Rights Reserved");
+}); // Mark the current page as active in navbar
+
+$('ul.navbar-nav a').filter(function (i, item) {
+  return window.location.href.includes(item.href);
+}).parent().addClass('active');
 $(function () {
-  // Print the footer
-  $('#footer').text(function () {
-    var startYear = '2018';
-    var currentYear = new Date().getFullYear().toString();
-    var startYearText = startYear === currentYear ? '' : '2018';
-    return "\xA9 ".concat(startYearText, " - ").concat(currentYear, " Alireza Meftahi | All Rights Reserved");
-  }); // Searchbox filter
-
+  // Searchbox filter
   $('#searchBox').on('keyup change search', function (e) {
     var value = $(e.currentTarget).val().toLowerCase();
-    $('#listItems a').filter(function (ei, item) {
+    $('#list-items a').filter(function (ei, item) {
       $(item).toggle($(item).text().toLowerCase().indexOf(value) > -1);
     });
-  }); // Mark the current page as active in navbar
+  }); // Bind to click event of each item in list-items
 
-  $('ul.navbar-nav a').filter(function (i, item) {
-    return window.location.href.includes(item.href);
-  }).parent().addClass('active'); // // Enabling confirmation
-  // $('[data-toggle=confirmation]').confirmation({
-  // 	rootSelector: '[data-toggle=confirmation]',
-  // 	// other options
-  // });
+  $('#list-items').on('click', 'a', function (e) {
+    $('#list-items').children().removeClass('active');
+    $(e.currentTarget).addClass('active'); // TODO: Fill the info table and place the photo if exists
+  });
 });
 
 /***/ }),
