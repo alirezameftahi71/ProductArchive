@@ -16552,24 +16552,40 @@ footer#footer {
   color: #3490dc;
 }
 
+#loading {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 10001;
+  width: 100%;
+  height: 100%;
+  background-color: #000;
+  opacity: 0.2;
+  display: none;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  align-items: center;
+  justify-content: center;
+}
+
+#loading div {
+  color: #a6a6a6;
+  width: 30vw;
+  height: 30vw;
+}
+
 #info-table {
   margin: 1rem;
 }
-
-/* Overwrite the border and bg color of .active for list-group */
 
 .list-group-item.active {
   background-color: #343a40;
   border-color: #343a40;
 }
 
-/* Overwrite the font color of inactive list-group items */
-
 .list-group-item:not(.active) {
   color: #15072f;
 }
-
-/* On small screens*/
 
 @media screen and (max-width: 47.99em) {
   .items-sidenav {
@@ -16592,8 +16608,6 @@ footer#footer {
   .row.content {
     height: auto;
   }
-
-  /* Overwrite the scrol of .list-group */
 
   .list-group {
     height: 15.625em !important;

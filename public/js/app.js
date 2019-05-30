@@ -49442,21 +49442,39 @@ $('#footer').text(function () {
   return "\xA9 ".concat(startYear, " - ").concat(currentYear, " Alireza Meftahi | All Rights Reserved");
 }); // Mark the current page as active in navbar
 
-$('ul.navbar-nav a').filter(function (i, item) {
+$('ul.navbar-nav a').filter(function (_i, item) {
   return window.location.href.includes(item.href);
 }).parent().addClass('active');
 $(function () {
-  // Searchbox filter
+  $(document).ajaxStart(function () {
+    $("#loading").css('display', 'flex');
+  });
+  $(document).ajaxComplete(function () {
+    $("#loading").hide();
+  }); // Searchbox filter
+
   $('#searchBox').on('keyup change search', function (e) {
     var value = $(e.currentTarget).val().toLowerCase();
-    $('#list-items a').filter(function (ei, item) {
+    $('#list-items a').filter(function (_i, item) {
       $(item).toggle($(item).text().toLowerCase().indexOf(value) > -1);
     });
   }); // Bind to click event of each item in list-items
 
   $('#list-items').on('click', 'a', function (e) {
     $('#list-items').children().removeClass('active');
-    $(e.currentTarget).addClass('active'); // TODO: Fill the info table and place the photo if exists
+    $(e.currentTarget).addClass('active'); // Fill the info table and place the photo if exists
+
+    $.ajax({
+      url: "/api/games/".concat(e.currentTarget.id),
+      type: 'GET',
+      data: null,
+      dataType: 'JSON',
+      cache: false,
+      success: function success(e) {
+        console.log(e);
+      },
+      fail: function fail() {}
+    });
   });
 });
 
