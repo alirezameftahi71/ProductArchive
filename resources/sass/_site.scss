@@ -6,6 +6,7 @@ footer#footer {
 
 .full-height {
     height: calc(100vh - 6.6rem);
+    overflow: hidden;
 }
 
 #list-items {
@@ -53,6 +54,11 @@ footer#footer {
 
 #info-table {
     margin: 1rem;
+}
+
+/* Makes the table column widths all equal */
+.fixed-width-table {
+	table-layout: fixed;
 }
 
 .list-group-item.active {

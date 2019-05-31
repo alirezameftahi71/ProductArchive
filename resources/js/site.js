@@ -1,12 +1,5 @@
-"use strict";
+'use strict';
 // TODO: make use of vanilla js and vue.js instead of jQuery
-
-// Print the footer
-$('#footer').text(() => {
-    const startYear = '2018';
-    const currentYear = new Date().getFullYear();
-    return `\u00A9 ${startYear} - ${currentYear} Alireza Meftahi | All Rights Reserved`;
-});
 
 // Mark the current page as active in navbar
 $('ul.navbar-nav a').filter((_i, item) => {
@@ -14,11 +7,12 @@ $('ul.navbar-nav a').filter((_i, item) => {
 }).parent().addClass('active');
 
 $(() => {
+    // Loading layout on ajax calls handling
     $(document).ajaxStart(() => {
-        $("#loading").css('display', 'flex');
+        $('#loading').css('display', 'flex');
     });
     $(document).ajaxComplete(() => {
-        $("#loading").hide();
+        $('#loading').hide();
     });
 
     // Searchbox filter
@@ -41,7 +35,7 @@ $(() => {
             dataType: 'JSON',
             cache: false,
             success: (e) => {
-                console.log(e);
+                fillInfoTable(e);
             },
             fail: () => {
 
@@ -49,4 +43,29 @@ $(() => {
         });
     });
 
+    // Mark first entry on list-items as active on first load
+    $('#list-items > a:first').addClass('active');
+    // const activeItem = $('#list-items > a.active:first');
+    // activeItem && activeItem.trigger('click');
 });
+
+// Fills the info table with the passed data
+function fillInfoTable(dataItem) {
+    $('table #name').html(dataItem.name);
+    $('table #releasedDate').html(dataItem.released_date);
+    $('table #rate').html(dataItem.rate + '/5');
+    $('table #genre').html(joinJsonNames(dataItem.genres));
+    $('table #platform').html(joinJsonNames(dataItem.platforms));
+    $('table #publisher').html(joinJsonNames(dataItem.publishers));
+    $('#description').html(dataItem.description);
+}
+
+// Joins each item's name in a list with a separator
+function joinJsonNames(arr, separator) {
+    let joinedNames = '';
+    for (const item of arr) {
+        joinedNames += `${item.name}${(separator || ', ')}`;
+    }
+    joinedNames = joinedNames.endsWith(', ') ? joinedNames.substr(0, joinedNames.length - 2) : joinedNames;
+    return joinedNames;
+}

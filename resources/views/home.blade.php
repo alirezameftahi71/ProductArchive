@@ -13,7 +13,8 @@
         <br />
         <div class="list-group" id="list-items">
             @foreach ($list_items as $item)
-                <a id={{$item->id}} href="#" class="list-group-item list-group-item-action">{{$item->name}}</a>
+            <a id={{$item->id}} href="#"
+                class="list-group-item list-group-item-action">{{htmlspecialchars_decode($item->name)}}</a>
             @endforeach
         </div>
     </div>
@@ -24,28 +25,52 @@
             <div class="col-lg-8 col-md-7">
                 <table id="info-table" class="table table-bordered table-striped fixed-width-table">
                     <tr>
-                        <th>Title</th>
-                        <td id="title">Example Product Name</td>
+                        <th>Name</th>
+                        <td id="name">{{ isset($list_items[0]) ? $list_items[0]->name : null }}</td>
                     </tr>
                     <tr>
                         <th>Release Date</th>
-                        <td id="releaseDate">20xx</td>
+                        <td id="releasedDate">{{ isset($list_items[0]) ? $list_items[0]->released_date : null }}</td>
                     </tr>
                     <tr>
                         <th>Genre(s)</th>
-                        <td id="genre">Example Genre</td>
+                        <td id="genre">
+                            @php
+                            $joinedItems=array();
+                            if(isset($list_items[0]))
+                                foreach ($list_items[0]->genres as $item)
+                                    $joinedItems[] = $item->name;
+                            @endphp
+                            {{ implode(', ', $joinedItems) }}
+                        </td>
                     </tr>
                     <tr>
                         <th>Platform(s)</th>
-                        <td id="platform">Example platform</td>
+                        <td id="platform">
+                            @php
+                            $joinedItems=array();
+                            if(isset($list_items[0]))
+                                foreach ($list_items[0]->platforms as $item)
+                                    $joinedItems[] = $item->name;
+                            @endphp
+                            {{ implode(', ', $joinedItems) }}
+                        </td>
                     </tr>
                     <tr>
                         <th>Publisher(s)</th>
-                        <td id="publisher">Example Company</td>
+                        <td id="publisher">
+                            @php
+                            $joinedItems=array();
+                            if(isset($list_items[0]))
+                                foreach ($list_items[0]->publishers as $item)
+                                    $joinedItems[] = $item->name;
+                            @endphp
+                            {{ implode(', ', $joinedItems) }}
+                        </td>
                     </tr>
                     <tr>
                         <th>Rate</th>
-                        <td id="rate">#/5</td>
+                        <td id="rate">{{ isset($list_items[0]) ? $list_items[0]->rate . '/5' : null }}</td>
                     </tr>
                 </table>
             </div>
@@ -72,10 +97,7 @@
         <hr>
         <div class="container-fluid">
             <p id="description">
-                Full Description goes here in multiple lines providing more and detailed information about the product,
-                like
-                story line or
-                history.
+                {{ isset($list_items[0]) ? $list_items[0]->description : null }}
             </p>
         </div>
     </div>

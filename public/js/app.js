@@ -49434,23 +49434,18 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
  // TODO: make use of vanilla js and vue.js instead of jQuery
-// Print the footer
-
-$('#footer').text(function () {
-  var startYear = '2018';
-  var currentYear = new Date().getFullYear();
-  return "\xA9 ".concat(startYear, " - ").concat(currentYear, " Alireza Meftahi | All Rights Reserved");
-}); // Mark the current page as active in navbar
+// Mark the current page as active in navbar
 
 $('ul.navbar-nav a').filter(function (_i, item) {
   return window.location.href.includes(item.href);
 }).parent().addClass('active');
 $(function () {
+  // Loading layout on ajax calls handling
   $(document).ajaxStart(function () {
-    $("#loading").css('display', 'flex');
+    $('#loading').css('display', 'flex');
   });
   $(document).ajaxComplete(function () {
-    $("#loading").hide();
+    $('#loading').hide();
   }); // Searchbox filter
 
   $('#searchBox').on('keyup change search', function (e) {
@@ -49471,12 +49466,56 @@ $(function () {
       dataType: 'JSON',
       cache: false,
       success: function success(e) {
-        console.log(e);
+        fillInfoTable(e);
       },
       fail: function fail() {}
     });
-  });
-});
+  }); // Mark first entry on list-items as active on first load
+
+  $('#list-items > a:first').addClass('active'); // const activeItem = $('#list-items > a.active:first');
+  // activeItem && activeItem.trigger('click');
+}); // Fills the info table with the passed data
+
+function fillInfoTable(dataItem) {
+  $('table #name').html(dataItem.name);
+  $('table #releasedDate').html(dataItem.released_date);
+  $('table #rate').html(dataItem.rate + '/5');
+  $('table #genre').html(joinJsonNames(dataItem.genres));
+  $('table #platform').html(joinJsonNames(dataItem.platforms));
+  $('table #publisher').html(joinJsonNames(dataItem.publishers));
+  $('#description').html(dataItem.description);
+} // Joins each item's name in a list with a separator
+
+
+function joinJsonNames(arr, separator) {
+  var joinedNames = '';
+  var _iteratorNormalCompletion = true;
+  var _didIteratorError = false;
+  var _iteratorError = undefined;
+
+  try {
+    for (var _iterator = arr[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+      var item = _step.value;
+      joinedNames += "".concat(item.name).concat(separator || ', ');
+    }
+  } catch (err) {
+    _didIteratorError = true;
+    _iteratorError = err;
+  } finally {
+    try {
+      if (!_iteratorNormalCompletion && _iterator["return"] != null) {
+        _iterator["return"]();
+      }
+    } finally {
+      if (_didIteratorError) {
+        throw _iteratorError;
+      }
+    }
+  }
+
+  joinedNames = joinedNames.endsWith(', ') ? joinedNames.substr(0, joinedNames.length - 2) : joinedNames;
+  return joinedNames;
+}
 
 /***/ }),
 
