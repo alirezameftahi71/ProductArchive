@@ -9,6 +9,11 @@ footer#footer {
     overflow: hidden;
 }
 
+#info-area{
+    height: inherit;
+    overflow-y: auto;
+}
+
 #list-items {
     height: calc(100% - 4.25rem);
     overflow: auto;
@@ -82,6 +87,12 @@ footer#footer {
 
     .full-height {
         overflow-x: hidden;
+        overflow-y: auto;
+    }
+
+    #info-area{
+        height: unset;
+        overflow: hidden;
     }
 
     body {

@@ -18,7 +18,7 @@
             @endforeach
         </div>
     </div>
-    <div class="col-lg-9 col-md-9">
+    <div id="info-area" class="col-lg-9 col-md-9">
         <h3 class="mt-4 mb-4">The Archive</h3>
         <hr />
         <div class="row">
