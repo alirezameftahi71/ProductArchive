@@ -37,9 +37,11 @@
                         <td id="genre">
                             @php
                             $joinedItems=array();
-                            if(isset($list_items[0]))
-                                foreach ($list_items[0]->genres as $item)
+                            if(isset($list_items[0])) {
+                                foreach ($list_items[0]->genres as $item) {
                                     $joinedItems[] = $item->name;
+                                }
+                            }
                             @endphp
                             {{ implode(', ', $joinedItems) }}
                         </td>
@@ -49,9 +51,11 @@
                         <td id="platform">
                             @php
                             $joinedItems=array();
-                            if(isset($list_items[0]))
-                                foreach ($list_items[0]->platforms as $item)
+                            if(isset($list_items[0])) {
+                                foreach ($list_items[0]->platforms as $item) {
                                     $joinedItems[] = $item->name;
+                                }
+                            }
                             @endphp
                             {{ implode(', ', $joinedItems) }}
                         </td>
@@ -61,9 +65,11 @@
                         <td id="publisher">
                             @php
                             $joinedItems=array();
-                            if(isset($list_items[0]))
-                                foreach ($list_items[0]->publishers as $item)
+                            if(isset($list_items[0])) {
+                                foreach ($list_items[0]->publishers as $item) {
                                     $joinedItems[] = $item->name;
+                                }
+                            }
                             @endphp
                             {{ implode(', ', $joinedItems) }}
                         </td>
@@ -76,7 +82,7 @@
             </div>
             <div class="col-lg-4 col-md-5">
                 <div class="container-fluid">
-                    <img id="cover-pic" class="img-fluid" src="http://via.placeholder.com/265x320" alt="Product Cover"
+                    <img id="cover-pic" class="img-fluid" src="{{ '/images/covers/' }}{{ isset($list_items[0]) ? $list_items[0]->cover_pic : 'default.png' }}" alt="Product Cover"
                         width="265" height="320">
                 </div>
                 <div class="container-fluid toolbar">

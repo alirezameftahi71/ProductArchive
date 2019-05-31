@@ -49483,6 +49483,7 @@ function fillInfoTable(dataItem) {
   $('table #genre').html(joinJsonNames(dataItem.genres));
   $('table #platform').html(joinJsonNames(dataItem.platforms));
   $('table #publisher').html(joinJsonNames(dataItem.publishers));
+  $('#cover-pic').attr('src', "/images/covers/".concat(dataItem.cover_pic));
   $('#description').html(dataItem.description);
 } // Joins each item's name in a list with a separator
 
