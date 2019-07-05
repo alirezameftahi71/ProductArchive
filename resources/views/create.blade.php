@@ -6,12 +6,13 @@
             Create page
         </h3>
         <hr />
-        <form>
+        <form action="/games" method="post">
+            {{ csrf_field() }}
             <div class="row content justify-content-center">
                 <div class="col-md-8">
                     <div class="form-group">
-                        <label for="title">Title:</label>
-                        <input type="text" class="form-control" id="title" placeholder="Enter title" name="title"
+                        <label for="name">Title:</label>
+                        <input type="text" class="form-control" id="name" placeholder="Enter title" name="name"
                             required="required">
                     </div>
                     <div class="row">
@@ -54,7 +55,7 @@
                         <textarea class="form-control" rows="11" id="desc-box"
                             placeholder="Enter brief description here" name="desc-box"></textarea>
                     </div>
-                    <div class="form-group">
+                    {{-- <div class="form-group">
                         <label for="cover-pic">Cover Picture:</label>
                         <div id="file-browse-wrapper">
                             <input type="file" class="form-control" name="cover-pic" id="cover-pic">
@@ -64,12 +65,12 @@
                                 <i class="icon fas fa-times"></i>
                             </a>
                         </div>
-                    </div>
+                    </div> --}}
                 </div>
             </div>
             <div class="row content justify-content-center">
                 <div class="col-md-8">
-                    <button id="btn-submit" type="button" class="btn btn-primary">Submit</button>
+                    <button id="btn-submit" type="submit" class="btn btn-primary">Submit</button>
                 </div>
                 <div class="col-md-4">
                     <div id="messageBox"></div>

@@ -37853,7 +37853,6 @@ $(function () {
   tagsManagerHandler('genre', '/api/genres');
   tagsManagerHandler('platform', '/api/platforms');
   tagsManagerHandler('publisher', '/api/publishers');
-  $('#btn-submit').click(sendAddInfo);
 }); // Tagmanager working with typeahead general function
 
 function tagsManagerHandler(id, url) {
@@ -37879,11 +37878,6 @@ function tagsManagerHandler(id, url) {
       tagMan.tagsManager('pushTag', item);
     }
   });
-} // Send data to php services
-
-
-function sendAddInfo() {
-  var data = $('form').serializeJSON();
 }
 
 /***/ }),
