@@ -37497,7 +37497,9 @@ module.exports = function(module) {
 
 $(function () {
   // Tag inputs functionalities
-  tagsManagerHandler("genre", '/api/genres');
+  tagsManagerHandler('genre', '/api/genres');
+  tagsManagerHandler('platform', '/api/platforms');
+  tagsManagerHandler('publisher', '/api/publishers');
 }); // Tagmanager working with typeahead general function
 
 function tagsManagerHandler(_id, _url) {
@@ -37516,12 +37518,11 @@ function tagsManagerHandler(_id, _url) {
             newData.push(item.name);
           });
           process(newData);
-          return;
         }
       });
     },
     afterSelect: function afterSelect(item) {
-      tagMan.tagsManager("pushTag", item);
+      tagMan.tagsManager('pushTag', item);
     }
   });
 }
