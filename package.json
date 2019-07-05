@@ -25,6 +25,7 @@
         "vue-template-compiler": "^2.6.10"
     },
     "dependencies": {
-        "bootstrap-3-typeahead": "^4.0.2"
+        "bootstrap-3-typeahead": "^4.0.2",
+        "jquery-serializejson": "^2.9.0"
     }
 }

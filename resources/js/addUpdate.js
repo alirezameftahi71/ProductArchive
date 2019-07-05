@@ -3,21 +3,23 @@ $(function () {
     tagsManagerHandler('genre', '/api/genres');
     tagsManagerHandler('platform', '/api/platforms');
     tagsManagerHandler('publisher', '/api/publishers');
+    $('#btn-submit').click(sendAddInfo);
+
 });
 
 // Tagmanager working with typeahead general function
-function tagsManagerHandler(_id, _url) {
-    const tagMan = $(`#${_id}`).tagsManager();
-    $(`#${_id}`).typeahead({
+function tagsManagerHandler(id, url) {
+    const tagMan = $(`#${id}`).tagsManager();
+    $(`#${id}`).typeahead({
         source: (query, process) => {
             return $.ajax({
-                url: _url,
+                url: url,
                 type: 'GET',
                 data: `search=${query}`,
                 dataType: 'JSON',
                 cache: false,
                 success: (e) => {
-                    var newData = [];
+                    const newData = [];
                     $.each(e, (_i, item) => {
                         newData.push(item.name);
                     });
@@ -29,4 +31,10 @@ function tagsManagerHandler(_id, _url) {
             tagMan.tagsManager('pushTag', item);
         }
     });
+}
+
+// Send data to php services
+function sendAddInfo() {
+    const data = $('form').serializeJSON();
+    
 }
