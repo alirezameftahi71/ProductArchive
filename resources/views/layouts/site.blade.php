@@ -17,8 +17,7 @@
     </div>
     @include('layouts.footer')
     <div id="loading">
-        <div class="spinner-grow" role="status">
-            <span class="sr-only">Loading...</span>
+        <div class="spinner-border">
         </div>
     </div>
     <script src="/js/app.js"></script>
