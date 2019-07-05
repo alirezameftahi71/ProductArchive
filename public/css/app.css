@@ -16531,22 +16531,6 @@ footer#footer {
   overflow: hidden;
 }
 
-#info-area {
-  height: inherit;
-  overflow-y: auto;
-}
-
-#list-items {
-  height: calc(100% - 4.25rem);
-  overflow: auto;
-}
-
-.items-sidenav {
-  padding: 1.25rem;
-  background-color: #f1f1f1;
-  height: 100%;
-}
-
 .icon {
   cursor: pointer;
   color: #343a40;
@@ -16576,18 +16560,53 @@ footer#footer {
 
 #loading div {
   color: #a6a6a6;
-  width: 30vw;
-  height: 30vw;
-}
-
-#info-table {
-  margin: 1rem;
+  width: 15vw;
+  height: 15vw;
 }
 
 /* Makes the table column widths all equal */
 
 .fixed-width-table {
   table-layout: fixed;
+}
+
+@media screen and (max-width: 47.99em) {
+  .full-height {
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+
+  body {
+    height: initial;
+  }
+
+  .row.content {
+    height: auto;
+  }
+}
+
+#info-area {
+  height: inherit;
+  overflow-y: auto;
+}
+
+#list-items {
+  height: calc(100% - 4.25rem);
+  overflow: auto;
+}
+
+#searchBox {
+  border-color: #ced4da !important;
+}
+
+.items-sidenav {
+  padding: 1.25rem;
+  background-color: #f1f1f1;
+  height: 100%;
+}
+
+#info-table {
+  margin: 1rem;
 }
 
 .list-group-item.active {
@@ -16609,22 +16628,9 @@ footer#footer {
     margin: 0 0 1rem 0;
   }
 
-  .full-height {
-    overflow-x: hidden;
-    overflow-y: auto;
-  }
-
   #info-area {
     height: unset;
     overflow: hidden;
-  }
-
-  body {
-    height: initial;
-  }
-
-  .row.content {
-    height: auto;
   }
 
   .list-group {

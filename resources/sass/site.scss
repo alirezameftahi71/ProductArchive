@@ -9,22 +9,6 @@ footer#footer {
     overflow: hidden;
 }
 
-#info-area{
-    height: inherit;
-    overflow-y: auto;
-}
-
-#list-items {
-    height: calc(100% - 4.25rem);
-    overflow: auto;
-}
-
-.items-sidenav {
-    padding: 1.25rem;
-    background-color: $milk;
-    height: 100%;
-}
-
 .icon {
     cursor: pointer;
     color: $darkindigo;
@@ -53,12 +37,8 @@ footer#footer {
 
 #loading div {
 	color: #a6a6a6;
-    width: 30vw;
-    height: 30vw;
-}
-
-#info-table {
-    margin: 1rem;
+    width: 15vw;
+    height: 15vw;
 }
 
 /* Makes the table column widths all equal */
@@ -66,33 +46,10 @@ footer#footer {
 	table-layout: fixed;
 }
 
-.list-group-item.active {
-    background-color: $darkindigo;
-    border-color: $darkindigo;
-}
-
-.list-group-item:not(.active) {
-    color: #15072f;
-}
-
 @media screen and (max-width: 47.99em) {
-    .items-sidenav {
-        height: auto;
-        padding: 0.9375em;
-    }
-
-    #info-table {
-        margin: 0 0 1rem 0;
-    }
-
     .full-height {
         overflow-x: hidden;
         overflow-y: auto;
-    }
-
-    #info-area{
-        height: unset;
-        overflow: hidden;
     }
 
     body {
@@ -101,9 +58,5 @@ footer#footer {
 
     .row.content {
         height: auto;
-    }
-
-    .list-group {
-        height: 15.625em !important;
     }
 }

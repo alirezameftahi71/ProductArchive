@@ -49267,11 +49267,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _bootstrap__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_bootstrap__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _site__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./site */ "./resources/js/site.js");
 /* harmony import */ var _site__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_site__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _home__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./home */ "./resources/js/home.js");
+/* harmony import */ var _home__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_home__WEBPACK_IMPORTED_MODULE_2__);
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
  * building robust, powerful web applications using Vue and Laravel.
  */
+
 
 
 window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
@@ -49425,29 +49428,15 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/js/site.js":
+/***/ "./resources/js/home.js":
 /*!******************************!*\
-  !*** ./resources/js/site.js ***!
+  !*** ./resources/js/home.js ***!
   \******************************/
 /*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, exports) {
 
-"use strict";
- // TODO: make use of vanilla js and vue.js instead of jQuery
-// Mark the current page as active in navbar
-
-$('ul.navbar-nav a').filter(function (_i, item) {
-  return window.location.href.includes(item.href);
-}).parent().addClass('active');
 $(function () {
-  // Loading layout on ajax calls handling
-  $(document).ajaxStart(function () {
-    $('#loading').css('display', 'flex');
-  });
-  $(document).ajaxComplete(function () {
-    $('#loading').hide();
-  }); // Searchbox filter
-
+  // Searchbox filter
   $('#searchBox').on('keyup change search', function (e) {
     var value = $(e.currentTarget).val().toLowerCase();
     $('#list-items a').filter(function (_i, item) {
@@ -49472,8 +49461,7 @@ $(function () {
     });
   }); // Mark first entry on list-items as active on first load
 
-  $('#list-items > a:first').addClass('active'); // const activeItem = $('#list-items > a.active:first');
-  // activeItem && activeItem.trigger('click');
+  $('#list-items > a:first').addClass('active');
 }); // Fills the info table with the passed data
 
 function fillInfoTable(dataItem) {
@@ -49520,6 +49508,34 @@ function joinJsonNames(arr, separator) {
 
 /***/ }),
 
+/***/ "./resources/js/site.js":
+/*!******************************!*\
+  !*** ./resources/js/site.js ***!
+  \******************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+ // TODO: make use of vanilla js and vue.js instead of jQuery
+// Mark the current page as active in navbar
+
+var _url = $('ul.navbar-nav a').filter(function (_i, item) {
+  return window.location.href === item.href;
+});
+
+_url.length === 1 ? _url.parent().addClass('active') : $('ul.navbar-nav a')[0].parent().addClass('active');
+$(function () {
+  // Loading layout on ajax calls handling
+  $(document).ajaxStart(function () {
+    $('#loading').css('display', 'flex');
+  });
+  $(document).ajaxComplete(function () {
+    $('#loading').hide();
+  });
+});
+
+/***/ }),
+
 /***/ "./resources/sass/app.scss":
 /*!*********************************!*\
   !*** ./resources/sass/app.scss ***!
@@ -49538,8 +49554,8 @@ function joinJsonNames(arr, separator) {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Users\Alireza\Documents\Projects\lara\ProductArchive\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\Users\Alireza\Documents\Projects\lara\ProductArchive\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\Users\Alireza\Documents\Projects\www\ProductArchive\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\Alireza\Documents\Projects\www\ProductArchive\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
