@@ -8,6 +8,9 @@
             <li class="nav-item">
                 <a class="nav-link" href="{{ url('/') }}">Home</a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ url('/create') }}">Create</a>
+            </li>
         </ul>
         <ul class="navbar-nav">
             @auth

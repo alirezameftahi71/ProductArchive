@@ -27,4 +27,9 @@ class HomeController extends Controller
         $list_items = Game::with('genres')->with('platforms')->with('publishers')->get();
         return view('home', compact('list_items'));
     }
+
+    public function create()
+    {
+        return view('create');
+    }
 }
