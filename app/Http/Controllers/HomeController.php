@@ -10,21 +10,11 @@ use App\Publisher;
 
 class HomeController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
     public function __construct()
     {
         //$this->middleware('auth');
     }
 
-    /**
-     * Show the application home page.
-     *
-     * @return \Illuminate\Contracts\Support\Renderable
-     */
     public function index()
     {
         $list_items = Game::with('genres')->with('platforms')->with('publishers')->get();
