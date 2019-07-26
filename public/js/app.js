@@ -38041,7 +38041,7 @@ function fillInfoTable(dataItem) {
   $('table #genre').html(joinJsonNames(dataItem.genres));
   $('table #platform').html(joinJsonNames(dataItem.platforms));
   $('table #publisher').html(joinJsonNames(dataItem.publishers));
-  $('#cover-pic').attr('src', "/images/covers/".concat(dataItem.cover_pic));
+  $('#cover-pic').attr('src', "/storage/".concat(dataItem.cover_pic));
   $('#description').html(dataItem.description);
 } // Joins each item's name in a list with a separator
 
@@ -38697,8 +38697,8 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Dev\xampp\htdocs\myFiles\ProductArchive\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\Dev\xampp\htdocs\myFiles\ProductArchive\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\Users\Alireza\Documents\Projects\www\ProductArchive\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\Alireza\Documents\Projects\www\ProductArchive\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

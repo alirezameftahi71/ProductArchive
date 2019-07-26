@@ -20,7 +20,7 @@ class CreateGamesTable extends Migration
             $table->float('rate')->nullable();
             $table->boolean('completed')->default(false);
             $table->text('description')->nullable();
-            $table->string('cover_pic')->default('default.png');
+            $table->string('cover_pic')->default('uploads/default.png');
             $table->timestamps();
         });
     }

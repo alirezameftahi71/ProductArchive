@@ -13,8 +13,8 @@
         <br />
         <div class="list-group" id="list-items">
             @foreach ($list_items as $item)
-            <a id={{$item->id}} href="#"
-                class="list-group-item list-group-item-action">{{htmlspecialchars_decode($item->name)}}</a>
+            <a id={{ $item->id }} href="#"
+                class="list-group-item list-group-item-action">{{ htmlspecialchars_decode($item->name) }}</a>
             @endforeach
         </div>
     </div>
@@ -76,26 +76,28 @@
                     </tr>
                     <tr>
                         <th>Rate</th>
-                        <td id="rate">{{ isset($list_items[0]) ? $list_items[0]->rate . '/5' : null }}</td>
+                        <td id="rate">{{ isset($list_items[0]) ? $list_items[0]->rate . "/5" : null }}</td>
                     </tr>
                 </table>
             </div>
             <div class="col-lg-4 col-md-5">
                 <div class="container-fluid">
-                    <img id="cover-pic" class="img-fluid" src="{{ '/images/covers/' }}{{ isset($list_items[0]) ? $list_items[0]->cover_pic : 'default.png' }}" alt="Product Cover"
+                    <img id="cover-pic" class="img-fluid" src="{{ isset($list_items[0]) ? asset("storage/" . $list_items[0]->cover_pic) : asset("storage/" . "uploads/default.png")}}" alt="Product Cover"
                         width="265" height="320">
                 </div>
                 <div class="container-fluid toolbar">
                     <a data-toggle="confirmation" data-title="Delete Product?" data-placement="left"
-                        data-btn-cancel-class="btn-danger" data-popout="true" href="javascript:deleteProduct();">
-                        <i class="icon fas fa-trash-alt"></i>
+                        data-btn-cancel-class="btn-danger" data-popout="true" href="javascript:deleteProduct();" class="icon">
+                        <i class="fas fa-trash-alt"></i>
                     </a>
-                    <i class="icon fas fa-thumbs-up"></i>
-                    <a href="javascript:updateProduct();">
-                        <i class="icon fas fa-edit"></i>
+                    <a href="#" class="icon">
+                        <i class="fas fa-thumbs-up"></i>
                     </a>
-                    <a id="btn-action-checked" href="javascript:toggleCompletedTag();">
-                        <i class="icon fas fa-check-circle"></i>
+                    <a href="javascript:updateProduct();" class="icon">
+                        <i class="fas fa-edit"></i>
+                    </a>
+                    <a id="btn-action-checked" href="javascript:toggleCompletedTag();" class="icon">
+                        <i class="fas fa-check-circle"></i>
                     </a>
                 </div>
             </div>

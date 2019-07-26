@@ -6,7 +6,7 @@
             Create page
         </h3>
         <hr />
-        <form action="/games" method="post">
+        <form action="/games" method="post" enctype="multipart/form-data">
             {{ csrf_field() }}
             <div class="row content justify-content-center">
                 <div class="col-md-8">
@@ -55,17 +55,10 @@
                         <textarea class="form-control" rows="11" id="desc-box"
                             placeholder="Enter brief description here" name="desc-box"></textarea>
                     </div>
-                    {{-- <div class="form-group">
+                    <div class="form-group d-flex flex-column">
                         <label for="cover-pic">Cover Picture:</label>
-                        <div id="file-browse-wrapper">
-                            <input type="file" class="form-control" name="cover-pic" id="cover-pic">
-                            <a data-toggle="confirmation" title="Delete Cover Picture" data-title="Delete Picture?"
-                                data-placement="top" data-btn-cancel-class="btn-danger" data-popout="true"
-                                href="javascript:deletePicture();">
-                                <i class="icon fas fa-times"></i>
-                            </a>
-                        </div>
-                    </div> --}}
+                        <input type="file" name="cover-pic" id="cover-pic" class="py-1">
+                    </div>
                 </div>
             </div>
             <div class="row content justify-content-center">

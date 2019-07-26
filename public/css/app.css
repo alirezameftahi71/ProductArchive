@@ -16206,12 +16206,11 @@ footer#footer {
 .icon {
   cursor: pointer;
   color: #343a40;
-  -webkit-text-decoration-style: none;
-          text-decoration-style: none;
 }
 
 .icon:hover {
   color: #3490dc;
+  text-decoration: none;
 }
 
 #loading {

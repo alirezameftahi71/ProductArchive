@@ -39,7 +39,7 @@ function fillInfoTable(dataItem) {
     $('table #genre').html(joinJsonNames(dataItem.genres));
     $('table #platform').html(joinJsonNames(dataItem.platforms));
     $('table #publisher').html(joinJsonNames(dataItem.publishers));
-    $('#cover-pic').attr('src', `/images/covers/${dataItem.cover_pic}`);
+    $('#cover-pic').attr('src', `/storage/${dataItem.cover_pic}`);
     $('#description').html(dataItem.description);
 }
 

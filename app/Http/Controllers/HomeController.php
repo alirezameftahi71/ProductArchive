@@ -55,6 +55,13 @@ class HomeController extends Controller
                 $publishers = HomeController::fetch_objects_from_strings(Publisher::class, $publisher_names);
                 $game->publishers()->sync($publishers);
             }
+
+            if(request('cover-pic')) {
+                $game->update([
+                    'cover_pic' => request('cover-pic')->store('uploads', 'public'),
+                ]);
+            }
+
             \DB::commit();
             return redirect('/');
         } catch (\Exception $ex) {

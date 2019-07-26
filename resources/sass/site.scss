@@ -12,11 +12,11 @@ footer#footer {
 .icon {
     cursor: pointer;
     color: $darkindigo;
-    text-decoration-style: none;
 }
 
 .icon:hover {
     color: $blue;
+    text-decoration: none;
 }
 
 #loading {
