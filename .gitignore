@@ -1,2 +1,5 @@
 resource/_batScripts
 .vscode/
+node_modules
+vendor
+
