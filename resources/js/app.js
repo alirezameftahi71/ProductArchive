@@ -7,6 +7,7 @@
 import './bootstrap';
 import 'bootstrap-3-typeahead';
 import 'jquery-serializejson';
+import 'bootstrap-confirmation2';
 import './tagmanager';
 import './site';
 import './home';

@@ -86,8 +86,8 @@
                         width="265" height="320">
                 </div>
                 <div class="container-fluid toolbar">
-                    <a data-toggle="confirmation" data-title="Delete Product?" data-placement="left"
-                        data-btn-cancel-class="btn-danger" data-popout="true" href="javascript:deleteProduct();" class="icon">
+                    <a id="item-delete" href="#" data-toggle="confirmation" data-title="Delete Product?" data-placement="left"
+                        data-btn-cancel-class="btn btn-sm btn-danger" data-popout="true" class="icon">
                         <i class="fas fa-trash-alt"></i>
                     </a>
                     <a href="#" class="icon">
