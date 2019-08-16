@@ -29,19 +29,19 @@
                 <table id="info-table" class="table table-bordered table-striped fixed-width-table">
                     <tr>
                         <th>Name</th>
-                        <td id="name">{{ isset($list_items[0]) ? $list_items[0]->name : null }}</td>
+                        <td id="name">{{ isset($game) ? $game->name : null }}</td>
                     </tr>
                     <tr>
                         <th>Release Date</th>
-                        <td id="releasedDate">{{ isset($list_items[0]) ? $list_items[0]->released_date : null }}</td>
+                        <td id="releasedDate">{{ isset($game) ? $game->released_date : null }}</td>
                     </tr>
                     <tr>
                         <th>Genre(s)</th>
                         <td id="genre">
                             @php
                             $joinedItems=array();
-                            if(isset($list_items[0])) {
-                            foreach ($list_items[0]->genres as $item) {
+                            if(isset($game)) {
+                            foreach ($game->genres as $item) {
                             $joinedItems[] = $item->name;
                             }
                             }
@@ -54,8 +54,8 @@
                         <td id="platform">
                             @php
                             $joinedItems=array();
-                            if(isset($list_items[0])) {
-                            foreach ($list_items[0]->platforms as $item) {
+                            if(isset($game)) {
+                            foreach ($game->platforms as $item) {
                             $joinedItems[] = $item->name;
                             }
                             }
@@ -68,8 +68,8 @@
                         <td id="publisher">
                             @php
                             $joinedItems=array();
-                            if(isset($list_items[0])) {
-                            foreach ($list_items[0]->publishers as $item) {
+                            if(isset($game)) {
+                            foreach ($game->publishers as $item) {
                             $joinedItems[] = $item->name;
                             }
                             }
@@ -79,14 +79,14 @@
                     </tr>
                     <tr>
                         <th>Rate</th>
-                        <td id="rate">{{ isset($list_items[0]) ? $list_items[0]->rate . "/5" : null }}</td>
+                        <td id="rate">{{ isset($game) ? $game->rate . "/5" : null }}</td>
                     </tr>
                 </table>
             </div>
             <div class="col-lg-4 col-md-5">
                 <div class="container-fluid">
                     <img id="cover-pic" class="img-fluid"
-                        src="{{ isset($list_items[0]) ? asset("storage/" . $list_items[0]->cover_pic) : asset("storage/" . "uploads/default.png")}}"
+                        src="{{ isset($game) ? asset("storage/" . $game->cover_pic) : asset("storage/" . "uploads/default.png")}}"
                         alt="Product Cover" width="265" height="320">
                 </div>
                 <div class="container-fluid toolbar">
@@ -110,7 +110,7 @@
         <hr>
         <div class="container-fluid">
             <p id="description">
-                {{ isset($list_items[0]) ? $list_items[0]->description : null }}
+                {{ isset($game) ? $game->description : null }}
             </p>
         </div>
     </div>

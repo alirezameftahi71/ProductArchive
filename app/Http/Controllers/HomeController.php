@@ -17,10 +17,11 @@ class HomeController extends Controller
         //$this->middleware('auth');
     }
 
-    public function index()
+    public function index(Request $request)
     {
         $list_items = Game::with('genres', 'platforms', 'publishers')->get();
-        return view('home', compact('list_items'));
+        $game = $request->query('id') ? $list_items->find($request->query('id')) : $list_items->first();
+        return view('home', compact('list_items', 'game'));
     }
 
     public function create()
@@ -65,7 +66,7 @@ class HomeController extends Controller
             }
 
             DB::commit();
-            return redirect()->route('home');
+            return redirect()->route('home', ['id' => $game->id]);
         } catch (Exception $ex) {
             DB::rollback();
             return response()->json(['error' => $ex->getMessage()], 500);
@@ -115,7 +116,7 @@ class HomeController extends Controller
             }
 
             DB::commit();
-            return redirect()->route('home');
+            return redirect()->route('home', ['id' => $game->id]);
         } catch (Exception $ex) {
             DB::rollback();
             return response()->json(['error' => $ex->getMessage()], 500);

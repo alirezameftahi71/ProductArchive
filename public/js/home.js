@@ -143,9 +143,11 @@ $('#item-delete').on('click', function () {
 });
 $('#item-edit').on('click', function () {
   window.location.replace("/edit/".concat(getCurrentProductId()));
-}); // Mark first entry on list-items as active on first load
+}); // // Mark first entry on list-items as active on first load
 
-$('#list-items > a:first').addClass('active'); // Fills the info table with the passed data
+var urlParams = new URLSearchParams(window.location.search);
+var id = urlParams.get('id') || 1;
+$("#list-items > a#".concat(id)).addClass('active')[0].scrollIntoView(); // Fills the info table with the passed data
 
 function fillInfoTable(dataItem) {
   $('#info-table #name').html(dataItem.name);

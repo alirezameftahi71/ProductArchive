@@ -38572,7 +38572,7 @@ if (token) {
 
 // Mark the current page as active in navbar
 var _url = $('ul.navbar-nav a').toArray().find(function (x) {
-  return window.location.href.replace('#', '') === x.href;
+  return "".concat(window.location.origin).concat(window.location.pathname) === x.href;
 });
 
 _url && _url.parentElement.classList.add('active'); // Loading layout on ajax calls handling

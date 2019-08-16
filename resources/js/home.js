@@ -49,8 +49,10 @@ $('#item-edit').on('click', () => {
     window.location.replace(`/edit/${getCurrentProductId()}`);
 })
 
-// Mark first entry on list-items as active on first load
-$('#list-items > a:first').addClass('active');
+// // Mark first entry on list-items as active on first load
+var urlParams = new URLSearchParams(window.location.search);
+const id = urlParams.get('id') || 1;
+$(`#list-items > a#${id}`).addClass('active')[0].scrollIntoView();
 
 // Fills the info table with the passed data
 function fillInfoTable(dataItem) {
