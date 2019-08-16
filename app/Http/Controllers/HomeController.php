@@ -7,6 +7,8 @@ use App\Game;
 use App\Genre;
 use App\Platform;
 use App\Publisher;
+use Exception;
+use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
@@ -17,7 +19,7 @@ class HomeController extends Controller
 
     public function index()
     {
-        $list_items = Game::with('genres')->with('platforms')->with('publishers')->get();
+        $list_items = Game::with('genres', 'platforms', 'publishers')->get();
         return view('home', compact('list_items'));
     }
 
@@ -28,7 +30,7 @@ class HomeController extends Controller
 
     public function store()
     {
-        \DB::beginTransaction();
+        DB::beginTransaction();
         try {
             $game = Game::create([
                 'name' => request('name'),
@@ -56,16 +58,66 @@ class HomeController extends Controller
                 $game->publishers()->sync($publishers);
             }
 
-            if(request('cover-pic')) {
+            if (request('cover-pic')) {
                 $game->update([
                     'cover_pic' => request('cover-pic')->store('uploads', 'public'),
                 ]);
             }
 
-            \DB::commit();
-            return redirect('/');
-        } catch (\Exception $ex) {
-            \DB::rollback();
+            DB::commit();
+            return redirect()->route('home');
+        } catch (Exception $ex) {
+            DB::rollback();
+            return response()->json(['error' => $ex->getMessage()], 500);
+        }
+    }
+
+    public function edit($id)
+    {
+        $game = Game::with('genres', 'platforms', 'publishers')->find($id);
+        return view('edit', compact('game'));
+    }
+
+    public function update(Game $game)
+    {
+        DB::beginTransaction();
+        try {
+            $game->update([
+                'name' => request('name'),
+                'released_date' => request('released-date'),
+                'rate' => request('rate'),
+                'completed' => request('isDone'),
+                'description' => request('desc-box')
+            ]);
+
+            if (request('hidden-genre')) {
+                $genre_names =  explode(',', request('hidden-genre'));
+                $genres = HomeController::fetch_objects_from_strings(Genre::class, $genre_names);
+                $game->genres()->sync($genres);
+            }
+
+            if (request('hidden-platform')) {
+                $platform_names = explode(',', request('hidden-platform'));
+                $platforms = HomeController::fetch_objects_from_strings(Platform::class, $platform_names);
+                $game->platforms()->sync($platforms);
+            }
+
+            if (request('hidden-publisher')) {
+                $publisher_names = explode(',', request('hidden-publisher'));
+                $publishers = HomeController::fetch_objects_from_strings(Publisher::class, $publisher_names);
+                $game->publishers()->sync($publishers);
+            }
+
+            if (request('cover-pic')) {
+                $game->update([
+                    'cover_pic' => request('cover-pic')->store('uploads', 'public'),
+                ]);
+            }
+
+            DB::commit();
+            return redirect()->route('home');
+        } catch (Exception $ex) {
+            DB::rollback();
             return response()->json(['error' => $ex->getMessage()], 500);
         }
     }

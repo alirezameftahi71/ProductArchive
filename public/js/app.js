@@ -38450,47 +38450,6 @@ module.exports = function(module) {
 
 /***/ }),
 
-/***/ "./resources/js/addUpdate.js":
-/*!***********************************!*\
-  !*** ./resources/js/addUpdate.js ***!
-  \***********************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-$(function () {
-  // Tag inputs functionalities
-  tagsManagerHandler('genre', '/api/genres');
-  tagsManagerHandler('platform', '/api/platforms');
-  tagsManagerHandler('publisher', '/api/publishers');
-}); // Tagmanager working with typeahead general function
-
-function tagsManagerHandler(id, url) {
-  var tagMan = $("#".concat(id)).tagsManager();
-  $("#".concat(id)).typeahead({
-    source: function source(query, process) {
-      return $.ajax({
-        url: url,
-        type: 'GET',
-        data: "search=".concat(query),
-        dataType: 'JSON',
-        cache: false,
-        success: function success(e) {
-          var newData = [];
-          $.each(e, function (_i, item) {
-            newData.push(item.name);
-          });
-          process(newData);
-        }
-      });
-    },
-    afterSelect: function afterSelect(item) {
-      tagMan.tagsManager('pushTag', item);
-    }
-  });
-}
-
-/***/ }),
-
 /***/ "./resources/js/app.js":
 /*!*****************************!*\
   !*** ./resources/js/app.js ***!
@@ -38512,17 +38471,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _tagmanager__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_tagmanager__WEBPACK_IMPORTED_MODULE_4__);
 /* harmony import */ var _site__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./site */ "./resources/js/site.js");
 /* harmony import */ var _site__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_site__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var _home__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./home */ "./resources/js/home.js");
-/* harmony import */ var _home__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_home__WEBPACK_IMPORTED_MODULE_6__);
-/* harmony import */ var _addUpdate__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./addUpdate */ "./resources/js/addUpdate.js");
-/* harmony import */ var _addUpdate__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_addUpdate__WEBPACK_IMPORTED_MODULE_7__);
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
  * building robust, powerful web applications using Vue and Laravel.
  */
-
-
 
 
 
@@ -38610,166 +38563,30 @@ if (token) {
 
 /***/ }),
 
-/***/ "./resources/js/home.js":
-/*!******************************!*\
-  !*** ./resources/js/home.js ***!
-  \******************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-$(function () {
-  // Searchbox filter
-  $('#searchBox').on('keyup change search', function (e) {
-    var value = $(e.currentTarget).val().toLowerCase();
-    $('#list-items a').filter(function (_i, item) {
-      $(item).toggle($(item).text().toLowerCase().indexOf(value) > -1);
-    });
-  }); // Bind to click event of each item in list-items
-
-  $('#list-items').on('click', 'a', function (e) {
-    $('#list-items').children().removeClass('active');
-    $(e.currentTarget).addClass('active'); // Fill the info table and place the photo if exists
-
-    $.ajax({
-      url: "/api/games/".concat(e.currentTarget.id),
-      type: 'GET',
-      data: null,
-      dataType: 'JSON',
-      cache: false,
-      success: function success(e) {
-        fillInfoTable(e);
-      },
-      fail: function fail() {}
-    });
-  }); // Delete a single item
-
-  $('#item-delete').on('click', function (e) {
-    $.ajax({
-      url: "/api/games/".concat($('#list-items .active').attr('id')),
-      type: 'DELETE',
-      data: null,
-      dataType: 'JSON',
-      cache: false,
-      success: function success(e) {
-        var _deleteItem = $('#list-items .active');
-
-        var _preItem = _deleteItem.prev();
-
-        var _preItemId = _preItem.attr('id');
-
-        _preItem.addClass('active');
-
-        _deleteItem.remove();
-
-        if (_preItemId != undefined) getProductById(_preItemId, fillInfoTable);else clearInfoTable();
-      },
-      fail: function fail() {}
-    });
-  }); // Mark first entry on list-items as active on first load
-
-  $('#list-items > a:first').addClass('active');
-}); // Fills the info table with the passed data
-
-function fillInfoTable(dataItem) {
-  $('#info-table #name').html(dataItem.name);
-  $('#info-table #releasedDate').html(dataItem.released_date);
-  $('#info-table #rate').html("".concat(dataItem.rate, "/5"));
-  $('#info-table #genre').html(joinJsonNames(dataItem.genres));
-  $('#info-table #platform').html(joinJsonNames(dataItem.platforms));
-  $('#info-table #publisher').html(joinJsonNames(dataItem.publishers));
-  $('#cover-pic').attr('src', "/storage/".concat(dataItem.cover_pic));
-  $('#description').html(dataItem.description);
-} // Clears the info table 
-
-
-function clearInfoTable() {
-  $('#info-table #name').html('Example Product Name');
-  $('#info-table #releasedDate').html('YYYY-MM-DD');
-  $('#info-table #rate').html('#/5');
-  $('#info-table #genre').html('Example Genre(s)');
-  $('#info-table #platform').html('Example Platform(s)');
-  $('#info-table #publisher').html('Example Company(s)');
-  $('#cover-pic').attr('src', "/storage/".concat(dataItem.cover_pic));
-  $('#description').html('Full Description goes here in multiple lines providing more and detailed information about the product, like story line or history.');
-} // Joins each item's name in a list with a separator
-
-
-function joinJsonNames(arr, separator) {
-  var joinedNames = '';
-  var _iteratorNormalCompletion = true;
-  var _didIteratorError = false;
-  var _iteratorError = undefined;
-
-  try {
-    for (var _iterator = arr[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-      var item = _step.value;
-      joinedNames += "".concat(item.name).concat(separator || ', ');
-    }
-  } catch (err) {
-    _didIteratorError = true;
-    _iteratorError = err;
-  } finally {
-    try {
-      if (!_iteratorNormalCompletion && _iterator["return"] != null) {
-        _iterator["return"]();
-      }
-    } finally {
-      if (_didIteratorError) {
-        throw _iteratorError;
-      }
-    }
-  }
-
-  joinedNames = joinedNames.endsWith(', ') ? joinedNames.substr(0, joinedNames.length - 2) : joinedNames;
-  return joinedNames;
-} // Read the data by passed id
-
-
-function getProductById(id, successFunc) {
-  $.ajax({
-    url: "/api/games/".concat(id),
-    type: 'GET',
-    data: null,
-    dataType: 'JSON',
-    cache: false,
-    success: function success(e) {
-      successFunc(e);
-    },
-    fail: function fail() {}
-  });
-}
-
-/***/ }),
-
 /***/ "./resources/js/site.js":
 /*!******************************!*\
   !*** ./resources/js/site.js ***!
   \******************************/
 /*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, exports) {
 
-"use strict";
- // TODO: make use of vanilla js and vue.js instead of jQuery
 // Mark the current page as active in navbar
-
-var _url = $('ul.navbar-nav a').filter(function (_i, item) {
-  return window.location.href === item.href;
+var _url = $('ul.navbar-nav a').toArray().find(function (x) {
+  return window.location.href.replace('#', '') === x.href;
 });
 
-_url.length === 1 ? _url.parent().addClass('active') : $('ul.navbar-nav a')[0].parent().addClass('active');
-$(function () {
-  // Loading layout on ajax calls handling
-  $(document).ajaxStart(function () {
-    $('#loading').css('display', 'flex');
-  });
-  $(document).ajaxComplete(function () {
-    $('#loading').hide();
-  }); // Enabling confirmation
+_url && _url.parentElement.classList.add('active'); // Loading layout on ajax calls handling
 
-  $('[data-toggle=confirmation]').confirmation({
-    rootSelector: '[data-toggle=confirmation]' // other options
+$(document).ajaxStart(function () {
+  $('#loading').css('display', 'flex');
+});
+$(document).ajaxComplete(function () {
+  $('#loading').hide();
+}); // Enabling confirmation
 
-  });
+$('[data-toggle=confirmation]').confirmation({
+  rootSelector: '[data-toggle=confirmation]' // other options
+
 });
 
 /***/ }),
@@ -39358,15 +39175,27 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
 
 /***/ }),
 
+/***/ "./resources/sass/home.scss":
+/*!**********************************!*\
+  !*** ./resources/sass/home.scss ***!
+  \**********************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+
 /***/ 0:
-/*!*************************************************************!*\
-  !*** multi ./resources/js/app.js ./resources/sass/app.scss ***!
-  \*************************************************************/
+/*!****************************************************************************************!*\
+  !*** multi ./resources/js/app.js ./resources/sass/app.scss ./resources/sass/home.scss ***!
+  \****************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(/*! C:\Users\Alireza\Documents\Projects\www\ProductArchive\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\Users\Alireza\Documents\Projects\www\ProductArchive\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\Users\Alireza\Documents\Projects\www\ProductArchive\resources\sass\app.scss */"./resources/sass/app.scss");
+module.exports = __webpack_require__(/*! C:\Users\Alireza\Documents\Projects\www\ProductArchive\resources\sass\home.scss */"./resources/sass/home.scss");
 
 
 /***/ })

@@ -1,56 +1,56 @@
-$(() => {
-    // Searchbox filter
-    $('#searchBox').on('keyup change search', e => {
-        const value = $(e.currentTarget).val().toLowerCase();
-        $('#list-items a').filter((_i, item) => {
-            $(item).toggle($(item).text().toLowerCase().indexOf(value) > -1)
-        });
-    });
-
-    // Bind to click event of each item in list-items
-    $('#list-items').on('click', 'a', e => {
-        $('#list-items').children().removeClass('active');
-        $(e.currentTarget).addClass('active');
-        // Fill the info table and place the photo if exists
-        $.ajax({
-            url: `/api/games/${e.currentTarget.id}`,
-            type: 'GET',
-            data: null,
-            dataType: 'JSON',
-            cache: false,
-            success: e => {
-                fillInfoTable(e);
-            },
-            fail: () => {}
-        });
-    });
-
-    // Delete a single item
-    $('#item-delete').on('click', e => {
-        $.ajax({
-            url: `/api/games/${$('#list-items .active').attr('id')}`,
-            type: 'DELETE',
-            data: null,
-            dataType: 'JSON',
-            cache: false,
-            success: e => {
-                let _deleteItem = $('#list-items .active');
-                let _preItem = _deleteItem.prev();
-                let _preItemId = _preItem.attr('id');
-                _preItem.addClass('active');
-                _deleteItem.remove();
-                if (_preItemId != undefined)
-                    getProductById(_preItemId, fillInfoTable);
-                else
-                    clearInfoTable();
-            },
-            fail: () => {}
-        });
-    });
-
-    // Mark first entry on list-items as active on first load
-    $('#list-items > a:first').addClass('active');
+// Searchbox filter
+$('#searchBox').on('keyup change search', e => {
+    const value = $(e.currentTarget).val().toLowerCase();
+    $('#list-items a').toArray().filter(x => $(x).toggle($(x).text().toLowerCase().indexOf(value) > -1));
 });
+
+// Bind to click event of each item in list-items
+$('#list-items').on('click', 'a', e => {
+    $('#list-items').children().removeClass('active');
+    $(e.currentTarget).addClass('active');
+    // Fill the info table and place the photo if exists
+    $.ajax({
+        url: `/api/games/${e.currentTarget.id}`,
+        type: 'GET',
+        data: null,
+        dataType: 'JSON',
+        cache: false,
+        success: e => {
+            fillInfoTable(e);
+        },
+        fail: () => {}
+    });
+});
+
+// Delete a single item
+$('#item-delete').on('click', () => {
+    $.ajax({
+        url: `/api/games/${$('#list-items .active').attr('id')}`,
+        type: 'DELETE',
+        data: null,
+        dataType: 'JSON',
+        cache: false,
+        success: () => {
+            let _deleteItem = $('#list-items .active');
+            let _preItem = _deleteItem.prev();
+            let _preItemId = _preItem.attr('id');
+            _preItem.addClass('active');
+            _deleteItem.remove();
+            if (_preItemId != undefined)
+                getProductById(_preItemId, fillInfoTable);
+            else
+                clearInfoTable();
+        },
+        fail: () => {}
+    });
+});
+
+$('#item-edit').on('click', () => {
+    window.location.replace(`/edit/${getCurrentProductId()}`);
+})
+
+// Mark first entry on list-items as active on first load
+$('#list-items > a:first').addClass('active');
 
 // Fills the info table with the passed data
 function fillInfoTable(dataItem) {
@@ -72,7 +72,7 @@ function clearInfoTable() {
     $('#info-table #genre').html('Example Genre(s)');
     $('#info-table #platform').html('Example Platform(s)');
     $('#info-table #publisher').html('Example Company(s)');
-    $('#cover-pic').attr('src', `/storage/${dataItem.cover_pic}`);
+    $('#cover-pic').attr('src', '/storage/uploads/default.png');
     $('#description').html('Full Description goes here in multiple lines providing more and detailed information about the product, like story line or history.');
 }
 
@@ -99,4 +99,9 @@ function getProductById(id, successFunc) {
         },
         fail: () => {}
     });
+}
+
+// Find the selected product's id
+function getCurrentProductId() {
+    return $('#list-items .active').attr('id');
 }

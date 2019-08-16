@@ -1,4 +1,7 @@
 @extends('layouts.site')
+@section('styles')
+<link rel="stylesheet" href="/css/home.css">
+@endsection
 @section('content')
 <div class="row text-center full-height">
     <div class="col-lg-3 col-md-3 items-sidenav">
@@ -38,9 +41,9 @@
                             @php
                             $joinedItems=array();
                             if(isset($list_items[0])) {
-                                foreach ($list_items[0]->genres as $item) {
-                                    $joinedItems[] = $item->name;
-                                }
+                            foreach ($list_items[0]->genres as $item) {
+                            $joinedItems[] = $item->name;
+                            }
                             }
                             @endphp
                             {{ implode(', ', $joinedItems) }}
@@ -52,9 +55,9 @@
                             @php
                             $joinedItems=array();
                             if(isset($list_items[0])) {
-                                foreach ($list_items[0]->platforms as $item) {
-                                    $joinedItems[] = $item->name;
-                                }
+                            foreach ($list_items[0]->platforms as $item) {
+                            $joinedItems[] = $item->name;
+                            }
                             }
                             @endphp
                             {{ implode(', ', $joinedItems) }}
@@ -66,9 +69,9 @@
                             @php
                             $joinedItems=array();
                             if(isset($list_items[0])) {
-                                foreach ($list_items[0]->publishers as $item) {
-                                    $joinedItems[] = $item->name;
-                                }
+                            foreach ($list_items[0]->publishers as $item) {
+                            $joinedItems[] = $item->name;
+                            }
                             }
                             @endphp
                             {{ implode(', ', $joinedItems) }}
@@ -82,21 +85,23 @@
             </div>
             <div class="col-lg-4 col-md-5">
                 <div class="container-fluid">
-                    <img id="cover-pic" class="img-fluid" src="{{ isset($list_items[0]) ? asset("storage/" . $list_items[0]->cover_pic) : asset("storage/" . "uploads/default.png")}}" alt="Product Cover"
-                        width="265" height="320">
+                    <img id="cover-pic" class="img-fluid"
+                        src="{{ isset($list_items[0]) ? asset("storage/" . $list_items[0]->cover_pic) : asset("storage/" . "uploads/default.png")}}"
+                        alt="Product Cover" width="265" height="320">
                 </div>
                 <div class="container-fluid toolbar">
-                    <a id="item-delete" href="#" data-toggle="confirmation" data-title="Delete Product?" data-placement="left"
-                        data-btn-cancel-class="btn btn-sm btn-danger" data-popout="true" class="icon">
+                    <a id="item-delete" href="javascript:return 0;" data-toggle="confirmation"
+                        data-title="Delete Product?" data-placement="left" data-btn-cancel-class="btn btn-sm btn-danger"
+                        data-popout="true" class="icon">
                         <i class="fas fa-trash-alt"></i>
                     </a>
-                    <a href="#" class="icon">
+                    <a id="item-heart" href="javascript:return 0;" class="icon">
                         <i class="fas fa-thumbs-up"></i>
                     </a>
-                    <a href="javascript:updateProduct();" class="icon">
+                    <a id="item-edit" href="javascript:return 0;" class="icon">
                         <i class="fas fa-edit"></i>
                     </a>
-                    <a id="btn-action-checked" href="javascript:toggleCompletedTag();" class="icon">
+                    <a id="item-check" href="javascript:return 0;" class="icon">
                         <i class="fas fa-check-circle"></i>
                     </a>
                 </div>
@@ -110,4 +115,7 @@
         </div>
     </div>
 </div>
+@endsection
+@section('scripts')
+<script src="/js/home.js"></script>
 @endsection

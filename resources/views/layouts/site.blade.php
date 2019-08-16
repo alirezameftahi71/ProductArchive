@@ -8,6 +8,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>The Archive</title>
     <link rel="stylesheet" href="/css/app.css">
+    @yield('styles')
 </head>
 
 <body>
@@ -21,6 +22,7 @@
         </div>
     </div>
     <script src="/js/app.js"></script>
+    @yield('scripts')
 </body>
 
 </html>

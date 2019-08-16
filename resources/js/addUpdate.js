@@ -1,9 +1,7 @@
-$(function () {
-    // Tag inputs functionalities
-    tagsManagerHandler('genre', '/api/genres');
-    tagsManagerHandler('platform', '/api/platforms');
-    tagsManagerHandler('publisher', '/api/publishers');
-});
+// Tag inputs functionalities
+tagsManagerHandler('genre', '/api/genres');
+tagsManagerHandler('platform', '/api/platforms');
+tagsManagerHandler('publisher', '/api/publishers');
 
 // Tagmanager working with typeahead general function
 function tagsManagerHandler(id, url) {

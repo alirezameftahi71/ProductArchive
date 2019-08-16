@@ -10,8 +10,6 @@ import 'jquery-serializejson';
 import 'bootstrap-confirmation2';
 import './tagmanager';
 import './site';
-import './home';
-import './addUpdate';
 // window.Vue = require('vue');
 
 /**
