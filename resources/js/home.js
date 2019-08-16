@@ -50,9 +50,13 @@ $('#item-edit').on('click', () => {
 })
 
 // // Mark first entry on list-items as active on first load
-var urlParams = new URLSearchParams(window.location.search);
+const urlParams = new URLSearchParams(window.location.search);
 const id = urlParams.get('id') || 1;
-$(`#list-items > a#${id}`).addClass('active')[0].scrollIntoView();
+const item = $(`#list-items > a#${id}`);
+if (item.length > 0) {
+    item.addClass('active');
+    item[0].scrollIntoView();
+}
 
 // Fills the info table with the passed data
 function fillInfoTable(dataItem) {

@@ -147,7 +147,13 @@ $('#item-edit').on('click', function () {
 
 var urlParams = new URLSearchParams(window.location.search);
 var id = urlParams.get('id') || 1;
-$("#list-items > a#".concat(id)).addClass('active')[0].scrollIntoView(); // Fills the info table with the passed data
+var item = $("#list-items > a#".concat(id));
+
+if (item.length > 0) {
+  item.addClass('active');
+  item[0].scrollIntoView();
+} // Fills the info table with the passed data
+
 
 function fillInfoTable(dataItem) {
   $('#info-table #name').html(dataItem.name);
@@ -181,8 +187,8 @@ function joinJsonNames(arr, separator) {
 
   try {
     for (var _iterator = arr[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-      var item = _step.value;
-      joinedNames += "".concat(item.name).concat(separator || ', ');
+      var _item = _step.value;
+      joinedNames += "".concat(_item.name).concat(separator || ', ');
     }
   } catch (err) {
     _didIteratorError = true;
