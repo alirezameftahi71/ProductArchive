@@ -12,7 +12,7 @@
                 <a class="nav-link" href="{{ url('/create') }}">Create</a>
             </li>
         </ul>
-        <ul class="navbar-nav">
+        {{-- <ul class="navbar-nav">
             @auth
             <li class="nav-item">
                 <a class="nav-link" href="{{ url('/') }}">Home</a>
@@ -25,6 +25,6 @@
                 <a class="nav-link" href="{{ route('register') }}"><i class="fas fa-user-plus"></i>&nbsp;Register</a>
             </li>
             @endauth
-        </ul>
+        </ul> --}}
     </div>
 </nav>
