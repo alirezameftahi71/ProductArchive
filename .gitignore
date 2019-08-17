@@ -1,7 +1,11 @@
-resource/_batScripts
-.vscode/
-bootstrap
-node_modules
+/node_modules
+/public/hot
+/public/storage
+/storage/*.key
+/vendor
 .env
-vendor
-storage
+.phpunit.result.cache
+Homestead.json
+Homestead.yaml
+npm-debug.log
+yarn-error.log
