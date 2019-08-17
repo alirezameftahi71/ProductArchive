@@ -1,2 +1,7 @@
 resource/_batScripts
 .vscode/
+bootstrap
+node_modules
+.env
+vendor
+storage
