@@ -41,12 +41,10 @@ $ npm run dev
 1. In the root path of application run this command:
 ~~~bash
 $ php artisan migrate
-~~~
-1. Run: 
-~~~bash
 $ php artisan key:generate
+$ php artisan storage:link
 ~~~
-1. Start the app using :
+1. Start the app using:
 ~~~bash
 $ php artisan serve
 ~~~
