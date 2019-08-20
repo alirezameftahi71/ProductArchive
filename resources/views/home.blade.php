@@ -41,9 +41,9 @@
                             @php
                             $joinedItems=array();
                             if(isset($game)) {
-                            foreach ($game->genres as $item) {
-                            $joinedItems[] = $item->name;
-                            }
+                                foreach ($game->genres as $item) {
+                                    $joinedItems[] = $item->name;
+                                }
                             }
                             @endphp
                             {{ implode(', ', $joinedItems) }}
@@ -55,9 +55,9 @@
                             @php
                             $joinedItems=array();
                             if(isset($game)) {
-                            foreach ($game->platforms as $item) {
-                            $joinedItems[] = $item->name;
-                            }
+                                foreach ($game->platforms as $item) {
+                                    $joinedItems[] = $item->name;
+                                }
                             }
                             @endphp
                             {{ implode(', ', $joinedItems) }}
@@ -69,9 +69,9 @@
                             @php
                             $joinedItems=array();
                             if(isset($game)) {
-                            foreach ($game->publishers as $item) {
-                            $joinedItems[] = $item->name;
-                            }
+                                foreach ($game->publishers as $item) {
+                                    $joinedItems[] = $item->name;
+                                }
                             }
                             @endphp
                             {{ implode(', ', $joinedItems) }}
@@ -90,18 +90,18 @@
                         alt="Product Cover" width="265" height="320">
                 </div>
                 <div class="container-fluid toolbar">
-                    <a id="item-delete" href="javascript:return 0;" data-toggle="confirmation"
+                    <a id="item-delete" href="javascript:void(0);" data-toggle="confirmation"
                         data-title="Delete Product?" data-placement="left" data-btn-cancel-class="btn btn-sm btn-danger"
                         data-popout="true" class="icon">
                         <i class="fas fa-trash-alt"></i>
                     </a>
-                    <a id="item-heart" href="javascript:return 0;" class="icon">
+                    <a id="item-heart" href="javascript:void(0);" class="icon">
                         <i class="fas fa-thumbs-up"></i>
                     </a>
-                    <a id="item-edit" href="javascript:return 0;" class="icon">
+                    <a id="item-edit" href="javascript:void(0);" class="icon">
                         <i class="fas fa-edit"></i>
                     </a>
-                    <a id="item-check" href="javascript:return 0;" class="icon">
+                    <a id="item-check" href="javascript:void(0);" class="icon">
                         <i class="fas fa-check-circle"></i>
                     </a>
                 </div>

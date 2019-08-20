@@ -119,31 +119,44 @@ $('#list-items').on('click', 'a', function (e) {
 }); // Delete a single item
 
 $('#item-delete').on('click', function () {
-  $.ajax({
-    url: "/api/games/".concat($('#list-items .active').attr('id')),
-    type: 'DELETE',
-    data: null,
-    dataType: 'JSON',
-    cache: false,
-    success: function success() {
-      var _deleteItem = $('#list-items .active');
+  var id = getCurrentProductId();
 
-      var _preItem = _deleteItem.prev();
+  try {
+    checkNull(id);
+    $.ajax({
+      url: "/api/games/".concat(id),
+      type: 'DELETE',
+      data: null,
+      dataType: 'JSON',
+      cache: false,
+      success: function success() {
+        var _deleteItem = $('#list-items .active');
 
-      var _preItemId = _preItem.attr('id');
+        var _preItem = _deleteItem.prev();
 
-      _preItem.addClass('active');
+        var _preItemId = _preItem.attr('id');
 
-      _deleteItem.remove();
+        _preItem.addClass('active');
 
-      if (_preItemId != undefined) getProductById(_preItemId, fillInfoTable);else clearInfoTable();
-    },
-    fail: function fail() {}
-  });
-});
+        _deleteItem.remove();
+
+        if (_preItemId != undefined) getProductById(_preItemId, fillInfoTable);else clearInfoTable();
+      },
+      fail: function fail() {}
+    });
+  } catch (error) {// show flash message 
+  }
+}); // update a single item (redirects to edit form)
+
 $('#item-edit').on('click', function () {
-  window.location.replace("/edit/".concat(getCurrentProductId()));
-}); // // Mark first entry on list-items as active on first load
+  var id = getCurrentProductId();
+
+  try {
+    checkNull(id);
+    window.location.replace("/edit/".concat(id));
+  } catch (error) {// show flash message        
+  }
+}); // Mark first entry on list-items as active on first load
 
 var urlParams = new URLSearchParams(window.location.search);
 var id = urlParams.get('id') || 1;
@@ -207,6 +220,13 @@ function joinJsonNames(arr, separator) {
 
   joinedNames = joinedNames.endsWith(', ') ? joinedNames.substr(0, joinedNames.length - 2) : joinedNames;
   return joinedNames;
+} // return false if null
+
+
+function checkNull(data) {
+  if (typeof data === 'undefined' || data === undefined || data === null) {
+    throw new Error("Null Parameter Recieved!");
+  }
 } // Read the data by passed id
 
 

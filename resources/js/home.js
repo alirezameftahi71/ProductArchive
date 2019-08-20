@@ -24,32 +24,45 @@ $('#list-items').on('click', 'a', e => {
 
 // Delete a single item
 $('#item-delete').on('click', () => {
-    $.ajax({
-        url: `/api/games/${$('#list-items .active').attr('id')}`,
-        type: 'DELETE',
-        data: null,
-        dataType: 'JSON',
-        cache: false,
-        success: () => {
-            let _deleteItem = $('#list-items .active');
-            let _preItem = _deleteItem.prev();
-            let _preItemId = _preItem.attr('id');
-            _preItem.addClass('active');
-            _deleteItem.remove();
-            if (_preItemId != undefined)
-                getProductById(_preItemId, fillInfoTable);
-            else
-                clearInfoTable();
-        },
-        fail: () => {}
-    });
+    let id = getCurrentProductId();
+    try {
+        checkNull(id);
+        $.ajax({
+            url: `/api/games/${id}`,
+            type: 'DELETE',
+            data: null,
+            dataType: 'JSON',
+            cache: false,
+            success: () => {
+                let _deleteItem = $('#list-items .active');
+                let _preItem = _deleteItem.prev();
+                let _preItemId = _preItem.attr('id');
+                _preItem.addClass('active');
+                _deleteItem.remove();
+                if (_preItemId != undefined)
+                    getProductById(_preItemId, fillInfoTable);
+                else
+                    clearInfoTable();
+            },
+            fail: () => {}
+        });
+    } catch (error) {
+        // show flash message 
+    }
 });
 
+// update a single item (redirects to edit form)
 $('#item-edit').on('click', () => {
-    window.location.replace(`/edit/${getCurrentProductId()}`);
-})
+    let id = getCurrentProductId();
+    try {
+        checkNull(id);
+        window.location.replace(`/edit/${id}`);
+    } catch (error) {
+        // show flash message        
+    }
+});
 
-// // Mark first entry on list-items as active on first load
+// Mark first entry on list-items as active on first load
 const urlParams = new URLSearchParams(window.location.search);
 const id = urlParams.get('id') || 1;
 const item = $(`#list-items > a#${id}`);
@@ -90,6 +103,13 @@ function joinJsonNames(arr, separator) {
     }
     joinedNames = joinedNames.endsWith(', ') ? joinedNames.substr(0, joinedNames.length - 2) : joinedNames;
     return joinedNames;
+}
+
+// return false if null
+function checkNull(data) {
+    if (typeof data === 'undefined' || data === undefined || data === null) {
+        throw new Error("Null Parameter Recieved!");
+    }
 }
 
 // Read the data by passed id
