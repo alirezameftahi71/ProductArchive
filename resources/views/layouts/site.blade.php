@@ -17,10 +17,7 @@
         @yield('content')
     </div>
     @include('layouts.footer')
-    <div id="loading">
-        <div class="spinner-border">
-        </div>
-    </div>
+    <div class="loader loader-default" data-text data-blink></div>
     <script src="/js/app.js"></script>
     @yield('scripts')
 </body>

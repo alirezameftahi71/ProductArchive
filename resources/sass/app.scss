@@ -1,9 +1,11 @@
 // Fonts
 @import url('https://fonts.googleapis.com/css?family=Nunito');
-@import "node_modules/@fortawesome/fontawesome-free/scss/fontawesome";
-@import "node_modules/@fortawesome/fontawesome-free/scss/solid";
-@import "node_modules/@fortawesome/fontawesome-free/scss/brands";
-@import "node_modules/@fortawesome/fontawesome-free/scss/regular";
+@import "../../node_modules/@fortawesome/fontawesome-free/scss/fontawesome";
+@import "../../node_modules/@fortawesome/fontawesome-free/scss/solid";
+@import "../../node_modules/@fortawesome/fontawesome-free/scss/brands";
+@import "../../node_modules/@fortawesome/fontawesome-free/scss/regular";
+@import '../../node_modules/pure-css-loader/dist/css-loader.css';
+@import '../../node_modules/pure-css-loader/dist/loader-default.css';
 
 @import 'variables';
 @import '~bootstrap/scss/bootstrap';
