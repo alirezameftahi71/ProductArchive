@@ -2,12 +2,12 @@
 let _url = $('ul.navbar-nav a').toArray().find(x => `${window.location.origin}${window.location.pathname}` === x.href);
 _url && _url.parentElement.classList.add('active');
 
-// Loading layout on ajax calls handling
+// Loading layout on ajax calls
 $(document).ajaxStart(() => {
-    $('#loading').css('display', 'flex');
+    $('.loader').addClass('is-active');
 });
 $(document).ajaxComplete(() => {
-    $('#loading').hide();
+    $('.loader').removeClass('is-active');
 });
 
 // Enabling confirmation

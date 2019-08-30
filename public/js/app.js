@@ -38575,13 +38575,13 @@ var _url = $('ul.navbar-nav a').toArray().find(function (x) {
   return "".concat(window.location.origin).concat(window.location.pathname) === x.href;
 });
 
-_url && _url.parentElement.classList.add('active'); // Loading layout on ajax calls handling
+_url && _url.parentElement.classList.add('active'); // Loading layout on ajax calls
 
 $(document).ajaxStart(function () {
-  $('#loading').css('display', 'flex');
+  $('.loader').addClass('is-active');
 });
 $(document).ajaxComplete(function () {
-  $('#loading').hide();
+  $('.loader').removeClass('is-active');
 }); // Enabling confirmation
 
 $('[data-toggle=confirmation]').confirmation({

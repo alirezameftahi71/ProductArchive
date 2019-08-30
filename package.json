@@ -27,6 +27,7 @@
     },
     "dependencies": {
         "bootstrap-3-typeahead": "^4.0.2",
-        "jquery-serializejson": "^2.9.0"
+        "jquery-serializejson": "^2.9.0",
+        "pure-css-loader": "^3.3.3"
     }
 }
