@@ -16716,6 +16716,16 @@ footer#footer {
   background-color: rgba(0, 0, 0, 0.5);
 }
 
+/* Loading indicator for input boxes */
+
+input.tm-input.input-loading {
+  background-color: #ffffff;
+  background-image: url(/images/input-loading.gif?b2278b93841e8fdbb157df1bf302b00b);
+  background-size: 25px 25px;
+  background-position: right center;
+  background-repeat: no-repeat;
+}
+
 /* Makes the table column widths all equal */
 
 .fixed-width-table {

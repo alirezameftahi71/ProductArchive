@@ -99,6 +99,13 @@ $('#searchBox').on('keyup change search', function (e) {
   $('#list-items a').toArray().filter(function (x) {
     return $(x).toggle($(x).text().toLowerCase().indexOf(value) > -1);
   });
+}); // Loading layout on ajax calls
+
+$(document).ajaxStart(function () {
+  $('.loader').addClass('is-active');
+});
+$(document).ajaxComplete(function () {
+  $('.loader').removeClass('is-active');
 }); // Bind to click event of each item in list-items
 
 $('#list-items').on('click', 'a', function (e) {
@@ -187,7 +194,7 @@ function clearInfoTable() {
   $('#info-table #genre').html('Example Genre(s)');
   $('#info-table #platform').html('Example Platform(s)');
   $('#info-table #publisher').html('Example Company(s)');
-  $('#cover-pic').attr('src', '/storage/uploads/default.png');
+  $('#cover-pic').attr('src', '/storage/assets/default.png');
   $('#description').html('Full Description goes here in multiple lines providing more and detailed information about the product, like story line or history.');
 } // Joins each item's name in a list with a separator
 

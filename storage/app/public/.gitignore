@@ -1,5 +1,4 @@
 *
 !.gitignore
-!uploads
-uploads/*
-!uploads/default.png
+!assets
+!assets/*

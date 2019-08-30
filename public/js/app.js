@@ -38575,14 +38575,7 @@ var _url = $('ul.navbar-nav a').toArray().find(function (x) {
   return "".concat(window.location.origin).concat(window.location.pathname) === x.href;
 });
 
-_url && _url.parentElement.classList.add('active'); // Loading layout on ajax calls
-
-$(document).ajaxStart(function () {
-  $('.loader').addClass('is-active');
-});
-$(document).ajaxComplete(function () {
-  $('.loader').removeClass('is-active');
-}); // Enabling confirmation
+_url && _url.parentElement.classList.add('active'); // Enabling confirmation
 
 $('[data-toggle=confirmation]').confirmation({
   rootSelector: '[data-toggle=confirmation]' // other options

@@ -99,9 +99,11 @@ tagsManagerHandler('platform', '/api/platforms');
 tagsManagerHandler('publisher', '/api/publishers'); // Tagmanager working with typeahead general function
 
 function tagsManagerHandler(id, url) {
-  var tagMan = $("#".concat(id)).tagsManager();
-  $("#".concat(id)).typeahead({
+  var el = $("#".concat(id));
+  var tagMan = el.tagsManager();
+  el.typeahead({
     source: function source(query, process) {
+      el.addClass('input-loading');
       return $.ajax({
         url: url,
         type: 'GET',
@@ -114,6 +116,9 @@ function tagsManagerHandler(id, url) {
             newData.push(item.name);
           });
           process(newData);
+        },
+        complete: function complete() {
+          el.removeClass('input-loading');
         }
       });
     },

@@ -86,7 +86,7 @@
             <div class="col-lg-4 col-md-5">
                 <div class="container-fluid">
                     <img id="cover-pic" class="img-fluid"
-                        src="{{ isset($game) ? asset("storage/" . $game->cover_pic) : asset("storage/" . "uploads/default.png")}}"
+                        src="{{ isset($game) ? asset("storage/" . $game->cover_pic) : asset('storage/assets/default.png')}}"
                         alt="Product Cover" width="265" height="320">
                 </div>
                 <div class="container-fluid toolbar">

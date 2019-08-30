@@ -5,9 +5,11 @@ tagsManagerHandler('publisher', '/api/publishers');
 
 // Tagmanager working with typeahead general function
 function tagsManagerHandler(id, url) {
-    const tagMan = $(`#${id}`).tagsManager();
-    $(`#${id}`).typeahead({
+    const el = $(`#${id}`);
+    const tagMan = el.tagsManager();
+    el.typeahead({
         source: (query, process) => {
+            el.addClass('input-loading');
             return $.ajax({
                 url: url,
                 type: 'GET',
@@ -20,6 +22,9 @@ function tagsManagerHandler(id, url) {
                         newData.push(item.name);
                     });
                     process(newData);
+                },
+                complete: () => {
+                    el.removeClass('input-loading');
                 }
             });
         },
