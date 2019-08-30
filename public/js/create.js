@@ -147,7 +147,7 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\Users\Alireza\Documents\Projects\www\ProductArchive\resources\js\create.js */"./resources/js/create.js");
+module.exports = __webpack_require__(/*! C:\Users\Alireza\Documents\Projects\www\product-archive\resources\js\create.js */"./resources/js/create.js");
 
 
 /***/ })

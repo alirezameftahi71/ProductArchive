@@ -39193,9 +39193,9 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Users\Alireza\Documents\Projects\www\ProductArchive\resources\js\app.js */"./resources/js/app.js");
-__webpack_require__(/*! C:\Users\Alireza\Documents\Projects\www\ProductArchive\resources\sass\app.scss */"./resources/sass/app.scss");
-module.exports = __webpack_require__(/*! C:\Users\Alireza\Documents\Projects\www\ProductArchive\resources\sass\home.scss */"./resources/sass/home.scss");
+__webpack_require__(/*! C:\Users\Alireza\Documents\Projects\www\product-archive\resources\js\app.js */"./resources/js/app.js");
+__webpack_require__(/*! C:\Users\Alireza\Documents\Projects\www\product-archive\resources\sass\app.scss */"./resources/sass/app.scss");
+module.exports = __webpack_require__(/*! C:\Users\Alireza\Documents\Projects\www\product-archive\resources\sass\home.scss */"./resources/sass/home.scss");
 
 
 /***/ })

@@ -258,7 +258,7 @@ function getCurrentProductId() {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\Users\Alireza\Documents\Projects\www\ProductArchive\resources\js\home.js */"./resources/js/home.js");
+module.exports = __webpack_require__(/*! C:\Users\Alireza\Documents\Projects\www\product-archive\resources\js\home.js */"./resources/js/home.js");
 
 
 /***/ })

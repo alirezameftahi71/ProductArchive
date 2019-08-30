@@ -174,7 +174,7 @@ fillUpdateForm(game);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\Users\Alireza\Documents\Projects\www\ProductArchive\resources\js\update.js */"./resources/js/update.js");
+module.exports = __webpack_require__(/*! C:\Users\Alireza\Documents\Projects\www\product-archive\resources\js\update.js */"./resources/js/update.js");
 
 
 /***/ })
