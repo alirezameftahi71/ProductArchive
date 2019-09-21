@@ -6,7 +6,7 @@
             {{ $page_title }}
         </h3>
         <hr />
-        <form action="/games/{{isset($game) ? $game->id : null}}" method="post" enctype="multipart/form-data">
+        <form action="/games{{isset($game) ? '/' . $game->id : null}}" method="post" enctype="multipart/form-data">
             @if (isset($game))
             {{ method_field('PUT') }}
             @endif
