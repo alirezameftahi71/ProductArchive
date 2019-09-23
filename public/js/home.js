@@ -127,32 +127,28 @@ $('#list-items').on('click', 'a', function (e) {
 
 $('#item-delete').on('click', function () {
   var id = getCurrentProductId();
+  checkNull(id);
+  $.ajax({
+    url: "/api/games/".concat(id),
+    type: 'DELETE',
+    data: null,
+    dataType: 'JSON',
+    cache: false,
+    success: function success() {
+      var _deleteItem = $('#list-items .active');
 
-  try {
-    checkNull(id);
-    $.ajax({
-      url: "/api/games/".concat(id),
-      type: 'DELETE',
-      data: null,
-      dataType: 'JSON',
-      cache: false,
-      success: function success() {
-        var _deleteItem = $('#list-items .active');
+      var _nearestItem = _deleteItem.preOrNext();
 
-        var _preItem = _deleteItem.prev();
+      var _nearestItemId = _nearestItem.attr('id');
 
-        var _preItemId = _preItem.attr('id');
+      _nearestItem.addClass('active');
 
-        _preItem.addClass('active');
+      _deleteItem.remove();
 
-        _deleteItem.remove();
-
-        if (_preItemId != undefined) getProductById(_preItemId, fillInfoTable);else clearInfoTable();
-      },
-      fail: function fail() {}
-    });
-  } catch (error) {// show flash message 
-  }
+      if (_nearestItemId != undefined) getProductById(_nearestItemId, fillInfoTable);else clearInfoTable();
+    },
+    fail: function fail() {}
+  });
 }); // update a single item (redirects to edit form)
 
 $('#item-edit').on('click', function () {
@@ -166,12 +162,24 @@ $('#item-edit').on('click', function () {
 }); // Mark first entry on list-items as active on first load
 
 var urlParams = new URLSearchParams(window.location.search);
-var id = urlParams.get('id') || 1;
+var id = urlParams.get('id') || getIdOfListItem(getFirstItemInList());
 var item = $("#list-items > a#".concat(id));
 
 if (item.length > 0) {
   item.addClass('active');
   item[0].scrollIntoView();
+}
+
+function getIdOfListItem(item) {
+  if (item && item.length) {
+    return item.attr('id');
+  } else {
+    return null;
+  }
+}
+
+function getFirstItemInList() {
+  return $('#list-items a').first();
 } // Fills the info table with the passed data
 
 
@@ -188,14 +196,14 @@ function fillInfoTable(dataItem) {
 
 
 function clearInfoTable() {
-  $('#info-table #name').html('Example Product Name');
-  $('#info-table #releasedDate').html('YYYY-MM-DD');
-  $('#info-table #rate').html('#/5');
-  $('#info-table #genre').html('Example Genre(s)');
-  $('#info-table #platform').html('Example Platform(s)');
-  $('#info-table #publisher').html('Example Company(s)');
+  $('#info-table #name').empty();
+  $('#info-table #releasedDate').empty();
+  $('#info-table #rate').empty();
+  $('#info-table #genre').empty();
+  $('#info-table #platform').empty();
+  $('#info-table #publisher').empty();
   $('#cover-pic').attr('src', '/storage/assets/default.png');
-  $('#description').html('Full Description goes here in multiple lines providing more and detailed information about the product, like story line or history.');
+  $('#description').empty();
 } // Joins each item's name in a list with a separator
 
 

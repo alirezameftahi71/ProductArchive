@@ -86,10 +86,10 @@
 /************************************************************************/
 /******/ ({
 
-/***/ "./resources/js/addUpdate.js":
-/*!***********************************!*\
-  !*** ./resources/js/addUpdate.js ***!
-  \***********************************/
+/***/ "./resources/js/_addUpdate.js":
+/*!************************************!*\
+  !*** ./resources/js/_addUpdate.js ***!
+  \************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -139,7 +139,7 @@ function tagsManagerHandler(id, url) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _addUpdate_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./addUpdate.js */ "./resources/js/addUpdate.js");
+/* harmony import */ var _addUpdate_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./_addUpdate.js */ "./resources/js/_addUpdate.js");
 /* harmony import */ var _addUpdate_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_addUpdate_js__WEBPACK_IMPORTED_MODULE_0__);
  // Fill Form with existing data
 

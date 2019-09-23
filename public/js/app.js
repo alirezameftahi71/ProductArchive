@@ -38450,65 +38450,10 @@ module.exports = function(module) {
 
 /***/ }),
 
-/***/ "./resources/js/app.js":
-/*!*****************************!*\
-  !*** ./resources/js/app.js ***!
-  \*****************************/
-/*! no exports provided */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _bootstrap__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
-/* harmony import */ var _bootstrap__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_bootstrap__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var bootstrap_3_typeahead__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! bootstrap-3-typeahead */ "./node_modules/bootstrap-3-typeahead/bootstrap3-typeahead.js");
-/* harmony import */ var bootstrap_3_typeahead__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(bootstrap_3_typeahead__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var jquery_serializejson__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! jquery-serializejson */ "./node_modules/jquery-serializejson/jquery.serializejson.js");
-/* harmony import */ var jquery_serializejson__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(jquery_serializejson__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var bootstrap_confirmation2__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! bootstrap-confirmation2 */ "./node_modules/bootstrap-confirmation2/dist/bootstrap-confirmation.js");
-/* harmony import */ var bootstrap_confirmation2__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(bootstrap_confirmation2__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _tagmanager__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./tagmanager */ "./resources/js/tagmanager.js");
-/* harmony import */ var _tagmanager__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_tagmanager__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var _site__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./site */ "./resources/js/site.js");
-/* harmony import */ var _site__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_site__WEBPACK_IMPORTED_MODULE_5__);
-/**
- * First we will load all of this project's JavaScript dependencies which
- * includes Vue and other libraries. It is a great starting point when
- * building robust, powerful web applications using Vue and Laravel.
- */
-
-
-
-
-
- // window.Vue = require('vue');
-
-/**
- * The following block of code may be used to automatically register your
- * Vue components. It will recursively scan this directory for the Vue
- * components and automatically register them with their "basename".
- *
- * Eg. ./components/ExampleComponent.vue -> <example-component></example-component>
- */
-// const files = require.context('./', true, /\.vue$/i);
-// files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default));
-// Vue.component('example-component', require('./components/ExampleComponent.vue').default);
-
-/**
- * Next, we will create a fresh Vue application instance and attach it to
- * the page. Then, you may begin adding components to this application
- * or customize the JavaScript scaffolding to fit your unique needs.
- */
-// const app = new Vue({
-//     el: '#app',
-// });
-
-/***/ }),
-
-/***/ "./resources/js/bootstrap.js":
-/*!***********************************!*\
-  !*** ./resources/js/bootstrap.js ***!
-  \***********************************/
+/***/ "./resources/js/_bootstrap.js":
+/*!************************************!*\
+  !*** ./resources/js/_bootstrap.js ***!
+  \************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -38563,10 +38508,10 @@ if (token) {
 
 /***/ }),
 
-/***/ "./resources/js/site.js":
-/*!******************************!*\
-  !*** ./resources/js/site.js ***!
-  \******************************/
+/***/ "./resources/js/_site.js":
+/*!*******************************!*\
+  !*** ./resources/js/_site.js ***!
+  \*******************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -38580,14 +38525,26 @@ _url && _url.parentElement.classList.add('active'); // Enabling confirmation
 $('[data-toggle=confirmation]').confirmation({
   rootSelector: '[data-toggle=confirmation]' // other options
 
-});
+}); // Jquery custom plugin to get nearest item to a selector
+
+(function ($) {
+  $.fn.preOrNext = function () {
+    var preElement = this.prev();
+
+    if (preElement.length) {
+      return preElement;
+    } else {
+      return this.next();
+    }
+  };
+})(jQuery);
 
 /***/ }),
 
-/***/ "./resources/js/tagmanager.js":
-/*!************************************!*\
-  !*** ./resources/js/tagmanager.js ***!
-  \************************************/
+/***/ "./resources/js/_tagmanager.js":
+/*!*************************************!*\
+  !*** ./resources/js/_tagmanager.js ***!
+  \*************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -39154,6 +39111,61 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
     }
   };
 })(jQuery);
+
+/***/ }),
+
+/***/ "./resources/js/app.js":
+/*!*****************************!*\
+  !*** ./resources/js/app.js ***!
+  \*****************************/
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _bootstrap__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./_bootstrap */ "./resources/js/_bootstrap.js");
+/* harmony import */ var _bootstrap__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_bootstrap__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var bootstrap_3_typeahead__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! bootstrap-3-typeahead */ "./node_modules/bootstrap-3-typeahead/bootstrap3-typeahead.js");
+/* harmony import */ var bootstrap_3_typeahead__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(bootstrap_3_typeahead__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var jquery_serializejson__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! jquery-serializejson */ "./node_modules/jquery-serializejson/jquery.serializejson.js");
+/* harmony import */ var jquery_serializejson__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(jquery_serializejson__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var bootstrap_confirmation2__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! bootstrap-confirmation2 */ "./node_modules/bootstrap-confirmation2/dist/bootstrap-confirmation.js");
+/* harmony import */ var bootstrap_confirmation2__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(bootstrap_confirmation2__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _tagmanager__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./_tagmanager */ "./resources/js/_tagmanager.js");
+/* harmony import */ var _tagmanager__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_tagmanager__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _site__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./_site */ "./resources/js/_site.js");
+/* harmony import */ var _site__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_site__WEBPACK_IMPORTED_MODULE_5__);
+/**
+ * First we will load all of this project's JavaScript dependencies which
+ * includes Vue and other libraries. It is a great starting point when
+ * building robust, powerful web applications using Vue and Laravel.
+ */
+
+
+
+
+
+ // window.Vue = require('vue');
+
+/**
+ * The following block of code may be used to automatically register your
+ * Vue components. It will recursively scan this directory for the Vue
+ * components and automatically register them with their "basename".
+ *
+ * Eg. ./components/ExampleComponent.vue -> <example-component></example-component>
+ */
+// const files = require.context('./', true, /\.vue$/i);
+// files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default));
+// Vue.component('example-component', require('./components/ExampleComponent.vue').default);
+
+/**
+ * Next, we will create a fresh Vue application instance and attach it to
+ * the page. Then, you may begin adding components to this application
+ * or customize the JavaScript scaffolding to fit your unique needs.
+ */
+// const app = new Vue({
+//     el: '#app',
+// });
 
 /***/ }),
 
