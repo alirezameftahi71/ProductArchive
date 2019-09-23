@@ -4,12 +4,12 @@
  * building robust, powerful web applications using Vue and Laravel.
  */
 
-import './bootstrap';
+import './_bootstrap';
 import 'bootstrap-3-typeahead';
 import 'jquery-serializejson';
 import 'bootstrap-confirmation2';
-import './tagmanager';
-import './site';
+import './_tagmanager';
+import './_site';
 // window.Vue = require('vue');
 
 /**

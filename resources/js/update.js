@@ -1,4 +1,4 @@
-import './addUpdate.js';
+import './_addUpdate.js';
 
 // Fill Form with existing data
 function fillUpdateForm(game) {

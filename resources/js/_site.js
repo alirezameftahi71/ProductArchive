@@ -7,3 +7,15 @@ $('[data-toggle=confirmation]').confirmation({
     rootSelector: '[data-toggle=confirmation]',
     // other options
 });
+
+// Jquery custom plugin to get nearest item to a selector
+(function ($) {
+    $.fn.preOrNext = function () {
+        const preElement = this.prev();
+        if (preElement.length) {
+            return preElement;
+        } else {
+            return this.next();
+        }
+    };
+}(jQuery));
