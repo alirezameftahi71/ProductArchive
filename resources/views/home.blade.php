@@ -15,7 +15,7 @@
         </div>
         <br />
         <div class="list-group" id="list-items">
-            @foreach ($list_items as $item)
+            @foreach ($list_items ?? [] as $item)
             <a id={{ $item->id }} href="#"
                 class="list-group-item list-group-item-action">{{ htmlspecialchars_decode($item->name) }}</a>
             @endforeach

@@ -55,8 +55,9 @@
                 <div class="col-md-4">
                     <div class="form-group">
                         <label for="desc-box">Description:</label>
-                        <textarea class="form-control" rows="11" id="desc-box"
-                            placeholder="Enter brief description here" name="desc-box"></textarea>
+                        <textarea class="form-control" id="desc-box"
+                            placeholder="Enter brief description here" name="desc-box"
+                            style="height: 275px"></textarea>
                     </div>
                     <div class="form-group d-flex flex-column">
                         <label for="cover-pic">Cover Picture:</label>
