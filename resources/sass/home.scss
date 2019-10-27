@@ -1,5 +1,6 @@
 @import 'variables';
-#info-area{
+
+#info-area {
     height: inherit;
     overflow-y: auto;
 }
@@ -9,8 +10,12 @@
     overflow: auto;
 }
 
-#searchBox {
+#search-box {
     border-color: #ced4da !important;
+}
+
+#cover-pic-container {
+    height: 340px;
 }
 
 .items-sidenav {
@@ -41,8 +46,8 @@
     #info-table {
         margin: 0 0 1rem 0;
     }
-    
-    #info-area{
+
+    #info-area {
         height: unset;
         overflow: hidden;
     }

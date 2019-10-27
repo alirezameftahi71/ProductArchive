@@ -6,7 +6,7 @@
 <div class="row text-center full-height">
     <div class="col-lg-3 col-md-3 items-sidenav">
         <div class="input-group" id="searchItems">
-            <input class="form-control border-right-0 border" type="search" id="searchBox" placeholder="Search...">
+            <input class="form-control border-right-0 border" type="search" id="search-box" placeholder="Search...">
             <div class="input-group-append">
                 <div class="input-group-text bg-white">
                     <i class="icon fa fa-search"></i>
@@ -41,9 +41,9 @@
                             @php
                             $joinedItems=array();
                             if(isset($game)) {
-                                foreach ($game->genres as $item) {
-                                    $joinedItems[] = $item->name;
-                                }
+                            foreach ($game->genres as $item) {
+                            $joinedItems[] = $item->name;
+                            }
                             }
                             @endphp
                             {{ implode(', ', $joinedItems) }}
@@ -55,9 +55,9 @@
                             @php
                             $joinedItems=array();
                             if(isset($game)) {
-                                foreach ($game->platforms as $item) {
-                                    $joinedItems[] = $item->name;
-                                }
+                            foreach ($game->platforms as $item) {
+                            $joinedItems[] = $item->name;
+                            }
                             }
                             @endphp
                             {{ implode(', ', $joinedItems) }}
@@ -69,9 +69,9 @@
                             @php
                             $joinedItems=array();
                             if(isset($game)) {
-                                foreach ($game->publishers as $item) {
-                                    $joinedItems[] = $item->name;
-                                }
+                            foreach ($game->publishers as $item) {
+                            $joinedItems[] = $item->name;
+                            }
                             }
                             @endphp
                             {{ implode(', ', $joinedItems) }}
@@ -101,7 +101,7 @@
                     <a id="item-edit" href="javascript:void(0);" class="icon">
                         <i class="fas fa-edit"></i>
                     </a>
-                    <a id="item-check" href="javascript:void(0);" class="icon">
+                    <a id="item-check" href="javascript:void(0);" class="icon {{ $game->checked ? 'i-green' : '' }}">
                         <i class="fas fa-check-circle"></i>
                     </a>
                 </div>
