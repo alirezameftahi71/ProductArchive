@@ -5,12 +5,8 @@ $('#search-box').on('keyup change search', e => {
 });
 
 // Loading layout on ajax calls
-$(document).ajaxStart(() => {
-    $('.loader').addClass('is-active');
-});
-$(document).ajaxComplete(() => {
-    $('.loader').removeClass('is-active');
-});
+$(document).ajaxStart(showPageLoading);
+$(document).ajaxComplete(hidePageLoading);
 
 // Bind to click event of each item in list-items
 $('#list-items').on('click', 'a', e => {
@@ -140,13 +136,6 @@ function joinJsonNames(arr, separator) {
     }
     joinedNames = joinedNames.endsWith(', ') ? joinedNames.substr(0, joinedNames.length - 2) : joinedNames;
     return joinedNames;
-}
-
-// return false if null
-function checkNull(data) {
-    if (typeof data === 'undefined' || data === undefined || data === null) {
-        throw new Error("Null Parameter Recieved!");
-    }
 }
 
 // Read the data by passed id
