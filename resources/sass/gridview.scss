@@ -5,14 +5,6 @@ div.scrolled {
     padding: 0 2.5px;
     overflow-y: auto;
 
-    .row {
-        display: -ms-flexbox;
-        display: flex;
-        -ms-flex-wrap: wrap;
-        flex-wrap: wrap;
-        padding: 0 5px;
-    }
-
     /* Create four equal columns that sits next to each other */
     .column {
         -ms-flex: 20%;
@@ -20,9 +12,38 @@ div.scrolled {
         max-width: 20%;
         padding: 0 2.5px;
 
+        .tile {
+            position: relative;
+
+            .overlay {
+                display: table;
+                position: absolute;
+                bottom: 0;
+                background: #00000080;
+                color: $milk;
+                width: 100%;
+                height: 30%;
+                transition: .5s ease;
+                opacity: 0;
+                font-size: 20px;
+                padding: 20px;
+                text-align: center;
+
+                .tile-label {
+                    display: table-cell;
+                    vertical-align: middle;
+                }
+            }
+
+            &:hover {
+                .overlay {
+                    opacity: 1;
+                }
+            }
+        }
+
         img {
             margin-top: 5px;
-            vertical-align: middle;
             width: 100%;
             height: 420px;
             opacity: 0.8;
