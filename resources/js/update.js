@@ -5,7 +5,7 @@ function fillUpdateForm(game) {
     $('#name').val(game.name);
     $('#released-date').val(game.released_date);
     $('#rate').val(game.rate);
-    $('#isDone').val(game.completed || 0);
+    $('#isChecked').val(game.checked || 0);
     game.genres.forEach(item => {
         pushIntoTagmanager("genre", item.name);
     });

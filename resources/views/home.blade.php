@@ -101,7 +101,7 @@
                     <a id="item-edit" href="javascript:void(0);" class="icon">
                         <i class="fas fa-edit"></i>
                     </a>
-                    <a id="item-check" href="javascript:void(0);" class="icon {{ $game->checked ? 'i-green' : '' }}">
+                    <a id="item-check" href="javascript:void(0);" class="icon {{ isset($game) && $game->checked ? 'i-green' : '' }}">
                         <i class="fas fa-check-circle"></i>
                     </a>
                 </div>

@@ -249,7 +249,7 @@ function clearInfoTable() {
   $('#info-table #publisher').empty();
   $('#cover-pic').attr('src', '/storage/assets/default.png');
   $('#description').empty();
-  $('#item-check').remove('i-green');
+  $('#item-check').removeClass('i-green');
 } // Joins each item's name in a list with a separator
 
 

@@ -37,7 +37,7 @@ class HomeController extends Controller
                 'name' => request('name'),
                 'released_date' => request('released-date'),
                 'rate' => request('rate'),
-                'completed' => request('isDone'),
+                'checked' => request('isChecked'),
                 'description' => request('desc-box')
             ]);
 
@@ -87,7 +87,7 @@ class HomeController extends Controller
                 'name' => request('name'),
                 'released_date' => request('released-date'),
                 'rate' => request('rate'),
-                'completed' => request('isDone'),
+                'checked' => request('isChecked'),
                 'description' => request('desc-box')
             ]);
 
