@@ -19,7 +19,7 @@ class HomeController extends Controller
 
     public function index(Request $request)
     {
-        $list_items = Game::with('genres', 'platforms', 'publishers')->get();
+        $list_items = Game::getAll();
         $game = $request->query('id') ? $list_items->find($request->query('id')) : $list_items->first();
         return view('home', compact('list_items', 'game'));
     }
@@ -121,6 +121,12 @@ class HomeController extends Controller
             DB::rollback();
             return response()->json(['error' => $ex->getMessage()], 500);
         }
+    }
+
+    public function gridview() {
+        $collection = Game::getAll();
+
+        return view('gridview', compact('collection'));
     }
 
     private static function fetch_objects_from_strings($class, $item_names)

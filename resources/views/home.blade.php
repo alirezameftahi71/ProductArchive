@@ -41,9 +41,9 @@
                             @php
                             $joinedItems=array();
                             if(isset($game)) {
-                            foreach ($game->genres as $item) {
-                            $joinedItems[] = $item->name;
-                            }
+                                foreach ($game->genres as $item) {
+                                    $joinedItems[] = $item->name;
+                                }
                             }
                             @endphp
                             {{ implode(', ', $joinedItems) }}
@@ -55,9 +55,9 @@
                             @php
                             $joinedItems=array();
                             if(isset($game)) {
-                            foreach ($game->platforms as $item) {
-                            $joinedItems[] = $item->name;
-                            }
+                                foreach ($game->platforms as $item) {
+                                    $joinedItems[] = $item->name;
+                                }
                             }
                             @endphp
                             {{ implode(', ', $joinedItems) }}
@@ -69,9 +69,9 @@
                             @php
                             $joinedItems=array();
                             if(isset($game)) {
-                            foreach ($game->publishers as $item) {
-                            $joinedItems[] = $item->name;
-                            }
+                                foreach ($game->publishers as $item) {
+                                    $joinedItems[] = $item->name;
+                                }
                             }
                             @endphp
                             {{ implode(', ', $joinedItems) }}
@@ -101,7 +101,8 @@
                     <a id="item-edit" href="javascript:void(0);" class="icon">
                         <i class="fas fa-edit"></i>
                     </a>
-                    <a id="item-check" href="javascript:void(0);" class="icon {{ isset($game) && $game->checked ? 'i-green' : '' }}">
+                    <a id="item-check" href="javascript:void(0);"
+                        class="icon {{ isset($game) && $game->checked ? 'i-green' : '' }}">
                         <i class="fas fa-check-circle"></i>
                     </a>
                 </div>
