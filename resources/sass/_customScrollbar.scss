@@ -3,16 +3,16 @@
 ::-webkit-scrollbar {
     height: 1.125em;
     width: 1.125em;
-    background-color: #EAEAEA;
+    background-color: $milk;
 }
 
 ::-webkit-scrollbar-corner {
-    background-color: #EAEAEA;
+    background-color: $milk;
 }
 
 ::-webkit-scrollbar-thumb {
     border-radius: 0.5625em;
-    border: solid 0.375em #EAEAEA;
+    border: solid 0.375em $milk;
     background-color: #A5A5A5;
 
     &:hover {
@@ -25,7 +25,7 @@
 }
 
 ::-webkit-scrollbar-button {
-    background: no-repeat #EAEAEA;
+    background: no-repeat $milk;
     background-size: 0.75em;
     background-position: center;
     cursor: pointer;

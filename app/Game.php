@@ -19,4 +19,8 @@ class Game extends Model
     {
         return $this->belongsToMany(Platform::class);
     }
+    public static function getAll()
+    {
+        return Game::with('genres', 'platforms', 'publishers')->get();
+    }
 }

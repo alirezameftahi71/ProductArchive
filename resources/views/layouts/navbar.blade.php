@@ -11,6 +11,9 @@
             <li class="nav-item">
                 <a class="nav-link" href="{{ url('/create') }}">Create</a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ url('/gridview') }}">Gridview</a>
+            </li>
         </ul>
         {{-- <ul class="navbar-nav">
             @auth
