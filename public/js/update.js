@@ -1,1 +1,187 @@
-!function(e){var n={};function t(r){if(n[r])return n[r].exports;var a=n[r]={i:r,l:!1,exports:{}};return e[r].call(a.exports,a,a.exports,t),a.l=!0,a.exports}t.m=e,t.c=n,t.d=function(e,n,r){t.o(e,n)||Object.defineProperty(e,n,{enumerable:!0,get:r})},t.r=function(e){"undefined"!=typeof Symbol&&Symbol.toStringTag&&Object.defineProperty(e,Symbol.toStringTag,{value:"Module"}),Object.defineProperty(e,"__esModule",{value:!0})},t.t=function(e,n){if(1&n&&(e=t(e)),8&n)return e;if(4&n&&"object"==typeof e&&e&&e.__esModule)return e;var r=Object.create(null);if(t.r(r),Object.defineProperty(r,"default",{enumerable:!0,value:e}),2&n&&"string"!=typeof e)for(var a in e)t.d(r,a,function(n){return e[n]}.bind(null,a));return r},t.n=function(e){var n=e&&e.__esModule?function(){return e.default}:function(){return e};return t.d(n,"a",n),n},t.o=function(e,n){return Object.prototype.hasOwnProperty.call(e,n)},t.p="/",t(t.s=44)}({2:function(e,n){function t(e,n){var t=$("#".concat(e)),r=t.tagsManager();t.typeahead({source:function(e,r){return t.addClass("input-loading"),$.ajax({url:n,type:"GET",data:"search=".concat(e),dataType:"JSON",cache:!1,success:function(e){var n=[];$.each(e,(function(e,t){n.push(t.name)})),r(n)},complete:function(){t.removeClass("input-loading")}})},afterSelect:function(e){r.tagsManager("pushTag",e)}})}t("genre","/api/genres"),t("platform","/api/platforms"),t("publisher","/api/publishers")},44:function(e,n,t){e.exports=t(45)},45:function(e,n,t){"use strict";t.r(n);t(2);function r(e,n){$("#".concat(e)).tagsManager("pushTag",n)}!function(e){$("#name").val(e.name),$("#released-date").val(e.released_date),$("#rate").val(e.rate),$("#isDone").val(e.completed||0),e.genres.forEach((function(e){r("genre",e.name)})),e.platforms.forEach((function(e){r("platform",e.name)})),e.publishers.forEach((function(e){r("publisher",e.name)})),$("#desc-box").val(e.description)}(game)}});
+/******/ (function(modules) { // webpackBootstrap
+/******/ 	// The module cache
+/******/ 	var installedModules = {};
+/******/
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/
+/******/ 		// Check if module is in cache
+/******/ 		if(installedModules[moduleId]) {
+/******/ 			return installedModules[moduleId].exports;
+/******/ 		}
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = installedModules[moduleId] = {
+/******/ 			i: moduleId,
+/******/ 			l: false,
+/******/ 			exports: {}
+/******/ 		};
+/******/
+/******/ 		// Execute the module function
+/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+/******/
+/******/ 		// Flag the module as loaded
+/******/ 		module.l = true;
+/******/
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/
+/******/
+/******/ 	// expose the modules object (__webpack_modules__)
+/******/ 	__webpack_require__.m = modules;
+/******/
+/******/ 	// expose the module cache
+/******/ 	__webpack_require__.c = installedModules;
+/******/
+/******/ 	// define getter function for harmony exports
+/******/ 	__webpack_require__.d = function(exports, name, getter) {
+/******/ 		if(!__webpack_require__.o(exports, name)) {
+/******/ 			Object.defineProperty(exports, name, { enumerable: true, get: getter });
+/******/ 		}
+/******/ 	};
+/******/
+/******/ 	// define __esModule on exports
+/******/ 	__webpack_require__.r = function(exports) {
+/******/ 		if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
+/******/ 			Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
+/******/ 		}
+/******/ 		Object.defineProperty(exports, '__esModule', { value: true });
+/******/ 	};
+/******/
+/******/ 	// create a fake namespace object
+/******/ 	// mode & 1: value is a module id, require it
+/******/ 	// mode & 2: merge all properties of value into the ns
+/******/ 	// mode & 4: return value when already ns object
+/******/ 	// mode & 8|1: behave like require
+/******/ 	__webpack_require__.t = function(value, mode) {
+/******/ 		if(mode & 1) value = __webpack_require__(value);
+/******/ 		if(mode & 8) return value;
+/******/ 		if((mode & 4) && typeof value === 'object' && value && value.__esModule) return value;
+/******/ 		var ns = Object.create(null);
+/******/ 		__webpack_require__.r(ns);
+/******/ 		Object.defineProperty(ns, 'default', { enumerable: true, value: value });
+/******/ 		if(mode & 2 && typeof value != 'string') for(var key in value) __webpack_require__.d(ns, key, function(key) { return value[key]; }.bind(null, key));
+/******/ 		return ns;
+/******/ 	};
+/******/
+/******/ 	// getDefaultExport function for compatibility with non-harmony modules
+/******/ 	__webpack_require__.n = function(module) {
+/******/ 		var getter = module && module.__esModule ?
+/******/ 			function getDefault() { return module['default']; } :
+/******/ 			function getModuleExports() { return module; };
+/******/ 		__webpack_require__.d(getter, 'a', getter);
+/******/ 		return getter;
+/******/ 	};
+/******/
+/******/ 	// Object.prototype.hasOwnProperty.call
+/******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
+/******/
+/******/ 	// __webpack_public_path__
+/******/ 	__webpack_require__.p = "/";
+/******/
+/******/
+/******/ 	// Load entry module and return exports
+/******/ 	return __webpack_require__(__webpack_require__.s = 2);
+/******/ })
+/************************************************************************/
+/******/ ({
+
+/***/ "./resources/js/_addUpdate.js":
+/*!************************************!*\
+  !*** ./resources/js/_addUpdate.js ***!
+  \************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+// Tag inputs functionalities
+tagsManagerHandler('genre', '/api/genres');
+tagsManagerHandler('platform', '/api/platforms');
+tagsManagerHandler('publisher', '/api/publishers'); // Tagmanager working with typeahead general function
+
+function tagsManagerHandler(id, url) {
+  var el = $("#".concat(id));
+  var tagMan = el.tagsManager();
+  el.typeahead({
+    source: function source(query, process) {
+      el.addClass('input-loading');
+      return $.ajax({
+        url: url,
+        type: 'GET',
+        data: "search=".concat(query),
+        dataType: 'JSON',
+        cache: false,
+        success: function success(e) {
+          var newData = [];
+          $.each(e, function (_i, item) {
+            newData.push(item.name);
+          });
+          process(newData);
+        },
+        complete: function complete() {
+          el.removeClass('input-loading');
+        }
+      });
+    },
+    afterSelect: function afterSelect(item) {
+      tagMan.tagsManager('pushTag', item);
+    }
+  });
+}
+
+/***/ }),
+
+/***/ "./resources/js/update.js":
+/*!********************************!*\
+  !*** ./resources/js/update.js ***!
+  \********************************/
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _addUpdate_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./_addUpdate.js */ "./resources/js/_addUpdate.js");
+/* harmony import */ var _addUpdate_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_addUpdate_js__WEBPACK_IMPORTED_MODULE_0__);
+ // Fill Form with existing data
+
+function fillUpdateForm(game) {
+  $('#name').val(game.name);
+  $('#released-date').val(game.released_date);
+  $('#rate').val(game.rate);
+  $('#isChecked').val(game.checked || 0);
+  game.genres.forEach(function (item) {
+    pushIntoTagmanager("genre", item.name);
+  });
+  game.platforms.forEach(function (item) {
+    pushIntoTagmanager("platform", item.name);
+  });
+  game.publishers.forEach(function (item) {
+    pushIntoTagmanager("publisher", item.name);
+  });
+  $('#desc-box').val(game.description); // displaying the name of cover pic in browse element
+  // const dT = new ClipboardEvent('').clipboardData || new DataTransfer(); 
+  // dT.items.add(new File(['coverPic'], game.cover_pic.replace('uploads/','')));
+  // document.querySelector('#cover-pic').files = dT.files;
+} // Push value into tagmanager manually 
+
+
+function pushIntoTagmanager(id, value) {
+  $("#".concat(id)).tagsManager("pushTag", value);
+}
+
+fillUpdateForm(game);
+
+/***/ }),
+
+/***/ 2:
+/*!**************************************!*\
+  !*** multi ./resources/js/update.js ***!
+  \**************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__(/*! C:\Users\Alireza\Documents\Projects\www\product-archive\resources\js\update.js */"./resources/js/update.js");
+
+
+/***/ })
+
+/******/ });

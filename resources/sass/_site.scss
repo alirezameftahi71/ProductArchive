@@ -12,30 +12,43 @@ footer#footer {
 .icon {
     cursor: pointer;
     color: $darkindigo;
-}
 
-.icon:hover {
-    color: $blue;
-    text-decoration: none;
+    &:hover {
+        color: $blue;
+        text-decoration: none;
+    }
 }
 
 /* loading background opacity setting */
 .loader.is-active {
-    background-color: rgba(0,0,0,0.50);
+    background-color: rgba(0, 0, 0, 0.50);
 }
 
 /* Loading indicator for input boxes */
-input.tm-input.input-loading {    
+input.tm-input.input-loading {
     background-color: #ffffff;
     background-image: url("../../storage/app/public/assets/input-loading.gif");
     background-size: 25px 25px;
-    background-position:right center;
+    background-position: right center;
     background-repeat: no-repeat;
 }
 
 /* Makes the table column widths all equal */
 .fixed-width-table {
-	table-layout: fixed;
+    table-layout: fixed;
+}
+
+
+.i-green {
+    color: green;
+
+    &:hover {
+        color: greenyellow;
+    }
+}
+
+.i-red {
+    color: red;
 }
 
 @media screen and (max-width: 47.99em) {

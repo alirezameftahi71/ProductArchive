@@ -20,6 +20,7 @@ use App\Game;
 
 Route::get('/games', 'GameController@all');
 Route::get('/games/{game}', 'GameController@show');
+Route::post('/games/toggleChecked/{game}', 'GameController@toggleChecked');
 Route::delete('/games/{game}', 'GameController@destroy');
 
 Route::get('/genres', 'GenreController@all');

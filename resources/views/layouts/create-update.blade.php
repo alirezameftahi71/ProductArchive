@@ -29,8 +29,8 @@
                                 placeholder="Enter Metascore" name="rate">
                         </div>
                         <div class="col-md-4  form-group">
-                            <label for="isDone">Mark as Done:</label>
-                            <select id="isDone" class="form-control" name="isDone">
+                            <label for="isChecked">Checked:</label>
+                            <select id="isChecked" class="form-control" name="isChecked">
                                 <option value="0">False</option>
                                 <option value="1">True</option>
                             </select>
