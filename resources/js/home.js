@@ -17,17 +17,7 @@ $('#list-items').on('click', 'a', e => {
     $('#list-items').children().removeClass('active');
     $(e.currentTarget).addClass('active');
     // Fill the info table and place the photo if exists
-    $.ajax({
-        url: `/api/games/${e.currentTarget.id}`,
-        type: 'GET',
-        data: null,
-        dataType: 'JSON',
-        cache: false,
-        success: e => {
-            fillInfoTable(e);
-        },
-        fail: () => {}
-    });
+    getProductById(e.currentTarget.id, fillInfoTable);
 });
 
 // Delete a single item
@@ -78,27 +68,12 @@ $('#item-check').on('click', () => {
             dataType: 'JSON',
             cache: false,
             success: e => {
-                $.ajax({
-                    url: `/api/games/${id}`,
-                    type: 'GET',
-                    data: null,
-                    dataType: 'JSON',
-                    cache: false,
-                    success: res => {
-                        fillInfoTable(res);
-                    },
-                    fail: (e) => {
-                        console.log(e);
-                    }
-                });
+                getProductById(id, fillInfoTable);
             },
-            fail: (e) => {
-                console.log(e);
-            }
+            fail: () => { }
         });
-    } catch (error) {
-        // show flash message
-        console.log(error);
+    } catch (error) { 
+        // show flash message        
     }
 });
 

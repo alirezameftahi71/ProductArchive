@@ -112,17 +112,7 @@ $('#list-items').on('click', 'a', function (e) {
   $('#list-items').children().removeClass('active');
   $(e.currentTarget).addClass('active'); // Fill the info table and place the photo if exists
 
-  $.ajax({
-    url: "/api/games/".concat(e.currentTarget.id),
-    type: 'GET',
-    data: null,
-    dataType: 'JSON',
-    cache: false,
-    success: function success(e) {
-      fillInfoTable(e);
-    },
-    fail: function fail() {}
-  });
+  getProductById(e.currentTarget.id, fillInfoTable);
 }); // Delete a single item
 
 $('#item-delete').on('click', function () {
@@ -173,27 +163,11 @@ $('#item-check').on('click', function () {
       dataType: 'JSON',
       cache: false,
       success: function success(e) {
-        $.ajax({
-          url: "/api/games/".concat(id),
-          type: 'GET',
-          data: null,
-          dataType: 'JSON',
-          cache: false,
-          success: function success(res) {
-            fillInfoTable(res);
-          },
-          fail: function fail(e) {
-            console.log(e);
-          }
-        });
+        getProductById(id, fillInfoTable);
       },
-      fail: function fail(e) {
-        console.log(e);
-      }
+      fail: function fail() {}
     });
-  } catch (error) {
-    // show flash message
-    console.log(error);
+  } catch (error) {// show flash message        
   }
 }); // Mark first entry on list-items as active on first load
 
