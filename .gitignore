@@ -12,3 +12,5 @@ yarn-error.log
 *.code-workspace
 public/css
 public/js
+public/fonts
+composer.lock
