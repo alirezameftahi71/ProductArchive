@@ -1,9 +1,16 @@
 @import 'variables';
 
+div#filter-container {
+    margin-top: 1.25em;
+}
+
 div.scrolled {
-    background-color: $body-bg;
-    padding: 2.5px;
     overflow-y: auto;
+
+    div#grid-container {
+        background-color: $body-bg;
+        padding: 2.5px;
+    }
 
     /* Create four equal columns that sits next to each other */
     .column {
