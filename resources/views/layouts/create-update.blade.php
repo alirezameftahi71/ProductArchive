@@ -19,18 +19,18 @@
                             required="required">
                     </div>
                     <div class="row">
-                        <div class="col-md-4  form-group">
+                        <div class="col-md-4 form-group">
                             <label for="released-date">Released Date:</label>
                             <input type="date" class="form-control" id="released-date" name="released-date">
                         </div>
-                        <div class="col-md-4  form-group">
+                        <div class="col-md-4 form-group">
                             <label for="rate">Rate:</label>
                             <input type="number" min=1 max=5 step="0.5" class="form-control" id="rate"
                                 placeholder="Enter Metascore" name="rate">
                         </div>
-                        <div class="col-md-4  form-group">
+                        <div class="col-md-4 form-group">
                             <label for="isChecked">Checked:</label>
-                            <select id="isChecked" class="form-control" name="isChecked">
+                            <select id="isChecked" class="form-control custom-select" name="isChecked">
                                 <option value="0">False</option>
                                 <option value="1">True</option>
                             </select>
@@ -59,9 +59,9 @@
                             placeholder="Enter brief description here" name="desc-box"
                             style="height: 275px"></textarea>
                     </div>
-                    <div class="form-group d-flex flex-column">
-                        <label for="cover-pic">Cover Picture:</label>
-                        <input type="file" name="cover-pic" id="cover-pic" class="py-1">
+                    <div class="form-group d-flex flex-column custom-file" style="margin-bottom:1rem;">
+                        <input type="file" name="cover-pic" id="cover-pic" class="py-1 custom-file-input">
+                        <label for="cover-pic" class="custom-file-label" style="overflow:hidden">Select Cover Picture</label>
                     </div>
                 </div>
             </div>
