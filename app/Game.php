@@ -21,6 +21,6 @@ class Game extends Model
     }
     public static function getAll()
     {
-        return Game::with('genres', 'platforms', 'publishers')->orderBy('created_at', 'ASC')->get();
+        return Game::with('genres', 'platforms', 'publishers')->orderBy('updated_at', 'desc')->get();
     }
 }
