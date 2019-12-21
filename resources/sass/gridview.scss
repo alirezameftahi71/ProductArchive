@@ -2,7 +2,7 @@
 
 div.scrolled {
     background-color: $body-bg;
-    padding: 0 2.5px;
+    padding: 2.5px;
     overflow-y: auto;
 
     /* Create four equal columns that sits next to each other */
@@ -10,7 +10,7 @@ div.scrolled {
         -ms-flex: 20%;
         flex: 20%;
         max-width: 20%;
-        padding: 0 2.5px;
+        padding: 2.5px;
 
         .tile {
             position: relative;
@@ -43,7 +43,6 @@ div.scrolled {
         }
 
         img {
-            margin-top: 5px;
             width: 100%;
             height: 420px;
             opacity: 0.8;

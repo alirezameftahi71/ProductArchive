@@ -24,7 +24,7 @@ class GameController extends Controller
     }
     public function toggleChecked(Game $game)
     {
-        $game->checked = $game->checked === 0 ? 1 : 0;
+        $game->checked = $game->checked == 0 ? 1 : 0;
         $game->save();
         return response()->json($game, 204);
     }

@@ -52,7 +52,7 @@ $('#item-edit').on('click', () => {
     }
 });
 
-// Mark a single item as checked
+// Toggle a single item as checked
 $('#item-check').on('click', () => {
     let id = getCurrentProductId();
     try {
@@ -104,7 +104,7 @@ function fillInfoTable(dataItem) {
     $('#info-table #publisher').html(joinJsonNames(dataItem.publishers));
     $('#cover-pic').attr('src', `/storage/${dataItem.cover_pic}`);
     $('#description').html(dataItem.description);
-    toggleCheckedIconByValue(!!dataItem.checked);
+    toggleCheckedIconByValue(!!+dataItem.checked);
 }
 
 function toggleCheckedIconByValue(isChecked) {

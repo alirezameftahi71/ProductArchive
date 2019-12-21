@@ -17,13 +17,14 @@ This application is created using:
 - JQuery 3.1
 - Bootsrap 4
 - MySQL 10.3.16
+- Sqlite 3
 - Highcharts 7
 
 ## Setup
 This application is written in PHP Laravel and JQuery.
 
 ### Prerequisites
-Make sure you have PHP and MySQL up and running on your machine.
+Make sure you have PHP and MySQL/Sqlite up and running on your machine.
 Also install latest versions of Laravel and nodejs.
 
 ### Installing
@@ -36,8 +37,18 @@ To get started, follow these instructions:
     $ npm run dev
     ~~~
 1. Make a copy of `.env.example` file in the root path and rename it to `.env` and open it in a text-editor.
-1. Find the lines starting with `DB_` . Change the fields based on your database settings. You can pick any name for the `DB_DATABASE` field. 
-1. Login to your database and create a new database with the same name that you picked for the `DB_DATABASE` field in the `.env` file. 
+1. If you are using MySQL,
+    1. Find the 'MySQL Config Section' and uncomment the section bellow it.
+    1. Make sure the other section ('Sqlite Config Section') is commented out.
+    1. Each line in this section statrs with a `DB_` . Change the fields based on your database settings. You can pick any name for the `DB_DATABASE` field. 
+    1. Save the changes to the `.env` file.
+    1. Login to your database and create a new database with the same name that you picked for the `DB_DATABASE` field in the `.env` file. 
+
+1. If you are using Sqlite, 
+    1. Find the 'Sqlite Config Section' and uncomment the section bellow it.
+    1. Make sure the other section ('MySQL Config Section') is commented out.
+    1. Save the changes to the `.env` file.
+
 1. In the root path of application run this command:
     ~~~bash
     $ php artisan migrate
@@ -48,6 +59,7 @@ To get started, follow these instructions:
     ~~~bash
     $ php artisan serve
     ~~~
+    Or use a webserver to serve the /public directory of the application.
 
 ## Author 
 - Alireza Meftahi
