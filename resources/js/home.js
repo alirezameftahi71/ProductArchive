@@ -98,7 +98,7 @@ function getFirstItemInList() {
 function fillInfoTable(dataItem) {
     $('#info-table #name').html(dataItem.name);
     $('#info-table #releasedDate').html(dataItem.released_date);
-    $('#info-table #rate').html(`${dataItem.rate != null ? dataItem.rate : ''}/5`);
+    $('#info-table #rate').html(`${dataItem.rate != null ? dataItem.rate : ''} / 5.0`);
     $('#info-table #genre').html(joinJsonNames(dataItem.genres));
     $('#info-table #platform').html(joinJsonNames(dataItem.platforms));
     $('#info-table #publisher').html(joinJsonNames(dataItem.publishers));
