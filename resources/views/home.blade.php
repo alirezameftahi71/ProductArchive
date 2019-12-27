@@ -79,7 +79,7 @@
                     </tr>
                     <tr>
                         <th>Rate</th>
-                        <td id="rate">{{ isset($game) ? $game->rate . "/5" : null }}</td>
+                        <td id="rate">{{ isset($game) ? $game->rate . " / 5.0" : null }}</td>
                     </tr>
                 </table>
             </div>

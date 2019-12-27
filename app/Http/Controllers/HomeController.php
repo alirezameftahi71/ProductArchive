@@ -123,9 +123,18 @@ class HomeController extends Controller
         }
     }
 
-    public function gridview() {
+    public function gridview(Request $request) {
         $collection = Game::getAll();
-
+        if($request->query('is-checked') == '1') {
+            $collection = $collection->filter(function($item) {
+                return ($item->checked == '0');
+            });
+        }
+        if($request->query('high-rate') == '1') {
+            $collection = $collection->filter(function($item) {
+                return ($item->rate >= '4');
+            });
+        }
         return view('gridview', compact('collection'));
     }
 
