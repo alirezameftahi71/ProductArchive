@@ -79,10 +79,22 @@
     }
 }
 
-/* Responsive layout - makes a two column-layout instead of four columns */
-@media screen and (max-width: 800px) {
+/* Hides Scrollbar */
+@mixin hidden-scrollbar() {
+    height: 0 !important;
+    width: 0 !important;
+}
+
+/* smartphones, touchscreens */
+@media (hover: none) and (pointer: coarse) {
     ::-webkit-scrollbar {
-        height: 0 !important;
-        width: 0 !important;
+        @include hidden-scrollbar();
+    }
+}
+
+/* stylus-based screens */
+@media (hover: none) and (pointer: fine) {
+    ::-webkit-scrollbar {
+        @include hidden-scrollbar();
     }
 }
