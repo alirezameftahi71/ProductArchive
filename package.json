@@ -26,6 +26,7 @@
         "vue-template-compiler": "^2.6.11"
     },
     "dependencies": {
+        "arm-scrollbar": "^1.1.0",
         "bootstrap-3-typeahead": "^4.0.2",
         "jquery-serializejson": "^2.9.0",
         "pure-css-loader": "^3.3.3",
