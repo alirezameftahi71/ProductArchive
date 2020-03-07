@@ -149,7 +149,9 @@ function getProductById(id, successFunc) {
         success: e => {
             successFunc(e);
         },
-        fail: () => {}
+        fail: (e) => {
+            console.error(e);
+        }
     });
 }
 

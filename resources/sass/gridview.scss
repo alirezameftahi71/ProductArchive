@@ -6,9 +6,9 @@ div#filter-container {
 
 div.scrolled {
     overflow-y: auto;
+    background-color: $milk;
 
     div#grid-container {
-        background-color: $body-bg;
         padding: 2.5px;
     }
 
