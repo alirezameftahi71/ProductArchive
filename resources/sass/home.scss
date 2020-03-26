@@ -24,10 +24,6 @@
     height: 100%;
 }
 
-#info-table {
-    margin: 1rem;
-}
-
 .list-group-item.active {
     background-color: $darkindigo;
     border-color: $darkindigo;
@@ -41,10 +37,6 @@
     .items-sidenav {
         height: auto;
         padding: 0.9375em;
-    }
-
-    #info-table {
-        margin: 0 0 1rem 0;
     }
 
     #info-area {

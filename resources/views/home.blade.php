@@ -16,16 +16,17 @@
         <br />
         <div class="list-group" id="list-items">
             @foreach ($list_items ?? [] as $item)
-            <a id={{ $item->id }} href="#"
+            <a id={{ $item->id }} href="javascript:void(0);"
                 class="list-group-item list-group-item-action">{{ htmlspecialchars_decode($item->name) }}</a>
             @endforeach
         </div>
     </div>
     <div id="info-area" class="col-lg-9 col-md-9">
-        <h3 class="mt-4 mb-4">The Archive</h3>
-        <hr />
+        <h3 class="mt-4 mb-4 d-none d-md-block">The Archive</h3>
+        <hr class="d-none d-md-block" />
+        <br class="d-block d-md-none" />
         <div class="row">
-            <div class="col-lg-8 col-md-7">
+            <div class="col-lg-8 col-md-7 order-2 order-md-1 mt-4">
                 <table id="info-table" class="table table-bordered table-striped fixed-width-table">
                     <tr>
                         <th>Name</th>
@@ -83,13 +84,13 @@
                     </tr>
                 </table>
             </div>
-            <div class="col-lg-4 col-md-5">
+            <div class="col-lg-4 col-md-5 order-1 order-md-2">
                 <div class="container-fluid">
                     <img id="cover-pic" class="img-fluid"
                         src="{{ isset($game) ? asset("storage/" . $game->cover_pic) : asset('storage/assets/default.png')}}"
                         alt="Product Cover" width="265" height="320">
                 </div>
-                <div class="container-fluid toolbar">
+                <div class="container-fluid toolbar mt-2">
                     <a id="item-delete" href="javascript:void(0);" data-toggle="confirmation"
                         data-title="Delete Product?" data-placement="left" data-btn-cancel-class="btn btn-sm btn-danger"
                         data-popout="true" class="icon">
@@ -108,7 +109,7 @@
                 </div>
             </div>
         </div>
-        <hr>
+        <hr class="d-none d-md-block" />
         <div class="container-fluid">
             <p id="description">
                 {{ isset($game) ? $game->description : null }}
