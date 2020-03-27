@@ -19,6 +19,7 @@
     @include('layouts.footer')
     <div class="loader loader-default" data-text data-blink></div>
     <script src="/js/app.js"></script>
+    @yield('modals')
     @yield('scripts')
 </body>
 
