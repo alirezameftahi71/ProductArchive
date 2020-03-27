@@ -27,7 +27,7 @@
         <br class="d-block d-md-none" />
         <div class="row">
             <div class="col-lg-8 col-md-7 order-2 order-md-1 mt-4">
-                <table id="info-table" class="table table-bordered table-striped fixed-width-table ml-4 mt-2">
+                <table id="info-table" class="table table-bordered table-striped fixed-width-table">
                     <tr>
                         <th>Name</th>
                         <td id="name">{{ isset($game) ? $game->name : null }}</td>
@@ -128,11 +128,11 @@
                 </button>
             </div>
             <div class="modal-body">
-                Are You Sure You Want To Delete This Item?
+                Are you sure you want to delete this item?
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
                 <button id="item-delete" type="button" class="btn btn-primary" data-dismiss="modal">Yes</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
             </div>
         </div>
     </div>

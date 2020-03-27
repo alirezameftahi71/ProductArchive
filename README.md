@@ -13,7 +13,7 @@ An advanced archive web application to manage and organize data, with full CRUD 
 ## Technologies
 This application is created using:
 - PHP 7.3.7
-- Laravel 5.8
+- Laravel 7
 - JQuery 3.1
 - Bootsrap 4
 - MySQL 10.3.16
