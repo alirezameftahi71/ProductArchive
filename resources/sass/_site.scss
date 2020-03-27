@@ -27,7 +27,7 @@ footer#footer {
 /* Loading indicator for input boxes */
 input.tm-input.input-loading {
     background-color: #ffffff;
-    background-image: url("../../storage/app/public/assets/input-loading.gif");
+    background-image: url("assets/input-loading.gif");
     background-size: 25px 25px;
     background-position: right center;
     background-repeat: no-repeat;
@@ -59,9 +59,5 @@ input.tm-input.input-loading {
 
     body {
         height: initial;
-    }
-
-    .row.content {
-        height: auto;
     }
 }
