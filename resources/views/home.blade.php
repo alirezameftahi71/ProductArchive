@@ -27,7 +27,7 @@
         <br class="d-block d-md-none" />
         <div class="row">
             <div class="col-lg-8 col-md-7 order-2 order-md-1 mt-4">
-                <table id="info-table" class="table table-bordered table-striped fixed-width-table">
+                <table id="info-table" class="table table-bordered table-striped fixed-width-table ml-4 mt-2">
                     <tr>
                         <th>Name</th>
                         <td id="name">{{ isset($game) ? $game->name : null }}</td>
@@ -91,9 +91,7 @@
                         alt="Product Cover" width="265" height="320">
                 </div>
                 <div class="container-fluid toolbar mt-2">
-                    <a id="item-delete" href="javascript:void(0);" data-toggle="confirmation"
-                        data-title="Delete Product?" data-placement="left" data-btn-cancel-class="btn btn-sm btn-danger"
-                        data-popout="true" class="icon">
+                    <a data-target="#delete-modal" href="javascript:void(0);" class="icon" data-toggle="modal">
                         <i class="fas fa-trash-alt"></i>
                     </a>
                     <a id="item-heart" href="javascript:void(0);" class="icon">
@@ -119,5 +117,25 @@
 </div>
 @endsection
 @section('scripts')
+<!-- Modal -->
+<div class="modal fade" id="delete-modal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Delete Confirmation</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Are You Sure You Want To Delete This Item?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                <button id="item-delete" type="button" class="btn btn-primary" data-dismiss="modal">Yes</button>
+            </div>
+        </div>
+    </div>
+</div>
 <script src="/js/home.js"></script>
 @endsection
