@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Http\Request;
-use App\Game;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
