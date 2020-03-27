@@ -12,14 +12,16 @@
 </head>
 
 <body>
-    @include('layouts.navbar')
-    <div id="app" class="container-fluid">
-        @yield('content')
+    <div id="app">
+        <navbar></navbar>
+        <div class="container-fluid">
+            @yield('content')
+        </div>
+        <footerbar></footerbar>
+        <div class="loader loader-default" data-text data-blink></div>
+        @yield('modals')
     </div>
-    @include('layouts.footer')
-    <div class="loader loader-default" data-text data-blink></div>
     <script src="/js/app.js"></script>
-    @yield('modals')
     @yield('scripts')
 </body>
 
