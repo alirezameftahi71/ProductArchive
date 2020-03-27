@@ -1,79 +1,68 @@
-<p align="center"><img src="https://res.cloudinary.com/dtfbvvkyp/image/upload/v1566331377/laravel-logolockup-cmyk-red.svg" width="400"></p>
+# Product Archive
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/d/total.svg" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/v/stable.svg" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
-</p>
+## Table of contents
+* [About](#about)
+* [Technologies](#technologies)
+* [Setup](#setup)
+* [Author](#author)
+* [License](#license)
 
-## About Laravel
+## About
+An advanced archive web application to manage and organize data, with full CRUD support in database, powerful query builder, creating and saving reports and charts as well as favorite lists for each individual user. 
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## Technologies
+This application is created using:
+- PHP 7.3.7
+- Laravel 5.8
+- JQuery 3.1
+- Bootsrap 4
+- MySQL 10.3.16
+- Sqlite 3
+- Highcharts 7
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Setup
+This application is written in PHP Laravel and JQuery.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+### Prerequisites
+Make sure you have PHP and MySQL/Sqlite up and running on your machine.
+Also install latest versions of Laravel and nodejs.
 
-## Learning Laravel
+### Installing
+To get started, follow these instructions: 
+1. clone the app
+1. Navigate to root path, run the following commands in terminal respectively:
+    ~~~bash
+    $ composer install
+    $ npm install
+    $ npm run dev
+    ~~~
+1. Make a copy of `.env.example` file in the root path and rename it to `.env` and open it in a text-editor.
+1. If you are using MySQL,
+    1. Find the 'MySQL Config Section' and uncomment the section bellow it.
+    1. Make sure the other section ('Sqlite Config Section') is commented out.
+    1. Each line in this section statrs with a `DB_` . Change the fields based on your database settings. You can pick any name for the `DB_DATABASE` field. 
+    1. Save the changes to the `.env` file.
+    1. Login to your database and create a new database with the same name that you picked for the `DB_DATABASE` field in the `.env` file. 
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+1. If you are using Sqlite, 
+    1. Find the 'Sqlite Config Section' and uncomment the section bellow it.
+    1. Make sure the other section ('MySQL Config Section') is commented out.
+    1. Save the changes to the `.env` file.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+1. In the root path of application run this command:
+    ~~~bash
+    $ php artisan migrate
+    $ php artisan key:generate
+    $ php artisan storage:link
+    ~~~
+1. Start the app using:
+    ~~~bash
+    $ php artisan serve
+    ~~~
+    Or use a webserver to serve the /public directory of the application.
 
-## Laravel Sponsors
-
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
-
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[British Software Development](https://www.britishsoftware.co)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- [UserInsights](https://userinsights.com)
-- [Fragrantica](https://www.fragrantica.com)
-- [SOFTonSOFA](https://softonsofa.com/)
-- [User10](https://user10.com)
-- [Soumettre.fr](https://soumettre.fr/)
-- [CodeBrisk](https://codebrisk.com)
-- [1Forge](https://1forge.com)
-- [TECPRESSO](https://tecpresso.co.jp/)
-- [Runtime Converter](http://runtimeconverter.com/)
-- [WebL'Agence](https://weblagence.com/)
-- [Invoice Ninja](https://www.invoiceninja.com)
-- [iMi digital](https://www.imi-digital.de/)
-- [Earthlink](https://www.earthlink.ro/)
-- [Steadfast Collective](https://steadfastcollective.com/)
-- [We Are The Robots Inc.](https://watr.mx/)
-- [Understand.io](https://www.understand.io/)
-- [Abdel Elrafa](https://abdelelrafa.com)
-- [Hyper Host](https://hyper.host)
-- [Appoly](https://www.appoly.co.uk)
-- [OP.GG](https://op.gg)
-- [云软科技](http://www.yunruan.ltd/)
-
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+## Author 
+- Alireza Meftahi
 
 ## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+This project is licensed under the MIT License.
