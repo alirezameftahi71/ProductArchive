@@ -27,62 +27,7 @@
         <br class="d-block d-md-none" />
         <div class="row">
             <div class="col-lg-8 col-md-7 order-2 order-md-1 mt-4">
-                <table id="info-table" class="table table-bordered table-striped fixed-width-table">
-                    <tr>
-                        <th>Name</th>
-                        <td id="name">{{ isset($game) ? $game->name : null }}</td>
-                    </tr>
-                    <tr>
-                        <th>Release Date</th>
-                        <td id="releasedDate">{{ isset($game) ? $game->released_date : null }}</td>
-                    </tr>
-                    <tr>
-                        <th>Genre(s)</th>
-                        <td id="genre">
-                            @php
-                            $joinedItems=array();
-                            if(isset($game)) {
-                                foreach ($game->genres as $item) {
-                                    $joinedItems[] = $item->name;
-                                }
-                            }
-                            @endphp
-                            {{ implode(', ', $joinedItems) }}
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>Platform(s)</th>
-                        <td id="platform">
-                            @php
-                            $joinedItems=array();
-                            if(isset($game)) {
-                                foreach ($game->platforms as $item) {
-                                    $joinedItems[] = $item->name;
-                                }
-                            }
-                            @endphp
-                            {{ implode(', ', $joinedItems) }}
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>Publisher(s)</th>
-                        <td id="publisher">
-                            @php
-                            $joinedItems=array();
-                            if(isset($game)) {
-                                foreach ($game->publishers as $item) {
-                                    $joinedItems[] = $item->name;
-                                }
-                            }
-                            @endphp
-                            {{ implode(', ', $joinedItems) }}
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>Rate</th>
-                        <td id="rate">{{ isset($game) ? $game->rate . " / 5.0" : null }}</td>
-                    </tr>
-                </table>
+                <infogrid :item="{{$game}}"></infogrid>
             </div>
             <div class="col-lg-4 col-md-5 order-1 order-md-2">
                 <div class="container-fluid">
