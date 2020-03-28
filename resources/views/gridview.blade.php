@@ -28,19 +28,7 @@
         </form>
         <div id="grid-container" class="row">
             @foreach ($collection ?? [] as $item)
-            <div class="column">
-                <div class="tile">
-                    <a href="/?id={{ isset($item->id) ? $item->id : '0' }}">
-                        <img id="{{ isset($item->id) ? $item->id : '0' }}"
-                            src="{{ isset($item->cover_pic) ? asset("storage/" . $item->cover_pic) : asset('storage/assets/default.png') }}" />
-                        <div class="overlay">
-                            <p class="tile-label">
-                                {{ isset($item->name) ? $item->name : '' }}
-                            </p>
-                        </div>
-                    </a>
-                </div>
-            </div>
+            <gametile :item="{{$item}}"></gametile>
             @endforeach
         </div>
     </div>
