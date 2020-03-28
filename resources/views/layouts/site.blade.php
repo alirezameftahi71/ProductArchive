@@ -13,11 +13,11 @@
 
 <body>
     <div id="app">
-        <navbar></navbar>
+        <navigationbar></navigationbar>
         <div class="container-fluid">
             @yield('content')
         </div>
-        <footerbar></footerbar>
+        <footbar></footbar>
         <div class="loader loader-default" data-text data-blink></div>
         @yield('modals')
     </div>
