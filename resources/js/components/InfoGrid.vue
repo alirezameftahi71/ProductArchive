@@ -3,27 +3,27 @@
     <tbody>
       <tr>
         <th>Name</th>
-        <td id="name">{{ !!item ? item.name : '-' }}</td>
+        <td id="name">{{ !!computedItem ? computedItem.name : '-' }}</td>
       </tr>
       <tr>
         <th>Release Date</th>
-        <td id="releasedDate">{{ !!item ? item.released_date : '-' }}</td>
+        <td id="releasedDate">{{ !!computedItem ? computedItem.released_date : '-' }}</td>
       </tr>
       <tr>
         <th>Genre(s)</th>
-        <td id="genre">{{ getJoinedItems(item.genres) }}</td>
+        <td id="genre">{{ getJoinedItems(computedItem.genres) }}</td>
       </tr>
       <tr>
         <th>Platform(s)</th>
-        <td id="platform">{{ getJoinedItems(item.platforms) }}</td>
+        <td id="platform">{{ getJoinedItems(computedItem.platforms) }}</td>
       </tr>
       <tr>
         <th>Publisher(s)</th>
-        <td id="publisher">{{ getJoinedItems(item.publishers) }}</td>
+        <td id="publisher">{{ getJoinedItems(computedItem.publishers) }}</td>
       </tr>
       <tr>
         <th>Rate</th>
-        <td id="rate">{{ !!item ? `${item.rate} / 5.0` : '-' }}</td>
+        <td id="rate">{{ !!computedItem ? `${computedItem.rate} / 5.0` : '-' }}</td>
       </tr>
     </tbody>
   </table>
@@ -33,6 +33,14 @@
 export default {
   props: {
     item: Object
+  },
+  data() {
+    return {
+      computedItem: this.item,
+    }
+  },
+  created() {
+    this.$root.$on('selectionchanged', item => this.computedItem = item);
   },
   methods: {
     getJoinedItems(items = []) {

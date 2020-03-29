@@ -4,23 +4,7 @@
 @endsection
 @section('content')
 <div class="row text-center full-height">
-    <div class="col-lg-3 col-md-3 items-sidenav">
-        <div class="input-group" id="searchItems">
-            <input class="form-control border-right-0 border" type="search" id="search-box" placeholder="Search...">
-            <div class="input-group-append">
-                <div class="input-group-text bg-white">
-                    <i class="icon fa fa-search"></i>
-                </div>
-            </div>
-        </div>
-        <br />
-        <div class="list-group" id="list-items">
-            @foreach ($list_items ?? [] as $item)
-            <a id={{ $item->id }} href="javascript:void(0);"
-                class="list-group-item list-group-item-action">{{ htmlspecialchars_decode($item->name) }}</a>
-            @endforeach
-        </div>
-    </div>
+    <sidebar :items="{{ $list_items }}"></sidebar>
     <div id="info-area" class="col-lg-9 col-md-9">
         <h3 class="mt-4 mb-4 d-none d-md-block">The Archive</h3>
         <hr class="d-none d-md-block" />

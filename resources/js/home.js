@@ -1,20 +1,6 @@
-// Searchbox filter
-$('#search-box').on('keyup change search', e => {
-    const value = $(e.currentTarget).val().toLowerCase();
-    $('#list-items a').toArray().filter(x => $(x).toggle($(x).text().toLowerCase().indexOf(value) > -1));
-});
-
 // Loading layout on ajax calls
 $(document).ajaxStart(showPageLoading);
 $(document).ajaxComplete(hidePageLoading);
-
-// Bind to click event of each item in list-items
-$('#list-items').on('click', 'a', e => {
-    $('#list-items').children().removeClass('active');
-    $(e.currentTarget).addClass('active');
-    // Fill the info table and place the photo if exists
-    getProductById(e.currentTarget.id, fillInfoTable);
-});
 
 // Delete a single item
 $('#item-delete').on('click', () => {
@@ -73,39 +59,6 @@ $('#item-check').on('click', () => {
     }
 });
 
-// Mark first entry on list-items as active on first load
-const urlParams = new URLSearchParams(window.location.search);
-const id = urlParams.get('id') || getIdOfListItem(getFirstItemInList());
-const item = $(`#list-items > a#${id}`);
-if (item.length > 0) {
-    item.addClass('active');
-    item[0].scrollIntoView();
-}
-
-function getIdOfListItem(item) {
-    if (item && item.length) {
-        return item.attr('id');
-    } else {
-        return null;
-    }
-}
-
-function getFirstItemInList() {
-    return $('#list-items a').first();
-}
-
-// Fills the info table with the passed data
-function fillInfoTable(dataItem) {
-    $('#info-table #name').html(dataItem.name);
-    $('#info-table #releasedDate').html(dataItem.released_date);
-    $('#info-table #rate').html(`${dataItem.rate != null ? dataItem.rate : ''} / 5.0`);
-    $('#info-table #genre').html(joinJsonNames(dataItem.genres));
-    $('#info-table #platform').html(joinJsonNames(dataItem.platforms));
-    $('#info-table #publisher').html(joinJsonNames(dataItem.publishers));
-    $('#cover-pic').attr('src', `/storage/${dataItem.cover_pic}`);
-    $('#description').html(dataItem.description);
-    toggleCheckedIconByValue(!!+dataItem.checked);
-}
 
 function toggleCheckedIconByValue(isChecked) {
     if (isChecked) {
@@ -115,18 +68,6 @@ function toggleCheckedIconByValue(isChecked) {
     }
 }
 
-// Clears the info table 
-function clearInfoTable() {
-    $('#info-table #name').empty();
-    $('#info-table #releasedDate').empty();
-    $('#info-table #rate').empty()
-    $('#info-table #genre').empty();
-    $('#info-table #platform').empty();
-    $('#info-table #publisher').empty();
-    $('#cover-pic').attr('src', '/storage/assets/default.png');
-    $('#description').empty();
-    $('#item-check').removeClass('i-green');
-}
 
 // Joins each item's name in a list with a separator
 function joinJsonNames(arr, separator) {
