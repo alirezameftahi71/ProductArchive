@@ -21,7 +21,7 @@
                     <a id="item-edit" href="javascript:void(0);" class="icon">
                         <i class="fas fa-edit"></i>
                     </a>
-                    <a id="item-check" href="javascript:void(0);" :class="!!dataItem && !!dataItem.checked ? 'icon i-green' : 'icon'">
+                    <a id="item-check" href="javascript:void(0);" :class="{'i-green' : !!+dataItem.checked}" class="icon">
                         <i class="fas fa-check-circle"></i>
                     </a>
                 </div>
