@@ -28,7 +28,7 @@
         </form>
         <div id="grid-container" class="row">
             @foreach ($collection ?? [] as $item)
-            <gametile :item="{{$item}}"></gametile>
+            <game-tile :item="{{$item}}"></game-tile>
             @endforeach
         </div>
     </div>

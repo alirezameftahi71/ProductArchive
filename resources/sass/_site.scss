@@ -63,6 +63,18 @@ input.tm-input.input-loading {
   height: 100%;
 }
 
+.info-area-container {
+  height: inherit;
+  overflow-y: auto;
+}
+
+@media screen and (max-width: 47.99em) {
+  .info-area-container {
+    height: unset;
+    overflow: hidden;
+  }
+}
+
 @media screen and (max-width: 47.99em) {
   .full-height {
     overflow-x: hidden;

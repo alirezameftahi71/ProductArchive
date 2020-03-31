@@ -1,17 +1,18 @@
 <template>
-  <nav class="navbar navbar-expand-md bg-dark navbar-dark">
-    <a class="navbar-brand fas fa-archive" :title="logo.title" :href="logo.link"></a>
-    <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#nav-bar">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="nav-bar">
-      <ul class="navbar-nav mr-auto">
-        <li class="nav-item" v-for="button in buttons" :key="button.link">
-          <a class="nav-link" :href="button.link" :title="button.title">{{ button.title }}</a>
-        </li>
-      </ul>
-    </div>
-  </nav>
+  <div>
+    <b-navbar toggleable="md" type="dark" variant="dark">
+      <b-navbar-brand class="fas fa-archive" :title="logo.title" :href="logo.link"></b-navbar-brand>
+
+      <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
+      <b-collapse id="nav-collapse" is-nav>
+        <b-navbar-nav>
+          <b-nav-item v-for="button in buttons" :key="button.link" :href="button.link" :title="button.title">
+            {{ button.title }}
+          </b-nav-item>
+        </b-navbar-nav>
+      </b-collapse>
+    </b-navbar>
+  </div>
 </template>
 
 <script>
