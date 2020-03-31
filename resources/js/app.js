@@ -1,35 +1,36 @@
-/**
- * First we will load all of this project's JavaScript dependencies which
- * includes Vue and other libraries. It is a great starting point when
- * building robust, powerful web applications using Vue and Laravel.
- */
 import './_bootstrap';
-import 'bootstrap-3-typeahead';
-import 'jquery-serializejson';
 import './_tagmanager';
-import './_site';
 
-// require('./bootstrap');
-
-window.Vue = require('vue');
-
-/**
- * The following block of code may be used to automatically register your
- * Vue components. It will recursively scan this directory for the Vue
- * components and automatically register them with their "basename".
- *
- * Eg. ./components/ExampleComponent.vue -> <example-component></example-component>
- */
-
-const files = require.context('./', true, /\.vue$/i)
-files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0].toLowerCase(), files(key).default))
-
-/**
- * Next, we will create a fresh Vue application instance and attach it to
- * the page. Then, you may begin adding components to this application
- * or customize the JavaScript scaffolding to fit your unique needs.
- */
-
-const app = new Vue({
+new Vue({
     el: '#app',
+    created() {
+        this.setAxiosRequestInterceptors();
+        this.setAxiosResponseInterceptors();
+    },
+    methods: {
+        setAxiosRequestInterceptors() {
+            axios.interceptors.request.use(config => {
+                this.showLoading();
+                return config;
+            }, error => {
+                this.hideLoading();
+                return Promise.reject(error);
+            });
+        }, 
+        setAxiosResponseInterceptors() {
+            axios.interceptors.response.use(response => {
+                this.hideLoading();
+                return response;
+            }, error => {
+                this.hideLoading();
+                return Promise.reject(error);
+            });
+        },
+        showLoading() {
+            document.querySelector('.loader').classList.add('is-active');
+        },
+        hideLoading() {
+            document.querySelector('.loader').classList.remove('is-active');
+        }
+    }
 });

@@ -35,6 +35,3 @@
 </div>
 
 @endsection
-@section('scripts')
-<script src="/js/gridview.js"></script>
-@endsection

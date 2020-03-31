@@ -1,7 +1,6 @@
 <template>
   <footer class="container-fluid text-center bg-dark text-light">
-    &copy; {{ '2017' != currentYear ? `2017 - ${currentYear}` : '2017' }} Alireza Meftahi | All Rights Reserved
-  </footer>
+      &copy; {{ '2017' != currentYear ? `2017 - ${currentYear}` : '2017' }} Alireza Meftahi | All Rights Reserved</footer>
 </template>
 
 <script>
@@ -11,7 +10,7 @@ export default {
       return new Date().getFullYear();
     }
   }
-}
+};
 </script>
 
 <style lang="scss">

@@ -11,7 +11,7 @@
     </div>
     <br />
     <div id="list-items" class="list-group">
-      <a v-for="item in items" :key="item.id" :id="item.id" href="javascript:void(0);"
+      <a v-for="item in dataItems" :key="item.id" :id="item.id" href="javascript:void(0);"
         class="list-group-item list-group-item-action" @click="onItemClick($event)"
         v-html="item.name"></a>
     </div>
@@ -21,16 +21,34 @@
 <script>
 export default {
   props: {
-    items: Array,
-    selectedItem: Object
+    items: Array
+  },
+  data() {
+    return {
+      dataItems: this.items
+    };
+  },
+  created() {
+    this.$root.$on('itemdeleted', item => this.onItemDeleted(item))
   },
   mounted() {
     this.makeFirstItemActive();
   },
   methods: {
-    selectionChanged(currentSelectedId) {
-      const selectedItem = this.items.find(x => x.id === +currentSelectedId);
-      this.$root.$emit('selectionchanged', selectedItem);
+    async selectionChanged(currentSelectedId) {
+      const fetchedItem = await axios.get(`/api/games/${currentSelectedId}`);
+      this.$root.$emit('selectionchanged', fetchedItem.data);
+    },
+    onItemDeleted(item) {
+      const nearestItem = this.getNearestItem(this.dataItems, this.dataItems.findIndex(x => x.id === item.id));
+      this.dataItems = this.dataItems.filter(x => x.id !== item.id);
+      document.querySelector(`#list-items #${CSS.escape(nearestItem.id)}`).classList.add('active');
+      this.$root.$emit('selectionchanged', nearestItem);
+    },
+    getNearestItem(array, currentIndex) {
+        const previousItem = array[currentIndex - 1];
+        const nextItem = array[currentIndex + 1];
+        return previousItem || nextItem;
     },
     onSearch(element) {
       const keyword = (element.target.value || "").toLowerCase();
@@ -41,8 +59,10 @@ export default {
     },
     onItemClick(event) {
       const element = event.target;
-      // Array.from(document.querySelectorAll('#list-items').children).forEach(x => x.classList.remove('active'));
-      document.querySelector('#list-items .active').classList.remove('active');
+      const activeElement = document.querySelector('#list-items .active');
+      if (!!activeElement) {
+        activeElement.classList.remove('active');
+      }
       element.classList.add('active');
       this.selectionChanged(element.getAttribute('id'));
     },
@@ -82,6 +102,13 @@ export default {
 #list-items {
   height: calc(100% - 4.25rem);
   overflow: auto;
+  a.list-group-item {
+    background-color: $lightmilk;
+  }
+  a.list-group-item.active {
+    background-color: $darkindigo;
+    border-color: $darkindigo;
+  }
 }
 
 #search-box {
@@ -92,11 +119,6 @@ export default {
   padding: 1.25rem;
   background-color: $milk;
   height: 100%;
-}
-
-.list-group-item.active {
-  background-color: $darkindigo;
-  border-color: $darkindigo;
 }
 
 .list-group-item:not(.active) {

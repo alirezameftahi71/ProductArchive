@@ -38,9 +38,13 @@ export default {
     getJoinedItems(items = []) {
       return items.map(x => x.name).join(", ");
     }
-  },
+  }
 };
 </script>
 
 <style lang="scss">
+@import "../../sass/variables";
+.table-striped tbody tr:nth-of-type(even) {
+  background-color: $lightmilk;
+}
 </style>
