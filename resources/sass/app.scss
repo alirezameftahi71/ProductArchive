@@ -8,7 +8,7 @@
 @import "~pure-css-loader/dist/loader-default.css";
 
 @import "variables";
-@import "~bootstrap/scss/bootstrap";
+@import "~bootstrap";
+@import "~bootstrap-vue";
 @import "~arm-scrollbar/lib/arm-scrollbar";
-@import "tagmanager";
 @import "site";

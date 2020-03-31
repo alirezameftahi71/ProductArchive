@@ -1,5 +1,5 @@
 <template>
-  <div class="col-lg-3 col-md-3 items-sidenav">
+  <div class="items-sidenav">
     <div class="input-group">
       <input
         id="search-box"
@@ -17,15 +17,14 @@
     </div>
     <br />
     <div id="list-items" class="list-group">
-      <a
+      <button
         v-for="item in dataItems"
         :key="item.id"
         :id="item.id"
-        href="javascript:void(0);"
-        class="list-group-item list-group-item-action"
+        class="btn list-group-item list-group-item-action no-rounded-corners"
         @click="onItemClick($event)"
         v-html="item.name"
-      ></a>
+      ></button>
     </div>
   </div>
 </template>
@@ -41,7 +40,7 @@ export default {
     };
   },
   created() {
-    this.$root.$on("itemdeleted", (item) => this.onItemDeleted(item));
+    this.$root.$on("item-deleted", item => this.onItemDeleted(item));
   },
   mounted() {
     this.makeFirstItemActive();
@@ -49,16 +48,17 @@ export default {
   methods: {
     async selectionChanged(currentSelectedId) {
       const fetchedItem = await axios.get(`/api/games/${currentSelectedId}`);
-      this.$root.$emit("selectionchanged", fetchedItem.data);
+      this.$root.$emit("selection-changed", fetchedItem.data);
     },
-    onItemDeleted(item) {
+    async onItemDeleted(item) {
+      await axios.delete(`/api/games/${item.id}`);
       const nearestItem = this.getNearestItem(
         this.dataItems,
-        this.dataItems.findIndex((x) => x.id === item.id)
+        this.dataItems.findIndex(x => x.id === item.id)
       );
-      this.dataItems = this.dataItems.filter((x) => x.id !== item.id);
+      this.dataItems = this.dataItems.filter(x => x.id !== item.id);
       document.querySelector(`#list-items #${CSS.escape(nearestItem.id)}`).classList.add("active");
-      this.$root.$emit("selectionchanged", nearestItem);
+      this.$root.$emit("selection-changed", nearestItem);
     },
     getNearestItem(array, currentIndex) {
       const previousItem = array[currentIndex - 1];
@@ -67,8 +67,8 @@ export default {
     },
     onSearch(element) {
       const keyword = (element.target.value || "").toLowerCase();
-      const nodeArray = Array.from(document.querySelectorAll("#list-items a"));
-      nodeArray.filter((x) => this.toggleElementDisplay(x, x.innerText.toLowerCase().indexOf(keyword) > -1));
+      const nodeArray = Array.from(document.querySelectorAll("#list-items button"));
+      nodeArray.filter(x => this.toggleElementDisplay(x, x.innerText.toLowerCase().indexOf(keyword) > -1));
     },
     onItemClick(event) {
       const element = event.target;
@@ -89,14 +89,14 @@ export default {
     makeFirstItemActive() {
       const urlParams = new URLSearchParams(window.location.search);
       const id = urlParams.get("id") || this.getElementId(this.getFirstItemInList());
-      const item = document.querySelector(`#list-items > a#${CSS.escape(id)}`);
+      const item = document.querySelector(`#list-items > #${CSS.escape(id)}`);
       if (!!item) {
         item.classList.add("active");
         item.scrollIntoView();
       }
     },
     getFirstItemInList() {
-      return document.querySelector("#list-items a");
+      return document.querySelector("#list-items button");
     },
     getElementId(el) {
       return !!el ? el.getAttribute("id") : el;
@@ -108,44 +108,43 @@ export default {
 <style lang="scss">
 @import "../../sass/variables";
 
-.hidden {
-  display: none;
-}
-
-#list-items {
-  height: calc(100% - 4.25rem);
-  overflow: auto;
-  a.list-group-item {
-    background-color: $lightmilk;
-  }
-  a.list-group-item.active {
-    background-color: $darkindigo;
-    border-color: $darkindigo;
-  }
-}
-
-#search-box {
-  border-color: #ced4da !important;
-}
-
 .items-sidenav {
   padding: 1.25rem;
   background-color: $milk;
   height: 100%;
-}
 
-.list-group-item:not(.active) {
-  color: #15072f;
+  #list-items {
+    height: calc(100% - 4.2rem);
+    overflow-y: auto;
+    overflow-x: hidden;
+    .list-group-item {
+      background-color: $lightmilk;
+      &.active {
+        background-color: $darkindigo;
+        border-color: $darkindigo;
+      }
+      &:hover:not(.active) {
+        background-color: $darkmilk;
+      }
+      &:not(.active) {
+        color: #15072f;
+      }
+    }
+  }
+
+  #search-box {
+    border-color: #ced4da !important;
+  }
 }
 
 @media screen and (max-width: 47.99em) {
   .items-sidenav {
     height: auto;
     padding: 0.9375em;
-  }
 
-  .list-group {
-    height: 15.625em !important;
+    .list-group {
+      height: 15.625em !important;
+    }
   }
 }
 </style>

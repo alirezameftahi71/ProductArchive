@@ -3,7 +3,7 @@
 <link rel="stylesheet" href="/css/gridview.css">
 @endsection
 @section('content')
-<div class="row full-height scrolled">
+<div class="row full-height scrolled-y">
     <div class="col-12">
         <form action="">
             <div id="filter-container" class="form-row">
@@ -33,5 +33,4 @@
         </div>
     </div>
 </div>
-
 @endsection

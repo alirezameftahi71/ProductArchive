@@ -1,5 +1,14 @@
-import "./_bootstrap";
-import "./_tagmanager";
+import { BootstrapVue, IconsPlugin } from "bootstrap-vue";
+
+window.Vue = require("vue");
+Vue.use(BootstrapVue);
+Vue.use(IconsPlugin);
+
+window.axios = require("axios");
+window.axios.defaults.headers.common["X-Requested-With"] = "XMLHttpRequest";
+
+const files = require.context("./", true, /\.vue$/i);
+files.keys().map(key => Vue.component(key.split("/").pop().split(".")[0].toLowerCase(), files(key).default));
 
 new Vue({
   el: "#app",
@@ -10,11 +19,11 @@ new Vue({
   methods: {
     setAxiosRequestInterceptors() {
       axios.interceptors.request.use(
-        (config) => {
+        config => {
           this.showLoading();
           return config;
         },
-        (error) => {
+        error => {
           this.hideLoading();
           return Promise.reject(error);
         }
@@ -22,11 +31,11 @@ new Vue({
     },
     setAxiosResponseInterceptors() {
       axios.interceptors.response.use(
-        (response) => {
+        response => {
           this.hideLoading();
           return response;
         },
-        (error) => {
+        error => {
           this.hideLoading();
           return Promise.reject(error);
         }

@@ -43,9 +43,8 @@ export default {
   },
   methods: {
     makeCurrentLinkActive() {
-      // Mark the current page as active in navbar
       const url = Array.from(document.querySelectorAll("ul.navbar-nav a")).find(
-        (x) => `${window.location.origin}${window.location.pathname}` === x.href
+        x => `${window.location.origin}${window.location.pathname}` === x.href
       );
       url && url.parentElement.classList.add("active");
     }
@@ -53,4 +52,4 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style lang="scss"></style>
