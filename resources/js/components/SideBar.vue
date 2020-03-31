@@ -1,8 +1,14 @@
 <template>
   <div class="col-lg-3 col-md-3 items-sidenav">
     <div class="input-group">
-      <input id="search-box" class="form-control border-right-0 border" type="search" 
-        placeholder="Search..." @input="onSearch($event)" @keyup="onSearch($event)" />
+      <input
+        id="search-box"
+        class="form-control border-right-0 border"
+        type="search"
+        placeholder="Search..."
+        @input="onSearch($event)"
+        @keyup="onSearch($event)"
+      />
       <div class="input-group-append">
         <div class="input-group-text bg-white">
           <i class="icon fa fa-search"></i>
@@ -11,9 +17,15 @@
     </div>
     <br />
     <div id="list-items" class="list-group">
-      <a v-for="item in dataItems" :key="item.id" :id="item.id" href="javascript:void(0);"
-        class="list-group-item list-group-item-action" @click="onItemClick($event)"
-        v-html="item.name"></a>
+      <a
+        v-for="item in dataItems"
+        :key="item.id"
+        :id="item.id"
+        href="javascript:void(0);"
+        class="list-group-item list-group-item-action"
+        @click="onItemClick($event)"
+        v-html="item.name"
+      ></a>
     </div>
   </div>
 </template>
@@ -29,7 +41,7 @@ export default {
     };
   },
   created() {
-    this.$root.$on('itemdeleted', item => this.onItemDeleted(item))
+    this.$root.$on("itemdeleted", (item) => this.onItemDeleted(item));
   },
   mounted() {
     this.makeFirstItemActive();
@@ -37,34 +49,35 @@ export default {
   methods: {
     async selectionChanged(currentSelectedId) {
       const fetchedItem = await axios.get(`/api/games/${currentSelectedId}`);
-      this.$root.$emit('selectionchanged', fetchedItem.data);
+      this.$root.$emit("selectionchanged", fetchedItem.data);
     },
     onItemDeleted(item) {
-      const nearestItem = this.getNearestItem(this.dataItems, this.dataItems.findIndex(x => x.id === item.id));
-      this.dataItems = this.dataItems.filter(x => x.id !== item.id);
-      document.querySelector(`#list-items #${CSS.escape(nearestItem.id)}`).classList.add('active');
-      this.$root.$emit('selectionchanged', nearestItem);
+      const nearestItem = this.getNearestItem(
+        this.dataItems,
+        this.dataItems.findIndex((x) => x.id === item.id)
+      );
+      this.dataItems = this.dataItems.filter((x) => x.id !== item.id);
+      document.querySelector(`#list-items #${CSS.escape(nearestItem.id)}`).classList.add("active");
+      this.$root.$emit("selectionchanged", nearestItem);
     },
     getNearestItem(array, currentIndex) {
-        const previousItem = array[currentIndex - 1];
-        const nextItem = array[currentIndex + 1];
-        return previousItem || nextItem;
+      const previousItem = array[currentIndex - 1];
+      const nextItem = array[currentIndex + 1];
+      return previousItem || nextItem;
     },
     onSearch(element) {
       const keyword = (element.target.value || "").toLowerCase();
       const nodeArray = Array.from(document.querySelectorAll("#list-items a"));
-      nodeArray.filter(x =>
-        this.toggleElementDisplay(x, x.innerText.toLowerCase().indexOf(keyword) > -1)
-      );
+      nodeArray.filter((x) => this.toggleElementDisplay(x, x.innerText.toLowerCase().indexOf(keyword) > -1));
     },
     onItemClick(event) {
       const element = event.target;
-      const activeElement = document.querySelector('#list-items .active');
+      const activeElement = document.querySelector("#list-items .active");
       if (!!activeElement) {
-        activeElement.classList.remove('active');
+        activeElement.classList.remove("active");
       }
-      element.classList.add('active');
-      this.selectionChanged(element.getAttribute('id'));
+      element.classList.add("active");
+      this.selectionChanged(element.getAttribute("id"));
     },
     toggleElementDisplay(element, visible) {
       if (visible) {
@@ -75,10 +88,10 @@ export default {
     },
     makeFirstItemActive() {
       const urlParams = new URLSearchParams(window.location.search);
-      const id = urlParams.get('id') || this.getElementId(this.getFirstItemInList());
+      const id = urlParams.get("id") || this.getElementId(this.getFirstItemInList());
       const item = document.querySelector(`#list-items > a#${CSS.escape(id)}`);
       if (!!item) {
-        item.classList.add('active');
+        item.classList.add("active");
         item.scrollIntoView();
       }
     },
@@ -86,7 +99,7 @@ export default {
       return document.querySelector("#list-items a");
     },
     getElementId(el) {
-        return !!el ? el.getAttribute('id') : el;
+      return !!el ? el.getAttribute("id") : el;
     }
   }
 };

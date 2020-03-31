@@ -1,13 +1,13 @@
-@import 'variables';
+@import "variables";
 
 div#filter-container {
-    margin-top: 1.25em;
+  margin-top: 1.25em;
 }
 
 div.scrolled {
-    overflow-y: auto;
-  
-    div#grid-container {
-      padding: 2.5px;
-    }
+  overflow-y: auto;
+
+  div#grid-container {
+    padding: 2.5px;
+  }
 }

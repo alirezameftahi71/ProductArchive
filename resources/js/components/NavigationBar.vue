@@ -19,33 +19,33 @@ export default {
   data() {
     return {
       logo: {
-        title: 'Home',
-        link: '/'
+        title: "Home",
+        link: "/"
       },
       buttons: [
         {
-          title: 'Home',
-          link: '/'
+          title: "Home",
+          link: "/"
         },
         {
-          title: 'Create',
-          link: '/create'
+          title: "Create",
+          link: "/create"
         },
         {
-          title: 'Gridview',
-          link: '/gridview'
+          title: "Gridview",
+          link: "/gridview"
         }
       ]
     };
   },
   mounted() {
-      this.makeCurrentLinkActive();
+    this.makeCurrentLinkActive();
   },
   methods: {
     makeCurrentLinkActive() {
       // Mark the current page as active in navbar
       const url = Array.from(document.querySelectorAll("ul.navbar-nav a")).find(
-        x => `${window.location.origin}${window.location.pathname}` === x.href
+        (x) => `${window.location.origin}${window.location.pathname}` === x.href
       );
       url && url.parentElement.classList.add("active");
     }
@@ -53,5 +53,4 @@ export default {
 };
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>

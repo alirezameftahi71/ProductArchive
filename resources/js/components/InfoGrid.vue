@@ -7,7 +7,7 @@
       </tr>
       <tr>
         <th>Release Date</th>
-        <td id="releasedDate">{{ !!item ? item.released_date : '-' }}</td>
+        <td id="releasedDate">{{ !!item ? item.released_date : "-" }}</td>
       </tr>
       <tr>
         <th>Genre(s)</th>
@@ -23,7 +23,7 @@
       </tr>
       <tr>
         <th>Rate</th>
-        <td id="rate">{{ !!item ? `${item.rate} / 5.0` : '-' }}</td>
+        <td id="rate">{{ !!item ? `${item.rate} / 5.0` : "-" }}</td>
       </tr>
     </tbody>
   </table>
@@ -36,7 +36,7 @@ export default {
   },
   methods: {
     getJoinedItems(items = []) {
-      return items.map(x => x.name).join(", ");
+      return items.map((x) => x.name).join(", ");
     }
   }
 };

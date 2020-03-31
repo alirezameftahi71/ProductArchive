@@ -65,126 +65,123 @@ $baseLineHeight: 20px;
 // Fonts
 // --------------------------------------------------
 
-$sansFontFamily: "Helvetica Neue",
-Helvetica,
-Arial,
-sans-serif;
+$sansFontFamily: "Helvetica Neue", Helvetica, Arial, sans-serif;
 
 // Base tag class
 // -------------------------
 
 .tm-tag {
-    color: $tagText;
-    background-color: $tagBackground;
-    border: $tagBorder 1px solid;
-    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;
-    display: inline-block;
-    border-radius: $borderRadiusSmall;
-    font-family: $sansFontFamily;
-    font-size: $tagFontSize;
-    margin: 0 $tagMargin $tagMargin 0;
-    padding: $tagPadding;
-    text-decoration: none;
-    transition: border 0.2s linear 0s, box-shadow 0.2s linear 0s;
-    -moz-transition: border 0.2s linear 0s, box-shadow 0.2s linear 0s;
-    -webkit-transition: border 0.2s linear 0s, box-shadow 0.2s linear 0s;
-    vertical-align: middle;
+  color: $tagText;
+  background-color: $tagBackground;
+  border: $tagBorder 1px solid;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;
+  display: inline-block;
+  border-radius: $borderRadiusSmall;
+  font-family: $sansFontFamily;
+  font-size: $tagFontSize;
+  margin: 0 $tagMargin $tagMargin 0;
+  padding: $tagPadding;
+  text-decoration: none;
+  transition: border 0.2s linear 0s, box-shadow 0.2s linear 0s;
+  -moz-transition: border 0.2s linear 0s, box-shadow 0.2s linear 0s;
+  -webkit-transition: border 0.2s linear 0s, box-shadow 0.2s linear 0s;
+  vertical-align: middle;
 
-    // Remove button
-    // -------------------------
+  // Remove button
+  // -------------------------
+
+  .tm-tag-remove {
+    color: $black;
+    font-weight: bold;
+    margin-left: $tagPadding;
+    opacity: 0.2;
+
+    &:hover {
+      color: $black;
+      text-decoration: none;
+      opacity: 0.4;
+    }
+  }
+
+  // Semantic Colors
+  // -------------------------
+
+  &.tm-tag-warning {
+    color: $tagWarningText;
+    background-color: $tagWarningBackground;
+    border-color: $tagWarningBorder;
+  }
+
+  &.tm-tag-error {
+    color: $tagErrorText;
+    background-color: $tagErrorBackground;
+    border-color: $tagErrorBorder;
+  }
+
+  &.tm-tag-success {
+    color: $tagSuccessText;
+    background-color: $tagSuccessBackground;
+    border-color: $tagSuccessBorder;
+  }
+
+  &.tm-tag-info {
+    color: $tagInfoText;
+    background-color: $tagInfoBackground;
+    border-color: $tagInfoBorder;
+  }
+
+  &.tm-tag-inverse {
+    color: $tagInverseText;
+    background-color: $tagInverseBackground;
+    border-color: $tagInverseBorder;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2) inset;
 
     .tm-tag-remove {
-        color: $black;
-        font-weight: bold;
-        margin-left: $tagPadding;
-        opacity: 0.2;
-
-        &:hover {
-            color: $black;
-            text-decoration: none;
-            opacity: 0.4;
-        }
+      color: $white;
     }
+  }
 
-    // Semantic Colors
-    // -------------------------
+  // Sizes
+  // -------------------------
 
-    &.tm-tag-warning {
-        color: $tagWarningText;
-        background-color: $tagWarningBackground;
-        border-color: $tagWarningBorder;
+  &.tm-tag-large {
+    font-size: $tagFontSizeLarge;
+    border-radius: $baseBorderRadius;
+    padding: 11px 7px;
+  }
+
+  &.tm-tag-small {
+    font-size: $tagFontSizeSmall;
+    border-radius: $borderRadiusSmall;
+    padding: 2px 4px;
+  }
+
+  &.tm-tag-mini {
+    font-size: $tagFontSizeMini;
+    border-radius: 2px;
+    padding: 0px 2px;
+  }
+
+  // Miscellaneous Styles
+  // -------------------------
+
+  &.tm-tag-plain {
+    color: $textColor;
+    box-shadow: none;
+    background: none;
+    border: none;
+  }
+
+  &.tm-tag-disabled {
+    color: $tagDisabledText;
+    background-color: $tagDisabledBackground;
+    border-color: $tagDisabledBorder;
+    box-shadow: none;
+
+    .tm-tag-remove {
+      display: none;
     }
-
-    &.tm-tag-error {
-        color: $tagErrorText;
-        background-color: $tagErrorBackground;
-        border-color: $tagErrorBorder;
-    }
-
-    &.tm-tag-success {
-        color: $tagSuccessText;
-        background-color: $tagSuccessBackground;
-        border-color: $tagSuccessBorder;
-    }
-
-    &.tm-tag-info {
-        color: $tagInfoText;
-        background-color: $tagInfoBackground;
-        border-color: $tagInfoBorder;
-    }
-
-    &.tm-tag-inverse {
-        color: $tagInverseText;
-        background-color: $tagInverseBackground;
-        border-color: $tagInverseBorder;
-        box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2) inset;
-
-        .tm-tag-remove {
-            color: $white;
-        }
-    }
-
-    // Sizes
-    // -------------------------
-
-    &.tm-tag-large {
-        font-size: $tagFontSizeLarge;
-        border-radius: $baseBorderRadius;
-        padding: 11px 7px;
-    }
-
-    &.tm-tag-small {
-        font-size: $tagFontSizeSmall;
-        border-radius: $borderRadiusSmall;
-        padding: 2px 4px;
-    }
-
-    &.tm-tag-mini {
-        font-size: $tagFontSizeMini;
-        border-radius: 2px;
-        padding: 0px 2px;
-    }
-
-    // Miscellaneous Styles
-    // -------------------------
-
-    &.tm-tag-plain {
-        color: $textColor;
-        box-shadow: none;
-        background: none;
-        border: none;
-    }
-
-    &.tm-tag-disabled {
-        color: $tagDisabledText;
-        background-color: $tagDisabledBackground;
-        border-color: $tagDisabledBorder;
-        box-shadow: none;
-
-        .tm-tag-remove {
-            display: none;
-        }
-    }
+  }
 }
 
 // Forms
@@ -194,16 +191,16 @@ sans-serif;
 // -------------------------
 
 input[type="text"].tm-input {
-    margin-bottom: $tagMargin;
+  margin-bottom: $tagMargin;
 }
 
 // Form wrappers (Optional)
 // -------------------------
 
 .control-group.tm-group {
-    margin-bottom: ($baseLineHeight / 2) - $tagMargin;
+  margin-bottom: ($baseLineHeight / 2) - $tagMargin;
 }
 
 .form-horizontal .control-group.tm-group {
-    margin-bottom: $baseLineHeight - $tagMargin;
+  margin-bottom: $baseLineHeight - $tagMargin;
 }

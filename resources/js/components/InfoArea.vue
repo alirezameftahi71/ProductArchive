@@ -21,7 +21,7 @@
           <a href="javascript:void(0);" class="icon" @click="editItem()">
             <i class="fas fa-edit"></i>
           </a>
-          <a href="javascript:void(0);" class="icon" @click="markItem()" :class="{'i-green' : !!+dataItem.checked}">
+          <a href="javascript:void(0);" class="icon" @click="markItem()" :class="{ 'i-green': !!+dataItem.checked }">
             <i class="fas fa-check-circle"></i>
           </a>
         </div>
@@ -46,13 +46,11 @@ export default {
   },
   computed: {
     coverPic() {
-      return !!this.dataItem
-        ? `storage/${this.dataItem.cover_pic}`
-        : "storage/assets/default.png";
+      return !!this.dataItem ? `storage/${this.dataItem.cover_pic}` : "storage/assets/default.png";
     }
   },
   created() {
-    this.$root.$on('selectionchanged', item => this.dataItem = item);
+    this.$root.$on("selectionchanged", (item) => (this.dataItem = item));
   },
   methods: {
     editItem() {
@@ -60,15 +58,15 @@ export default {
     },
     async deleteItem() {
       await axios.delete(`/api/games/${this.dataItem.id}`);
-      this.$root.$emit('itemdeleted', this.dataItem);
+      this.$root.$emit("itemdeleted", this.dataItem);
     },
     async markItem() {
-        await axios.post(`/api/games/toggleChecked/${this.dataItem.id}`);
-        const fetchResponse = await axios.get(`/api/games/${this.dataItem.id}`);
-        this.dataItem = fetchResponse.data;
+      await axios.post(`/api/games/toggleChecked/${this.dataItem.id}`);
+      const fetchResponse = await axios.get(`/api/games/${this.dataItem.id}`);
+      this.dataItem = fetchResponse.data;
     },
     heartItem() {
-        // TODO: implement this functionality
+      // TODO: implement this functionality
     }
   }
 };
