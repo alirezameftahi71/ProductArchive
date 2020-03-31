@@ -1,20 +1,13 @@
 <template>
   <div class="items-sidenav">
-    <div class="input-group">
-      <input
-        id="search-box"
-        class="form-control border-right-0 border"
-        type="search"
-        placeholder="Search..."
-        @input="onSearch($event)"
-        @keyup="onSearch($event)"
-      />
-      <div class="input-group-append">
-        <div class="input-group-text bg-white">
-          <i class="icon fa fa-search"></i>
-        </div>
-      </div>
-    </div>
+    <b-input-group class="mt-3">
+      <template v-slot:append>
+        <b-input-group-text id="btn-search" title="Search">
+          <strong class="fa fa-search"></strong>
+        </b-input-group-text>
+      </template>
+      <b-form-input type="search" placeholder="Search..." @input="onSearch($event)"></b-form-input>
+    </b-input-group>
     <br />
     <div id="list-items" class="list-group">
       <button
@@ -65,10 +58,9 @@ export default {
       const nextItem = array[currentIndex + 1];
       return previousItem || nextItem;
     },
-    onSearch(element) {
-      const keyword = (element.target.value || "").toLowerCase();
+    onSearch(keyword) {
       const nodeArray = Array.from(document.querySelectorAll("#list-items button"));
-      nodeArray.filter(x => this.toggleElementDisplay(x, x.innerText.toLowerCase().indexOf(keyword) > -1));
+      nodeArray.forEach(x => this.toggleElementDisplay(x, x.innerText.toLowerCase().indexOf(keyword.toLowerCase()) > -1));
     },
     onItemClick(event) {
       const element = event.target;
@@ -107,6 +99,10 @@ export default {
 
 <style lang="scss">
 @import "../../sass/variables";
+
+#btn-search {
+  cursor: pointer;
+}
 
 .items-sidenav {
   padding: 1.25rem;
