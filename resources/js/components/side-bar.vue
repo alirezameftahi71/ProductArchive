@@ -108,7 +108,7 @@ export default {
   height: 100%;
 
   #list-items {
-    height: calc(100% - 4.2rem);
+    height: calc(100% - 6em);
     overflow-y: auto;
     overflow-x: hidden;
     .list-group-item {
