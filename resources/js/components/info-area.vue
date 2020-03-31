@@ -8,19 +8,28 @@
         <div class="container-fluid">
           <img id="cover-pic" class="img-fluid" :src="coverPic" alt="Product Cover" width="265" height="320" />
         </div>
-        <div class="container-fluid toolbar">
-          <button class="btn pt-1 icon" title="Delete Item" @click="deleteItem()">
-            <i class="fas fa-trash-alt"></i>
-          </button>
-          <button class="btn pt-1 icon" title="Favorite Item" @click="heartItem()">
-            <i class="fas fa-thumbs-up"></i>
-          </button>
-          <button class="btn pt-1 icon" title="Edit Item" @click="editItem()">
-            <i class="fas fa-edit"></i>
-          </button>
-          <button class="btn pt-1 icon" title="Mark Item" @click="markItem()" :class="{ 'i-green': !!+dataItem.checked }">
-            <i class="fas fa-check-circle"></i>
-          </button>
+
+        <div class="container mt-1">
+          <b-button-group size="sm">
+            <b-button variant="light" class="icon border-0" title="Delete Item" @click="deleteItem()">
+              <b-icon icon="trash-fill"></b-icon>
+            </b-button>
+            <b-button variant="light" class="icon border-0" title="Favorite Item" @click="heartItem()">
+              <b-icon icon="heart-fill"></b-icon>
+            </b-button>
+            <b-button variant="light" class="icon border-0" title="Edit Item" @click="editItem()">
+              <b-icon icon="pencil-square"></b-icon>
+            </b-button>
+            <b-button
+              variant="light"
+              class="icon border-0"
+              title="Mark Item"
+              @click="markItem()"
+              :class="{ 'i-green': !!+dataItem.checked }"
+            >
+              <b-icon icon="check-circle"></b-icon>
+            </b-button>
+          </b-button-group>
         </div>
       </div>
     </div>

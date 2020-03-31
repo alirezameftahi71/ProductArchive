@@ -1,12 +1,10 @@
 <template>
   <div class="items-sidenav">
     <b-input-group class="mt-3">
-      <template v-slot:append>
-        <b-input-group-text id="btn-search" title="Search">
-          <strong class="fa fa-search"></strong>
-        </b-input-group-text>
-      </template>
       <b-form-input type="search" placeholder="Search..." @input="onSearch($event)"></b-form-input>
+      <b-input-group-append is-text id="btn-search" title="Search">
+        <b-icon icon="search"></b-icon>
+      </b-input-group-append>
     </b-input-group>
     <br />
     <div id="list-items" class="list-group">

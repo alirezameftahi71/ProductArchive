@@ -16,6 +16,7 @@
   cursor: pointer;
   color: $darkindigo;
   padding: 0.1rem;
+  background-color: $lightmilk;
 
   &:hover {
     color: $blue;
@@ -49,10 +50,6 @@ input.tm-input.input-loading {
 
 .i-green {
   color: green;
-
-  &:hover {
-    color: greenyellow;
-  }
 }
 
 .i-red {

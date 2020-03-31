@@ -1,8 +1,9 @@
 <template>
   <div>
     <b-navbar toggleable="md" type="dark" variant="dark">
-      <b-navbar-brand class="fas fa-archive" :title="logo.title" :href="logo.link"></b-navbar-brand>
-
+      <b-navbar-brand :title="logo.title" :href="logo.link">
+        <b-icon icon="archive-fill"></b-icon>
+      </b-navbar-brand>
       <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
       <b-collapse id="nav-collapse" is-nav>
         <b-navbar-nav>
