@@ -38,11 +38,11 @@ export default {
   },
   methods: {
     async selectionChanged(currentSelectedId) {
-      const fetchedItem = await axios.get(`/api/games/${currentSelectedId}`);
+      const fetchedItem = await this.axios.get(`/api/games/${currentSelectedId}`);
       this.$root.$emit("selection-changed", fetchedItem.data);
     },
     async onItemDeleted(item) {
-      await axios.delete(`/api/games/${item.id}`);
+      await this.axios.delete(`/api/games/${item.id}`);
       const nearestItem = this.getNearestItem(
         this.dataItems,
         this.dataItems.findIndex(x => x.id === item.id)
@@ -63,7 +63,7 @@ export default {
     onItemClick(event) {
       const element = event.target;
       const activeElement = document.querySelector("#list-items .active");
-      if (!!activeElement) {
+      if (activeElement) {
         activeElement.classList.remove("active");
       }
       element.classList.add("active");
@@ -80,7 +80,7 @@ export default {
       const urlParams = new URLSearchParams(window.location.search);
       const id = urlParams.get("id") || this.getElementId(this.getFirstItemInList());
       const item = document.querySelector(`#list-items > #${CSS.escape(id)}`);
-      if (!!item) {
+      if (item) {
         item.classList.add("active");
         item.scrollIntoView();
       }
@@ -89,7 +89,7 @@ export default {
       return document.querySelector("#list-items button");
     },
     getElementId(el) {
-      return !!el ? el.getAttribute("id") : el;
+      return el ? el.getAttribute("id") : el;
     }
   }
 };

@@ -14,9 +14,9 @@
 <body>
     <div id="app">
         <nav-bar></nav-bar>
-        <div class="container-fluid">
+        <b-container fluid>
             @yield('content')
-        </div>
+        </b-container>
         <footer-bar></footer-bar>
         <div class="loader loader-default" data-text data-blink></div>
         @yield('modals')

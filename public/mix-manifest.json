@@ -1,7 +1,6 @@
 {
     "/js/app.js": "/js/app.js",
     "/css/app.css": "/css/app.css",
-    "/css/gridview.css": "/css/gridview.css",
     "/js/create.js": "/js/create.js",
     "/js/update.js": "/js/update.js"
 }

@@ -1,11 +1,11 @@
 import { BootstrapVue, IconsPlugin } from "bootstrap-vue";
+import Vue from "vue";
+import axios from "axios";
+import VueAxios from "vue-axios";
 
-window.Vue = require("vue");
 Vue.use(BootstrapVue);
 Vue.use(IconsPlugin);
-
-window.axios = require("axios");
-window.axios.defaults.headers.common["X-Requested-With"] = "XMLHttpRequest";
+Vue.use(VueAxios, axios);
 
 const files = require.context("./", true, /\.vue$/i);
 files.keys().map(key => Vue.component(key.split("/").pop().split(".")[0].toLowerCase(), files(key).default));
@@ -18,7 +18,7 @@ new Vue({
   },
   methods: {
     setAxiosRequestInterceptors() {
-      axios.interceptors.request.use(
+      this.axios.interceptors.request.use(
         config => {
           this.showLoading();
           return config;
@@ -30,7 +30,7 @@ new Vue({
       );
     },
     setAxiosResponseInterceptors() {
-      axios.interceptors.response.use(
+      this.axios.interceptors.response.use(
         response => {
           this.hideLoading();
           return response;

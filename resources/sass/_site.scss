@@ -21,6 +21,14 @@
   }
 }
 
+div#filter-container {
+  margin-top: 1.25em;
+}
+
+div#grid-container {
+  padding: 2.5px;
+}
+
 .no-rounded-corners {
   border-radius: 0;
   -webkit-border-radius: 0;
@@ -44,14 +52,6 @@ input.tm-input.input-loading {
 /* Makes the table column widths all equal */
 .fixed-width-table {
   table-layout: fixed;
-}
-
-.i-green {
-  color: green;
-}
-
-.i-red {
-  color: red;
 }
 
 .side-bar-container {

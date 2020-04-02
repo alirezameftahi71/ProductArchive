@@ -25,7 +25,7 @@
               class="icon border-0"
               title="Mark Item"
               @click="markItem()"
-              :class="{ 'i-green': !!+dataItem.checked }"
+              :class="{ 'i-green': +dataItem.checked }"
             >
               <b-icon icon="check-circle"></b-icon>
             </b-button>
@@ -52,7 +52,7 @@ export default {
   },
   computed: {
     coverPic() {
-      return !!this.dataItem ? `storage/${this.dataItem.cover_pic}` : "storage/assets/default.png";
+      return this.dataItem ? `storage/${this.dataItem.cover_pic}` : "storage/assets/default.png";
     }
   },
   created() {
@@ -67,8 +67,8 @@ export default {
       this.$root.$emit("item-delete-clicked", this.dataItem);
     },
     async markItem() {
-      await axios.post(`/api/games/toggleChecked/${this.dataItem.id}`);
-      const fetchResponse = await axios.get(`/api/games/${this.dataItem.id}`);
+      await this.axios.post(`/api/games/toggleChecked/${this.dataItem.id}`);
+      const fetchResponse = await this.axios.get(`/api/games/${this.dataItem.id}`);
       this.dataItem = fetchResponse.data;
     },
     heartItem() {
@@ -81,5 +81,19 @@ export default {
 <style lang="scss">
 #cover-pic-container {
   height: 340px;
+}
+
+.icon.i-green {
+  color: green;
+  &:active {
+    color: green;
+  }
+}
+
+.icon.i-red {
+  color: red;
+  &:active {
+    color: red;
+  }
 }
 </style>
