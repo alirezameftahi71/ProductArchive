@@ -12,63 +12,42 @@
   display: none;
 }
 
-.icon {
-  cursor: pointer;
-  background-color: $milk;
-
-  .i-green {
-    color: green;
-
-    &:active {
-      color: green;
-    }
-  }
-
-  .i-red {
-    color: red;
-
-    &:active {
-      color: red;
-    }
-  }
-
-  &:hover {
-    color: $blue;
-  }
-}
-
 .no-rounded-corners {
   border-radius: 0;
   -webkit-border-radius: 0;
   -moz-border-radius: 0;
 }
 
-/* loading background opacity setting */
 .loader.is-active {
   background-color: rgba(0, 0, 0, 0.5);
 }
 
-/* Loading indicator for input boxes */
-input.tm-input.input-loading {
-  background-color: #ffffff;
-  background-image: url("assets/input-loading.gif");
-  background-size: 25px 25px;
-  background-position: right center;
-  background-repeat: no-repeat;
+.side-bar-container {
+  height: 100%;
 }
 
-/* Makes the table column widths all equal */
-.fixed-width-table {
-  table-layout: fixed;
+.area-container {
+  height: inherit;
+  overflow-y: auto;
 }
 
 @media screen and (max-width: 47.99em) {
+  body {
+    height: initial;
+  }
+
   .full-height {
     overflow-x: hidden;
     overflow-y: auto;
   }
 
-  body {
-    height: initial;
+  .area-container {
+    height: unset;
+    overflow: hidden;
   }
+
+  .side-bar-container {
+    height: auto;
+  }
+
 }

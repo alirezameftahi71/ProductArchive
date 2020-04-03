@@ -1,5 +1,5 @@
 <template>
-  <table id="info-table" class="table table-bordered table-striped fixed-width-table">
+  <table id="info-table" class="table table-bordered table-hover table-striped fixed-width-table">
     <tbody>
       <tr>
         <th>Name</th>
@@ -36,15 +36,20 @@ export default {
   },
   methods: {
     getJoinedItems(items = []) {
-      return items.map((x) => x.name).join(", ");
+      return items.map(x => x.name).join(", ");
     }
   }
 };
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 @import "../../sass/variables";
+
 .table-striped tbody tr:nth-of-type(even) {
   background-color: $lightmilk;
+}
+
+.fixed-width-table {
+  table-layout: fixed;
 }
 </style>

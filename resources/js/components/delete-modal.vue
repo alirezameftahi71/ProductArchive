@@ -1,4 +1,6 @@
-<template></template>
+<template>
+  <div v-if="false"></div>
+</template>
 
 <script>
 export default {
@@ -22,3 +24,4 @@ export default {
   }
 };
 </script>
+<style lang="scss" scoped></style>

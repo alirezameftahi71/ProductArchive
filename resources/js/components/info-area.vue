@@ -78,28 +78,31 @@ export default {
 };
 </script>
 
-<style lang="scss">
-.side-bar-container {
-  height: 100%;
-}
+<style lang="scss" scoped>
+@import "../../sass/variables";
 
-.info-area-container {
-  height: inherit;
-  overflow-y: auto;
-}
+.icon {
+  cursor: pointer;
+  background-color: $milk;
 
-#cover-pic-container {
-  height: 340px;
-}
-
-@media screen and (max-width: 47.99em) {
-  .info-area-container {
-    height: unset;
-    overflow: hidden;
+  &:hover {
+    color: $blue;
   }
 
-  .side-bar-container {
-    height: auto;
+  &.i-green {
+    color: green;
+
+    &:active {
+      color: green;
+    }
+  }
+
+  &.i-red {
+    color: red;
+
+    &:active {
+      color: red;
+    }
   }
 }
 </style>

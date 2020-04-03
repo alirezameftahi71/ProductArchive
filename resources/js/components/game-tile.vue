@@ -19,7 +19,7 @@ export default {
 };
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .column {
   -ms-flex: 20%;
   flex: 20%;

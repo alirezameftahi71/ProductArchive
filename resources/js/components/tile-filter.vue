@@ -33,7 +33,7 @@ export default {
 };
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 #filter-container {
   margin-top: 1.25em;
 }
