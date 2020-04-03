@@ -64,7 +64,7 @@ class GameController extends Controller
                 $game->publishers()->sync($publishers);
             }
 
-            if (request('coverPic') != "null") {
+            if (request('coverPic') != null && request('coverPic') != "null") {
                 $game->update([
                     'cover_pic' => request('coverPic')->store('uploads', 'public'),
                 ]);
@@ -91,24 +91,24 @@ class GameController extends Controller
             ]);
 
             if (request('genres')) {
-                $genre_names = request('genres');
+                $genre_names =  explode(',', request('genres'));
                 $genres = GameController::fetch_objects_from_strings(Genre::class, $genre_names);
                 $game->genres()->sync($genres);
             }
 
             if (request('platforms')) {
-                $platform_names = request('platforms');
+                $platform_names = explode(',', request('platforms'));
                 $platforms = GameController::fetch_objects_from_strings(Platform::class, $platform_names);
                 $game->platforms()->sync($platforms);
             }
 
             if (request('publishers')) {
-                $publisher_names = request('publishers');
+                $publisher_names = explode(',', request('publishers'));
                 $publishers = GameController::fetch_objects_from_strings(Publisher::class, $publisher_names);
                 $game->publishers()->sync($publishers);
             }
 
-            if (request('coverPic')) {
+            if (request('coverPic') != null && request('coverPic') != "null") {
                 $game->update([
                     'cover_pic' => request('coverPic')->store('uploads', 'public'),
                 ]);

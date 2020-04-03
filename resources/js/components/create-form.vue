@@ -1,5 +1,5 @@
 <template>
-  <b-form @submit="onSubmit" @reset="onReset">
+  <b-form @submit="onSubmit">
     <div class="row content justify-content-center">
       <div class="col-md-8">
         <b-form-group label="Name:" label-for="name">
@@ -80,6 +80,24 @@
 
 <script>
 export default {
+  props: {
+    item: Object
+  },
+  mounted() {
+    if (this.item) {
+      this.form = {
+        name: this.item.name,
+        releasedDate: this.item.released_date,
+        rate: +this.item.rate,
+        isChecked: !!+this.item.checked,
+        description: this.item.description,
+        genres: this.item.genres.map(x => x.name),
+        publishers: this.item.publishers.map(x => x.name),
+        platforms: this.item.platforms.map(x => x.name)
+      };
+      this.isUpdateMode = true;
+    }
+  },
   data() {
     return {
       form: {
@@ -97,17 +115,18 @@ export default {
         { value: false, text: "False" },
         { value: true, text: "True" }
       ],
-      seperators: ",;"
+      seperators: ",;",
+      isUpdateMode: false
     };
   },
   methods: {
-    async onSubmit(evt) {
+    onSubmit(evt) {
       evt.preventDefault();
-
+      const url = this.isUpdateMode ? `/api/games/${this.item.id}` : "/api/games";
       const formData = new FormData();
       Object.keys(this.form).forEach(key => formData.append(key, this.form[key]));
-      await this.axios
-        .post("/api/games", formData)
+      this.axios
+        .post(url, formData)
         .then(response => window.location.replace(`/?id=${response.data.id}`))
         .catch(err => console.log(err));
     },
