@@ -16,17 +16,25 @@
   cursor: pointer;
   background-color: $milk;
 
+  .i-green {
+    color: green;
+
+    &:active {
+      color: green;
+    }
+  }
+
+  .i-red {
+    color: red;
+
+    &:active {
+      color: red;
+    }
+  }
+
   &:hover {
     color: $blue;
   }
-}
-
-div#filter-container {
-  margin-top: 1.25em;
-}
-
-div#grid-container {
-  padding: 2.5px;
 }
 
 .no-rounded-corners {
@@ -54,30 +62,10 @@ input.tm-input.input-loading {
   table-layout: fixed;
 }
 
-.side-bar-container {
-  height: 100%;
-}
-
-.info-area-container {
-  height: inherit;
-  overflow-y: auto;
-}
-
-@media screen and (max-width: 47.99em) {
-  .info-area-container {
-    height: unset;
-    overflow: hidden;
-  }
-}
-
 @media screen and (max-width: 47.99em) {
   .full-height {
     overflow-x: hidden;
     overflow-y: auto;
-  }
-
-  .side-bar-container {
-    height: auto;
   }
 
   body {

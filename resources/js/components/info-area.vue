@@ -79,21 +79,27 @@ export default {
 </script>
 
 <style lang="scss">
+.side-bar-container {
+  height: 100%;
+}
+
+.info-area-container {
+  height: inherit;
+  overflow-y: auto;
+}
+
 #cover-pic-container {
   height: 340px;
 }
 
-.icon.i-green {
-  color: green;
-  &:active {
-    color: green;
+@media screen and (max-width: 47.99em) {
+  .info-area-container {
+    height: unset;
+    overflow: hidden;
   }
-}
 
-.icon.i-red {
-  color: red;
-  &:active {
-    color: red;
+  .side-bar-container {
+    height: auto;
   }
 }
 </style>

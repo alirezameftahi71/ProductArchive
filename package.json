@@ -33,6 +33,7 @@
     "jquery-serializejson": "^2.9.0",
     "pure-css-loader": "^3.3.3",
     "set-value": "^3.0.1",
-    "vue-axios": "^2.1.5"
+    "vue-axios": "^2.1.5",
+    "vue-router": "^3.1.6"
   }
 }
