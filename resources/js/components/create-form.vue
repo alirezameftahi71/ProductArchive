@@ -73,7 +73,6 @@
     <div class="row content justify-content-center mb-3">
       <div class="col-md-12">
         <b-button type="submit" variant="primary">Submit</b-button>
-        <b-button type="reset" variant="danger">Reset</b-button>
       </div>
     </div>
   </b-form>
@@ -83,17 +82,6 @@
 export default {
   data() {
     return {
-      defaultForm: {
-        name: "",
-        releasedDate: "",
-        rate: 1,
-        isChecked: false,
-        genres: [],
-        platforms: [],
-        publishers: [],
-        description: "",
-        coverPic: null
-      },
       form: {
         name: "",
         releasedDate: "",
@@ -122,10 +110,6 @@ export default {
         .post("/api/games", formData)
         .then(response => window.location.replace(`/?id=${response.data.id}`))
         .catch(err => console.log(err));
-    },
-    onReset(evt) {
-      evt.preventDefault();
-      this.form = this.defaultForm;
     },
     formatCoverPicName(file) {
       return file[0].name.substr(0, 20);
