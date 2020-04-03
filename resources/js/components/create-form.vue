@@ -113,9 +113,15 @@ export default {
     };
   },
   methods: {
-    onSubmit(evt) {
+    async onSubmit(evt) {
       evt.preventDefault();
-      alert(JSON.stringify(this.form));
+
+      const formData = new FormData();
+      Object.keys(this.form).forEach(key => formData.append(key, this.form[key]));
+      await this.axios
+        .post("/api/games", formData)
+        .then(response => window.location.replace(`/?id=${response.data.id}`))
+        .catch(err => console.log(err));
     },
     onReset(evt) {
       evt.preventDefault();
