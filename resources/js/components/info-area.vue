@@ -11,18 +11,19 @@
 
         <div class="container mt-1">
           <b-button-group size="sm">
-            <b-button variant="light" class="icon border-0" title="Delete Item" @click="deleteItem()">
+            <b-button variant="light" class="icon border-0" :disabled="!item" title="Delete Item" @click="deleteItem()">
               <b-icon icon="trash-fill"></b-icon>
             </b-button>
-            <b-button variant="light" class="icon border-0" title="Favorite Item" @click="heartItem()">
+            <b-button variant="light" class="icon border-0" :disabled="!item" title="Favorite Item" @click="heartItem()">
               <b-icon icon="heart-fill"></b-icon>
             </b-button>
-            <b-button variant="light" class="icon border-0" title="Edit Item" @click="editItem()">
+            <b-button variant="light" class="icon border-0" :disabled="!item" title="Edit Item" @click="editItem()">
               <b-icon icon="pencil-square"></b-icon>
             </b-button>
             <b-button
               variant="light"
               class="icon border-0"
+              :disabled="!item"
               title="Mark Item"
               @click="markItem()"
               :class="{ 'i-green': +dataItem.checked }"
@@ -48,6 +49,19 @@ export default {
   data() {
     return {
       dataItem: this.item
+        ? this.item
+        : {
+            id: 0,
+            name: "-",
+            released_date: new Date().toLocaleDateString(),
+            rate: "2.5",
+            description: "-",
+            cover_pic: "assets/default.png",
+            checked: "false",
+            genres: [{ name: "-" }],
+            platforms: [{ name: "-" }],
+            publishers: [{ name: "-" }]
+          }
     };
   },
   computed: {
@@ -81,7 +95,7 @@ export default {
 <style lang="scss" scoped>
 @import "../../sass/variables";
 
-.icon {
+.icon:not([disabled]) {
   cursor: pointer;
   background-color: $milk;
 
