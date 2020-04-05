@@ -3,14 +3,14 @@
 <link rel="stylesheet" href="/css/gridview.css">
 @endsection
 @section('content')
-<div class="row full-height scrolled-y">
-    <div class="col-12">
+<b-row class="full-height scrolled-y">
+    <b-col>
         <tile-filter></tile-filter>
-        <div id="grid-container" class="row">
+        <b-row id="grid-container">
             @foreach ($collection ?? [] as $item)
             <game-tile :item="{{$item}}"></game-tile>
             @endforeach
-        </div>
-    </div>
-</div>
+        </b-row>
+    </b-col>
+</b-row>
 @endsection
