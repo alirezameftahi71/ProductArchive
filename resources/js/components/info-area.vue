@@ -53,8 +53,8 @@ export default {
         : {
             id: 0,
             name: "-",
-            released_date: new Date().toLocaleDateString(),
-            rate: "2.5",
+            released_date: "-",
+            rate: "-",
             description: "-",
             cover_pic: "assets/default.png",
             checked: "false",
@@ -95,27 +95,29 @@ export default {
 <style lang="scss" scoped>
 @import "../../sass/variables";
 
-.icon:not([disabled]) {
-  cursor: pointer;
+.icon {
   background-color: $milk;
+  &:not([disabled]) {
+    cursor: pointer;
 
-  &:hover {
-    color: $blue;
-  }
-
-  &.i-green {
-    color: green;
-
-    &:active {
-      color: green;
+    &:hover {
+      color: $blue;
     }
-  }
 
-  &.i-red {
-    color: red;
+    &.i-green {
+      color: green;
 
-    &:active {
+      &:active {
+        color: green;
+      }
+    }
+
+    &.i-red {
       color: red;
+
+      &:active {
+        color: red;
+      }
     }
   }
 }
