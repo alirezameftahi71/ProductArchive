@@ -30,7 +30,13 @@
           </div>
         </div>
         <b-form-group label="Genres:" label-for="genres" description="Press , or ; to add tags">
-          <b-form-tags input-id="genres" v-model="form.genres" placeholder="Genres" :separator="seperators"></b-form-tags>
+          <b-form-tags
+            input-id="genres"
+            v-model="form.genres"
+            placeholder="Genres"
+            :tag-validator="tagValidator"
+            :separator="seperators"
+          ></b-form-tags>
         </b-form-group>
         <b-form-group label="Platforms:" label-for="platforms" description="Press , or ; to add tags">
           <b-form-tags
@@ -132,6 +138,17 @@ export default {
     },
     formatCoverPicName(file) {
       return file[0].name.substr(0, 20);
+    },
+    getSuggestions(val) {
+      this.axios
+        .get("/api/genres")
+        .then(response => response.data.filter(x => x.name.includes(val)))
+        .catch(err => console.log(err));
+    },
+    tagValidator(tag) {
+      // Individual tag validator function
+      this.getSuggestions(tag);
+      return true;
     }
   }
 };
