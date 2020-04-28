@@ -12,25 +12,25 @@
   "devDependencies": {
     "axios": "^0.19.2",
     "bootstrap": "^4.4.1",
-    "cross-env": "^7.0",
+    "cross-env": "^7.0.2",
     "eslint": "^6.8.0",
     "eslint-plugin-vue": "^6.2.2",
-    "laravel-mix": "^5.0.1",
-    "lodash": "^4.17.13",
-    "popper.js": "^1.12",
-    "prettier": "^2.0.2",
-    "resolve-url-loader": "^2.3.1",
-    "sass": "^1.20.1",
-    "sass-loader": "^8.0.0",
+    "laravel-mix": "^5.0.4",
+    "lodash": "^4.17.15",
+    "popper.js": "^1.16.1",
+    "prettier": "^2.0.5",
+    "resolve-url-loader": "^3.1.1",
+    "sass": "^1.26.5",
+    "sass-loader": "^8.0.2",
     "vue": "^2.6.11",
-    "vue-template-compiler": "^2.6.10"
+    "vue-template-compiler": "^2.6.11"
   },
   "dependencies": {
     "arm-scrollbar": "^1.2.7",
     "bootstrap-3-typeahead": "^4.0.2",
-    "bootstrap-vue": "^2.9.0",
+    "bootstrap-vue": "^2.13.0",
     "pure-css-loader": "^3.3.3",
-    "set-value": "^3.0.1",
+    "set-value": "^3.0.2",
     "vue-axios": "^2.1.5",
     "vue-router": "^3.1.6"
   }
