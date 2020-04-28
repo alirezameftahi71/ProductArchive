@@ -23,10 +23,10 @@
             <b-button
               variant="light"
               class="icon border-0"
-              :disabled="!item"
               title="Mark Item"
+              :disabled="!item"
               @click="markItem()"
-              :class="{ 'i-green': +dataItem.checked }"
+              :class="{ 'i-green': dataItem.checked === 'true' }"
             >
               <b-icon icon="check-circle"></b-icon>
             </b-button>

@@ -2,16 +2,16 @@
   <form action="">
     <div id="filter-container" class="form-row">
       <div class="form-group col-md-3">
-        <select id="is-checked" class="form-control custom-select" name="is-checked">
-          <option value="0">Disable Only UnChecked</option>
-          <option value="1" :selected="this.getQueryString('is-checked') == '1'">Enable Only UnChecked</option>
+        <select id="is-unchecked" class="form-control custom-select" name="is-unchecked">
+          <option value="false">Disable Only UnChecked</option>
+          <option value="true" :selected="this.getQueryString('is-unchecked') == 'true'">Enable Only UnChecked</option>
         </select>
       </div>
 
       <div class="form-group col-md-3">
         <select id="high-rate" class="form-control custom-select" name="high-rate">
-          <option value="0">Disable High Rate</option>
-          <option value="1" :selected="this.getQueryString('high-rate') == '1'">Enable High Rate</option>
+          <option value="false">Disable High Rate</option>
+          <option value="true" :selected="this.getQueryString('high-rate') == 'true'">Enable High Rate</option>
         </select>
       </div>
 

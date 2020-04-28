@@ -36,12 +36,12 @@ class HomeController extends Controller
 
     public function gridview(Request $request) {
         $collection = Game::getAll();
-        if($request->query('is-checked') == '1') {
+        if($request->query('is-unchecked') == 'true') {
             $collection = $collection->filter(function($item) {
-                return ($item->checked == '0');
+                return ($item->checked == 'false');
             });
         }
-        if($request->query('high-rate') == '1') {
+        if($request->query('high-rate') == 'true') {
             $collection = $collection->filter(function($item) {
                 return ($item->rate >= '4');
             });

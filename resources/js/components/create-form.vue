@@ -95,7 +95,7 @@ export default {
         name: this.item.name,
         releasedDate: this.item.released_date,
         rate: +this.item.rate,
-        isChecked: !!+this.item.checked,
+        isChecked: this.item.checked,
         description: this.item.description,
         genres: this.item.genres.map(x => x.name),
         publishers: this.item.publishers.map(x => x.name),
@@ -110,7 +110,7 @@ export default {
         name: "",
         releasedDate: "",
         rate: 1,
-        isChecked: false,
+        isChecked: "false",
         genres: [],
         platforms: [],
         publishers: [],
@@ -118,8 +118,8 @@ export default {
         coverPic: null
       },
       markOptions: [
-        { value: false, text: "False" },
-        { value: true, text: "True" }
+        { value: "false", text: "False" },
+        { value: "true", text: "True" }
       ],
       seperators: ",;",
       isUpdateMode: false

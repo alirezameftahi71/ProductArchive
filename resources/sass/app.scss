@@ -1,6 +1,6 @@
 @font-face {
   font-family: Nunito-Regular;
-  src: url('assets/Nunito-Regular.ttf');
+  src: url("../../public/storage/assets/Nunito-Regular.ttf");
 }
 
 @import "~pure-css-loader/dist/css-loader.css";
@@ -9,5 +9,5 @@
 @import "variables";
 @import "~bootstrap";
 @import "~bootstrap-vue";
-@import '~arm-scrollbar/lib/main';
+@import "~arm-scrollbar/lib/main";
 @import "site";

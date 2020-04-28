@@ -1,4 +1,4 @@
-# Product Archive
+# Game Archive
 
 ## Table of contents
 
