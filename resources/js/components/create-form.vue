@@ -32,11 +32,25 @@
         <b-form-group label="Genres:" label-for="genres" description="Press , or ; to add tags">
           <b-form-tags
             input-id="genres"
+            ref="genreTagRef"
             v-model="form.genres"
             placeholder="Genres"
-            :tag-validator="tagValidator"
+            :tag-validator="onGenreInput"
             :separator="seperators"
-          ></b-form-tags>
+          >
+          </b-form-tags>
+          <b-dropdown
+            block
+            variant="link"
+            ref="genresDropdown"
+            toggle-class="p-0 text-decoration-none"
+            no-caret
+            menu-class="w-100"
+          >
+            <b-dropdown-item v-for="item in genreItems" :key="item.id" href="#" @click="onGenreItemClick(item)">{{
+              item.name
+            }}</b-dropdown-item>
+          </b-dropdown>
         </b-form-group>
         <b-form-group label="Platforms:" label-for="platforms" description="Press , or ; to add tags">
           <b-form-tags
@@ -103,9 +117,24 @@ export default {
       };
       this.isUpdateMode = true;
     }
+    this.$root.$on("bv::dropdown::show", bvEvent => {
+      if (!this.mustShow) {
+        bvEvent.preventDefault();
+      }
+      this.mustShow = false;
+    });
+
+    this.$root.$on("bv::dropdown::hide", bvEvent => {
+      if (!this.mustClose) {
+        bvEvent.preventDefault();
+      }
+      this.mustClose = false;
+    });
   },
   data() {
     return {
+      mustShow: false,
+      mustClose: false,
       form: {
         name: "",
         releasedDate: "",
@@ -122,6 +151,7 @@ export default {
         { value: "true", text: "True" }
       ],
       seperators: ",;",
+      genreItems: [],
       isUpdateMode: false
     };
   },
@@ -136,19 +166,41 @@ export default {
         .then(response => window.location.replace(`/?id=${response.data.id}`))
         .catch(err => console.log(err));
     },
+    onGenreItemClick(dataItem) {
+      this.$refs.genreTagRef.addTag(dataItem.name);
+      this.closeGenreDropdown();
+    },
+    closeGenreDropdown() {
+      this.mustClose = true;
+      this.$refs.genresDropdown.hide(true);
+    },
     formatCoverPicName(file) {
       return file[0].name.substr(0, 20);
     },
-    getSuggestions(val) {
+    getGerneSuggestion(val) {
       this.axios
         .get("/api/genres")
-        .then(response => response.data.filter(x => x.name.includes(val)))
+        .then(response => {
+          const data = response.data.filter(x => this.toLowerCaseOrDefault(x.name).includes(this.toLowerCaseOrDefault(val)));
+          this.genreItems = data.splice(0, 4);
+          if (this.genreItems && this.genreItems.length) {
+            this.mustShow = true;
+            this.$refs.genresDropdown.show();
+          } else {
+            this.closeGenreDropdown();
+          }
+          setTimeout(() => {
+            this.$refs.genreTagRef.focus();
+          });
+        })
         .catch(err => console.log(err));
     },
-    tagValidator(tag) {
-      // Individual tag validator function
-      this.getSuggestions(tag);
+    onGenreInput(tag) {
+      this.getGerneSuggestion(tag);
       return true;
+    },
+    toLowerCaseOrDefault(val) {
+      return (val || "").toLowerCase();
     }
   }
 };
