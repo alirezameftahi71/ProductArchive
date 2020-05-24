@@ -1,6 +1,6 @@
 <template>
   <div>
-    <b-form-tags input-id="inputId" v-model="value" no-outer-focus class="mb-2" :separator="seperators">
+    <b-form-tags :input-id="inputid" v-model="value" no-outer-focus class="mb-2 no-bg" :separator="seperators">
       <template v-slot="{ tags, inputAttrs, inputHandlers, tagVariant, addTag, removeTag }">
         <b-input-group class="mb-2">
           <b-form-input
@@ -42,17 +42,15 @@
 <script>
 export default {
   props: {
-    inputId: String
+    inputid: String,
+    api: String
   },
   data() {
     return {
       isDropdownVisible: false,
       seperators: ",;",
       value: [],
-      suggestItems: [
-        { id: 1, name: "Iran" },
-        { id: 2, name: "China" }
-      ]
+      suggestItems: []
     };
   },
   methods: {
@@ -66,15 +64,11 @@ export default {
         this.suggestItems = [];
       } else {
         this.axios
-          .get("/api/genres")
+          .get(this.api)
           .then(response => {
             const data = response.data.filter(x => this.toLowerCaseOrDefault(x.name).includes(this.toLowerCaseOrDefault(val)));
             this.suggestItems = data.splice(0, 4);
-            if (this.suggestItems && this.suggestItems.length) {
-              this.isDropdownVisible = true;
-            } else {
-              this.isDropdownVisible = false;
-            }
+            this.isDropdownVisible = this.suggestItems && this.suggestItems.length;
           })
           .catch(err => console.log(err));
       }
@@ -86,5 +80,9 @@ export default {
 .dropdown-items-container {
   top: initial;
   left: initial;
+}
+.no-bg {
+  background: transparent;
+  border: none;
 }
 </style>
