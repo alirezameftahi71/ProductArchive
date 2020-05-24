@@ -86,16 +86,31 @@
 <script>
 export default {
   props: {
-    item: Object
+    item: {
+      type: Object,
+      default() {
+        return {
+          name: "",
+          released_date: "",
+          rate: 1,
+          checked: false,
+          genres: [],
+          platforms: [],
+          publishers: [],
+          description: "",
+          coverPic: null
+        };
+      }
+    }
   },
   mounted() {
-    this.isUpdateMode = !!this.item;
+    this.isUpdateMode = !!this.item.id;
   },
   data() {
     return {
       markOptions: [
-        { value: "false", text: "False" },
-        { value: "true", text: "True" }
+        { value: false, text: "False" },
+        { value: true, text: "True" }
       ],
       seperators: ",;",
       isUpdateMode: false
@@ -111,7 +126,8 @@ export default {
         description: this.item.description,
         genres: this.item.genres.map(x => x.name),
         publishers: this.item.publishers.map(x => x.name),
-        platforms: this.item.platforms.map(x => x.name)
+        platforms: this.item.platforms.map(x => x.name),
+        coverPic: this.item.coverPic
       };
     }
   },

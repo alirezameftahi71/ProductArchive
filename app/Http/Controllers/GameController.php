@@ -108,7 +108,7 @@ class GameController extends Controller
                 $game->publishers()->sync($publishers);
             }
 
-            if (request('coverPic') != null && request('coverPic') != "null") {
+            if (request('coverPic') != null && request('coverPic') != "null" && request('coverPic') != "undefined") {
                 $game->update([
                     'cover_pic' => request('coverPic')->store('uploads', 'public'),
                 ]);
