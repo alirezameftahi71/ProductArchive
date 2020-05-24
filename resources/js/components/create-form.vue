@@ -38,20 +38,20 @@
           ></tag-autocomplete>
         </b-form-group>
         <b-form-group label="Platforms:" label-for="platforms">
-          <b-form-tags
-            input-id="platforms"
-            v-model="form.platforms"
-            placeholder="Platforms"
-            :separator="seperators"
-          ></b-form-tags>
+          <tag-autocomplete
+            :iscontainerstatic="false"
+            inputid="platforms"
+            api="/api/platforms"
+            :selectedtags.sync="form.platforms"
+          ></tag-autocomplete>
         </b-form-group>
         <b-form-group label="Publishers:" label-for="publishers">
-          <b-form-tags
-            input-id="publishers"
-            v-model="form.publishers"
-            placeholder="Publishers"
-            :separator="seperators"
-          ></b-form-tags>
+          <tag-autocomplete
+            :iscontainerstatic="false"
+            inputid="publishers"
+            api="/api/publishers"
+            :selectedtags.sync="form.publishers"
+          ></tag-autocomplete>
         </b-form-group>
       </div>
       <div class="col-md-4">
