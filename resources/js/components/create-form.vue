@@ -29,30 +29,15 @@
             </b-form-group>
           </div>
         </div>
-        <b-form-group label="Genres:" label-for="genres" description="Press , or ; to add tags">
-          <b-form-tags
-            input-id="genres"
-            ref="genreTagRef"
-            v-model="form.genres"
-            placeholder="Genres"
-            :tag-validator="onGenreInput"
-            :separator="seperators"
-          >
-          </b-form-tags>
-          <b-dropdown
-            block
-            variant="link"
-            ref="genresDropdown"
-            toggle-class="p-0 text-decoration-none"
-            no-caret
-            menu-class="w-100"
-          >
-            <b-dropdown-item v-for="item in genreItems" :key="item.id" href="#" @click="onGenreItemClick(item)">{{
-              item.name
-            }}</b-dropdown-item>
-          </b-dropdown>
+        <b-form-group label="Genres:" label-for="genres">
+          <tag-autocomplete
+            :iscontainerstatic="false"
+            inputid="genres"
+            api="/api/genres"
+            :selectedtags.sync="form.genres"
+          ></tag-autocomplete>
         </b-form-group>
-        <b-form-group label="Platforms:" label-for="platforms" description="Press , or ; to add tags">
+        <b-form-group label="Platforms:" label-for="platforms">
           <b-form-tags
             input-id="platforms"
             v-model="form.platforms"
@@ -60,7 +45,7 @@
             :separator="seperators"
           ></b-form-tags>
         </b-form-group>
-        <b-form-group label="Publishers:" label-for="publishers" description="Press , or ; to add tags">
+        <b-form-group label="Publishers:" label-for="publishers">
           <b-form-tags
             input-id="publishers"
             v-model="form.publishers"
@@ -104,8 +89,21 @@ export default {
     item: Object
   },
   mounted() {
-    if (this.item) {
-      this.form = {
+    this.isUpdateMode = !!this.item;
+  },
+  data() {
+    return {
+      markOptions: [
+        { value: "false", text: "False" },
+        { value: "true", text: "True" }
+      ],
+      seperators: ",;",
+      isUpdateMode: false
+    };
+  },
+  computed: {
+    form() {
+      return {
         name: this.item.name,
         releasedDate: this.item.released_date,
         rate: +this.item.rate,
@@ -115,45 +113,7 @@ export default {
         publishers: this.item.publishers.map(x => x.name),
         platforms: this.item.platforms.map(x => x.name)
       };
-      this.isUpdateMode = true;
     }
-    this.$root.$on("bv::dropdown::show", bvEvent => {
-      if (!this.mustShow) {
-        bvEvent.preventDefault();
-      }
-      this.mustShow = false;
-    });
-
-    this.$root.$on("bv::dropdown::hide", bvEvent => {
-      if (!this.mustClose) {
-        bvEvent.preventDefault();
-      }
-      this.mustClose = false;
-    });
-  },
-  data() {
-    return {
-      mustShow: false,
-      mustClose: false,
-      form: {
-        name: "",
-        releasedDate: "",
-        rate: 1,
-        isChecked: "false",
-        genres: [],
-        platforms: [],
-        publishers: [],
-        description: "",
-        coverPic: null
-      },
-      markOptions: [
-        { value: "false", text: "False" },
-        { value: "true", text: "True" }
-      ],
-      seperators: ",;",
-      genreItems: [],
-      isUpdateMode: false
-    };
   },
   methods: {
     onSubmit(evt) {
@@ -166,41 +126,8 @@ export default {
         .then(response => window.location.replace(`/?id=${response.data.id}`))
         .catch(err => console.log(err));
     },
-    onGenreItemClick(dataItem) {
-      this.$refs.genreTagRef.addTag(dataItem.name);
-      this.closeGenreDropdown();
-    },
-    closeGenreDropdown() {
-      this.mustClose = true;
-      this.$refs.genresDropdown.hide(true);
-    },
     formatCoverPicName(file) {
       return file[0].name.substr(0, 20);
-    },
-    getGerneSuggestion(val) {
-      this.axios
-        .get("/api/genres")
-        .then(response => {
-          const data = response.data.filter(x => this.toLowerCaseOrDefault(x.name).includes(this.toLowerCaseOrDefault(val)));
-          this.genreItems = data.splice(0, 4);
-          if (this.genreItems && this.genreItems.length) {
-            this.mustShow = true;
-            this.$refs.genresDropdown.show();
-          } else {
-            this.closeGenreDropdown();
-          }
-          setTimeout(() => {
-            this.$refs.genreTagRef.focus();
-          });
-        })
-        .catch(err => console.log(err));
-    },
-    onGenreInput(tag) {
-      this.getGerneSuggestion(tag);
-      return true;
-    },
-    toLowerCaseOrDefault(val) {
-      return (val || "").toLowerCase();
     }
   }
 };

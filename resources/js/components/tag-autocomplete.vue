@@ -2,13 +2,13 @@
   <b-form-tags
     :input-id="inputid"
     v-model="values"
-    @input="$emit('update:selectedtags', values)"
+    @input="onTagsChange"
     no-outer-focus
     class="p-0 no-bg"
     :separator="seperators"
   >
     <template v-slot="{ tags, inputAttrs, inputHandlers, tagVariant, addTag, removeTag }">
-      <b-input-group class="mb-2">
+      <b-input-group>
         <b-form-input
           v-bind="inputAttrs"
           ref="input"
@@ -35,7 +35,7 @@
         >
       </div>
 
-      <div :class="{ 'd-inline-block': iscontainerstatic }">
+      <div :class="{ 'd-inline-block': iscontainerstatic }" class="pt-2">
         <b-form-tag v-for="tag in tags" @remove="removeTag(tag)" :key="tag" :title="tag" :variant="tagVariant" class="mr-1">{{
           tag
         }}</b-form-tag>
@@ -63,6 +63,9 @@ export default {
   methods: {
     toLowerCaseOrDefault(val) {
       return (val || "").toLowerCase();
+    },
+    onTagsChange() {
+      this.$emit("update:selectedtags", this.values);
     },
     onInputChange(val) {
       val = val.trim();
