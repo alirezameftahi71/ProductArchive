@@ -48,7 +48,7 @@ export default {
         this.dataItems.findIndex(x => x.id === item.id)
       );
       this.dataItems = this.dataItems.filter(x => x.id !== item.id);
-      document.querySelector(`#list-items #${CSS.escape(nearestItem.id)}`).classList.add("active");
+      nearestItem && document.querySelector(`#list-items #${CSS.escape(nearestItem.id)}`).classList.add("active");
       this.$root.$emit("selection-changed", nearestItem);
     },
     getNearestItem(array, currentIndex) {

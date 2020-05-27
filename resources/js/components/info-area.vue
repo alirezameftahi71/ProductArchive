@@ -2,7 +2,7 @@
   <div id="info-area">
     <div class="row">
       <div class="col-lg-8 col-md-7 order-2 order-md-1 mt-4">
-        <info-grid :item="dataItem"></info-grid>
+        <info-grid :item="_dataItem"></info-grid>
       </div>
       <div class="col-lg-4 col-md-5 order-1 order-md-2">
         <div class="container-fluid">
@@ -11,22 +11,22 @@
 
         <div class="container mt-1">
           <b-button-group size="sm">
-            <b-button variant="light" class="icon border-0" :disabled="!item" title="Delete Item" @click="deleteItem()">
+            <b-button variant="light" class="icon border-0" :disabled="!_dataItem.id" title="Delete Item" @click="deleteItem()">
               <b-icon icon="trash-fill"></b-icon>
             </b-button>
-            <b-button variant="light" class="icon border-0" :disabled="!item" title="Favorite Item" @click="heartItem()">
+            <b-button variant="light" class="icon border-0" :disabled="!_dataItem.id" title="Favorite Item" @click="heartItem()">
               <b-icon icon="heart-fill"></b-icon>
             </b-button>
-            <b-button variant="light" class="icon border-0" :disabled="!item" title="Edit Item" @click="editItem()">
+            <b-button variant="light" class="icon border-0" :disabled="!_dataItem.id" title="Edit Item" @click="editItem()">
               <b-icon icon="pencil-square"></b-icon>
             </b-button>
             <b-button
               variant="light"
               class="icon border-0"
               title="Mark Item"
-              :disabled="!item"
+              :disabled="!_dataItem.id"
               @click="markItem()"
-              :class="{ 'i-green': dataItem.checked === 'true' }"
+              :class="{ 'i-green': _dataItem.checked === 'true' }"
             >
               <b-icon icon="check-circle"></b-icon>
             </b-button>
@@ -36,7 +36,7 @@
     </div>
     <hr class="d-none d-md-block" />
     <div class="container-fluid">
-      <p id="description">{{ dataItem.description }}</p>
+      <p id="description">{{ _dataItem.description }}</p>
     </div>
   </div>
 </template>
@@ -49,9 +49,17 @@ export default {
   data() {
     return {
       dataItem: this.item
-        ? this.item
+    };
+  },
+  computed: {
+    coverPic() {
+      return this.dataItem ? `storage/${this.dataItem.cover_pic}` : "storage/assets/default.png";
+    },
+    _dataItem() {
+      return this.dataItem
+        ? this.dataItem
         : {
-            id: 0,
+            id: null,
             name: "-",
             released_date: "-",
             rate: "-",
@@ -61,12 +69,7 @@ export default {
             genres: [{ name: "-" }],
             platforms: [{ name: "-" }],
             publishers: [{ name: "-" }]
-          }
-    };
-  },
-  computed: {
-    coverPic() {
-      return this.dataItem ? `storage/${this.dataItem.cover_pic}` : "storage/assets/default.png";
+          };
     }
   },
   created() {
@@ -119,6 +122,9 @@ export default {
         color: red;
       }
     }
+  }
+  &[disabled] {
+    cursor: initial;
   }
 }
 </style>
