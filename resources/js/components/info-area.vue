@@ -6,7 +6,7 @@
       </div>
       <div class="col-lg-4 col-md-5 order-1 order-md-2">
         <div class="container-fluid">
-          <img id="cover-pic" class="img-fluid" :src="coverPic" alt="Product Cover" width="265" height="320" />
+          <img id="cover-pic" class="img-fluid" :src="_dataItem.cover_pic" alt="Product Cover" width="265" height="320" />
         </div>
 
         <div class="container mt-1">
@@ -26,7 +26,7 @@
               title="Mark Item"
               :disabled="!_dataItem.id"
               @click="markItem()"
-              :class="{ 'i-green': _dataItem.checked === 'true' }"
+              :class="{ 'i-green': _dataItem.checked === true }"
             >
               <b-icon icon="check-circle"></b-icon>
             </b-button>
@@ -52,20 +52,28 @@ export default {
     };
   },
   computed: {
-    coverPic() {
-      return this.dataItem ? `storage/${this.dataItem.cover_pic}` : "storage/assets/default.png";
-    },
     _dataItem() {
       return this.dataItem
-        ? this.dataItem
+        ? {
+            id: this.dataItem.id,
+            name: this.dataItem.name,
+            released_date: this.dataItem.released_date,
+            rate: this.dataItem.rate,
+            description: this.dataItem.description,
+            cover_pic: this.dataItem.cover_pic ? `storage/${this.dataItem.cover_pic}` : "storage/assets/default.png",
+            checked: this.dataItem.checked === "1",
+            genres: this.dataItem.genres,
+            platforms: this.dataItem.platforms,
+            publishers: this.dataItem.publishers
+          }
         : {
             id: null,
             name: "-",
             released_date: "-",
             rate: "-",
             description: "-",
-            cover_pic: "assets/default.png",
-            checked: "false",
+            cover_pic: "storage/assets/default.png",
+            checked: false,
             genres: [{ name: "-" }],
             platforms: [{ name: "-" }],
             publishers: [{ name: "-" }]

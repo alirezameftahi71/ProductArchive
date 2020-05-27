@@ -122,7 +122,7 @@ export default {
         name: this.item.name,
         releasedDate: this.item.released_date,
         rate: +this.item.rate,
-        isChecked: this.item.checked,
+        isChecked: this.item.checked == "1",
         description: this.item.description,
         genres: this.item.genres.map(x => x.name),
         publishers: this.item.publishers.map(x => x.name),
