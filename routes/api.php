@@ -1,6 +1,5 @@
 <?php
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,8 +19,11 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/games', 'GameController@all');
 Route::get('/games/{game}', 'GameController@show');
-Route::post('/games/toggleChecked/{game}', 'GameController@toggleChecked');
+Route::post('/games', 'GameController@store');
+Route::post('/games/{game}', 'GameController@update');
 Route::delete('/games/{game}', 'GameController@destroy');
+
+Route::post('/games/toggleChecked/{game}', 'GameController@toggleChecked');
 
 Route::get('/genres', 'GenreController@all');
 Route::get('/genres/{genre}', 'GenreController@show');

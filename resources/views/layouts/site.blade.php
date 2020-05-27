@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Game Archive</title>
@@ -12,14 +12,16 @@
 </head>
 
 <body>
-    @include('layouts.navbar')
-    <div id="app" class="container-fluid">
-        @yield('content')
+    <div id="app">
+        <nav-bar></nav-bar>
+        <b-container fluid>
+            @yield('content')
+        </b-container>
+        <footer-bar></footer-bar>
+        <div class="loader loader-default" data-text data-blink></div>
+        @yield('modals')
     </div>
-    @include('layouts.footer')
-    <div class="loader loader-default" data-text data-blink></div>
     <script src="/js/app.js"></script>
-    @yield('modals')
     @yield('scripts')
 </body>
 

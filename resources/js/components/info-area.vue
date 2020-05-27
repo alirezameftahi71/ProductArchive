@@ -1,0 +1,130 @@
+<template>
+  <div id="info-area">
+    <div class="row">
+      <div class="col-lg-8 col-md-7 order-2 order-md-1 mt-4">
+        <info-grid :item="_dataItem"></info-grid>
+      </div>
+      <div class="col-lg-4 col-md-5 order-1 order-md-2">
+        <div class="container-fluid">
+          <img id="cover-pic" class="img-fluid" :src="coverPic" alt="Product Cover" width="265" height="320" />
+        </div>
+
+        <div class="container mt-1">
+          <b-button-group size="sm">
+            <b-button variant="light" class="icon border-0" :disabled="!_dataItem.id" title="Delete Item" @click="deleteItem()">
+              <b-icon icon="trash-fill"></b-icon>
+            </b-button>
+            <b-button variant="light" class="icon border-0" :disabled="!_dataItem.id" title="Favorite Item" @click="heartItem()">
+              <b-icon icon="heart-fill"></b-icon>
+            </b-button>
+            <b-button variant="light" class="icon border-0" :disabled="!_dataItem.id" title="Edit Item" @click="editItem()">
+              <b-icon icon="pencil-square"></b-icon>
+            </b-button>
+            <b-button
+              variant="light"
+              class="icon border-0"
+              title="Mark Item"
+              :disabled="!_dataItem.id"
+              @click="markItem()"
+              :class="{ 'i-green': _dataItem.checked === 'true' }"
+            >
+              <b-icon icon="check-circle"></b-icon>
+            </b-button>
+          </b-button-group>
+        </div>
+      </div>
+    </div>
+    <hr class="d-none d-md-block" />
+    <div class="container-fluid">
+      <p id="description">{{ _dataItem.description }}</p>
+    </div>
+  </div>
+</template>
+
+<script>
+export default {
+  props: {
+    item: Object
+  },
+  data() {
+    return {
+      dataItem: this.item
+    };
+  },
+  computed: {
+    coverPic() {
+      return this.dataItem ? `storage/${this.dataItem.cover_pic}` : "storage/assets/default.png";
+    },
+    _dataItem() {
+      return this.dataItem
+        ? this.dataItem
+        : {
+            id: null,
+            name: "-",
+            released_date: "-",
+            rate: "-",
+            description: "-",
+            cover_pic: "assets/default.png",
+            checked: "false",
+            genres: [{ name: "-" }],
+            platforms: [{ name: "-" }],
+            publishers: [{ name: "-" }]
+          };
+    }
+  },
+  created() {
+    this.$root.$on("selection-changed", item => (this.dataItem = item));
+    this.$root.$on("delete-confirmed", () => this.$root.$emit("item-deleted", this.dataItem));
+  },
+  methods: {
+    editItem() {
+      window.location.replace(`/edit/${this.dataItem.id}`);
+    },
+    async deleteItem() {
+      this.$root.$emit("item-delete-clicked", this.dataItem);
+    },
+    async markItem() {
+      await this.axios.post(`/api/games/toggleChecked/${this.dataItem.id}`);
+      const fetchResponse = await this.axios.get(`/api/games/${this.dataItem.id}`);
+      this.dataItem = fetchResponse.data;
+    },
+    heartItem() {
+      // TODO: implement this functionality
+    }
+  }
+};
+</script>
+
+<style lang="scss" scoped>
+@import "../../sass/variables";
+
+.icon {
+  background-color: $milk;
+  &:not([disabled]) {
+    cursor: pointer;
+
+    &:hover {
+      color: $blue;
+    }
+
+    &.i-green {
+      color: green;
+
+      &:active {
+        color: green;
+      }
+    }
+
+    &.i-red {
+      color: red;
+
+      &:active {
+        color: red;
+      }
+    }
+  }
+  &[disabled] {
+    cursor: initial;
+  }
+}
+</style>

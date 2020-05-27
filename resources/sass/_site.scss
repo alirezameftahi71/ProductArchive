@@ -1,63 +1,56 @@
-footer#footer {
-    padding: 1rem;
-    position: static;
-    bottom: 0;
+body {
+  overflow: hidden;
 }
 
 .full-height {
-    height: calc(100vh - 6.6rem);
-    overflow: hidden;
+  height: calc(100vh - 6.6rem);
+  overflow: hidden;
+  background-color: $milk;
 }
 
-.icon {
-    cursor: pointer;
-    color: $darkindigo;
-
-    &:hover {
-        color: $blue;
-        text-decoration: none;
-    }
+.scrolled-y {
+  overflow-y: auto;
 }
 
-/* loading background opacity setting */
+.hidden {
+  display: none;
+}
+
+.no-rounded-corners {
+  border-radius: 0;
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+}
+
 .loader.is-active {
-    background-color: rgba(0, 0, 0, 0.50);
+  background-color: rgba(0, 0, 0, 0.5);
 }
 
-/* Loading indicator for input boxes */
-input.tm-input.input-loading {
-    background-color: #ffffff;
-    background-image: url("assets/input-loading.gif");
-    background-size: 25px 25px;
-    background-position: right center;
-    background-repeat: no-repeat;
+.side-bar-container {
+  height: 100%;
 }
 
-/* Makes the table column widths all equal */
-.fixed-width-table {
-    table-layout: fixed;
-}
-
-
-.i-green {
-    color: green;
-
-    &:hover {
-        color: greenyellow;
-    }
-}
-
-.i-red {
-    color: red;
+.area-container {
+  height: inherit;
+  overflow-y: auto;
 }
 
 @media screen and (max-width: 47.99em) {
-    .full-height {
-        overflow-x: hidden;
-        overflow-y: auto;
-    }
+  body {
+    height: initial;
+  }
 
-    body {
-        height: initial;
-    }
+  .full-height {
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+
+  .area-container {
+    height: unset;
+    overflow: hidden;
+  }
+
+  .side-bar-container {
+    height: auto;
+  }
 }

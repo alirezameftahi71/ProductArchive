@@ -1,14 +1,13 @@
-// Fonts
-@import url('https://fonts.googleapis.com/css?family=Nunito');
-@import "~@fortawesome/fontawesome-free/scss/fontawesome";
-@import "~@fortawesome/fontawesome-free/scss/solid";
-@import "~@fortawesome/fontawesome-free/scss/brands";
-@import "~@fortawesome/fontawesome-free/scss/regular";
-@import '~pure-css-loader/dist/css-loader.css';
-@import '~pure-css-loader/dist/loader-default.css';
+@font-face {
+  font-family: Nunito-Regular;
+  src: url("../../public/storage/assets/Nunito-Regular.ttf");
+}
 
-@import 'variables';
-@import '~bootstrap/scss/bootstrap';
-@import '~arm-scrollbar/lib/main';
-@import 'tagmanager';
-@import 'site';
+@import "~pure-css-loader/dist/css-loader.css";
+@import "~pure-css-loader/dist/loader-default.css";
+
+@import "variables";
+@import "~bootstrap";
+@import "~bootstrap-vue";
+@import "~arm-scrollbar/lib/main";
+@import "site";

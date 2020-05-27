@@ -7,7 +7,6 @@ use App\Genre;
 use App\Platform;
 use App\Publisher;
 use Exception;
-use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
@@ -29,108 +28,20 @@ class HomeController extends Controller
         return view('create');
     }
 
-    public function store()
-    {
-        DB::beginTransaction();
-        try {
-            $game = Game::create([
-                'name' => request('name'),
-                'released_date' => request('released-date'),
-                'rate' => request('rate'),
-                'checked' => request('isChecked'),
-                'description' => request('desc-box')
-            ]);
-
-            if (request('hidden-genre')) {
-                $genre_names =  explode(',', request('hidden-genre'));
-                $genres = HomeController::fetch_objects_from_strings(Genre::class, $genre_names);
-                $game->genres()->sync($genres);
-            }
-
-            if (request('hidden-platform')) {
-                $platform_names = explode(',', request('hidden-platform'));
-                $platforms = HomeController::fetch_objects_from_strings(Platform::class, $platform_names);
-                $game->platforms()->sync($platforms);
-            }
-
-            if (request('hidden-publisher')) {
-                $publisher_names = explode(',', request('hidden-publisher'));
-                $publishers = HomeController::fetch_objects_from_strings(Publisher::class, $publisher_names);
-                $game->publishers()->sync($publishers);
-            }
-
-            if (request('cover-pic')) {
-                $game->update([
-                    'cover_pic' => request('cover-pic')->store('uploads', 'public'),
-                ]);
-            }
-
-            DB::commit();
-            return redirect()->route('home', ['id' => $game->id]);
-        } catch (Exception $ex) {
-            DB::rollback();
-            return response()->json(['error' => $ex->getMessage()], 500);
-        }
-    }
-
     public function edit($id)
     {
         $game = Game::with('genres', 'platforms', 'publishers')->find($id);
         return view('edit', compact('game'));
     }
 
-    public function update(Game $game)
-    {
-        DB::beginTransaction();
-        try {
-            $game->update([
-                'name' => request('name'),
-                'released_date' => request('released-date'),
-                'rate' => request('rate'),
-                'checked' => request('isChecked'),
-                'description' => request('desc-box')
-            ]);
-
-            if (request('hidden-genre')) {
-                $genre_names =  explode(',', request('hidden-genre'));
-                $genres = HomeController::fetch_objects_from_strings(Genre::class, $genre_names);
-                $game->genres()->sync($genres);
-            }
-
-            if (request('hidden-platform')) {
-                $platform_names = explode(',', request('hidden-platform'));
-                $platforms = HomeController::fetch_objects_from_strings(Platform::class, $platform_names);
-                $game->platforms()->sync($platforms);
-            }
-
-            if (request('hidden-publisher')) {
-                $publisher_names = explode(',', request('hidden-publisher'));
-                $publishers = HomeController::fetch_objects_from_strings(Publisher::class, $publisher_names);
-                $game->publishers()->sync($publishers);
-            }
-
-            if (request('cover-pic')) {
-                $game->update([
-                    'cover_pic' => request('cover-pic')->store('uploads', 'public'),
-                ]);
-            }
-
-            DB::commit();
-            return redirect()->route('home', ['id' => $game->id]);
-        } catch (Exception $ex) {
-            DB::rollback();
-            return response()->json(['error' => $ex->getMessage()], 500);
-        }
-    }
-
     public function gridview(Request $request) {
         $collection = Game::getAll();
-        if($request->query('is-checked') == '1') {
+        if($request->query('is-unchecked') == 'true') {
             $collection = $collection->filter(function($item) {
-                return ($item->checked == '0');
+                return ($item->checked == 'false');
             });
         }
-        if($request->query('high-rate') == '1') {
+        if($request->query('high-rate') == 'true') {
             $collection = $collection->filter(function($item) {
                 return ($item->rate >= '4');
             });
@@ -138,13 +49,5 @@ class HomeController extends Controller
         return view('gridview', compact('collection'));
     }
 
-    private static function fetch_objects_from_strings($class, $item_names)
-    {
-        $res = array();
-        foreach ($item_names as $item_name) {
-            $publisher = $class::firstOrCreate(['name' => $item_name]);
-            $res[] = $publisher->id;
-        }
-        return $res;
-    }
+    
 }
