@@ -12,8 +12,8 @@
             </b-form-group>
           </div>
           <div class="col-md-4">
-            <b-form-group label="Marked:" label-for="isChecked">
-              <b-form-select id="isChecked" v-model="form.isChecked" placeholder="Marked" :options="markOptions"></b-form-select>
+            <b-form-group label="Marked:" label-for="checked">
+              <b-form-select id="checked" v-model="form.checked" placeholder="Marked" :options="markOptions"></b-form-select>
             </b-form-group>
           </div>
           <div class="col-md-4">
@@ -122,7 +122,7 @@ export default {
         name: this.item.name,
         releasedDate: this.item.released_date,
         rate: +this.item.rate,
-        isChecked: this.item.checked == "1",
+        checked: this.item.checked == "1",
         description: this.item.description,
         genres: this.item.genres.map(x => x.name),
         publishers: this.item.publishers.map(x => x.name),

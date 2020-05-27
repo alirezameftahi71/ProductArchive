@@ -42,7 +42,7 @@ class GameController extends Controller
                 'name' => request('name'),
                 'released_date' => request('releasedDate'),
                 'rate' => request('rate'),
-                'checked' => request('isChecked'),
+                'checked' => request('checked') == 'true',
                 'description' => request('description')
             ]);
 
@@ -86,7 +86,7 @@ class GameController extends Controller
                 'name' => request('name'),
                 'released_date' => request('releasedDate'),
                 'rate' => request('rate'),
-                'checked' => request('isChecked'),
+                'checked' => request('checked') == 'true',
                 'description' => request('description')
             ]);
 
