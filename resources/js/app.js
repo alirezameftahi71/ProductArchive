@@ -24,6 +24,7 @@ new Vue({
   el: "#app",
   data() {
     return {
+      loadingOverlay: false,
       axiosInterceptorsRequest: null,
       axiosInterceptorsResponse: null
     };
@@ -85,10 +86,10 @@ new Vue({
       });
     },
     showLoading() {
-      document.querySelector(".loader").classList.add("is-active");
+      this.loadingOverlay = true;
     },
     hideLoading() {
-      document.querySelector(".loader").classList.remove("is-active");
+      this.loadingOverlay = false;
     }
   }
 });

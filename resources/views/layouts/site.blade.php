@@ -14,11 +14,12 @@
 <body>
     <div id="app">
         <nav-bar></nav-bar>
-        <b-container fluid>
-            @yield('content')
-        </b-container>
+        <b-overlay :show="loadingOverlay" rounded="false" variant="dark" spinner-variant="light">
+            <b-container fluid>
+                @yield('content')
+            </b-container>
+        </b-overlay>
         <footer-bar></footer-bar>
-        <div class="loader loader-default" data-text data-blink></div>
         <flash-message></flash-message>
         @yield('modals')
     </div>

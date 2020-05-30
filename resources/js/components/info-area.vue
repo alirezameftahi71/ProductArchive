@@ -100,8 +100,7 @@ export default {
             " is marked as ",
             response.data.checked ? "checked." : "unchecked."
           ]);
-          const fetchResponse = await this.axios.get(`/api/games/${this.dataItem.id}`);
-          this.dataItem = fetchResponse.data;
+          this.dataItem.checked = response.data.checked ? "1" : "0";
         })
         .catch(error => {
           console.error(error);
