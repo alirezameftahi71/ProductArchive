@@ -21,17 +21,22 @@ class GameController extends Controller
 
     public function show($id)
     {
-        $game = Game::with('genres', 'platforms', 'publishers')->find($id);
-        if (!$game) {
-            throw new ModelNotFoundException;
+        try {
+            $game = Game::with('genres', 'platforms', 'publishers')->find($id);
+        } catch (\Throwable $th) {
+            throw $th;
         }
         return response()->json($game, 200);
     }
 
     public function destroy(Game $game)
     {
-        $game->delete();
-        return response()->json($game, 204);
+        try {
+            $game->delete();
+        } catch (\Throwable $th) {
+            throw $th;
+        }
+        return response()->json($game, 200);
     }
     
     public function store()
@@ -124,9 +129,13 @@ class GameController extends Controller
 
     public function toggleChecked(Game $game)
     {
-        $game->checked = $game->checked == false ? true : false;
-        $game->save();
-        return response()->json($game, 204);
+        try {
+            $game->checked = $game->checked == false ? true : false;
+            $game->save();
+        } catch (\Throwable $th) {
+            throw $th;
+        }
+        return response()->json($game, 200);
     }
 
     private static function fetch_objects_from_strings($class, $item_names)

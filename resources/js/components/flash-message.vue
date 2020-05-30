@@ -12,7 +12,8 @@ export default {
       this.$bvToast.toast(config.message, {
         title: config.title,
         autoHideDelay: 5000,
-        variant: config.variant
+        variant: config.variant,
+        solid: true
       });
     }
   }

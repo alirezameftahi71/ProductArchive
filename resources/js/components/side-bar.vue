@@ -41,15 +41,28 @@ export default {
       const fetchedItem = await this.axios.get(`/api/games/${currentSelectedId}`);
       this.$root.$emit("selection-changed", fetchedItem.data);
     },
-    async onItemDeleted(item) {
-      await this.axios.delete(`/api/games/${item.id}`);
-      const nearestItem = this.getNearestItem(
-        this.dataItems,
-        this.dataItems.findIndex(x => x.id === item.id)
-      );
-      this.dataItems = this.dataItems.filter(x => x.id !== item.id);
-      nearestItem && document.querySelector(`#list-items #${CSS.escape(nearestItem.id)}`).classList.add("active");
-      this.$root.$emit("selection-changed", nearestItem);
+    onItemDeleted(item) {
+      this.axios
+        .delete(`/api/games/${item.id}`)
+        .then(response => {
+          console.log(response);
+          this.$root.showFlashMessage({
+            title: "Success",
+            message: [this.$createElement("b", response.data.name), " is deleted", "."],
+            variant: "success"
+          });
+
+          const nearestItem = this.getNearestItem(
+            this.dataItems,
+            this.dataItems.findIndex(x => x.id === item.id)
+          );
+          this.dataItems = this.dataItems.filter(x => x.id !== item.id);
+          nearestItem && document.querySelector(`#list-items #${CSS.escape(nearestItem.id)}`).classList.add("active");
+          this.$root.$emit("selection-changed", nearestItem);
+        })
+        .catch(error => {
+          console.error(error);
+        });
     },
     getNearestItem(array, currentIndex) {
       const previousItem = array[currentIndex - 1];
