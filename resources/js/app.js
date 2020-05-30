@@ -64,7 +64,7 @@ new Vue({
       );
     },
     showErrorFlashMessage(error) {
-      this.$root.$emit("show-flash-message", {
+      this.showFlashMessage({
         title: error.response.statusText,
         message: error.response.data.message,
         variant: "danger"
