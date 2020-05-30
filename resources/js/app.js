@@ -70,6 +70,13 @@ new Vue({
         variant: "danger"
       });
     },
+    showSuccessMessage(message) {
+      this.showFlashMessage({
+        title: "Success",
+        message: message,
+        variant: "success"
+      });
+    },
     showFlashMessage(config) {
       this.$root.$emit("show-flash-message", {
         title: config.title,

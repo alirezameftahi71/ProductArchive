@@ -79,7 +79,7 @@ class GameController extends Controller
             return response()->json($game, 200);
         } catch (Exception $ex) {
             DB::rollback();
-            return response()->json(['error' => $ex->getMessage()], 500);
+            throw $ex;
         }
     }
 
@@ -123,7 +123,7 @@ class GameController extends Controller
             return response()->json($game, 200);
         } catch (Exception $ex) {
             DB::rollback();
-            return response()->json(['error' => $ex->getMessage()], 500);
+            throw $ex;
         }
     }
 

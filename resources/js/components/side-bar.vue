@@ -45,11 +45,7 @@ export default {
       this.axios
         .delete(`/api/games/${item.id}`)
         .then(response => {
-          this.$root.showFlashMessage({
-            title: "Success",
-            message: [this.$createElement("b", response.data.name), " is deleted", "."],
-            variant: "success"
-          });
+          this.$root.showSuccessMessage([this.$createElement("b", response.data.name), " is deleted."]);
 
           const nearestItem = this.getNearestItem(
             this.dataItems,

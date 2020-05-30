@@ -122,7 +122,7 @@ export default {
         name: this.item.name,
         releasedDate: this.item.released_date,
         rate: +this.item.rate,
-        checked: this.item.checked == "1",
+        checked: this.item.checked == "1", // false as boolean stores as 1 or 0 in database!
         description: this.item.description,
         genres: this.item.genres.map(x => x.name),
         publishers: this.item.publishers.map(x => x.name),
@@ -139,7 +139,11 @@ export default {
       Object.keys(this.form).forEach(key => formData.append(key, this.form[key]));
       this.axios
         .post(url, formData)
-        .then(response => window.location.replace(`/?id=${response.data.id}`))
+        .then(response => {
+          const messageAppend = this.isUpdateMode ? " updated successfully." : " is stored in database.";
+          this.$root.showSuccessMessage([this.$createElement("b", response.data.name), messageAppend]);
+          window.location.assign(`/?id=${response.data.id}`);
+        })
         .catch(error => console.error(error));
     },
     formatCoverPicName(file) {
