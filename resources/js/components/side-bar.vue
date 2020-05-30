@@ -41,15 +41,23 @@ export default {
       const fetchedItem = await this.axios.get(`/api/games/${currentSelectedId}`);
       this.$root.$emit("selection-changed", fetchedItem.data);
     },
-    async onItemDeleted(item) {
-      await this.axios.delete(`/api/games/${item.id}`);
-      const nearestItem = this.getNearestItem(
-        this.dataItems,
-        this.dataItems.findIndex(x => x.id === item.id)
-      );
-      this.dataItems = this.dataItems.filter(x => x.id !== item.id);
-      nearestItem && document.querySelector(`#list-items #${CSS.escape(nearestItem.id)}`).classList.add("active");
-      this.$root.$emit("selection-changed", nearestItem);
+    onItemDeleted(item) {
+      this.axios
+        .delete(`/api/games/${item.id}`)
+        .then(response => {
+          this.$root.showSuccessMessage([this.$createElement("b", response.data.name), " is deleted."]);
+
+          const nearestItem = this.getNearestItem(
+            this.dataItems,
+            this.dataItems.findIndex(x => x.id === item.id)
+          );
+          this.dataItems = this.dataItems.filter(x => x.id !== item.id);
+          nearestItem && document.querySelector(`#list-items #${CSS.escape(nearestItem.id)}`).classList.add("active");
+          this.$root.$emit("selection-changed", nearestItem);
+        })
+        .catch(error => {
+          console.error(error);
+        });
     },
     getNearestItem(array, currentIndex) {
       const previousItem = array[currentIndex - 1];
@@ -78,12 +86,11 @@ export default {
     },
     makeFirstItemActive() {
       const urlParams = new URLSearchParams(window.location.search);
-      const id = urlParams.get("id") || this.getElementId(this.getFirstItemInList());
+      const sentId = urlParams.get("id");
+      const id = sentId || this.getElementId(this.getFirstItemInList());
       const item = document.querySelector(`#list-items > #${CSS.escape(id)}`);
-      if (item) {
-        item.classList.add("active");
-        item.scrollIntoView();
-      }
+      item && item.classList.add("active");
+      sentId && item.scrollIntoView();
     },
     getFirstItemInList() {
       return document.querySelector("#list-items button");

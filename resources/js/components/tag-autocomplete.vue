@@ -17,6 +17,14 @@
           placeholder="To add tags press ; , or enter"
           class="form-control"
         ></b-form-input>
+        <b-overlay
+          :show="requesting"
+          variant="transparent"
+          blur="0"
+          spinner-small
+          overlay-tag="span"
+          class="custom-loader"
+        ></b-overlay>
         <b-input-group-append>
           <b-button @click="addTag()" variant="outline-secondary">Add</b-button>
         </b-input-group-append>
@@ -54,11 +62,19 @@ export default {
   },
   data() {
     return {
+      requesting: false,
       values: this.selectedtags,
       isDropdownVisible: false,
       seperators: ",;",
-      suggestItems: []
+      suggestItems: [],
+      customAxios: null
     };
+  },
+  created() {
+    // eslint-disable-next-line no-undef
+    this.customAxios = axios.create();
+    this.setAxiosRequestInterceptors();
+    this.setAxiosResponseInterceptors();
   },
   methods: {
     toLowerCaseOrDefault(val) {
@@ -67,21 +83,53 @@ export default {
     onTagsChange() {
       this.$emit("update:selectedtags", this.values);
     },
+    showLoading() {
+      this.requesting = true;
+    },
+    hideLoading() {
+      this.requesting = false;
+    },
     onInputChange(val) {
       val = val.trim();
       if (!val) {
         this.isDropdownVisible = false;
         this.suggestItems = [];
       } else {
-        this.axios
+        this.customAxios
           .get(this.api)
           .then(response => {
             const data = response.data.filter(x => this.toLowerCaseOrDefault(x.name).includes(this.toLowerCaseOrDefault(val)));
             this.suggestItems = data.splice(0, 4);
             this.isDropdownVisible = this.suggestItems && this.suggestItems.length;
           })
-          .catch(err => console.log(err));
+          .catch(error => console.error(error));
       }
+    },
+    setAxiosRequestInterceptors() {
+      this.customAxios.interceptors.request.use(
+        config => {
+          this.showLoading();
+          return config;
+        },
+        error => {
+          this.hideLoading();
+          this.$root.showErrorFlashMessage(error);
+          return Promise.reject(error);
+        }
+      );
+    },
+    setAxiosResponseInterceptors() {
+      this.customAxios.interceptors.response.use(
+        response => {
+          this.hideLoading();
+          return response;
+        },
+        error => {
+          this.hideLoading();
+          this.$root.showErrorFlashMessage(error);
+          return Promise.reject(error);
+        }
+      );
     }
   }
 };
@@ -94,5 +142,9 @@ export default {
 .no-bg {
   background: transparent;
   border: none;
+}
+.custom-loader {
+  left: -1rem;
+  top: -0.1rem;
 }
 </style>

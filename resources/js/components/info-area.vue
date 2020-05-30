@@ -86,15 +86,26 @@ export default {
   },
   methods: {
     editItem() {
-      window.location.replace(`/edit/${this.dataItem.id}`);
+      window.location.assign(`/edit/${this.dataItem.id}`);
     },
-    async deleteItem() {
+    deleteItem() {
       this.$root.$emit("item-delete-clicked", this.dataItem);
     },
-    async markItem() {
-      await this.axios.post(`/api/games/toggleChecked/${this.dataItem.id}`);
-      const fetchResponse = await this.axios.get(`/api/games/${this.dataItem.id}`);
-      this.dataItem = fetchResponse.data;
+    markItem() {
+      this.axios
+        .post(`/api/games/toggleChecked/${this.dataItem.id}`)
+        .then(async response => {
+          this.$root.showSuccessMessage([
+            this.$createElement("b", response.data.name),
+            " is marked as ",
+            response.data.checked ? "checked." : "unchecked."
+          ]);
+          const fetchResponse = await this.axios.get(`/api/games/${this.dataItem.id}`);
+          this.dataItem = fetchResponse.data;
+        })
+        .catch(error => {
+          console.error(error);
+        });
     },
     heartItem() {
       // TODO: implement this functionality

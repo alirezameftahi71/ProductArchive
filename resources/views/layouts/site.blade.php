@@ -19,6 +19,7 @@
         </b-container>
         <footer-bar></footer-bar>
         <div class="loader loader-default" data-text data-blink></div>
+        <flash-message></flash-message>
         @yield('modals')
     </div>
     <script src="/js/app.js"></script>
