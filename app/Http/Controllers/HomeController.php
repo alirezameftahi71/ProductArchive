@@ -38,7 +38,7 @@ class HomeController extends Controller
         $collection = Game::getAll();
         if($request->query('is-unchecked') == 'true') {
             $collection = $collection->filter(function($item) {
-                return ($item->checked == 'false');
+                return ($item->checked == false);
             });
         }
         if($request->query('high-rate') == 'true') {
