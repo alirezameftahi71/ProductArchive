@@ -15,3 +15,6 @@
 @section('modals')
     <delete-modal></delete-modal>
 @endsection
+@section('toasts')
+    <flash-message></flash-message>
+@endsection

@@ -78,12 +78,11 @@ export default {
     },
     makeFirstItemActive() {
       const urlParams = new URLSearchParams(window.location.search);
-      const id = urlParams.get("id") || this.getElementId(this.getFirstItemInList());
+      const sentId = urlParams.get("id");
+      const id = sentId || this.getElementId(this.getFirstItemInList());
       const item = document.querySelector(`#list-items > #${CSS.escape(id)}`);
-      if (item) {
-        item.classList.add("active");
-        item.scrollIntoView();
-      }
+      item && item.classList.add("active");
+      sentId && item.scrollIntoView();
     },
     getFirstItemInList() {
       return document.querySelector("#list-items button");
