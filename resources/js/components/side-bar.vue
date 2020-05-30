@@ -45,7 +45,6 @@ export default {
       this.axios
         .delete(`/api/games/${item.id}`)
         .then(response => {
-          console.log(response);
           this.$root.showFlashMessage({
             title: "Success",
             message: [this.$createElement("b", response.data.name), " is deleted", "."],

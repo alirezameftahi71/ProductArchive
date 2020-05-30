@@ -140,7 +140,7 @@ export default {
       this.axios
         .post(url, formData)
         .then(response => window.location.replace(`/?id=${response.data.id}`))
-        .catch(err => console.log(err));
+        .catch(error => console.error(error));
     },
     formatCoverPicName(file) {
       return file[0].name.substr(0, 20);

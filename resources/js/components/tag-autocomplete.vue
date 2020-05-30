@@ -102,7 +102,7 @@ export default {
             this.suggestItems = data.splice(0, 4);
             this.isDropdownVisible = this.suggestItems && this.suggestItems.length;
           })
-          .catch(err => console.log(err));
+          .catch(error => console.error(error));
       }
     },
     setAxiosRequestInterceptors() {
