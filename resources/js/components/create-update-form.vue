@@ -139,14 +139,20 @@ export default {
       this.axios
         .post(url, formData)
         .then(response => {
-          const messageAppend = this.isUpdateMode ? " updated successfully." : " is stored in database.";
-          this.$root.showSuccessMessage([this.$createElement("b", response.data.name), messageAppend]);
-          window.location.assign(`/?id=${response.data.id}`);
+          const messagePostFix = this.createMessage();
+          this.$root.showSuccessMessage([this.$createElement("b", response.data.name), messagePostFix]);
+          this.redirectTo(`/?id=${response.data.id}`);
         })
         .catch(error => console.error(error));
     },
+    createMessage() {
+      return this.isUpdateMode ? " updated successfully." : " is stored in database.";
+    },
     formatCoverPicName(file) {
       return file[0].name.substr(0, 20);
+    },
+    redirectTo(url) {
+      window.location.assign(url);
     }
   }
 };
