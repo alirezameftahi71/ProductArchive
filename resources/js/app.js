@@ -20,13 +20,11 @@ const router = new VueRouter({
 });
 
 new Vue({
-  router,
   el: "#app",
+  router,
   data() {
     return {
-      loadingOverlay: false,
-      axiosInterceptorsRequest: null,
-      axiosInterceptorsResponse: null
+      showLoadingOverlay: false
     };
   },
   created() {
@@ -34,37 +32,33 @@ new Vue({
     this.setAxiosResponseInterceptors();
   },
   methods: {
-    ejectAxiosInterceptors() {
-      this.axios.interceptors.request.eject(this.axiosInterceptorsRequest);
-      this.axios.interceptors.response.eject(this.axiosInterceptorsResponse);
-    },
     setAxiosRequestInterceptors() {
-      this.axiosInterceptorsRequest = this.axios.interceptors.request.use(
+      this.axios.interceptors.request.use(
         config => {
           this.showLoading();
           return config;
         },
         error => {
           this.hideLoading();
-          this.showErrorFlashMessage(error);
+          this.showErrorMessage(error);
           return Promise.reject(error);
         }
       );
     },
     setAxiosResponseInterceptors() {
-      this.axiosInterceptorsResponse = this.axios.interceptors.response.use(
+      this.axios.interceptors.response.use(
         response => {
           this.hideLoading();
           return response;
         },
         error => {
           this.hideLoading();
-          this.showErrorFlashMessage(error);
+          this.showErrorMessage(error);
           return Promise.reject(error);
         }
       );
     },
-    showErrorFlashMessage(error) {
+    showErrorMessage(error) {
       this.showFlashMessage({
         title: error.response.statusText,
         message: error.response.data.message,
@@ -86,10 +80,10 @@ new Vue({
       });
     },
     showLoading() {
-      this.loadingOverlay = true;
+      this.showLoadingOverlay = true;
     },
     hideLoading() {
-      this.loadingOverlay = false;
+      this.showLoadingOverlay = false;
     }
   }
 });

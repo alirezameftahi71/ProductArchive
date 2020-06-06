@@ -9,7 +9,7 @@ export default {
   },
   methods: {
     async show() {
-      const confirmed = await this.$bvModal.msgBoxConfirm("Are you sure you want to delete this item?", {
+      const confirmed = await this.$bvModal.msgBoxConfirm("Are you sure you want to delete this record?", {
         title: "Delete Item",
         okVariant: "danger",
         okTitle: "YES",

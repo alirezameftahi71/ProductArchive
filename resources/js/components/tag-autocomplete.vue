@@ -113,7 +113,7 @@ export default {
         },
         error => {
           this.hideLoading();
-          this.$root.showErrorFlashMessage(error);
+          this.$root.showErrorMessage(error);
           return Promise.reject(error);
         }
       );
@@ -126,7 +126,7 @@ export default {
         },
         error => {
           this.hideLoading();
-          this.$root.showErrorFlashMessage(error);
+          this.$root.showErrorMessage(error);
           return Promise.reject(error);
         }
       );

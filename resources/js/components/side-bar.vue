@@ -90,7 +90,7 @@ export default {
       const id = sentId || this.getElementId(this.getFirstItemInList());
       const item = document.querySelector(`#list-items > #${CSS.escape(id)}`);
       item && item.classList.add("active");
-      sentId && item.scrollIntoView();
+      item && sentId && item.scrollIntoView();
     },
     getFirstItemInList() {
       return document.querySelector("#list-items button");
