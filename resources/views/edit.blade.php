@@ -8,7 +8,7 @@
                     Update product
                 </h3>
                 <hr />
-            <create-form :item="{{$game}}"></create-form>
+            <create-update-form :item="{{$game}}"></create-update-form>
             </b-col>
         </b-row>
     </b-col>

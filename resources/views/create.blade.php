@@ -8,7 +8,7 @@
                     Create new product
                 </h3>
                 <hr />
-                <create-form></create-form>
+                <create-update-form></create-update-form>
             </b-col>
         </b-row>
     </b-col>

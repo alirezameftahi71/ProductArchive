@@ -14,7 +14,7 @@
 <body>
     <div id="app">
         <nav-bar></nav-bar>
-        <b-overlay :show="loadingOverlay" rounded="false" variant="dark" spinner-variant="light">
+        <b-overlay :show="showLoadingOverlay" rounded="false" variant="dark" spinner-variant="light">
             <b-container fluid>
                 @yield('content')
             </b-container>

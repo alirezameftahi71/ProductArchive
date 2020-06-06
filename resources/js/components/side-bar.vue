@@ -42,22 +42,13 @@ export default {
       this.$root.$emit("selection-changed", fetchedItem.data);
     },
     onItemDeleted(item) {
-      this.axios
-        .delete(`/api/games/${item.id}`)
-        .then(response => {
-          this.$root.showSuccessMessage([this.$createElement("b", response.data.name), " is deleted."]);
-
-          const nearestItem = this.getNearestItem(
-            this.dataItems,
-            this.dataItems.findIndex(x => x.id === item.id)
-          );
-          this.dataItems = this.dataItems.filter(x => x.id !== item.id);
-          nearestItem && document.querySelector(`#list-items #${CSS.escape(nearestItem.id)}`).classList.add("active");
-          this.$root.$emit("selection-changed", nearestItem);
-        })
-        .catch(error => {
-          console.error(error);
-        });
+      const nearestItem = this.getNearestItem(
+        this.dataItems,
+        this.dataItems.findIndex(x => x.id === item.id)
+      );
+      this.dataItems = this.dataItems.filter(x => x.id !== item.id);
+      nearestItem && document.querySelector(`#list-items #${CSS.escape(nearestItem.id)}`).classList.add("active");
+      this.$root.$emit("selection-changed", nearestItem);
     },
     getNearestItem(array, currentIndex) {
       const previousItem = array[currentIndex - 1];
@@ -90,7 +81,7 @@ export default {
       const id = sentId || this.getElementId(this.getFirstItemInList());
       const item = document.querySelector(`#list-items > #${CSS.escape(id)}`);
       item && item.classList.add("active");
-      sentId && item.scrollIntoView();
+      item && sentId && item.scrollIntoView();
     },
     getFirstItemInList() {
       return document.querySelector("#list-items button");

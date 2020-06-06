@@ -3,9 +3,7 @@
     <div class="tile">
       <a :href="`/?id=${item.id}`">
         <img :id="item.id" :src="item.cover_pic ? `storage/${item.cover_pic}` : 'storage/assets/default.png'" />
-        <div class="overlay">
-          <p class="tile-label">{{ item.name }}</p>
-        </div>
+        <tile-overlay :name="item.name"></tile-overlay>
       </a>
     </div>
   </div>
@@ -28,38 +26,13 @@ export default {
 
   .tile {
     position: relative;
-
-    .overlay {
-      display: table;
-      position: absolute;
-      bottom: 0;
-      background: #00000080;
-      color: #f1f1f1;
-      width: 100%;
-      height: 30%;
-      transition: 0.5s ease;
-      opacity: 0;
-      font-size: 20px;
-      padding: 20px;
-      text-align: center;
-
-      .tile-label {
-        display: table-cell;
-        vertical-align: middle;
-      }
-    }
-
-    &:hover {
-      .overlay {
-        opacity: 1;
-      }
-    }
   }
 
   img {
     width: 100%;
     height: 420px;
     opacity: 0.8;
+    transition: 0.5s ease;
     cursor: pointer;
 
     &:hover {

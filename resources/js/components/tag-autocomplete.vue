@@ -26,7 +26,14 @@
           class="custom-loader"
         ></b-overlay>
         <b-input-group-append>
-          <b-button @click="addTag()" variant="outline-secondary">Add</b-button>
+          <b-button
+            @click="
+              addTag();
+              isDropdownVisible = false;
+            "
+            variant="outline-secondary"
+            >Add</b-button
+          >
         </b-input-group-append>
       </b-input-group>
       <div class="dropdown-menu dropdown-items-container" :class="{ show: isDropdownVisible }">
@@ -113,7 +120,7 @@ export default {
         },
         error => {
           this.hideLoading();
-          this.$root.showErrorFlashMessage(error);
+          this.$root.showErrorMessage(error);
           return Promise.reject(error);
         }
       );
@@ -126,7 +133,7 @@ export default {
         },
         error => {
           this.hideLoading();
-          this.$root.showErrorFlashMessage(error);
+          this.$root.showErrorMessage(error);
           return Promise.reject(error);
         }
       );
