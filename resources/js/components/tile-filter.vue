@@ -37,8 +37,4 @@ export default {
 #filter-container {
   margin-top: 1.25em;
 }
-
-#grid-container {
-  padding: 2.5px;
-}
 </style>

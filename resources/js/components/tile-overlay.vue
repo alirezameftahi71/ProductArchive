@@ -1,5 +1,5 @@
 <template>
-  <div class="overlay">
+  <div class="overlay" :class="{ 'show-label': showLabel }">
     <p class="tile-label">{{ name }}</p>
   </div>
 </template>
@@ -7,7 +7,8 @@
 <script>
 export default {
   props: {
-    name: String
+    name: String,
+    showLabel: Boolean
   }
 };
 </script>
@@ -30,6 +31,10 @@ export default {
   .tile-label {
     display: table-cell;
     vertical-align: middle;
+  }
+
+  &.show-label {
+    opacity: 1;
   }
 
   &:hover {
