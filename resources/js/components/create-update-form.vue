@@ -30,28 +30,13 @@
           </div>
         </div>
         <b-form-group label="Genres" label-for="genres">
-          <tag-autocomplete
-            :iscontainerstatic="false"
-            inputid="genres"
-            api="/api/genres"
-            :selectedtags.sync="form.genres"
-          ></tag-autocomplete>
+          <tag-autocomplete inputid="genres" api="/api/genres" :selectedtags.sync="form.genres"></tag-autocomplete>
         </b-form-group>
         <b-form-group label="Platforms" label-for="platforms">
-          <tag-autocomplete
-            :iscontainerstatic="false"
-            inputid="platforms"
-            api="/api/platforms"
-            :selectedtags.sync="form.platforms"
-          ></tag-autocomplete>
+          <tag-autocomplete inputid="platforms" api="/api/platforms" :selectedtags.sync="form.platforms"></tag-autocomplete>
         </b-form-group>
         <b-form-group label="Publishers" label-for="publishers">
-          <tag-autocomplete
-            :iscontainerstatic="false"
-            inputid="publishers"
-            api="/api/publishers"
-            :selectedtags.sync="form.publishers"
-          ></tag-autocomplete>
+          <tag-autocomplete inputid="publishers" api="/api/publishers" :selectedtags.sync="form.publishers"></tag-autocomplete>
         </b-form-group>
       </div>
       <div class="col-md-4">
@@ -139,20 +124,17 @@ export default {
       this.axios
         .post(url, formData)
         .then(response => {
-          const messagePostFix = this.createMessage();
+          const messagePostFix = this.createSuccessfullSubmitPostMessage();
           this.$root.showSuccessMessage([this.$createElement("b", response.data.name), messagePostFix]);
-          this.redirectTo(`/?id=${response.data.id}`);
+          this.$root.redirectTo(`/?id=${response.data.id}`);
         })
         .catch(error => console.error(error));
     },
-    createMessage() {
+    createSuccessfullSubmitPostMessage() {
       return this.isUpdateMode ? " updated successfully." : " is stored in database.";
     },
     formatCoverPicName(file) {
       return file[0].name.substr(0, 20);
-    },
-    redirectTo(url) {
-      window.location.assign(url);
     }
   }
 };

@@ -61,7 +61,7 @@ export default {
             rate: this.dataItem.rate,
             description: this.dataItem.description,
             cover_pic: this.dataItem.cover_pic ? `storage/${this.dataItem.cover_pic}` : "storage/assets/default.png",
-            checked: this.dataItem.checked === "1",
+            checked: this.dataItem.checked == "1",
             genres: this.dataItem.genres,
             platforms: this.dataItem.platforms,
             publishers: this.dataItem.publishers
@@ -82,11 +82,11 @@ export default {
   },
   created() {
     this.$root.$on("selection-changed", item => (this.dataItem = item));
-    this.$root.$on("delete-confirmed", () => this.$root.$emit("item-deleted", this.dataItem));
+    this.$root.$on("delete-confirmed", () => this.onItemDeleteConfirm());
   },
   methods: {
     editItem() {
-      window.location.assign(`/edit/${this.dataItem.id}`);
+      this.$root.redirectTo(`/edit/${this.dataItem.id}`);
     },
     deleteItem() {
       this.$root.$emit("item-delete-clicked", this.dataItem);
@@ -100,7 +100,7 @@ export default {
             " is marked as ",
             response.data.checked ? "checked." : "unchecked."
           ]);
-          this.dataItem.checked = response.data.checked ? "1" : "0";
+          this.dataItem.checked = response.data.checked;
         })
         .catch(error => {
           console.error(error);
@@ -108,6 +108,17 @@ export default {
     },
     heartItem() {
       // TODO: implement this functionality
+    },
+    onItemDeleteConfirm() {
+      this.axios
+        .delete(`/api/games/${this.dataItem.id}`)
+        .then(response => {
+          this.$root.showSuccessMessage([this.$createElement("b", response.data.name), " is deleted."]);
+        })
+        .catch(error => {
+          console.error(error);
+        });
+      this.$root.$emit("item-deleted", this.dataItem);
     }
   }
 };

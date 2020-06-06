@@ -84,6 +84,9 @@ new Vue({
     },
     hideLoading() {
       this.showLoadingOverlay = false;
+    },
+    redirectTo(url) {
+      window.location.assign(url);
     }
   }
 });
