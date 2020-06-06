@@ -26,7 +26,7 @@
               title="Mark Item"
               :disabled="!_dataItem.id"
               @click="markItem()"
-              :class="{ 'i-green': _dataItem.checked === true }"
+              :class="{ 'i-green': _dataItem.checked }"
             >
               <b-icon icon="check-circle"></b-icon>
             </b-button>

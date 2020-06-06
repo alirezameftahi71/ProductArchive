@@ -5,12 +5,14 @@
 @section('content')
 <b-row class="full-height scrolled-y">
     <b-col>
-        <tile-filter></tile-filter>
-        <b-row id="grid-container">
-            @foreach ($collection ?? [] as $item)
-            <game-tile :item="{{$item}}"></game-tile>
-            @endforeach
-        </b-row>
+        <b-container>
+            <b-row>
+                <b-col>
+                    <tile-filter></tile-filter>
+                </b-col>
+            </b-row>
+            <tiles-view :collection="{{ json_encode($collection) }}"></tiles-view>
+        </b-container>
     </b-col>
 </b-row>
 @endsection
