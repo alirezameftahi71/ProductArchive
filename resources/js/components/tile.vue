@@ -33,7 +33,7 @@ export default {
   img {
     width: 100%;
     height: 460px;
-    opacity: 0.7;
+    opacity: 0.8;
     transition: 0.5s ease;
     cursor: pointer;
 
