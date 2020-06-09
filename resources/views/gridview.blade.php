@@ -1,7 +1,4 @@
 @extends('layouts.site')
-@section('styles')
-<link rel="stylesheet" href="/css/gridview.css">
-@endsection
 @section('content')
 <b-row class="full-height scrolled-y">
     <b-col>
