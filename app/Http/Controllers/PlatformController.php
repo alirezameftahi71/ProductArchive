@@ -5,18 +5,15 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Platform;
 
-class PlatformController extends Controller
+class PlatformController extends BaseController
 {
     public function all(Request $request)
     {
-        if ($request->has('search')) {
-            return Platform::where('name', 'like', '%' . $request->input('search') . '%')->get();
-        }
-        return Platform::all();
+        return $this->baseAll(Platform::class, $request);
     }
 
-    public function show($platform)
+    public function show($id)
     {
-        return Platform::find($platform);
+        return $this->baseShow(Platform::class, $id);
     }
 }

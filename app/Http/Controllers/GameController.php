@@ -13,104 +13,80 @@ use Exception;
 
 class GameController extends Controller
 {
-    public function all()
+    public function all(Request $request)
     {
-        $games = Game::with('genres', 'platforms', 'publishers')->get();
+        if ($request->has('search')) {
+            $games = Game::where('name', 'like', '%' . $request->input('search') . '%')
+                            ->with('genres', 'platforms', 'publishers')->get();
+        } else {
+            $games = Game::with('genres', 'platforms', 'publishers')->get();
+        }
         return response()->json($games, 200);
     }
 
     public function show($id)
     {
-        try {
-            $game = Game::with('genres', 'platforms', 'publishers')->find($id);
-        } catch (\Throwable $th) {
-            throw $th;
-        }
+        $game = Game::with('genres', 'platforms', 'publishers')->find($id);
         return response()->json($game, 200);
     }
 
     public function destroy(Game $game)
     {
-        try {
-            $game->delete();
-        } catch (\Throwable $th) {
-            throw $th;
-        }
+        $game->delete();
         return response()->json($game, 200);
     }
     
     public function store()
     {
-        DB::beginTransaction();
-        try {
-            $game = Game::create([
-                'name' => request('name'),
-                'released_date' => request('releasedDate'),
-                'rate' => request('rate'),
-                'checked' => request('checked') == 'true',
-                'description' => request('description')
-            ]);
-
-            if (request('genres')) {
-                $genre_names =  explode(',', request('genres'));
-                $genres = GameController::fetch_objects_from_strings(Genre::class, $genre_names);
-                $game->genres()->sync($genres);
-            }
-
-            if (request('platforms')) {
-                $platform_names = explode(',', request('platforms'));
-                $platforms = GameController::fetch_objects_from_strings(Platform::class, $platform_names);
-                $game->platforms()->sync($platforms);
-            }
-
-            if (request('publishers')) {
-                $publisher_names = explode(',', request('publishers'));
-                $publishers = GameController::fetch_objects_from_strings(Publisher::class, $publisher_names);
-                $game->publishers()->sync($publishers);
-            }
-
-            if (request('coverPic') != null && request('coverPic') != "null") {
-                $game->update([
-                    'cover_pic' => request('coverPic')->store('uploads', 'public'),
-                ]);
-            }
-
-            DB::commit();
-            return response()->json($game, 200);
-        } catch (Exception $ex) {
-            DB::rollback();
-            throw $ex;
-        }
+        return $this->createUpdateGame();
     }
 
     public function update(Game $game)
     {
+        return $this->createUpdateGame($game);
+    }
+
+    public function createUpdateGame(Game $game = null)
+    {
+        $isStoreMode = is_null($game);
+        $inputObject = [
+            'name' => request('name'),
+            'released_date' => request('releasedDate'),
+            'rate' => request('rate'),
+            'checked' => request('checked') == 'true',
+            'description' => request('description')
+        ];
+
         DB::beginTransaction();
         try {
-            $game->update([
-                'name' => request('name'),
-                'released_date' => request('releasedDate'),
-                'rate' => request('rate'),
-                'checked' => request('checked') == 'true',
-                'description' => request('description')
-            ]);
+            if ($isStoreMode) {
+                $game = Game::create($inputObject);
+            } else {
+                $game->update($inputObject);
+            }
 
             if (request('genres')) {
                 $genre_names =  explode(',', request('genres'));
                 $genres = GameController::fetch_objects_from_strings(Genre::class, $genre_names);
                 $game->genres()->sync($genres);
+            } else {
+                $game->genres()->sync([]);
             }
 
             if (request('platforms')) {
                 $platform_names = explode(',', request('platforms'));
                 $platforms = GameController::fetch_objects_from_strings(Platform::class, $platform_names);
                 $game->platforms()->sync($platforms);
+            } else {
+                $game->platforms()->sync([]);
             }
 
             if (request('publishers')) {
                 $publisher_names = explode(',', request('publishers'));
                 $publishers = GameController::fetch_objects_from_strings(Publisher::class, $publisher_names);
                 $game->publishers()->sync($publishers);
+            } else {
+                $game->publishers()->sync([]);
             }
 
             if (request('coverPic') != null && request('coverPic') != "null" && request('coverPic') != "undefined") {
@@ -129,12 +105,8 @@ class GameController extends Controller
 
     public function toggleChecked(Game $game)
     {
-        try {
-            $game->checked = $game->checked == false ? true : false;
-            $game->save();
-        } catch (\Throwable $th) {
-            throw $th;
-        }
+        $game->checked = $game->checked == false;
+        $game->save();
         return response()->json($game, 200);
     }
 

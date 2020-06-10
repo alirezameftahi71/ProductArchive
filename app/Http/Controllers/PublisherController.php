@@ -1,22 +1,19 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Publisher;
 
 use Illuminate\Http\Request;
+use App\Publisher;
 
-class PublisherController extends Controller
+class PublisherController extends BaseController
 {
     public function all(Request $request)
     {
-        if ($request->has('search')) {
-            return Publisher::where('name', 'like', '%' . $request->input('search') . '%')->get();
-        }
-        return Publisher::all();
+        return $this->baseAll(Publisher::class, $request);
     }
 
-    public function show($Publisher)
+    public function show($id)
     {
-        return Publisher::find($Publisher);
+        return $this->baseShow(Publisher::class, $id);
     }
 }

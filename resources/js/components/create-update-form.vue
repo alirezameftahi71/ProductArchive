@@ -49,9 +49,9 @@
             no-resize
           ></b-form-textarea>
         </b-form-group>
-        <b-form-group label="Cover Picture" label-for="coverPic" class="mt-4">
+        <b-form-group label="Cover Picture" label-for="cover_pic" class="mt-4">
           <b-form-file
-            id="coverPic"
+            id="cover_pic"
             v-model="form.coverPic"
             placeholder="Cover Picture"
             accept="image/jpeg, image/png"
@@ -83,7 +83,7 @@ export default {
           platforms: [],
           publishers: [],
           description: "",
-          coverPic: null
+          cover_pic: null
         };
       }
     }
@@ -98,23 +98,19 @@ export default {
         { value: true, text: "True" }
       ],
       seperators: ",;",
-      isUpdateMode: false
-    };
-  },
-  computed: {
-    form() {
-      return {
+      isUpdateMode: false,
+      form: {
         name: this.item.name,
-        releasedDate: this.item.released_date,
+        releasedDate: this.item.released_date ? this.item.released_date : "",
         rate: +this.item.rate,
         checked: this.item.checked === "1", // false as boolean, stores as 1 or 0 in database!
-        description: this.item.description,
+        description: this.item.description ? this.item.description : "",
         genres: this.item.genres.map(x => x.name),
         publishers: this.item.publishers.map(x => x.name),
         platforms: this.item.platforms.map(x => x.name),
-        coverPic: this.item.coverPic
-      };
-    }
+        coverPic: null
+      }
+    };
   },
   methods: {
     onSubmit() {

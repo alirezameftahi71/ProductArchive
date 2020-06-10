@@ -5,18 +5,15 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Genre;
 
-class GenreController extends Controller
+class GenreController extends BaseController
 {
     public function all(Request $request)
     {
-        if ($request->has('search')) {
-            return Genre::where('name', 'like', '%' . $request->input('search') . '%')->get();
-        }
-        return Genre::all();
+        return $this->baseAll(Genre::class, $request);
     }
 
-    public function show($genre)
+    public function show($id)
     {
-        return Genre::find($genre);
+        return $this->baseShow(Genre::class, $id);
     }
 }

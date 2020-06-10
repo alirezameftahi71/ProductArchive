@@ -35,6 +35,7 @@ class HomeController extends Controller
     }
 
     public function gridview(Request $request) {
+        // TODO: refactor this so it won't fetch all in case of filters
         $collection = Game::getAll();
         if($request->query('is-unchecked') == 'true') {
             $collection = $collection->filter(function($item) {
