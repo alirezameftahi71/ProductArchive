@@ -1,2 +1,2 @@
-*_test.sqlite
-*_test.sqlite-journal
+*.dev.sqlite
+*.sqlite-journal

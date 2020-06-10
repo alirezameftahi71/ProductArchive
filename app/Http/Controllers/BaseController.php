@@ -13,16 +13,39 @@ class BaseController extends Controller
         if ($request->has($this->searchQueryString)) {
             return $this->baseSearchByName($class, $request->input($this->searchQueryString));
         }
-        return response()->json($class::all(), 200);
+        return $this->getAll($class);
     }
 
-    public function baseSearchByName($class, $search) {
-        $res = $class::where('name', 'like', '%' . $search . '%')->get();
-        return response()->json($res, 200);
+    public function getAll($class)
+    {
+        try {
+            return response()->json($class::all(), 200);
+        } catch (\Throwable $th) {
+            return $this->servereError();
+        }
+    }
+
+    public function baseSearchByName($class, $search)
+    {
+        try {
+            $res = $class::where('name', 'like', '%' . $search . '%')->get();
+            return response()->json($res, 200);
+        } catch (\Throwable $th) {
+            return $this->servereError();
+        }
     }
 
     public function baseShow($class, $id)
     {
-        return response()->json($class::find($id), 200);
+        try {
+            return response()->json($class::find($id), 200);
+        } catch (\Throwable $th) {
+            return $this->servereError();
+        }
+    }
+
+    public function servereError(string $message = 'Server Error.')
+    {
+        return response()->json(['message' => $message], 500);
     }
 }

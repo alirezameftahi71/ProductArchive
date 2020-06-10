@@ -1,12 +1,9 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use Illuminate\Http\Request;
 use App\Game;
-use App\Genre;
-use App\Platform;
-use App\Publisher;
-use Exception;
 
 class HomeController extends Controller
 {
@@ -34,21 +31,20 @@ class HomeController extends Controller
         return view('edit', compact('game'));
     }
 
-    public function gridview(Request $request) {
+    public function gridview(Request $request)
+    {
         // TODO: refactor this so it won't fetch all in case of filters
         $collection = Game::getAll();
-        if($request->query('is-unchecked') == 'true') {
-            $collection = $collection->filter(function($item) {
+        if ($request->query('is-unchecked') == 'true') {
+            $collection = $collection->filter(function ($item) {
                 return ($item->checked == false);
             });
         }
-        if($request->query('high-rate') == 'true') {
-            $collection = $collection->filter(function($item) {
+        if ($request->query('high-rate') == 'true') {
+            $collection = $collection->filter(function ($item) {
                 return ($item->rate >= '4');
             });
         }
         return view('gridview', compact('collection'));
     }
-
-    
 }

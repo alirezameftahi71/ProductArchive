@@ -13,7 +13,7 @@
         :key="item.id"
         :id="item.id"
         class="btn list-group-item list-group-item-action no-rounded-corners"
-        @click="onItemClick($event)"
+        @click="onItemClick"
         v-html="item.name"
       ></button>
     </div>
@@ -30,16 +30,21 @@ export default {
       dataItems: this.items
     };
   },
-  created() {
-    this.$root.$on("item-deleted", item => this.onItemDeleted(item));
-  },
   mounted() {
+    this.$root.$on("item-deleted", this.onItemDeleted);
     this.makeFirstItemActive();
   },
   methods: {
-    async selectionChanged(currentSelectedId) {
-      const fetchedItem = await this.axios.get(`/api/games/${currentSelectedId}`);
-      this.$root.$emit("selection-changed", fetchedItem.data);
+    selectionChanged(currentSelectedId) {
+      this.axios
+        .get(`/api/games/${currentSelectedId}`)
+        .then(response => {
+          this.$router.push({ path: "/", query: { id: response.data.id } });
+          this.$root.$emit("selection-changed", response.data);
+        })
+        .catch(error => {
+          console.error(error);
+        });
     },
     onItemDeleted(item) {
       const nearestItem = this.getNearestItem(
@@ -62,9 +67,7 @@ export default {
     onItemClick(event) {
       const element = event.target;
       const activeElement = document.querySelector("#list-items .active");
-      if (activeElement) {
-        activeElement.classList.remove("active");
-      }
+      activeElement && activeElement.classList.remove("active");
       element.classList.add("active");
       this.selectionChanged(element.getAttribute("id"));
     },

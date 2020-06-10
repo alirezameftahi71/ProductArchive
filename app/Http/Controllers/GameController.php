@@ -10,32 +10,45 @@ use App\Genre;
 use App\Platform;
 use App\Publisher;
 use Exception;
+use Throwable;
 
 class GameController extends Controller
 {
     public function all(Request $request)
     {
-        if ($request->has('search')) {
-            $games = Game::where('name', 'like', '%' . $request->input('search') . '%')
-                            ->with('genres', 'platforms', 'publishers')->get();
-        } else {
-            $games = Game::with('genres', 'platforms', 'publishers')->get();
+        try {
+            if ($request->has('search')) {
+                $games = Game::where('name', 'like', '%' . $request->input('search') . '%')
+                    ->with('genres', 'platforms', 'publishers')->get();
+            } else {
+                $games = Game::with('genres', 'platforms', 'publishers')->get();
+            }
+            return response()->json($games, 200);
+        } catch (\Throwable $th) {
+            return $this->servereError();
         }
-        return response()->json($games, 200);
     }
 
     public function show($id)
     {
-        $game = Game::with('genres', 'platforms', 'publishers')->find($id);
-        return response()->json($game, 200);
+        try {
+            $game = Game::with('genres', 'platforms', 'publishers')->find($id);
+            return response()->json($game, 200);
+        } catch (\Throwable $th) {
+            return $this->servereError();
+        }
     }
 
     public function destroy(Game $game)
     {
-        $game->delete();
-        return response()->json($game, 200);
+        try {
+            $game->delete();
+            return response()->json($game, 200);
+        } catch (\Throwable $th) {
+            return $this->servereError();
+        }
     }
-    
+
     public function store()
     {
         return $this->createUpdateGame();
@@ -97,17 +110,21 @@ class GameController extends Controller
 
             DB::commit();
             return response()->json($game, 200);
-        } catch (Exception $ex) {
+        } catch (Throwable $th) {
             DB::rollback();
-            throw $ex;
+            return $this->servereError();
         }
     }
 
     public function toggleChecked(Game $game)
     {
-        $game->checked = $game->checked == false;
-        $game->save();
-        return response()->json($game, 200);
+        try {
+            $game->checked = $game->checked == false;
+            $game->save();
+            return response()->json($game, 200);
+        } catch (\Throwable $th) {
+            return $this->servereError();
+        }
     }
 
     private static function fetch_objects_from_strings($class, $item_names)
