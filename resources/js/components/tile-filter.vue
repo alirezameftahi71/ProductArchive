@@ -1,6 +1,6 @@
 <template>
   <form action="">
-    <div id="filter-container" class="form-row">
+    <div class="form-row">
       <div class="form-group col-md-3">
         <select id="is-unchecked" class="form-control custom-select" name="is-unchecked">
           <option value="false">Disable Only UnChecked</option>
@@ -33,8 +33,4 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
-#filter-container {
-  margin-top: 1.25em;
-}
-</style>
+<style lang="scss" scoped></style>
