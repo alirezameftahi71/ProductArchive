@@ -29,7 +29,6 @@ export default {
 <style lang="scss" scoped>
 .tile {
   position: relative;
-  box-shadow: 0px 12px 22px 1px #414141;
   img {
     width: 100%;
     height: 460px;
@@ -40,6 +39,9 @@ export default {
     &:hover {
       opacity: 1;
     }
+  }
+  &:hover {
+    box-shadow: 0px 12px 22px 1px #414141;
   }
   &.is-selected {
     // box-shadow: 0px 0px 25px 10px #414141;

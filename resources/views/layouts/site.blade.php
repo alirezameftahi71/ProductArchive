@@ -13,15 +13,18 @@
 
 <body>
     <div id="app">
-        <nav-bar></nav-bar>
-        <b-overlay :show="showLoadingOverlay" rounded="false" variant="dark" spinner-variant="light">
-            <b-container fluid>
-                @yield('content')
-            </b-container>
-        </b-overlay>
-        <footer-bar></footer-bar>
-        <flash-message></flash-message>
-        @yield('modals')
+    <nav-bar :username="{{ json_encode(Auth::user()->name) }}"></nav-bar>
+    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+        @csrf
+    </form>
+    <b-overlay :show="showLoadingOverlay" rounded="false" variant="dark" spinner-variant="light">
+        <b-container fluid>
+            @yield('content')
+        </b-container>
+    </b-overlay>
+    <footer-bar></footer-bar>
+    <flash-message></flash-message>
+    @yield('modals')
     </div>
     <script src="/js/app.js"></script>
     @yield('scripts')
