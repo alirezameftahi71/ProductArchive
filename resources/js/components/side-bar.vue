@@ -1,21 +1,20 @@
 <template>
-  <div class="items-sidenav">
-    <b-input-group class="mt-3">
+  <div class="items-sidenav h-100">
+    <b-input-group class="mb-3">
       <b-form-input type="search" placeholder="Search..." @input="onSearch($event)"></b-form-input>
       <b-input-group-append is-text id="btn-search" title="Search">
         <b-icon icon="search"></b-icon>
       </b-input-group-append>
     </b-input-group>
-    <br />
     <div id="list-items" class="list-group">
-      <button
+      <b-button
         v-for="item in dataItems"
         :key="item.id"
         :id="item.id"
-        class="btn list-group-item list-group-item-action no-rounded-corners"
+        class="btn list-group-item list-group-item-action no-rounded-corners border"
         @click="onItemClick"
         v-html="item.name"
-      ></button>
+      ></b-button>
     </div>
   </div>
 </template>
@@ -104,12 +103,10 @@ export default {
 }
 
 .items-sidenav {
-  padding: 1.25rem;
   background-color: $milk;
-  height: 100%;
 
   #list-items {
-    height: calc(100% - 6em);
+    height: calc(100% - 4em);
     overflow-y: auto;
     overflow-x: hidden;
     .list-group-item {
@@ -134,8 +131,8 @@ export default {
 
 @media screen and (max-width: 47.99em) {
   .items-sidenav {
-    height: auto;
-    padding: 0.9375em;
+    height: auto !important;
+    margin-bottom: 1.3em;
 
     .list-group {
       height: 15.625em !important;

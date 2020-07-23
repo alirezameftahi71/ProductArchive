@@ -1,44 +1,42 @@
 <template>
-  <div id="info-area">
-    <div class="row">
-      <div class="col-lg-8 col-md-7 order-2 order-md-1 mt-4">
-        <info-grid :item="_dataItem"></info-grid>
+  <b-row id="info-area" class="h-100">
+    <b-col lg="8" md="7" order="1" order-md="1" order-sm="2">
+      <info-grid :item="_dataItem"></info-grid>
+    </b-col>
+    <b-col lg="4" md="5" order="2" order-md="2" order-sm="1">
+      <b-container fluid>
+        <img id="cover-pic" class="img-fluid" :src="_dataItem.cover_pic" alt="Product Cover" width="265" height="320" />
+      </b-container>
+      <b-container class="my-1">
+        <b-button-group size="sm">
+          <b-button variant="light" class="icon border-0" :disabled="!_dataItem.id" title="Delete Item" @click="deleteItem()">
+            <b-icon icon="trash-fill"></b-icon>
+          </b-button>
+          <b-button variant="light" class="icon border-0" :disabled="!_dataItem.id" title="Favorite Item" @click="heartItem()">
+            <b-icon icon="heart-fill"></b-icon>
+          </b-button>
+          <b-button variant="light" class="icon border-0" :disabled="!_dataItem.id" title="Edit Item" @click="editItem()">
+            <b-icon icon="pencil-square"></b-icon>
+          </b-button>
+          <b-button
+            variant="light"
+            class="icon border-0"
+            title="Mark Item"
+            :disabled="!_dataItem.id"
+            @click="markItem()"
+            :class="{ 'i-green': _dataItem.checked }"
+          >
+            <b-icon icon="check-circle"></b-icon>
+          </b-button>
+        </b-button-group>
+      </b-container>
+    </b-col>
+    <b-col order="3">
+      <div class="container-fluid">
+        <p id="description">{{ _dataItem.description }}</p>
       </div>
-      <div class="col-lg-4 col-md-5 order-1 order-md-2">
-        <div class="container-fluid">
-          <img id="cover-pic" class="img-fluid" :src="_dataItem.cover_pic" alt="Product Cover" width="265" height="320" />
-        </div>
-
-        <div class="container mt-1">
-          <b-button-group size="sm">
-            <b-button variant="light" class="icon border-0" :disabled="!_dataItem.id" title="Delete Item" @click="deleteItem()">
-              <b-icon icon="trash-fill"></b-icon>
-            </b-button>
-            <b-button variant="light" class="icon border-0" :disabled="!_dataItem.id" title="Favorite Item" @click="heartItem()">
-              <b-icon icon="heart-fill"></b-icon>
-            </b-button>
-            <b-button variant="light" class="icon border-0" :disabled="!_dataItem.id" title="Edit Item" @click="editItem()">
-              <b-icon icon="pencil-square"></b-icon>
-            </b-button>
-            <b-button
-              variant="light"
-              class="icon border-0"
-              title="Mark Item"
-              :disabled="!_dataItem.id"
-              @click="markItem()"
-              :class="{ 'i-green': _dataItem.checked }"
-            >
-              <b-icon icon="check-circle"></b-icon>
-            </b-button>
-          </b-button-group>
-        </div>
-      </div>
-    </div>
-    <hr class="d-none d-md-block" />
-    <div class="container-fluid">
-      <p id="description">{{ _dataItem.description }}</p>
-    </div>
-  </div>
+    </b-col>
+  </b-row>
 </template>
 
 <script>

@@ -13,18 +13,24 @@
 
 <body>
     <div id="app">
-    <nav-bar :username="{{ json_encode(Auth::user()->name) }}"></nav-bar>
-    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-        @csrf
-    </form>
-    <b-overlay :show="showLoadingOverlay" rounded="false" variant="dark" spinner-variant="light">
-        <b-container fluid>
-            @yield('content')
-        </b-container>
-    </b-overlay>
-    <footer-bar></footer-bar>
-    <flash-message></flash-message>
-    @yield('modals')
+        <nav-bar :username="{{ json_encode(Auth::user()->name) }}"></nav-bar>
+        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+            @csrf
+        </form>
+        <b-overlay :show="showLoadingOverlay" rounded="false" variant="dark" spinner-variant="light">
+            <b-container fluid>
+                <b-row class="full-height scrolled-y">
+                    <b-col class="h-100">
+                        <b-container class="py-3 h-100">
+                            @yield('content')
+                        </b-container>
+                    </b-col>
+                </b-row>
+            </b-container>
+        </b-overlay>
+        <footer-bar></footer-bar>
+        <flash-message></flash-message>
+        @yield('modals')
     </div>
     <script src="/js/app.js"></script>
     @yield('scripts')

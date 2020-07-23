@@ -1,22 +1,27 @@
 <template>
   <b-form @submit.prevent="onSubmit">
-    <div class="row content justify-content-center">
-      <div class="col-md-8">
+    <b-row>
+      <b-col lg="8">
         <b-form-group label="Name" label-for="name">
           <b-form-input id="name" v-model="form.name" type="text" required placeholder="Name"></b-form-input>
         </b-form-group>
-        <div class="row">
-          <div class="col-md-4">
+        <b-row>
+          <b-col md="4">
             <b-form-group label="Released Date" label-for="released-date">
-              <b-form-datepicker id="released-date" v-model="form.releasedDate" placeholder="Date of release"></b-form-datepicker>
+              <b-form-datepicker
+                id="released-date"
+                :date-format-options="{ year: 'numeric', month: 'numeric', day: 'numeric' }"
+                v-model="form.releasedDate"
+                placeholder="Released Date"
+              ></b-form-datepicker>
             </b-form-group>
-          </div>
-          <div class="col-md-4">
+          </b-col>
+          <b-col md="4">
             <b-form-group label="Marked" label-for="checked">
               <b-form-select id="checked" v-model="form.checked" placeholder="Marked" :options="markOptions"></b-form-select>
             </b-form-group>
-          </div>
-          <div class="col-md-4">
+          </b-col>
+          <b-col md="4">
             <b-form-group label="Metascore" label-for="rate">
               <b-form-spinbutton
                 id="rate"
@@ -27,8 +32,8 @@
                 step="0.5"
               ></b-form-spinbutton>
             </b-form-group>
-          </div>
-        </div>
+          </b-col>
+        </b-row>
         <b-form-group label="Genres" label-for="genres">
           <tag-autocomplete inputid="genres" api="/api/genres" :selectedtags.sync="form.genres"></tag-autocomplete>
         </b-form-group>
@@ -38,14 +43,14 @@
         <b-form-group label="Publishers" label-for="publishers">
           <tag-autocomplete inputid="publishers" api="/api/publishers" :selectedtags.sync="form.publishers"></tag-autocomplete>
         </b-form-group>
-      </div>
-      <div class="col-md-4">
+      </b-col>
+      <b-col lg="4">
         <b-form-group label="Description" label-for="description">
           <b-form-textarea
             id="description"
             v-model="form.description"
             placeholder="Description"
-            rows="14"
+            rows="13"
             no-resize
           ></b-form-textarea>
         </b-form-group>
@@ -58,13 +63,13 @@
             :file-name-formatter="formatCoverPicName"
           ></b-form-file>
         </b-form-group>
-      </div>
-    </div>
-    <div class="row content justify-content-center mb-3">
-      <div class="col-md-12">
+      </b-col>
+    </b-row>
+    <b-row>
+      <b-col class="pb-3">
         <b-button type="submit" variant="primary">Submit</b-button>
-      </div>
-    </div>
+      </b-col>
+    </b-row>
   </b-form>
 </template>
 
