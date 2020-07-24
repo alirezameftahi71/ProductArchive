@@ -14,14 +14,14 @@ use Illuminate\Support\Facades\Route;
 */
 
 // Route::get('/', function () {
-//     return view('welcome');
+//     return view('layouts.app');
 // });
 
-// Auth::routes();
-
-// Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/', 'HomeController@index')->name('home');
+Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/create', 'HomeController@create')->name('create');
 Route::get('/edit/{id}', 'HomeController@edit')->name('edit');
 Route::get('/gridview', 'HomeController@gridview')->name('gridview');
+
+Auth::routes();

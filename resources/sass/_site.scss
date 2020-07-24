@@ -4,7 +4,7 @@ body {
 
 .full-height {
   height: calc(100vh - 6.6rem);
-  overflow: hidden;
+  overflow: auto;
   background-color: $milk;
 }
 
@@ -26,11 +26,6 @@ body {
   height: 100%;
 }
 
-.area-container {
-  height: inherit;
-  overflow-y: auto;
-}
-
 @media screen and (max-width: 47.99em) {
   body {
     height: initial;
@@ -39,11 +34,6 @@ body {
   .full-height {
     overflow-x: hidden;
     overflow-y: auto;
-  }
-
-  .area-container {
-    height: unset;
-    overflow: hidden;
   }
 
   .side-bar-container {

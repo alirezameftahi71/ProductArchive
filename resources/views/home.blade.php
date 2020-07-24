@@ -1,14 +1,15 @@
 @extends('layouts.site')
 @section('content')
-<b-row class="text-center full-height">
-    <b-col md="3" class="side-bar-container">
+<b-row class="text-center h-100">
+    <b-col md="12" lg="3" class="side-bar-container">
         <side-bar :items="{{ json_encode($list_items) }}"></side-bar>
     </b-col>
-    <b-col md="9">
-        <h3 class="mt-4 pt-3 mb-4 d-none d-md-block">Game Archive</h3>
-        <hr class="d-none d-md-block" />
-        <br class="d-block d-md-none" />
-        <details-area :item="{{ json_encode($game) }}"></details-area>
+    <b-col md="12" lg="9">
+        <b-row align-v="center" class="h-100 mt-md-2">
+            <b-col>
+                <details-area :item="{{ json_encode($game) }}"></details-area>
+            </b-col>
+        </b-row>
     </b-col>
 </b-row>
 @endsection
