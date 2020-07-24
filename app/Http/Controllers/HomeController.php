@@ -38,12 +38,12 @@ class HomeController extends Controller
         if ($request->query('is-unchecked') == 'true') {
             $collection = $collection->filter(function ($item) {
                 return ($item->checked == false);
-            });
+            })->values();
         }
         if ($request->query('high-rate') == 'true') {
             $collection = $collection->filter(function ($item) {
                 return ($item->rate >= '4');
-            });
+            })->values();
         }
         return view('gridview', compact('collection'));
     }
