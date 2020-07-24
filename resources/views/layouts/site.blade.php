@@ -13,7 +13,8 @@
 
 <body>
     <div id="app">
-        <nav-bar :username="{{ json_encode(Auth::user()->name) }}"></nav-bar>
+        <nav-bar 
+        :user="{{ json_encode(Auth::user()) }}"></nav-bar>
         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
             @csrf
         </form>

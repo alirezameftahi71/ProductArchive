@@ -17,55 +17,21 @@
 
           <!-- Right aligned nav items -->
           <b-navbar-nav class="ml-auto">
-            <!-- <b-nav-form>
-            <b-form-input size="sm" class="mr-sm-2" placeholder="Search"></b-form-input>
-            <b-button size="sm" class="my-2 my-sm-0" type="submit">Search</b-button>
-          </b-nav-form> -->
-
-            <!-- <b-nav-item-dropdown text="Lang" right>
-            <b-dropdown-item href="#">EN</b-dropdown-item>
-            <b-dropdown-item href="#">ES</b-dropdown-item>
-            <b-dropdown-item href="#">RU</b-dropdown-item>
-            <b-dropdown-item href="#">FA</b-dropdown-item>
-          </b-nav-item-dropdown> -->
-
-            <b-nav-item-dropdown right>
-              <!-- <li class="nav-item dropdown">
-              <a
-                id="navbarDropdown"
-                class="nav-link dropdown-toggle"
-                href="#"
-                role="button"
-                data-toggle="dropdown"
-                aria-haspopup="true"
-                aria-expanded="false"
-                v-pre
-              >
-                {{ Auth::user()->name }} <span class="caret"></span>
-              </a>
-
-              <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                <a
-                  class="dropdown-item"
-                  href="{{ route('logout') }}"
-                  onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();"
-                >
-                  {{ __("Logout") }}
-                </a>
-
-                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                  @csrf
-                </form>
-              </div>
-            </li> -->
-
+            <b-nav-item-dropdown right v-if="user">
               <template v-slot:button-content>
-                <span>{{ username }}</span>
+                <span>{{ user.name }}</span>
               </template>
-              <b-dropdown-item href="#">Profile</b-dropdown-item>
-              <b-dropdown-item href="#" @click="signOut">Sign Out</b-dropdown-item>
+              <b-dropdown-item :href="profileLink" title="Profile">Profile</b-dropdown-item>
+              <b-dropdown-item href="#" @click="signOut" title="Sign Out">Sign Out</b-dropdown-item>
             </b-nav-item-dropdown>
+            <template right v-else>
+              <b-nav-item href="/login" title="Login">
+                Login
+              </b-nav-item>
+              <b-nav-item href="/register" title="Register">
+                Register
+              </b-nav-item>
+            </template>
           </b-navbar-nav>
         </b-collapse>
       </b-container>
@@ -76,10 +42,7 @@
 <script>
 export default {
   props: {
-    username: {
-      type: String,
-      default: null
-    }
+    user: Object
   },
   data() {
     return {
@@ -105,6 +68,11 @@ export default {
   },
   mounted() {
     this.makeCurrentLinkActive();
+  },
+  computed: {
+    profileLink() {
+      return this.user ? `/profile/${this.user.id}` : null;
+    }
   },
   methods: {
     makeCurrentLinkActive() {
