@@ -15,8 +15,8 @@
         class="btn list-group-item no-rounded-corners"
         :class="{ active: item.id === activeItem.id }"
         @click="onItemClick"
-        >{{ item.name }}</b-list-group-item
-      >
+        v-html="item.name"
+      ></b-list-group-item>
     </b-list-group>
   </div>
 </template>
