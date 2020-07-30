@@ -1,29 +1,39 @@
 <template>
-  <form action="">
-    <div class="form-row">
-      <div class="form-group col-md-3 mb-lg-0 mb-md-0 mb-sm-3 mb-3">
-        <select id="is-unchecked" class="form-control custom-select" name="is-unchecked">
-          <option value="false">Disable Only UnChecked</option>
-          <option value="true" :selected="this.getQueryString('is-unchecked') == 'true'">Enable Only UnChecked</option>
-        </select>
-      </div>
-
-      <div class="form-group col-md-3 mb-lg-0 mb-md-0 mb-sm-3 mb-3">
-        <select id="high-rate" class="form-control custom-select" name="high-rate">
-          <option value="false">Disable High Rate</option>
-          <option value="true" :selected="this.getQueryString('high-rate') == 'true'">Enable High Rate</option>
-        </select>
-      </div>
-
-      <div class="form-group col-md-3 mb-lg-0 mb-md-0 mb-sm-0 mb-0">
-        <button type="submit" class="btn btn-primary">Apply Filter</button>
-      </div>
-    </div>
-  </form>
+  <b-form inline>
+    <b-form-select
+      name="is-unchecked"
+      id="filterCheckedSelect"
+      class="mb-2 mr-sm-2 mb-sm-0"
+      v-model="selectedChecked"
+      :options="optionsChecked"
+    ></b-form-select>
+    <b-form-select
+      name="high-rate"
+      id="filterHighRateSelect"
+      class="mb-2 mr-sm-2 mb-sm-0"
+      v-model="selectedHighRate"
+      :options="optionsHighRate"
+    ></b-form-select>
+    <b-button type="submit" variant="primary" class="btn">Apply Filter</b-button>
+  </b-form>
 </template>
 
 <script>
 export default {
+  data() {
+    return {
+      optionsChecked: [
+        { value: "false", text: "Disable Only UnChecked" },
+        { value: "true", text: "Enable Only UnChecked" }
+      ],
+      optionsHighRate: [
+        { value: "false", text: "Disable High Rate" },
+        { value: "true", text: "Enable High Rate" }
+      ],
+      selectedChecked: this.getQueryString("is-unchecked") || "false",
+      selectedHighRate: this.getQueryString("high-rate") || "false"
+    };
+  },
   methods: {
     getQueryString(queryStringName) {
       const queryObject = this.$route.query;

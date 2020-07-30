@@ -1,9 +1,9 @@
 <template>
   <b-row id="info-area" class="h-100">
-    <b-col lg="8" md="7" order="1" order-md="1" order-sm="2">
+    <b-col lg="8" md="7" order="2" order-md="1" order-sm="2">
       <info-grid :item="_dataItem"></info-grid>
     </b-col>
-    <b-col lg="4" md="5" order="2" order-md="2" order-sm="1">
+    <b-col lg="4" md="5" order="1" order-md="2" order-sm="1">
       <b-container fluid>
         <img id="cover-pic" class="img-fluid" :src="_dataItem.cover_pic" alt="Product Cover" width="265" height="320" />
       </b-container>
