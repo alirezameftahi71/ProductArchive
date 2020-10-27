@@ -1,4 +1,4 @@
-@extends('layouts.app')
+{{-- @extends('layouts.app')
 
 @section('content')
 <div class="container">
@@ -13,11 +13,19 @@
                             {{ session('status') }}
                         </div>
                     @endif
-
-                    You are logged in!
+                    
+                    You are logged in! your name is {{$user->name}}
                 </div>
             </div>
         </div>
     </div>
 </div>
+@endsection --}}
+@extends('layouts.site')
+@section('content')
+    <b-row>
+        <b-col>
+            You are logged in! your name is {{$user->name}}
+        </b-col>
+    </b-row>
 @endsection

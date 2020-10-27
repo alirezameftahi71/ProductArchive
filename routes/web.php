@@ -23,5 +23,6 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/create', 'HomeController@create')->name('create');
 Route::get('/edit/{id}', 'HomeController@edit')->name('edit');
 Route::get('/gridview', 'HomeController@gridview')->name('gridview');
+Route::get('/profile/{user}', 'HomeController@dashboard')->name('dashboard');
 
 Auth::routes();

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Game;
+use App\User;
 
 class HomeController extends Controller
 {
@@ -46,5 +47,11 @@ class HomeController extends Controller
             })->values();
         }
         return view('gridview', compact('collection'));
+    }
+
+    public function dashboard($id)
+    {
+        $user = User::find($id);
+        return view('dashboard', compact('user'));
     }
 }
