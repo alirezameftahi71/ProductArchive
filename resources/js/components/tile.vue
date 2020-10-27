@@ -1,5 +1,5 @@
 <template>
-  <div class="tile" :class="{ 'is-selected': isSelected }" @click.prevent="$emit('tileClicked', item)" @dblclick="onDoubleClick">
+  <div class="tile" :class="{ 'is-selected': isSelected }" @click.prevent="$emit('tile-clicked', item)" @dblclick="onDoubleClick">
     <a :href="itemHomeUrl">
       <img loading="lazy" :id="item.id" :src="item.cover_pic ? `storage/${item.cover_pic}` : 'storage/assets/default.png'" />
       <tile-overlay :name="item.name" :showLabel="isSelected"></tile-overlay>
@@ -32,13 +32,13 @@ export default {
   img {
     width: 100%;
     height: 460px;
-    opacity: 0.8;
+    // opacity: 0.8;
     transition: 0.5s ease;
     cursor: pointer;
 
-    &:hover {
-      opacity: 1;
-    }
+    // &:hover {
+    //   opacity: 1;
+    // }
   }
   &:hover {
     box-shadow: 0px 12px 22px 1px #414141;
