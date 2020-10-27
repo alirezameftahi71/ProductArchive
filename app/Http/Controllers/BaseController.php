@@ -21,7 +21,7 @@ class BaseController extends Controller
         try {
             return response()->json($class::all(), 200);
         } catch (\Throwable $th) {
-            return $this->servereError();
+            return $this->serverError();
         }
     }
 
@@ -31,7 +31,7 @@ class BaseController extends Controller
             $res = $class::where('name', 'like', '%' . $search . '%')->get();
             return response()->json($res, 200);
         } catch (\Throwable $th) {
-            return $this->servereError();
+            return $this->serverError();
         }
     }
 
@@ -40,11 +40,11 @@ class BaseController extends Controller
         try {
             return response()->json($class::find($id), 200);
         } catch (\Throwable $th) {
-            return $this->servereError();
+            return $this->serverError();
         }
     }
 
-    public function servereError(string $message = 'Server Error.')
+    public function serverError(string $message = 'Server Error.')
     {
         return response()->json(['message' => $message], 500);
     }

@@ -19,6 +19,10 @@ class Game extends Model
     {
         return $this->belongsToMany(Platform::class);
     }
+    public function userLists()
+    {
+        return $this->belongsToMany(UserList::class);
+    }
     public static function getAll()
     {
         return Game::with('genres', 'platforms', 'publishers')->orderBy('updated_at', 'desc')->get();

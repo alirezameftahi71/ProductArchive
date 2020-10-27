@@ -25,7 +25,7 @@ class GameController extends Controller
             }
             return response()->json($games, 200);
         } catch (\Throwable $th) {
-            return $this->servereError();
+            return $this->serverError();
         }
     }
 
@@ -35,7 +35,7 @@ class GameController extends Controller
             $game = Game::with('genres', 'platforms', 'publishers')->find($id);
             return response()->json($game, 200);
         } catch (\Throwable $th) {
-            return $this->servereError();
+            return $this->serverError();
         }
     }
 
@@ -45,7 +45,7 @@ class GameController extends Controller
             $game->delete();
             return response()->json($game, 200);
         } catch (\Throwable $th) {
-            return $this->servereError();
+            return $this->serverError();
         }
     }
 
@@ -80,7 +80,7 @@ class GameController extends Controller
 
             if (request('genres')) {
                 $genre_names =  explode(',', request('genres'));
-                $genres = GameController::fetch_objects_from_strings(Genre::class, $genre_names);
+                $genres = $this->CreateOrFetchIdsByNames(Genre::class, $genre_names);
                 $game->genres()->sync($genres);
             } else {
                 $game->genres()->sync([]);
@@ -88,7 +88,7 @@ class GameController extends Controller
 
             if (request('platforms')) {
                 $platform_names = explode(',', request('platforms'));
-                $platforms = GameController::fetch_objects_from_strings(Platform::class, $platform_names);
+                $platforms = $this->CreateOrFetchIdsByNames(Platform::class, $platform_names);
                 $game->platforms()->sync($platforms);
             } else {
                 $game->platforms()->sync([]);
@@ -96,7 +96,7 @@ class GameController extends Controller
 
             if (request('publishers')) {
                 $publisher_names = explode(',', request('publishers'));
-                $publishers = GameController::fetch_objects_from_strings(Publisher::class, $publisher_names);
+                $publishers = $this->CreateOrFetchIdsByNames(Publisher::class, $publisher_names);
                 $game->publishers()->sync($publishers);
             } else {
                 $game->publishers()->sync([]);
@@ -112,7 +112,7 @@ class GameController extends Controller
             return response()->json($game, 200);
         } catch (Throwable $th) {
             DB::rollback();
-            return $this->servereError();
+            return $this->serverError();
         }
     }
 
@@ -123,16 +123,17 @@ class GameController extends Controller
             $game->save();
             return response()->json($game, 200);
         } catch (\Throwable $th) {
-            return $this->servereError();
+            return $this->serverError();
         }
     }
 
-    private static function fetch_objects_from_strings($class, $item_names)
+    
+    private function CreateOrFetchIdsByNames($class, $item_names)
     {
         $res = array();
         foreach ($item_names as $item_name) {
-            $publisher = $class::firstOrCreate(['name' => $item_name]);
-            $res[] = $publisher->id;
+            $item = $class::firstOrCreate(['name' => $item_name]);
+            $res[] = $item->id;
         }
         return $res;
     }

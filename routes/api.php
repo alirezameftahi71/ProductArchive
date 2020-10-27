@@ -33,3 +33,12 @@ Route::get('/platforms/{platform}', 'PlatformController@show');
 
 Route::get('/publishers', 'PublisherController@all');
 Route::get('/publishers/{publisher}', 'PublisherController@show');
+
+Route::get('/lists', 'UserListController@all');
+Route::get('/lists/{list}', 'UserListController@show');
+Route::post('/lists', 'UserListController@store');
+Route::post('/lists/{list}', 'UserListController@update');
+Route::delete('/lists/{list}', 'UserListController@destroy');
+
+Route::get('/users', 'UserController@all');
+Route::get('/users/{user}', 'UserController@show');
