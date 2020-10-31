@@ -2,7 +2,7 @@
 @section('content')
     <b-row>
         <b-col>
-            You are logged in! your name is {{$user->name}}
+            <dashboard :user='@json($user)'></dashboard>
         </b-col>
     </b-row>
 @endsection

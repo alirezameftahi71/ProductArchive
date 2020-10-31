@@ -7,7 +7,7 @@
 </b-row>
 <b-row>
     <b-col>
-        <tiles-view :collection="{{ json_encode($collection) }}"></tiles-view>
+        <tiles-view :collection='@json($collection)'></tiles-view>
     </b-col>
 </b-row>
 @endsection
