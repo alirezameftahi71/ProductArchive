@@ -16,7 +16,7 @@
           </b-navbar-nav>
 
           <!-- Right aligned nav items -->
-          <!-- <b-navbar-nav class="ml-auto">
+          <b-navbar-nav class="ml-auto">
             <b-nav-item-dropdown right v-if="user">
               <template v-slot:button-content>
                 <span>{{ user.name }}</span>
@@ -32,7 +32,7 @@
                 Register
               </b-nav-item>
             </template>
-          </b-navbar-nav> -->
+          </b-navbar-nav>
         </b-collapse>
       </b-container>
     </b-container>
