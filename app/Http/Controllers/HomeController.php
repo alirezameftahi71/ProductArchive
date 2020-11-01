@@ -23,13 +23,13 @@ class HomeController extends Controller
 
     public function create()
     {
-        return view('create');
+        return view('create-edit');
     }
 
     public function edit($id)
     {
         $game = Game::with('genres', 'platforms', 'publishers')->find($id);
-        return view('edit', compact('game'));
+        return view('create-edit', compact('game'));
     }
 
     public function gridview(Request $request)

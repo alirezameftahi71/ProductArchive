@@ -12,7 +12,7 @@ use App\Publisher;
 use Exception;
 use Throwable;
 
-class GameController extends Controller
+class GameController extends BaseController
 {
     public function all(Request $request)
     {

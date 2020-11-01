@@ -23,8 +23,8 @@ class CreateUserListsTable extends Migration
 
         Schema::create('game_user_list', function (Blueprint $table) {
             $table->integer('game_id');
-            $table->integer('list_id');
-            $table->primary(['game_id', 'list_id']);
+            $table->integer('user_list_id');
+            $table->primary(['game_id', 'user_list_id']);
         });
     }
 

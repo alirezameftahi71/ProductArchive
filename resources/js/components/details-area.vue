@@ -105,7 +105,16 @@ export default {
         });
     },
     heartItem() {
-      // TODO: implement this functionality
+      const formData = new FormData();
+      formData.append("games", this._dataItem.id);
+      this.axios
+        .post(`/api/lists`, formData)
+        .then(response => {
+          console.info(response);
+        })
+        .catch(error => {
+          console.error(error);
+        });
     },
     onItemDeleteConfirm() {
       this.axios

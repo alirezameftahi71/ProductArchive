@@ -5,12 +5,22 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 use App\UserList;
 use Exception;
 use Throwable;
 
 class UserListController extends BaseController
 {
+
+    public function __construct()
+    {
+        $this->middleware(function ($request, $next) {
+            $this->user = Auth::user();
+            return $next($request);
+        });
+    }
+
     public function all(Request $request)
     {
         return $this->baseAll(UserList::class, $request);
@@ -21,7 +31,7 @@ class UserListController extends BaseController
         return $this->baseShow(UserList::class, $id);
     }
 
-    public function store()
+    public function store(Request $request)
     {
         return $this->createUpdateUserList();
     }
@@ -35,7 +45,8 @@ class UserListController extends BaseController
     {
         $isStoreMode = is_null($userList);
         $inputObject = [
-            'name' => request('name'),
+            'name' => request('name') != null ? request('name') : "Favorites",
+            'user_id' => Auth::user()->id
         ];
 
         DB::beginTransaction();

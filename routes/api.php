@@ -2,28 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| API Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register API routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| is assigned the "api" middleware group. Enjoy building your API!
-|
-*/
-
-// Route::middleware('auth:api')->get('/user', function (Request $request) {
-//     return $request->user();
-// });
-
+// Stateless APIs
 Route::get('/games', 'GameController@all');
 Route::get('/games/{game}', 'GameController@show');
-Route::post('/games', 'GameController@store');
-Route::post('/games/{game}', 'GameController@update');
-Route::delete('/games/{game}', 'GameController@destroy');
-
-Route::post('/games/toggleChecked/{game}', 'GameController@toggleChecked');
 
 Route::get('/genres', 'GenreController@all');
 Route::get('/genres/{genre}', 'GenreController@show');
@@ -36,9 +17,6 @@ Route::get('/publishers/{publisher}', 'PublisherController@show');
 
 Route::get('/lists', 'UserListController@all');
 Route::get('/lists/{list}', 'UserListController@show');
-Route::post('/lists', 'UserListController@store');
-Route::post('/lists/{list}', 'UserListController@update');
-Route::delete('/lists/{list}', 'UserListController@destroy');
 
 Route::get('/users', 'UserController@all');
 Route::get('/users/{user}', 'UserController@show');

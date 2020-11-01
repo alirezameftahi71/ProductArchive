@@ -94,7 +94,7 @@ export default {
     }
   },
   mounted() {
-    this.isUpdateMode = !!this.item.id;
+    this.isUpdateMode = !!(this.item && this.item.id);
   },
   data() {
     return {
@@ -105,14 +105,14 @@ export default {
       seperators: ",;",
       isUpdateMode: false,
       form: {
-        name: this.item.name,
-        releasedDate: this.item.released_date ? this.item.released_date : "",
-        rate: +this.item.rate,
-        checked: this.item.checked === "1", // false as boolean, stores as 1 or 0 in database!
-        description: this.item.description ? this.item.description : "",
-        genres: this.item.genres.map(x => x.name),
-        publishers: this.item.publishers.map(x => x.name),
-        platforms: this.item.platforms.map(x => x.name),
+        name: this.item ? this.item.name : "",
+        releasedDate: this.item ? (this.item.released_date ? this.item.released_date : "") : "",
+        rate: +this.item ? this.item.rate : 1,
+        checked: this.item ? this.item.checked === "1" : false, // false as boolean, stores as 1 or 0 in database!
+        description: this.item ? (this.item.description ? this.item.description : "") : "",
+        genres: this.item ? this.item.genres.map(x => x.name) : [],
+        publishers: this.item ? this.item.publishers.map(x => x.name) : [],
+        platforms: this.item ? this.item.platforms.map(x => x.name) : [],
         coverPic: null
       }
     };
