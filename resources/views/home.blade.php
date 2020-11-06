@@ -7,7 +7,7 @@
     <b-col md='12' lg='9'>
         <b-row align-v='center' class='h-100 mt-md-2'>
             <b-col>
-                <details-area :item='@json($game)'></details-area>
+                <details-area :item='@json($game)' :hearted='@json($isHearted)'></details-area>
             </b-col>
         </b-row>
     </b-col>

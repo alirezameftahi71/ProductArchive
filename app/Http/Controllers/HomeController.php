@@ -18,7 +18,8 @@ class HomeController extends Controller
     {
         $list_items = Game::getAll();
         $game = $request->query('id') ? $list_items->find($request->query('id')) : $list_items->first();
-        return view('home', compact('list_items', 'game'));
+        $isHearted = UserListController::isHearted($game);
+        return view('home', compact('list_items', 'game', 'isHearted'));
     }
 
     public function create()
@@ -36,11 +37,6 @@ class HomeController extends Controller
     {
         // TODO: refactor this so it won't fetch all in case of filters
         $collection = Game::getAll();
-        if ($request->query('is-unchecked') == 'true') {
-            $collection = $collection->filter(function ($item) {
-                return ($item->checked == false);
-            })->values();
-        }
         if ($request->query('high-rate') == 'true') {
             $collection = $collection->filter(function ($item) {
                 return ($item->rate >= '4');

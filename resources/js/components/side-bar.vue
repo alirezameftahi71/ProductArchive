@@ -35,7 +35,7 @@ export default {
   },
   mounted() {
     this.$root.$on("item-deleted", this.onItemDeleted);
-    this.$root.$on("selection-changed", item => (this.activeItem = item));
+    this.$root.$on("selection-changed", ({ item }) => (this.activeItem = item));
     this.makeFirstItemActive();
   },
   methods: {
@@ -43,8 +43,8 @@ export default {
       this.axios
         .get(`/api/games/${currentSelectedId}`)
         .then(response => {
-          this.$router.push({ path: "/", query: { id: response.data.id } });
-          this.$root.$emit("selection-changed", response.data);
+          this.$router.push({ path: "/", query: { id: response.data.item.id } });
+          this.$root.$emit("selection-changed", { item: response.data.item, isHearted: response.data.isHearted });
         })
         .catch(error => {
           console.error(error);
@@ -56,7 +56,7 @@ export default {
         this.dataItems.findIndex(x => x.id === item.id)
       );
       this.dataItems = this.dataItems.filter(x => x.id !== item.id);
-      this.$root.$emit("selection-changed", nearestItem);
+      this.$root.$emit("selection-changed", { item: nearestItem });
     },
     getNearestItem(array, currentIndex) {
       const previousItem = array[currentIndex - 1];

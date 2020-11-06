@@ -18,7 +18,6 @@ class CreateGamesTable extends Migration
             $table->string('name');
             $table->date('released_date')->nullable();
             $table->float('rate')->nullable();
-            $table->boolean('checked')->default(false);
             $table->text('description')->nullable();
             $table->string('cover_pic')->default('assets/default.png');
             $table->timestamps();

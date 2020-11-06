@@ -6,7 +6,7 @@
           <b-form-input id="name" v-model="form.name" type="text" required placeholder="Name"></b-form-input>
         </b-form-group>
         <b-row>
-          <b-col md="4">
+          <b-col md="6">
             <b-form-group label="Released Date" label-for="released-date">
               <b-form-datepicker
                 id="released-date"
@@ -16,12 +16,7 @@
               ></b-form-datepicker>
             </b-form-group>
           </b-col>
-          <b-col md="4">
-            <b-form-group label="Marked" label-for="checked">
-              <b-form-select id="checked" v-model="form.checked" placeholder="Marked" :options="markOptions"></b-form-select>
-            </b-form-group>
-          </b-col>
-          <b-col md="4">
+          <b-col md="6">
             <b-form-group label="Metascore" label-for="rate">
               <b-form-spinbutton
                 id="rate"
@@ -83,7 +78,6 @@ export default {
           name: "",
           released_date: "",
           rate: 1,
-          checked: false,
           genres: [],
           platforms: [],
           publishers: [],
@@ -98,17 +92,12 @@ export default {
   },
   data() {
     return {
-      markOptions: [
-        { value: false, text: "False" },
-        { value: true, text: "True" }
-      ],
       seperators: ",;",
       isUpdateMode: false,
       form: {
         name: this.item ? this.item.name : "",
         releasedDate: this.item ? (this.item.released_date ? this.item.released_date : "") : "",
         rate: +this.item ? this.item.rate : 1,
-        checked: this.item ? this.item.checked === "1" : false, // false as boolean, stores as 1 or 0 in database!
         description: this.item ? (this.item.description ? this.item.description : "") : "",
         genres: this.item ? this.item.genres.map(x => x.name) : [],
         publishers: this.item ? this.item.publishers.map(x => x.name) : [],
