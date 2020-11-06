@@ -40,4 +40,5 @@ Route::get('/api/lists/{list}', 'UserListController@show');
 
 Route::get('/api/users', 'UserController@all');
 Route::get('/api/users/{user}', 'UserController@show');
+Route::get('/api/user/lists', 'UserListController@getUserListsForCurrentUser');
 Auth::routes();

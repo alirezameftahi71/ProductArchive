@@ -71,22 +71,24 @@ class UserListController extends BaseController
     public static function isHearted(Game $game)
     {
         $userList = UserListController::getUserListForCurrentUser("Favorites");
-        $exists = $userList->games->contains($game->id);
-        return $exists;
+        if (!is_null($userList)) {
+            return $userList->games->contains($game->id);
+        }
+        return false;
+    }
+
+    private function createOrFetchUserList($inputObject)
+    {
+        return UserListController::getUserListForCurrentUser($inputObject['name']) ?? UserList::create($inputObject);
+    }
+
+    public static function getUserListsForCurrentUser()
+    {
+        return UserList::where('user_id', '=', Auth::user()->id)->get();
     }
 
     private static function getUserListForCurrentUser($name)
     {
         return UserList::where([['user_id', '=', Auth::user()->id], ['name', '=', $name]])->first();
-    }
-
-    private static function createOrFetchUserList($inputObject)
-    {
-        return UserListController::getUserListForCurrentUser($inputObject['name']) ?? UserList::create($inputObject);
-    }
-
-    private static function getUserListsForCurrentUser()
-    {
-        return UserList::where('user_id', '=', Auth::user()->id)->with('games')->get();
     }
 }

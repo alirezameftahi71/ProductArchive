@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 use App\Game;
 use App\User;
 
@@ -36,13 +38,22 @@ class HomeController extends Controller
     public function gridview(Request $request)
     {
         // TODO: refactor this so it won't fetch all in case of filters
-        $collection = Game::getAll();
-        if ($request->query('high-rate') == 'true') {
-            $collection = $collection->filter(function ($item) {
-                return ($item->rate >= '4');
-            })->values();
+        $userLists = UserListController::getUserListsForCurrentUser();
+        $selectedUserListId = $request->query('userLists');
+        if (!is_null($selectedUserListId)) {
+            $collection = DB::table('games')
+                ->join('game_user_list', 'game_user_list.game_id', '=', 'games.id')
+                ->join('user_lists', 'user_lists.id', '=', 'game_user_list.user_list_id')
+                ->select('games.*')
+                ->where([
+                    ['user_lists.user_id', '=', Auth::user()->id],
+                    ['game_user_list.user_list_id', '=', $selectedUserListId],
+                ])
+                ->get();
+        } else {
+            $collection = Game::getAll();
         }
-        return view('gridview', compact('collection'));
+        return view('gridview', compact('collection', 'userLists'));
     }
 
     public function dashboard($id)

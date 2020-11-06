@@ -68,7 +68,8 @@ export default {
     },
     onItemClick(event) {
       const element = event.target;
-      this.selectionChanged(element.getAttribute("id"));
+      const id = element.getAttribute("id");
+      id && this.activeItem.id !== +id && this.selectionChanged(id);
     },
     makeFirstItemActive() {
       const urlParams = new URLSearchParams(window.location.search);
