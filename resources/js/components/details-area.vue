@@ -12,21 +12,18 @@
           <b-button variant="light" class="icon border-0" :disabled="!_dataItem.id" title="Delete Item" @click="deleteItem()">
             <b-icon icon="trash-fill"></b-icon>
           </b-button>
-          <b-button variant="light" class="icon border-0" :disabled="!_dataItem.id" title="Favorite Item" @click="heartItem()">
-            <b-icon icon="heart-fill"></b-icon>
-          </b-button>
           <b-button variant="light" class="icon border-0" :disabled="!_dataItem.id" title="Edit Item" @click="editItem()">
             <b-icon icon="pencil-square"></b-icon>
           </b-button>
           <b-button
             variant="light"
             class="icon border-0"
-            title="Mark Item"
+            :class="{ 'i-red': _dataItem.isHearted }"
             :disabled="!_dataItem.id"
-            @click="markItem()"
-            :class="{ 'i-green': _dataItem.checked }"
+            title="Favorite Item"
+            @click="heartItem()"
           >
-            <b-icon icon="check-circle"></b-icon>
+            <b-icon icon="heart-fill"></b-icon>
           </b-button>
         </b-button-group>
       </b-container>
@@ -42,11 +39,13 @@
 <script>
 export default {
   props: {
-    item: Object
+    item: Object,
+    hearted: Boolean
   },
   data() {
     return {
-      dataItem: this.item
+      dataItem: this.item,
+      isHearted: this.hearted
     };
   },
   computed: {
@@ -59,10 +58,10 @@ export default {
             rate: this.dataItem.rate,
             description: this.dataItem.description,
             cover_pic: this.dataItem.cover_pic ? `storage/${this.dataItem.cover_pic}` : "storage/assets/default.png",
-            checked: this.dataItem.checked == "1",
             genres: this.dataItem.genres,
             platforms: this.dataItem.platforms,
-            publishers: this.dataItem.publishers
+            publishers: this.dataItem.publishers,
+            isHearted: this.isHearted
           }
         : {
             id: null,
@@ -71,15 +70,18 @@ export default {
             rate: "-",
             description: "-",
             cover_pic: "storage/assets/default.png",
-            checked: false,
             genres: [{ name: "-" }],
             platforms: [{ name: "-" }],
-            publishers: [{ name: "-" }]
+            publishers: [{ name: "-" }],
+            isHearted: false
           };
     }
   },
   created() {
-    this.$root.$on("selection-changed", item => (this.dataItem = item));
+    this.$root.$on("selection-changed", ({ item, isHearted }) => {
+      this.dataItem = item;
+      this.isHearted = isHearted;
+    });
     this.$root.$on("delete-confirmed", () => this.onItemDeleteConfirm());
   },
   methods: {
@@ -89,23 +91,20 @@ export default {
     deleteItem() {
       this.$root.$emit("item-delete-clicked", this.dataItem);
     },
-    markItem() {
+    heartItem() {
       this.axios
-        .post(`/api/games/toggleChecked/${this.dataItem.id}`)
-        .then(async response => {
+        .post(`/api/games/heart/${this.dataItem.id}`)
+        .then(response => {
           this.$root.showSuccessMessage([
-            this.$createElement("b", response.data.name),
+            this.$createElement("b", this.dataItem.name),
             " is marked as ",
-            response.data.checked ? "checked." : "unchecked."
+            response.data ? "favorite." : "unfavorite."
           ]);
-          this.dataItem.checked = response.data.checked;
+          this.isHearted = response.data;
         })
         .catch(error => {
           console.error(error);
         });
-    },
-    heartItem() {
-      // TODO: implement this functionality
     },
     onItemDeleteConfirm() {
       this.axios
@@ -138,7 +137,11 @@ export default {
       color: green;
 
       &:active {
-        color: green;
+        color: #06ac06;
+      }
+
+      &:hover {
+        color: #2ae92a;
       }
     }
 
@@ -146,7 +149,11 @@ export default {
       color: red;
 
       &:active {
-        color: red;
+        color: #df1616;
+      }
+
+      &:hover {
+        color: #ff4848;
       }
     }
   }

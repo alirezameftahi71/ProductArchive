@@ -6,7 +6,7 @@
           <b-form-input id="name" v-model="form.name" type="text" required placeholder="Name"></b-form-input>
         </b-form-group>
         <b-row>
-          <b-col md="4">
+          <b-col md="6">
             <b-form-group label="Released Date" label-for="released-date">
               <b-form-datepicker
                 id="released-date"
@@ -16,12 +16,7 @@
               ></b-form-datepicker>
             </b-form-group>
           </b-col>
-          <b-col md="4">
-            <b-form-group label="Marked" label-for="checked">
-              <b-form-select id="checked" v-model="form.checked" placeholder="Marked" :options="markOptions"></b-form-select>
-            </b-form-group>
-          </b-col>
-          <b-col md="4">
+          <b-col md="6">
             <b-form-group label="Metascore" label-for="rate">
               <b-form-spinbutton
                 id="rate"
@@ -83,7 +78,6 @@ export default {
           name: "",
           released_date: "",
           rate: 1,
-          checked: false,
           genres: [],
           platforms: [],
           publishers: [],
@@ -94,25 +88,20 @@ export default {
     }
   },
   mounted() {
-    this.isUpdateMode = !!this.item.id;
+    this.isUpdateMode = !!(this.item && this.item.id);
   },
   data() {
     return {
-      markOptions: [
-        { value: false, text: "False" },
-        { value: true, text: "True" }
-      ],
       seperators: ",;",
       isUpdateMode: false,
       form: {
-        name: this.item.name,
-        releasedDate: this.item.released_date ? this.item.released_date : "",
-        rate: +this.item.rate,
-        checked: this.item.checked === "1", // false as boolean, stores as 1 or 0 in database!
-        description: this.item.description ? this.item.description : "",
-        genres: this.item.genres.map(x => x.name),
-        publishers: this.item.publishers.map(x => x.name),
-        platforms: this.item.platforms.map(x => x.name),
+        name: this.item ? this.item.name : "",
+        releasedDate: this.item ? (this.item.released_date ? this.item.released_date : "") : "",
+        rate: +this.item ? this.item.rate : 1,
+        description: this.item ? (this.item.description ? this.item.description : "") : "",
+        genres: this.item ? this.item.genres.map(x => x.name) : [],
+        publishers: this.item ? this.item.publishers.map(x => x.name) : [],
+        platforms: this.item ? this.item.platforms.map(x => x.name) : [],
         coverPic: null
       }
     };

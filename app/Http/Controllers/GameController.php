@@ -12,7 +12,7 @@ use App\Publisher;
 use Exception;
 use Throwable;
 
-class GameController extends Controller
+class GameController extends BaseController
 {
     public function all(Request $request)
     {
@@ -23,9 +23,9 @@ class GameController extends Controller
             } else {
                 $games = Game::with('genres', 'platforms', 'publishers')->get();
             }
-            return response()->json($games, 200);
+            return $this->successResponse($games);
         } catch (\Throwable $th) {
-            return $this->servereError();
+            return $this->serverErrorResponse();
         }
     }
 
@@ -33,9 +33,10 @@ class GameController extends Controller
     {
         try {
             $game = Game::with('genres', 'platforms', 'publishers')->find($id);
-            return response()->json($game, 200);
+            $isHearted = UserListController::isHearted($game);
+            return $this->successResponse(['item' => $game, 'isHearted' => $isHearted]);
         } catch (\Throwable $th) {
-            return $this->servereError();
+            return $this->serverErrorResponse();
         }
     }
 
@@ -43,9 +44,9 @@ class GameController extends Controller
     {
         try {
             $game->delete();
-            return response()->json($game, 200);
+            return $this->successResponse($game);
         } catch (\Throwable $th) {
-            return $this->servereError();
+            return $this->serverErrorResponse();
         }
     }
 
@@ -66,7 +67,6 @@ class GameController extends Controller
             'name' => request('name'),
             'released_date' => request('releasedDate'),
             'rate' => request('rate'),
-            'checked' => request('checked') == 'true',
             'description' => request('description')
         ];
 
@@ -80,7 +80,7 @@ class GameController extends Controller
 
             if (request('genres')) {
                 $genre_names =  explode(',', request('genres'));
-                $genres = GameController::fetch_objects_from_strings(Genre::class, $genre_names);
+                $genres = $this->createOrFetchIdsByNames(Genre::class, $genre_names);
                 $game->genres()->sync($genres);
             } else {
                 $game->genres()->sync([]);
@@ -88,7 +88,7 @@ class GameController extends Controller
 
             if (request('platforms')) {
                 $platform_names = explode(',', request('platforms'));
-                $platforms = GameController::fetch_objects_from_strings(Platform::class, $platform_names);
+                $platforms = $this->createOrFetchIdsByNames(Platform::class, $platform_names);
                 $game->platforms()->sync($platforms);
             } else {
                 $game->platforms()->sync([]);
@@ -96,7 +96,7 @@ class GameController extends Controller
 
             if (request('publishers')) {
                 $publisher_names = explode(',', request('publishers'));
-                $publishers = GameController::fetch_objects_from_strings(Publisher::class, $publisher_names);
+                $publishers = $this->createOrFetchIdsByNames(Publisher::class, $publisher_names);
                 $game->publishers()->sync($publishers);
             } else {
                 $game->publishers()->sync([]);
@@ -109,30 +109,19 @@ class GameController extends Controller
             }
 
             DB::commit();
-            return response()->json($game, 200);
+            return $this->successResponse($game);
         } catch (Throwable $th) {
             DB::rollback();
-            return $this->servereError();
+            return $this->serverErrorResponse();
         }
     }
 
-    public function toggleChecked(Game $game)
-    {
-        try {
-            $game->checked = $game->checked == false;
-            $game->save();
-            return response()->json($game, 200);
-        } catch (\Throwable $th) {
-            return $this->servereError();
-        }
-    }
-
-    private static function fetch_objects_from_strings($class, $item_names)
+    private function createOrFetchIdsByNames($class, $item_names)
     {
         $res = array();
         foreach ($item_names as $item_name) {
-            $publisher = $class::firstOrCreate(['name' => $item_name]);
-            $res[] = $publisher->id;
+            $item = $class::firstOrCreate(['name' => $item_name]);
+            $res[] = $item->id;
         }
         return $res;
     }

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 use App\Game;
 use App\User;
 
@@ -18,35 +20,40 @@ class HomeController extends Controller
     {
         $list_items = Game::getAll();
         $game = $request->query('id') ? $list_items->find($request->query('id')) : $list_items->first();
-        return view('home', compact('list_items', 'game'));
+        $isHearted = UserListController::isHearted($game);
+        return view('home', compact('list_items', 'game', 'isHearted'));
     }
 
     public function create()
     {
-        return view('create');
+        return view('create-edit');
     }
 
     public function edit($id)
     {
         $game = Game::with('genres', 'platforms', 'publishers')->find($id);
-        return view('edit', compact('game'));
+        return view('create-edit', compact('game'));
     }
 
     public function gridview(Request $request)
     {
         // TODO: refactor this so it won't fetch all in case of filters
-        $collection = Game::getAll();
-        if ($request->query('is-unchecked') == 'true') {
-            $collection = $collection->filter(function ($item) {
-                return ($item->checked == false);
-            })->values();
+        $userLists = UserListController::getUserListsForCurrentUser();
+        $selectedUserListId = $request->query('userLists');
+        if (!is_null($selectedUserListId)) {
+            $collection = DB::table('games')
+                ->join('game_user_list', 'game_user_list.game_id', '=', 'games.id')
+                ->join('user_lists', 'user_lists.id', '=', 'game_user_list.user_list_id')
+                ->select('games.*')
+                ->where([
+                    ['user_lists.user_id', '=', Auth::user()->id],
+                    ['game_user_list.user_list_id', '=', $selectedUserListId],
+                ])
+                ->get();
+        } else {
+            $collection = Game::getAll();
         }
-        if ($request->query('high-rate') == 'true') {
-            $collection = $collection->filter(function ($item) {
-                return ($item->rate >= '4');
-            })->values();
-        }
-        return view('gridview', compact('collection'));
+        return view('gridview', compact('collection', 'userLists'));
     }
 
     public function dashboard($id)
