@@ -56,7 +56,24 @@ class UserListController extends BaseController
         }
     }
 
-    public function markFavorite(Game $game)
+    public function addItem()
+    {
+        $list_id = request('list_id');
+        $game_ids = request('game_ids');
+
+        DB::beginTransaction();
+        try {
+            $userList = UserList::find($list_id);
+            $userList->games()->syncWithoutDetaching($game_ids);
+            DB::commit();
+            return $this->successResponse($userList);
+        } catch (Throwable $th) {
+            DB::rollback();
+            return $this->serverErrorResponse();
+        }
+    }
+
+    public function heartItem(Game $game)
     {
         $inputObject = [
             'name' => "Favorites",

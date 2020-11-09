@@ -25,6 +25,32 @@
           >
             <b-icon icon="heart-fill"></b-icon>
           </b-button>
+          <b-dropdown
+            variant="light"
+            menu-class="user-list-actions-container"
+            toggle-class="text-decoration-none icon border-0"
+            block
+            no-caret
+          >
+            <template #button-content><b-icon icon="bookmark-plus"></b-icon></template>
+            <b-dropdown-group id="dropdown-group-1" header="Create a new list and add to it">
+              <b-dropdown-form :inline="true">
+                <b-form-group>
+                  <b-form-input v-model="newListValue" size="sm" placeholder="Wishlist" />
+                  <b-button size="sm" variant="primary" @click="addNewUserList()">Save</b-button>
+                </b-form-group>
+              </b-dropdown-form>
+            </b-dropdown-group>
+            <b-dropdown-divider v-show="_userLists.length" />
+            <b-dropdown-group id="dropdown-group-1" header="User Lists" v-show="_userLists.length">
+              <b-dropdown-item
+                v-for="userList in _userLists"
+                v-bind:key="userList.id"
+                @click.prevent="addCurrentItemToList(userList.id)"
+                >{{ userList.name }}</b-dropdown-item
+              >
+            </b-dropdown-group>
+          </b-dropdown>
         </b-button-group>
       </b-container>
     </b-col>
@@ -40,12 +66,15 @@
 export default {
   props: {
     item: Object,
+    lists: Array,
     hearted: Boolean
   },
   data() {
     return {
       dataItem: this.item,
-      isHearted: this.hearted
+      isHearted: this.hearted,
+      newListValue: null,
+      userLists: this.lists
     };
   },
   computed: {
@@ -75,6 +104,9 @@ export default {
             publishers: [{ name: "-" }],
             isHearted: false
           };
+    },
+    _userLists() {
+      return this.userLists ? this.userLists.filter(x => x.name != "Favorites") : [];
     }
   },
   created() {
@@ -116,16 +148,52 @@ export default {
           console.error(error);
         });
       this.$root.$emit("item-deleted", this.dataItem);
+    },
+    addCurrentItemToList(userListId) {
+      const formData = new FormData();
+      formData.append("list_id", userListId);
+      formData.append("game_ids", [this._dataItem.id]);
+      this.axios
+        .post(`/api/games/add`, formData)
+        .then(response => {
+          this.$root.showSuccessMessage([
+            this.$createElement("b", this._dataItem.name),
+            " is added to list ",
+            this.$createElement("b", response.data.name),
+            "."
+          ]);
+        })
+        .catch(error => {
+          console.error(error);
+        });
+    },
+    addNewUserList() {
+      if (this.newListValue) {
+        const formData = new FormData();
+        formData.append("name", this.newListValue);
+        this.axios
+          .post(`/api/lists`, formData)
+          .then(response => {
+            this.$root.showSuccessMessage(["List ", this.$createElement("b", response.data.name), " is created."]);
+            this.userLists.push(response.data);
+          })
+          .catch(error => {
+            console.error(error);
+          });
+      }
     }
   }
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 @import "../../sass/variables";
-
+.user-list-actions-container {
+  width: 261px;
+}
 .icon {
   background-color: $milk;
+  padding: 4px 8px;
   &:not([disabled]) {
     cursor: pointer;
 

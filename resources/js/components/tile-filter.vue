@@ -7,7 +7,7 @@
       class="mb-2 mr-sm-2 mb-sm-0"
       v-model="filter.value"
       :options="filter.options"
-    ></b-form-select>
+    />
     <b-button type="submit" variant="primary" class="btn">Apply Filter(s)</b-button>
   </b-form>
 </template>
@@ -20,16 +20,6 @@ export default {
   data() {
     return {
       defaultOption: { value: null, text: "Nothing Selected" }
-      // optionsChecked: [
-      //   { value: "false", text: "Disable Only UnChecked" },
-      //   { value: "true", text: "Enable Only UnChecked" }
-      // ],
-      // optionsHighRate: [
-      //   { value: "false", text: "Disable High Rate" },
-      //   { value: "true", text: "Enable High Rate" }
-      // ],
-      // selectedChecked: this.getQueryString("is-unchecked") || "false",
-      // selectedHighRate: this.getQueryString("high-rate") || "false"
     };
   },
   computed: {
@@ -39,13 +29,10 @@ export default {
           uniqueName: item.uniqueName,
           title: item.title,
           options: [this.defaultOption, ...item.options.map(option => ({ value: option.id, text: option.name }))],
-          value: null
+          value: this.getQueryString("userLists") ? this.getQueryString("userLists") : null
         };
       });
     }
-  },
-  mounted() {
-    console.log("mounting");
   },
   methods: {
     getQueryString(queryStringName) {

@@ -2,7 +2,7 @@
   <div class="tile" :class="{ 'is-selected': isSelected }" @click.prevent="$emit('tile-clicked', item)" @dblclick="onDoubleClick">
     <a :href="itemHomeUrl">
       <img loading="lazy" :id="item.id" :src="item.cover_pic ? `storage/${item.cover_pic}` : 'storage/assets/default.png'" />
-      <tile-overlay :name="item.name" :showLabel="isSelected"></tile-overlay>
+      <tile-overlay :name="item.name" :showLabel="isSelected" />
     </a>
   </div>
 </template>

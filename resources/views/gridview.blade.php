@@ -10,12 +10,12 @@
 @endphp
 <b-row>
     <b-col>
-        <tile-filter :items='@json($filters)'></tile-filter>
+        <tile-filter :items='@json($filters)' />
     </b-col>
 </b-row>
 <b-row>
     <b-col>
-        <tiles-view :collection='@json($collection)'></tiles-view>
+        <tiles-view :collection='@json($collection)' />
     </b-col>
 </b-row>
 @endsection
