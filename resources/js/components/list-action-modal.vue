@@ -1,15 +1,24 @@
 <template>
   <b-modal v-model="show" title="Add item to List" hide-footer>
     <b-container fluid>
-      <b-form inline>
-        <label class="sr-only" for="inline-form-input-name">New list name</label>
-        <b-form-input v-model="newListValue" class="mb-2 mr-sm-2 mb-sm-0" placeholder="New list name..."></b-form-input>
-        <b-button variant="primary" @click="addNewUserList()">Save</b-button>
+      <b-form @submit.prevent="addNewUserList()">
+        <b-input-group>
+          <b-form-input v-model="newListValue" placeholder="New List Name..."></b-form-input>
+          <b-input-group-append>
+            <b-button variant="primary" @click="addNewUserList()">
+              <b-icon icon="cloud-upload" aria-hidden="true"></b-icon> Save
+            </b-button>
+          </b-input-group-append>
+        </b-input-group>
       </b-form>
+
       <br />
+
       <b-table :items="items" :fields="fields" responsive="sm" v-show="items && items.length" striped fixed hover>
         <template #cell(isItemIncluded)="row">
-          <b-form-checkbox v-model="row.item.isItemIncluded" @change="addCurrentItemToList(row.item.id)" switch></b-form-checkbox>
+          <b-form-checkbox v-model="row.item.isItemIncluded" @change="addCurrentItemToList(row.item.id)" switch>{{
+            row.item.isItemIncluded ? "Is in the List" : "Add to the List"
+          }}</b-form-checkbox>
         </template>
       </b-table>
     </b-container>
@@ -69,9 +78,10 @@ export default {
         });
     },
     addNewUserList() {
-      if (this.newListValue) {
+      const newListName = this.newListValue.trim();
+      if (newListName) {
         const formData = new FormData();
-        formData.append("name", this.newListValue);
+        formData.append("name", newListName);
         this.axios
           .post(`/api/lists`, formData)
           .then(response => {
