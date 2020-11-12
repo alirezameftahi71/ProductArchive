@@ -31,6 +31,7 @@ class UserListController extends BaseController
         DB::beginTransaction();
         try {
             $userList = $this->createOrFetchUserList($inputObject);
+            $userList = UserList::with('games')->where('id', $userList->id)->first();
             DB::commit();
             return $this->successResponse($userList);
         } catch (Throwable $th) {
@@ -63,7 +64,7 @@ class UserListController extends BaseController
 
         DB::beginTransaction();
         try {
-            $userList = UserList::find($list_id);
+            $userList = UserList::with('games')->where('id', $list_id)->first();
             $userList->games()->syncWithoutDetaching($game_ids);
             DB::commit();
             return $this->successResponse($userList);
@@ -101,7 +102,7 @@ class UserListController extends BaseController
 
     public static function getUserListsForCurrentUser()
     {
-        return UserList::where('user_id', '=', Auth::user()->id)->get();
+        return UserList::where('user_id', '=', Auth::user()->id)->with('games')->get();
     }
 
     private static function getUserListForCurrentUser($name)

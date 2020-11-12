@@ -7,7 +7,7 @@
       class="mb-2 mr-sm-2 mb-sm-0"
       v-model="filter.value"
       :options="filter.options"
-    />
+    ></b-form-select>
     <b-button type="submit" variant="primary" class="btn">Apply Filter(s)</b-button>
   </b-form>
 </template>

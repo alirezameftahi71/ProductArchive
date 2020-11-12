@@ -4,17 +4,18 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
 // Page routes
-Route::get('/', 'HomeController@index')->name('home');
-Route::get('/create', 'HomeController@create')->name('create');
-Route::get('/edit/{id}', 'HomeController@edit')->name('edit');
-Route::get('/gridview', 'HomeController@gridview')->name('gridview');
-Route::get('/profile/{user}', 'HomeController@dashboard')->name('dashboard');
+Route::get('/', 'HomeController@index');
+Route::get('/home', 'HomeController@index');
+Route::get('/create', 'HomeController@create');
+Route::get('/edit/{id}', 'HomeController@edit');
+Route::get('/gridview', 'HomeController@gridview');
+Route::get('/profile/{user}', 'HomeController@dashboard');
 
 // Auth group APIs
 Route::get('/api/games', 'GameController@all');
 Route::get('/api/games/{game}', 'GameController@show');
 Route::post('/api/games', 'GameController@store');
-Route::post('/api/games/add', 'UserListController@addItem');
+Route::post('/api/games/addToList', 'UserListController@addItem');
 Route::post('/api/games/{game}', 'GameController@update');
 Route::post('/api/games/heart/{game}', 'UserListController@heartItem');
 Route::delete('/api/games/{game}', 'GameController@destroy');

@@ -1,9 +1,9 @@
 <template>
   <div class="items-sidenav h-100">
     <b-input-group class="mb-3">
-      <b-form-input type="search" placeholder="Search..." @input="onSearch($event)" />
+      <b-form-input type="search" placeholder="Search..." @input="onSearch($event)"></b-form-input>
       <b-input-group-append is-text id="btn-search" title="Search">
-        <b-icon icon="search" />
+        <b-icon icon="search"></b-icon>
       </b-input-group-append>
     </b-input-group>
 
@@ -17,7 +17,7 @@
         @click="onItemClick"
         :title="item.name"
         v-html="item.name"
-      />
+      ></b-list-group-item>
     </b-list-group>
   </div>
 </template>
@@ -108,10 +108,6 @@ export default {
         color: #15072f;
       }
     }
-  }
-
-  #search-box {
-    border-color: #ced4da !important;
   }
 }
 

@@ -16,8 +16,15 @@
           v-on="inputHandlers"
           placeholder="To add tags press ; , or enter"
           class="form-control"
-        />
-        <b-overlay :show="requesting" variant="transparent" blur="0" spinner-small overlay-tag="span" class="custom-loader" />
+        ></b-form-input>
+        <b-overlay
+          :show="requesting"
+          variant="transparent"
+          blur="0"
+          spinner-small
+          overlay-tag="span"
+          class="custom-loader"
+        ></b-overlay>
         <b-input-group-append>
           <b-button
             @click="
