@@ -19,7 +19,7 @@
         </form>
         <b-overlay :show='showLoadingOverlay' rounded='false' variant='dark' spinner-variant='light'>
             <b-container fluid>
-                <b-row class='full-height scrolled-y' :class="darkMode ? 'bg-dark' : ''">
+                <b-row class='full-height scrolled-y'>
                     <b-col class='h-100'>
                         <b-container class='py-3 h-100'>
                             @yield('content')
