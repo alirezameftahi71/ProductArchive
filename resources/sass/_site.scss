@@ -26,6 +26,45 @@ body {
   height: 100%;
 }
 
+.icon {
+  background-color: $milk;
+  padding: 4px 8px;
+  &:not([disabled]) {
+    cursor: pointer;
+
+    &:hover {
+      color: $blue;
+    }
+
+    &.i-green {
+      color: green;
+
+      &:active {
+        color: #06ac06;
+      }
+
+      &:hover {
+        color: #2ae92a;
+      }
+    }
+
+    &.i-red {
+      color: red;
+
+      &:active {
+        color: #df1616;
+      }
+
+      &:hover {
+        color: #ff4848;
+      }
+    }
+  }
+  &[disabled] {
+    cursor: initial;
+  }
+}
+
 @media screen and (max-width: 47.99em) {
   body {
     height: initial;

@@ -18,7 +18,10 @@ class HomeController extends Controller
     public function index(Request $request)
     {
         $all_items = Game::getAll();
-        $game = $request->query('id') ? $all_items->find($request->query('id')) : $all_items->first();
+        $game = $all_items->first();
+        if ($request->query('id')) {
+            $game = $all_items->find($request->query('id')) ?? $game;
+        }
         $is_hearted = UserListController::isHearted($game);
         $user_lists = UserListController::getUserListsForCurrentUser();
         return view('home', compact('all_items', 'game', 'is_hearted', 'user_lists'));

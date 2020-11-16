@@ -40,7 +40,7 @@ class UserListController extends BaseController
         }
     }
 
-    public function update(UserList $userList)
+    public function update(UserList $list)
     {
         $inputObject = [
             'name' => request('name'),
@@ -48,9 +48,9 @@ class UserListController extends BaseController
 
         DB::beginTransaction();
         try {
-            $userList->update($inputObject);
+            $list->update($inputObject);
             DB::commit();
-            return $this->successResponse($userList);
+            return $this->successResponse($list);
         } catch (Throwable $th) {
             DB::rollback();
             return $this->serverErrorResponse();

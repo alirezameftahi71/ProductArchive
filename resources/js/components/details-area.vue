@@ -134,47 +134,9 @@ export default {
 };
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 @import "../../sass/variables";
 .user-list-actions-container {
   width: 261px;
-}
-.icon {
-  background-color: $milk;
-  padding: 4px 8px;
-  &:not([disabled]) {
-    cursor: pointer;
-
-    &:hover {
-      color: $blue;
-    }
-
-    &.i-green {
-      color: green;
-
-      &:active {
-        color: #06ac06;
-      }
-
-      &:hover {
-        color: #2ae92a;
-      }
-    }
-
-    &.i-red {
-      color: red;
-
-      &:active {
-        color: #df1616;
-      }
-
-      &:hover {
-        color: #ff4848;
-      }
-    }
-  }
-  &[disabled] {
-    cursor: initial;
-  }
 }
 </style>

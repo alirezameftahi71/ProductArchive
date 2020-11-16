@@ -15,10 +15,18 @@
       <br />
 
       <b-table :items="items" :fields="fields" responsive="sm" v-show="items && items.length" striped fixed hover>
+        <template #cell(listName)="row">
+          <b-form-input
+            autofocus
+            size="sm"
+            v-if="userListUpdatingId == row.item.id"
+            v-model="row.item.listName"
+            @blur="onListNameUpdateBlur(row.item)"
+          ></b-form-input>
+          <span v-else @dblclick="userListUpdatingId = row.item.id">{{ row.item.listName }}</span>
+        </template>
         <template #cell(isItemIncluded)="row">
-          <b-form-checkbox v-model="row.item.isItemIncluded" @change="addCurrentItemToList(row.item.id)" switch>{{
-            row.item.isItemIncluded ? "Is in the List" : "Add to the List"
-          }}</b-form-checkbox>
+          <b-form-checkbox v-model="row.item.isItemIncluded" @change="addCurrentItemToList(row.item.id)"></b-form-checkbox>
         </template>
       </b-table>
     </b-container>
@@ -52,6 +60,7 @@ export default {
   data() {
     return {
       fields: ["listName", "isItemIncluded"],
+      userListUpdatingId: null,
       show: false,
       userLists: this.lists,
       newListValue: "",
@@ -59,6 +68,19 @@ export default {
     };
   },
   methods: {
+    onListNameUpdateBlur(userListRowItem) {
+      this.userListUpdatingId = null;
+      const formData = new FormData();
+      formData.append("name", userListRowItem.listName);
+      this.axios
+        .post(`/api/lists/${userListRowItem.id}`, formData)
+        .then(() => {
+          this.$root.showSuccessMessage(["List name changed successfully."]);
+        })
+        .catch(error => {
+          console.error(error);
+        });
+    },
     addCurrentItemToList(userListId) {
       const formData = new FormData();
       formData.append("list_id", userListId);
@@ -97,3 +119,8 @@ export default {
   }
 };
 </script>
+<style lang="scss" scoped>
+.btn-bg-transparent {
+  background-color: transparent;
+}
+</style>
