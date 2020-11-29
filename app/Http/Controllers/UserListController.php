@@ -60,13 +60,23 @@ class UserListController extends BaseController
     public function addItem()
     {
         $list_id = request('list_id');
-        $game_ids = request('game_ids');
+        $added_game_ids = request('added_game_ids') ?? [];
+        $removed_game_ids = request('removed_game_ids') ?? [];
+
+        $added_game_ids = is_array($added_game_ids) ? $added_game_ids : [$added_game_ids];
+        $removed_game_ids = is_array($removed_game_ids) ? $removed_game_ids : [$removed_game_ids];
 
         DB::beginTransaction();
         try {
             $userList = UserList::with('games')->where('id', $list_id)->first();
-            $userList->games()->syncWithoutDetaching($game_ids);
+            if (count($added_game_ids) > 0) {
+                $userList->games()->attach($added_game_ids);
+            }
+            if (count($removed_game_ids) > 0) {
+                $userList->games()->detach($removed_game_ids);
+            }
             DB::commit();
+            $userList = UserList::with('games')->where('id', $list_id)->first();
             return $this->successResponse($userList);
         } catch (Throwable $th) {
             DB::rollback();

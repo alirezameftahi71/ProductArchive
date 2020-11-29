@@ -82,18 +82,24 @@ export default {
         });
     },
     addCurrentItemToList(userListId) {
+      const addedGameIds = [];
+      const removedGameIds = [];
+      let userList = this.userLists.find(x => x.id === userListId);
+      const isItemExistedInList = userList.games.some(x => x.id === this.currentItem.id);
+      if (isItemExistedInList) {
+        removedGameIds.push(this.currentItem.id);
+      } else {
+        addedGameIds.push(this.currentItem.id);
+      }
       const formData = new FormData();
       formData.append("list_id", userListId);
-      formData.append("game_ids", [this.currentItem.id]);
+      formData.append("added_game_ids", addedGameIds);
+      formData.append("removed_game_ids", removedGameIds);
       this.axios
         .post(`/api/games/addToList`, formData)
         .then(response => {
-          this.$root.showSuccessMessage([
-            this.$createElement("b", this.currentItem.name),
-            " is added to list ",
-            this.$createElement("b", response.data.name),
-            "."
-          ]);
+          userList.games = response.data.games;
+          this.$root.showSuccessMessage("Lists updated.");
         })
         .catch(error => {
           console.error(error);
