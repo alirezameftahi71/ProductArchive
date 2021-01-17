@@ -19,7 +19,7 @@ export default {
   },
   data() {
     return {
-      defaultOption: { value: null, text: "Nothing Selected" }
+      defaultOption: { value: null, text: "Select a list" }
     };
   },
   computed: {
