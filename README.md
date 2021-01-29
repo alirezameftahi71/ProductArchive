@@ -70,6 +70,7 @@ To get started, follow these instructions:
    $ php artisan serve
    ```
    Or use a webserver to serve the /public directory of the application.
+   Default user is admin@admin.com - adminadmin
 
 ## Author
 
