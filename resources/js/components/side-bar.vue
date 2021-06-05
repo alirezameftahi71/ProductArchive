@@ -75,6 +75,7 @@ export default {
       const urlParams = new URLSearchParams(window.location.search);
       const sentId = urlParams.get("id");
       this.activeItem = this.dataItems.length ? (sentId ? this.dataItems.find(x => x.id === +sentId) : this.dataItems[0]) : {};
+      this.activeItem = this.activeItem ? this.activeItem : this.dataItems[0];
       sentId && document.getElementById(this.activeItem.id).scrollIntoView();
     }
   }
