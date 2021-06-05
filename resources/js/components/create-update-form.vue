@@ -97,7 +97,7 @@ export default {
       form: {
         name: this.item ? this.item.name : "",
         releasedDate: this.item ? (this.item.released_date ? this.item.released_date : "") : "",
-        rate: +this.item ? this.item.rate : 1,
+        rate: this.item ? +this.item.rate : 1,
         description: this.item ? (this.item.description ? this.item.description : "") : "",
         genres: this.item ? this.item.genres.map(x => x.name) : [],
         publishers: this.item ? this.item.publishers.map(x => x.name) : [],
