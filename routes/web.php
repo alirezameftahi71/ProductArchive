@@ -10,6 +10,7 @@ Route::get('/create', 'HomeController@create');
 Route::get('/edit/{id}', 'HomeController@edit');
 Route::get('/gridview', 'HomeController@gridview');
 Route::get('/profile/{user}', 'HomeController@dashboard');
+Route::get('/tableview', 'HomeController@tableview');
 
 // Auth group APIs
 Route::get('/api/games', 'GameController@all');

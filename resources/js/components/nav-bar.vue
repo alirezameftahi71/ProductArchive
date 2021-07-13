@@ -62,6 +62,10 @@ export default {
         {
           title: "Gridview",
           link: "/gridview"
+        },
+        {
+          title: "Tableview",
+          link: "/tableview"
         }
       ]
     };

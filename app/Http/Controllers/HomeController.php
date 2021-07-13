@@ -59,6 +59,12 @@ class HomeController extends Controller
         return view('gridview', compact('collection', 'userLists'));
     }
 
+    public function tableview(Request $request)
+    {
+        $all_items = Game::getAll();
+        return view('table-view', compact('all_items'));
+    }
+
     public function dashboard($id)
     {
         $user = User::find($id);
